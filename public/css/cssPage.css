@@ -1,0 +1,151 @@
+/* .form_principal {
+    border: 1px solid rgba(128, 128, 128, 0.281);
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;*/
+
+    /*align-items: center;
+    align-content: center;
+    flex-direction: row;
+    height: auto;
+
+    width: max-content;
+    margin: auto;
+    margin-top: 30px;
+
+/* } */
+
+/* @media (max-width: 900px) {
+    .form_principal {
+        flex-direction: column;
+    }
+} */
+
+.contanier_form{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    position: relative;
+    top: -120px;
+}
+
+.logoAdmin{
+    width: 15vh;
+}
+
+
+.contanier_form_events{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    position: relative;
+    width: 70%;
+    /* top: -120px; */
+}
+
+.form_principal{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    /* margin-left: 100px; */
+    margin-top: 60px;
+    padding: 10px 25px 10px 25px;
+
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 8px 6px 9px 0px black;
+
+}
+
+.form_principal div:last-child{
+    display: flex;
+    justify-content: center;
+}
+
+.botonSearch{
+    padding: 20px 50px;
+    background-color: #e42728;
+    border-color: #e42728;
+}
+
+.logo{
+    width: 30vh;
+}
+
+
+
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    padding: 50px;
+    background-color: white;
+    border-radius: 20px;
+
+    box-shadow: 4px 5px 10px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.form__title {
+    font-weight: bold;
+    text-align: center;
+    font-size: 32px;
+}
+
+.form__button {
+    border: 0px;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/*Mejorada, que muestre en rojo en caso que sea incorrecto en focus*/
+/* .form__input:invalid{
+    background-color: rgba(255, 0, 0, 0.055);
+    outline: 2px solid rgb(172, 0, 0);
+} */
+
+.form__input_insert:invalid {
+    background-color: rgba(255, 0, 0, 0.055);
+    outline: 2px solid rgb(172, 0, 0);
+}
+
+.form__input:valid {
+    background-color: rgba(0, 255, 21, 0.055);
+    outline: 2px solid rgb(0, 121, 10);
+}
+
+.form__input,
+.pass__img>img {
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 0px;
+    background-color: #e0e0e0;
+
+}
+
+.input__required {
+    color: rgb(126, 0, 0);
+}
+
+#form__message {
+    border-radius: 20px;
+    background-color: #FF331F;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+#mainForm {
+    background-image: linear-gradient(to right, #3626a7, #6c35bd, #9a46d2, #c659e6, #f26df9);
+}
