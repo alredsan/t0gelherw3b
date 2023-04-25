@@ -106,6 +106,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- bucle --}}
                                     @foreach ($user->eventos as $event)
                                         <tr>
 
