@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.plantillaAdmin')
 
-@section('template_title')
-    {{ $organisation->name ?? "{{ __('Show') Organisation" }}
+@section('titulo')
+    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
 @endsection
 
-@section('content')
+@section('contenido')
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -14,12 +14,17 @@
                             <span class="card-title">{{ __('Show') }} Organisation</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('organisations.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('admin.ong.edit') }}"> {{ __('Editar') }}</a>
                         </div>
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Idong:</strong>
                             {{ $organisation->idONG }}

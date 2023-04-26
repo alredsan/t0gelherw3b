@@ -55,7 +55,7 @@
     <div class='d-flex gap-5 m-5'>
         @foreach ($events as $event)
             <div class="card" style="width: 18rem;">
-                <img src={{ 'data:image/jpeg;base64,' . base64_encode($event->Foto) . '' }} class="card-img-top" alt="...">
+                <img src={{ 'data:image/jpeg;base64,' . base64_encode($event->Foto) . '' }} class="card-img-top" alt="{{$event->Nombre}}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->Nombre }}</h5>
                     <p class="card-text">{{ $event->FechaEvento }}</p>

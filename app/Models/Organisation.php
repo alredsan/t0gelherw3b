@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Organisation extends Model
 {
-    
+
     static $rules = [
 		'idONG' => 'required',
 		'Name' => 'required',
@@ -37,6 +37,9 @@ class Organisation extends Model
 		'Telefono' => 'required',
     ];
 
+    protected $primaryKey = 'idONG';
+    public $timestamps = false;
+
     protected $perPage = 20;
 
     /**
@@ -44,7 +47,7 @@ class Organisation extends Model
      *
      * @var array
      */
-    protected $fillable = ['idONG','Name','DireccionSede','Descripcion','FechaCreacion','IBANmetodoPago','FotoLogo','eMail','Telefono'];
+    protected $fillable = ['id','Name','DireccionSede','Descripcion','FechaCreacion','IBANmetodoPago','FotoLogo','eMail','Telefono'];
 
 
     /**
@@ -52,16 +55,16 @@ class Organisation extends Model
      */
     public function events()
     {
-        return $this->hasMany('App\Models\Event', 'id_ONG', 'idONG');
+        return $this->hasMany('App\Models\Event', 'id_ONG', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users()
     {
-        return $this->hasMany('App\Models\User', 'id_ONG', 'idONG');
+        return $this->hasMany('App\Models\User', 'id_ONG', 'id');
     }
-    
+
 
 }

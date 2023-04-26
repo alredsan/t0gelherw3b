@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.plantillaAdmin')
 
-@section('template_title')
-    User
+@section('titulo')
+    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
 @endsection
 
-@section('content')
+@section('contenido')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('User') }}
+                                {{ __('Organisation') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('organisations.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,39 +35,39 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Dni</th>
+
+										<th>Idong</th>
 										<th>Name</th>
-										<th>Apellidos</th>
+										<th>Direccionsede</th>
+										<th>Descripcion</th>
+										<th>Fechacreacion</th>
+										<th>Ibanmetodopago</th>
+										<th>Fotologo</th>
 										<th>Email</th>
-										<th>Direccion</th>
-										<th>Provincialocalidad</th>
 										<th>Telefono</th>
-										<th>Id Ong</th>
-										<th>Foto</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($organisations as $organisation)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $user->DNI }}</td>
-											<td>{{ $user->name }}</td>
-											<td>{{ $user->Apellidos }}</td>
-											<td>{{ $user->email }}</td>
-											<td>{{ $user->Direccion }}</td>
-											<td>{{ $user->ProvinciaLocalidad }}</td>
-											<td>{{ $user->Telefono }}</td>
-											<td>{{ $user->id_ONG }}</td>
-											<td>{{ $user->Foto }}</td>
+                                            {{-- <td>{{ ++$i }}</td> --}}
+
+											<td>{{ $organisation->idONG }}</td>
+											<td>{{ $organisation->Name }}</td>
+											<td>{{ $organisation->DireccionSede }}</td>
+											<td>{{ $organisation->Descripcion }}</td>
+											<td>{{ $organisation->FechaCreacion }}</td>
+											<td>{{ $organisation->IBANmetodoPago }}</td>
+											<td>{{ $organisation->FotoLogo }}</td>
+											<td>{{ $organisation->eMail }}</td>
+											<td>{{ $organisation->Telefono }}</td>
 
                                             <td>
-                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('organisations.destroy',$organisation->idONG) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('organisations.show',$organisation->idONG) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('organisations.edit',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $users->links() !!}
+                {!! $organisations->links() !!}
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class OrganisationController
@@ -64,6 +65,14 @@ class OrganisationController extends Controller
         return view('organisation.show', compact('organisation'));
     }
 
+    public function showModeAdmin()
+    {
+        $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        // $organisation = Organisation::find(Auth::user()->id_ONG);
+
+        return view('admin.organisation.show', compact('organisation'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -75,6 +84,15 @@ class OrganisationController extends Controller
         $organisation = Organisation::find($id);
 
         return view('organisation.edit', compact('organisation'));
+    }
+
+
+    public function showModeAdminEdit()
+    {
+        $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        // $organisation = Organisation::find(Auth::user()->id_ONG);
+
+        return view('admin.organisation.edit', compact('organisation'));
     }
 
     /**
@@ -92,6 +110,31 @@ class OrganisationController extends Controller
 
         return redirect()->route('organisations.index')
             ->with('success', 'Organisation updated successfully');
+    }
+
+    public function ModeAdminONGUpdate(Request $request, Organisation $organisation)
+    {
+        request()->validate(Organisation::$rules);
+        $data = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        // $data = Organisation::find(Auth::user()->id_ONG);
+
+        $data->Name = $request->Name;
+        $data->DireccionSede = $request->DireccionSede;
+        $data->Descripcion = $request->Descripcion;
+        $data->FechaCreacion = $request->FechaCreacion;
+        $data->IBANmetodoPago = $request->IBANmetodoPago;
+        $data->eMail = $request->eMail;
+        $data->Telefono = $request->Telefono;
+
+        $path = $request->file('FotoLogo')->getRealPath();
+        $logo = file_get_contents($path);
+        $base64 = base64_encode($logo);
+        $data->logo = $base64;
+
+        $data->save();
+
+        return redirect()->route('admin.ong')
+            ->with('success', 'Ha sido actualizada correctamente');
     }
 
     /**

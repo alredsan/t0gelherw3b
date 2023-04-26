@@ -43,10 +43,15 @@ class AdminController extends Controller
         $data->Telefono = $request->Telefono;
 
         // falta la fotografia
+        $path = $request->file('Foto')->getRealPath();
+        $logo = file_get_contents($path);
+        $base64 = base64_encode($logo);
+        $data->Foto = $base64;
+        // $data->Foto = $request->Foto;
 
         $data->save();
 
         return redirect()->route('perfil')
-            ->with('success', 'Usuario ha sido actualizado correctamente');
+            ->with('success', 'Usuario'. $request->name .'ha sido actualizado correctamente');
     }
 }

@@ -1,11 +1,11 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
-        <div class="form-group">
+
+        {{-- <div class="form-group">
             {{ Form::label('idONG') }}
             {{ Form::text('idONG', $organisation->idONG, ['class' => 'form-control' . ($errors->has('idONG') ? ' is-invalid' : ''), 'placeholder' => 'Idong']) }}
             {!! $errors->first('idONG', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        </div> --}}
         <div class="form-group">
             {{ Form::label('Name') }}
             {{ Form::text('Name', $organisation->Name, ['class' => 'form-control' . ($errors->has('Name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
@@ -31,11 +31,12 @@
             {{ Form::text('IBANmetodoPago', $organisation->IBANmetodoPago, ['class' => 'form-control' . ($errors->has('IBANmetodoPago') ? ' is-invalid' : ''), 'placeholder' => 'Ibanmetodopago']) }}
             {!! $errors->first('IBANmetodoPago', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             {{ Form::label('FotoLogo') }}
-            {{ Form::text('FotoLogo', $organisation->FotoLogo, ['class' => 'form-control' . ($errors->has('FotoLogo') ? ' is-invalid' : ''), 'placeholder' => 'Fotologo']) }}
+            {{ Form::file('FotoLogo', $organisation->FotoLogo, ['class' => 'form-control' . ($errors->has('FotoLogo') ? ' is-invalid' : ''), 'placeholder' => 'Fotologo']) }}
             {!! $errors->first('FotoLogo', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        </div> --}}
+
         <div class="form-group">
             {{ Form::label('eMail') }}
             {{ Form::text('eMail', $organisation->eMail, ['class' => 'form-control' . ($errors->has('eMail') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
@@ -45,6 +46,9 @@
             {{ Form::label('Telefono') }}
             {{ Form::text('Telefono', $organisation->Telefono, ['class' => 'form-control' . ($errors->has('Telefono') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
             {!! $errors->first('Telefono', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div>
+            <input type="file" class='form-control' name='Foto' value="">
         </div>
 
     </div>

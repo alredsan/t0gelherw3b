@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -131,7 +132,7 @@ class UserController extends Controller
         // Add el usuario registrado al sistema, iniciado automaticamente
         Auth::login($user);
 
-        return redirect(route('Admin'));
+        return redirect(route('/'));
     }
 
     public function login(Request $request)
@@ -153,7 +154,7 @@ class UserController extends Controller
             return redirect()->intended(route('/'));
         } else {
             // en caso de fallo, decir al usuario fallido acceso
-            return redirect('login');
+            return redirect('inicioSesion')->with('message', 'Usuario o contraseña incorrectos');
         }
     }
 
@@ -175,5 +176,10 @@ class UserController extends Controller
     public function mostrarRegistro()
     {
         return view('registro');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

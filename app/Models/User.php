@@ -100,6 +100,22 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento');
     }
 
+    public function roles($id){
+
+        $array = $this->belongsToMany('App\Models\Role','users_roles','idUser','idRol','id','idRol')->wherePivot('idRol', $id)->count();
+
+        if ($array == 0){
+            return false;
+        }else{
+            return true;
+        }
+
+        // $obj = array_reduce($array, static function ($carry, $item) {
+        //     return $carry === false && $item->id === 'one' ? $item : $carry;
+        // }, false);
+        // return "hola";
+    }
+
     public function eventosPaginate(){
         return $this->eventos()->paginate(10);
     }

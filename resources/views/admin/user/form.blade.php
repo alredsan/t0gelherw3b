@@ -1,11 +1,11 @@
 <div class="box box-info padding-1">
     <div class="box-body">
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             {{ Form::label('DNI') }}
             {{ Form::text('DNI', $user->DNI, ['class' => 'form-control' . ($errors->has('DNI') ? ' is-invalid' : ''), 'placeholder' => 'Dni']) }}
             {!! $errors->first('DNI', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        </div> --}}
         <div class="form-group">
             {{ Form::label('name') }}
             {{ Form::text('name', $user->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
@@ -43,10 +43,12 @@
         </div> --}}
         {{-- <div class="form-group">
             {{ Form::label('Foto') }}
-            {{ Form::text('Foto', $user->Foto, ['class' => 'form-control' . ($errors->has('Foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
+            {{ Form::file('Foto', $user->Foto, ['class' => 'form-control' . ($errors->has('Foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
             {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
         </div> --}}
-
+        <div>
+            <input type="file" class='form-control' name='Foto' value="">
+        </div>
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>

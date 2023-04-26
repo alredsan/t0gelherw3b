@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.plantillaAdmin')
 
-@section('template_title')
-    {{ __('Update') }} User
+@section('titulo')
+    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
 @endsection
 
-@section('content')
+@section('contenido')
     <section class="content container-fluid">
         <div class="">
             <div class="col-md-12">
@@ -13,14 +13,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} User</span>
+                        <span class="card-title">{{ __('Update') }} Organisation</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('users.update', $user->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.ong.update', $organisation->idONG) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('user.form')
+                            @include('admin.organisation.form')
 
                         </form>
                     </div>

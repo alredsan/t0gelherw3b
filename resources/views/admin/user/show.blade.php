@@ -59,9 +59,9 @@
                         </div>
                         <div class="form-group">
                             <strong>Foto:</strong>
-                            {{ $user->Foto }}
+                            <img src={{ 'data:image/png;base64,' . base64_encode($user->Foto) . '' }} class="card-img-top" alt="FotoPerfil" />
+                            {{-- {{ $user->Foto }} --}}
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -124,15 +124,20 @@
                                             <td>{{ $event->Foto }}</td>
 
                                             <td>
-                                                <form action="{{ route('event.destroyParticipante', ['id'=> $event->idEvento]) }}" method="POST">
+                                                <form
+                                                    action="{{ route('event.destroyParticipante', ['id' => $event->idEvento]) }}"
+                                                    method="POST">
                                                     {{-- <a class="btn btn-sm btn-primary "
                                                         href="{{ route('events.show', $event->id) }}"><i
                                                             class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
 
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> {{ __('Desapuntar') }}</button>
+                                                    @if ($event->FechaEvento > time())
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-fw fa-trash"></i>
+                                                            {{ __('Desapuntar') }}</button>
+                                                    @endif
                                                 </form>
                                             </td>
                                         </tr>
