@@ -48,7 +48,8 @@
             {!! $errors->first('Telefono', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div>
-            <input type="file" class='form-control' name='Foto' value="">
+            <input type="file" class='form-control' name='FotoLogo' value="" accept="image/*">
+            {!! $errors->first('FotoLogo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>

@@ -89,8 +89,8 @@ class OrganisationController extends Controller
 
     public function showModeAdminEdit()
     {
-        $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
-        // $organisation = Organisation::find(Auth::user()->id_ONG);
+        // $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        $organisation = Organisation::find(Auth::user()->id_ONG);
 
         return view('admin.organisation.edit', compact('organisation'));
     }
@@ -126,10 +126,14 @@ class OrganisationController extends Controller
         $data->eMail = $request->eMail;
         $data->Telefono = $request->Telefono;
 
-        $path = $request->file('FotoLogo')->getRealPath();
-        $logo = file_get_contents($path);
-        $base64 = base64_encode($logo);
-        $data->logo = $base64;
+        // $path = $request->file('FotoLogo')->getRealPath();
+        // $logo = file_get_contents($path);
+        // $base64 = base64_encode($logo);
+        // $data->logo = $base64;
+        if ($request->hasFile('FotoLogo')) {
+            $data->FotoLogo = $request->file('FotoLogo')->store('logo_ong');
+            $data->FotoLogo = 'storage/'.$data->FotoLogo;
+        }
 
         $data->save();
 

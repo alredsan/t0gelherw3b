@@ -51,7 +51,8 @@
                         </div>
                         <div class="form-group">
                             <strong>Fotologo:</strong>
-                            {{ $organisation->FotoLogo }}
+                            <img src="{{ asset($organisation->FotoLogo) }}" alt="LogoONG">
+
                         </div>
                         <div class="form-group">
                             <strong>Email:</strong>

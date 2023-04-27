@@ -26,13 +26,12 @@ class Organisation extends Model
 {
 
     static $rules = [
-		'idONG' => 'required',
 		'Name' => 'required',
 		'DireccionSede' => 'required',
 		'Descripcion' => 'required',
 		'FechaCreacion' => 'required',
 		'IBANmetodoPago' => 'required',
-		'FotoLogo' => 'required',
+		'FotoLogo' => 'image|max:2048',
 		'eMail' => 'required',
 		'Telefono' => 'required',
     ];

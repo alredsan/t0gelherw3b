@@ -1,7 +1,7 @@
 @extends('layouts.plantillaAdmin')
 
 @section('titulo')
-    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
+    Editar ONG
 @endsection
 
 @section('contenido')
