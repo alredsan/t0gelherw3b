@@ -21,8 +21,13 @@ class OrganisationController extends Controller
     {
         $organisations = Organisation::paginate();
 
-        return view('organisation.index', compact('organisations'))
-            ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
+        if (Auth::user()->roles('1')) {
+
+            return view('admin.organisation.index', compact('organisations'))
+                ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
+        } else {
+            return "NO PERMITIDO";
+        }
     }
 
     /**
@@ -33,7 +38,7 @@ class OrganisationController extends Controller
     public function create()
     {
         $organisation = new Organisation();
-        return view('organisation.create', compact('organisation'));
+        return view('admin.organisation.create', compact('organisation'));
     }
 
     /**
@@ -46,9 +51,16 @@ class OrganisationController extends Controller
     {
         request()->validate(Organisation::$rules);
 
-        $organisation = Organisation::create($request->all());
+        $data = $request->all();
 
-        return redirect()->route('organisations.index')
+        if ($request->hasFile('FotoLogo')) {
+            $data['FotoLogo'] = $request->file('FotoLogo')->store('logo_ong');
+            $data['FotoLogo'] = 'storage/' . $data['FotoLogo'];
+        }
+
+        $organisation = Organisation::create($data);
+
+        return redirect()->route('admin.ong.show', $organisation->idONG)
             ->with('success', 'Organisation created successfully.');
     }
 
@@ -62,7 +74,11 @@ class OrganisationController extends Controller
     {
         $organisation = Organisation::find($id);
 
-        return view('organisation.show', compact('organisation'));
+        if (Auth::user()->id_ONG == $id || Auth::user()->roles('1')) {
+            return view('admin.organisation.show', compact('organisation'));
+        } else {
+            return "NO PERMITIDO";
+        }
     }
 
     public function showModeAdmin()
@@ -83,7 +99,12 @@ class OrganisationController extends Controller
     {
         $organisation = Organisation::find($id);
 
-        return view('organisation.edit', compact('organisation'));
+        if (Auth::user()->id_ONG == $id || Auth::user()->roles('1')) {
+
+            return view('admin.organisation.edit', compact('organisation'));
+        } else {
+            return "NO PERMITIDO";
+        }
     }
 
 
@@ -115,29 +136,25 @@ class OrganisationController extends Controller
     public function ModeAdminONGUpdate(Request $request, Organisation $organisation)
     {
         request()->validate(Organisation::$rules);
-        $data = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
-        // $data = Organisation::find(Auth::user()->id_ONG);
+        // $data = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        $data = Organisation::find($request->idONG);
 
         $data->Name = $request->Name;
         $data->DireccionSede = $request->DireccionSede;
-        $data->Descripcion = $request->Descripcion;
+        $data->Descripcion = $request->input('Descripcion');
         $data->FechaCreacion = $request->FechaCreacion;
         $data->IBANmetodoPago = $request->IBANmetodoPago;
         $data->eMail = $request->eMail;
         $data->Telefono = $request->Telefono;
 
-        // $path = $request->file('FotoLogo')->getRealPath();
-        // $logo = file_get_contents($path);
-        // $base64 = base64_encode($logo);
-        // $data->logo = $base64;
         if ($request->hasFile('FotoLogo')) {
             $data->FotoLogo = $request->file('FotoLogo')->store('logo_ong');
-            $data->FotoLogo = 'storage/'.$data->FotoLogo;
+            $data->FotoLogo = 'storage/' . $data->FotoLogo;
         }
 
         $data->save();
 
-        return redirect()->route('admin.ong')
+        return redirect()->route('admin.ong.show', $data->idONG)
             ->with('success', 'Ha sido actualizada correctamente');
     }
 
@@ -150,7 +167,7 @@ class OrganisationController extends Controller
     {
         $organisation = Organisation::find($id)->delete();
 
-        return redirect()->route('organisations.index')
+        return redirect()->route('admin.ong.index')
             ->with('success', 'Organisation deleted successfully');
     }
 }

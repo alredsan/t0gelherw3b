@@ -37,7 +37,7 @@
                         {{-- ADMINISTRADOR WEB --}}
                         @if (Auth::user()->roles('1'))
                             <li>
-                                <a href="#" class="nav-link px-0 align-middle">
+                                <a href="{{ route('admin.ong.index') }}" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">ONGs</span></a>
                             </li>
                             <li>
@@ -54,22 +54,21 @@
                         @if (Auth::user()->roles('2'))
                             <li>
                                 <a href="{{ route('admin.ong') }}" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil ONG</span></a>
+                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
+                                        ONG</span></a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Asignaciones
                                         Usuarios</span></a>
                             </li>
-
-
                         @endif
                         @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Eventos ONG</span></a>
-                        </li>
+                            <li>
+                                <a href="#" class="nav-link px-0 align-middle">
+                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
+                                        ONG</span></a>
+                            </li>
                         @endif
                         {{-- @if (Auth::user()->Role == 'O' && Auth::user()->id_ONG != null) --}}
                         {{-- <li>
@@ -164,6 +163,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
+    @stack('scriptsJS')
     {{-- <script src="/js/form.js"></script> --}}
 </body>
 

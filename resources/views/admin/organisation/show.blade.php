@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Show') }} Organisation</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.ong.edit') }}"> {{ __('Editar') }}</a>
+                            <a class="btn btn-primary" href="{{ route('admin.ong.edit',$organisation->idONG) }}"> {{ __('Editar') }}</a>
                         </div>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">

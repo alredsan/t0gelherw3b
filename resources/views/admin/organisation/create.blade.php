@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.plantillaAdmin')
 
-@section('template_title')
-    {{ __('Create') }} Organisation
+@section('titulo')
+    Crear ONG
 @endsection
 
-@section('content')
+@section('contenido')
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -16,10 +16,10 @@
                         <span class="card-title">{{ __('Create') }} Organisation</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('organisations.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.ong.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('organisation.form')
+                            @include('admin.organisation.form')
 
                         </form>
                     </div>

@@ -6,6 +6,7 @@
             {{ Form::text('idONG', $organisation->idONG, ['class' => 'form-control' . ($errors->has('idONG') ? ' is-invalid' : ''), 'placeholder' => 'Idong']) }}
             {!! $errors->first('idONG', '<div class="invalid-feedback">:message</div>') !!}
         </div> --}}
+        <input type="hidden" name='idONG' value='{{ $organisation->idONG }}'>
         <div class="form-group">
             {{ Form::label('Name') }}
             {{ Form::text('Name', $organisation->Name, ['class' => 'form-control' . ($errors->has('Name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
@@ -18,7 +19,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Descripcion') }}
-            {{ Form::text('Descripcion', $organisation->Descripcion, ['class' => 'form-control' . ($errors->has('Descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion']) }}
+            {{ Form::text('Descripcion', $organisation->Descripcion, ['class' => 'form-control' . ($errors->has('Descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion', 'id' => 'editor']) }}
             {!! $errors->first('Descripcion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -57,3 +58,21 @@
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+
+@push('scriptsJS')
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+    <script>
+        let element = document.querySelector('#editor');
+
+        if (element != null) {
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    </script>
+@endpush
