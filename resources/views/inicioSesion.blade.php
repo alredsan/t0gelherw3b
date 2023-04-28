@@ -31,7 +31,7 @@
                 </div>
             @endif
             <input class="button form__button" type="submit" value="Iniciar Sesión" name="sign">
-            <a class="form__button" href="./registro.html">Registrarte</a>
+            <a class="form__button" href="{{ route('registro') }}">Registrarte</a>
         </form>
 
     </main>

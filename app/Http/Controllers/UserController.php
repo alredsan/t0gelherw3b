@@ -60,11 +60,11 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
 
-        return view('user.show', compact('user'));
+        return view('cuenta.show',compact('user'));
     }
 
     /**
@@ -111,6 +111,14 @@ class UserController extends Controller
     }
 
 
+    public function showEventos(){
+
+        $user = User::find(Auth::user()->id);
+
+        return view('cuenta.showEventsCuenta',compact('user'));
+    }
+
+
     public function register(Request $request)
     {
         // Validacion de los datos
@@ -151,6 +159,7 @@ class UserController extends Controller
 
             $request->session()->regenerate();
             // intended , cuando intenta acceder, pero se queda capturado cuando inicie sesion, lleva a la url deseada
+
             return redirect()->intended(route('/'));
         } else {
             // en caso de fallo, decir al usuario fallido acceso
@@ -168,6 +177,23 @@ class UserController extends Controller
         return redirect(route('/'));
     }
 
+    public function acceso(){
+
+        if(Auth::user()->id_ONG != null){
+            return redirect(route('selectingCuenta'));
+        }
+
+        return redirect('cuenta');
+    }
+
+    public function selectingCuenta(){
+        return view('SelectingTipoCuenta');
+    }
+
+    public function general(){
+        return view('cuenta.welcomeCuenta');
+    }
+
     public function mostrarInicioSesion()
     {
         return view('inicioSesion');
@@ -182,4 +208,6 @@ class UserController extends Controller
     {
         return $this->belongsToMany(Role::class);
     }
+
+
 }

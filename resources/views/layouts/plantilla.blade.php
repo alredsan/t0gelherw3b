@@ -49,7 +49,7 @@
                 <div class="col-md-4 text-end">
                     @if(Auth::check())
                     Hola {{ Auth::user()->name }}!
-                    <a type="button" href='{{ route('Admin') }}' class="btn btn-outline-primary me-2">Admin</a>
+                    <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Admin</a>
                     <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary me-2">Cerrar Sesion</a>
 
                     @else

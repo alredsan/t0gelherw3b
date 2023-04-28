@@ -44,7 +44,7 @@
                 <a class="pass__img" href="#" onclick="mostrarContrasena()">Mostrar</a>
             </div>
             <input class="button form__button" type="submit" value="Registrarte" name="sign">
-            <a class="form__button" href="{{ route('inicioSesion') }}">Tienes cuenta?</a>
+            <a class="form__button" href="{{ route('login') }}">Tienes cuenta?</a>
         </form>
 
     </main>

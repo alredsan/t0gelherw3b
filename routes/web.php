@@ -52,6 +52,20 @@ Route::post('/inicia-sesion',[UserController::class,'login'])->name('inicia-sesi
 
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
+// Comprobar si tiene mas de un rol
+Route::get('/acceso',[UserController::class,'acceso'])->name('acceso');
+// Seleccionar el tipo
+Route::get('/accesoSelecting',[UserController::class,'selectingCuenta'])->name('selectingCuenta');
+
+// Parte administrativa para el usuario
+Route::get('/cuenta',[UserController::class,'general'])->middleware('auth')->name('cuenta');
+Route::get('/cuenta/perfil/',[UserController::class,'show'])->middleware('auth')->name('cuenta.perfil');
+Route::get('/cuenta/perfil/editar/',[UserController::class,'edit'])->middleware('auth')->name('cuenta.edit');
+Route::patch('/cuenta/perfil/editars/',[UserController::class,'updateUser'])->middleware('auth')->name('cuenta.update');
+
+Route::get('/cuenta/perfil/eventos',[UserController::class,'showEventos'])->middleware('auth')->name('cuenta.eventos');
+Route::delete('/cuenta/perfil/eliminarParticipante/{id}',[EventController::class,'destroyParticipante'])->middleware('auth')->name('event.destroyParticipante');
+
 // PARTE DE ADMINISTRACION
 // Route::get('/admin/perfil',[UserController::class,'show'])->middleware('auth')->parameter(Auth::user()->id)->name('perfil');
 
@@ -59,11 +73,10 @@ Route::get('/admin',AdminController::class)->middleware('auth')->name('Admin');
 Route::get('/admin/perfil/',[AdminController::class,'show'])->middleware('auth')->name('perfil');
 Route::get('/admin/perfil/editar/',[AdminController::class,'edit'])->middleware('auth')->name('admin.user.edit');
 Route::patch('/admin/perfil/editars/',[AdminController::class,'updateUser'])->middleware('auth')->name('admin.user.update');
-Route::delete('/admin/perfil/eliminarParticipante/{id}',[EventController::class,'destroyParticipante'])->middleware('auth')->name('event.destroyParticipante');
 
 
 // ADMINISTRACION ONG
-// Route::get('/admin/ong',[OrganisationController::class,'showModeAdmin'])->middleware('auth')->name('admin.ong');
+Route::get('/admin/ong',[OrganisationController::class,'showModeAdmin'])->middleware('auth')->name('admin.ong');
 Route::get('/admin/ong/edit',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
 Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUpdate'])->middleware('auth')->name('admin.ong.update');
 // Route::patch('/admin/perfil/actualizar/',[UserController::class,'update'])->middleware('auth')->name('users.update');

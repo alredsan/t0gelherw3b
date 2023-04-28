@@ -10,9 +10,7 @@
     <title>Thogeter - @yield('titulo')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
     <link rel="stylesheet" href="/css/cssPage.css">
 </head>
 
@@ -32,11 +30,26 @@
                         id="menu">
 
                         <li>
-                            <a href="{{ route('perfil') }}" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span> </a>
+                            <a href="{{ route('cuenta') }}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">General</span> </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('cuenta.perfil') }}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="bi bi-braces-asterisk"></i> <span class="ms-1 d-none d-sm-inline">Cambiar
+                                    contraseña</span> </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('cuenta.eventos') }}" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi bi-calendar-event-fill"></i> <span class="ms-1 d-none d-sm-inline">Eventos
+                                    Apuntados</span> </a>
                         </li>
 
-                        {{-- ADMINISTRADOR WEB --}}
+                        {{-- ADMINISTRADOR WEB
                         @if (Auth::user()->roles('1'))
                             <li>
                                 <a href="{{ route('admin.ong.index') }}" class="nav-link px-0 align-middle">
@@ -52,8 +65,8 @@
                                     <i class="fs-4 bi-table"></i> <span
                                         class="ms-1 d-none d-sm-inline">Usuarios</span></a>
                             </li>
-                        @endif
-                        @if (Auth::user()->roles('2'))
+                        @endif --}}
+                        {{-- @if (Auth::user()->roles('2'))
                             <li>
                                 <a href="{{ route('admin.ong') }}" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
@@ -71,7 +84,7 @@
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
                                         ONG</span></a>
                             </li>
-                        @endif
+                        @endif --}}
                         {{-- @if (Auth::user()->Role == 'O' && Auth::user()->id_ONG != null) --}}
                         {{-- <li>
                             <a href="#" class="nav-link px-0 align-middle">
