@@ -29,8 +29,6 @@ class Event extends Model
 {
 
     static $rules = [
-		'idEvento' => 'required',
-		'id_ONG' => 'required',
 		'Nombre' => 'required',
 		'Descripcion' => 'required',
 		'FechaEvento' => 'required',
@@ -39,8 +37,11 @@ class Event extends Model
 		'Latitud' => 'required',
 		'Longitud' => 'required',
 		'Aportaciones' => 'required',
-		'Foto' => 'required',
+		'Foto' => 'image|max:2048',
     ];
+
+    protected $primaryKey = 'idEvento';
+    public $timestamps = false;
 
     protected $perPage = 20;
 

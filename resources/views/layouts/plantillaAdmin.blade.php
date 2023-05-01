@@ -31,13 +31,15 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
 
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('perfil') }}" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span> </a>
-                        </li>
+                        </li> --}}
 
                         {{-- ADMINISTRADOR WEB --}}
                         @if (Auth::user()->roles('1'))
+                        <li>
+                            <strong>Administrador WEB</strong>
                             <li>
                                 <a href="{{ route('admin.ong.index') }}" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">ONGs</span></a>
@@ -52,8 +54,11 @@
                                     <i class="fs-4 bi-table"></i> <span
                                         class="ms-1 d-none d-sm-inline">Usuarios</span></a>
                             </li>
+
+                        </li>
                         @endif
                         @if (Auth::user()->roles('2'))
+                            <strong>Administrador ONG</strong>
                             <li>
                                 <a href="{{ route('admin.ong') }}" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
@@ -61,13 +66,13 @@
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Asignaciones
+                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Permisos
                                         Usuarios</span></a>
                             </li>
                         @endif
                         @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
                             <li>
-                                <a href="#" class="nav-link px-0 align-middle">
+                                <a href="{{ route('admin.ong.event.index')}}" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
                                         ONG</span></a>
                             </li>
@@ -143,7 +148,7 @@
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
+                            <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
                                 class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1">{{ Auth::user()->name }}</span>
                         </a>

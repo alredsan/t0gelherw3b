@@ -1,16 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
-        <div class="form-group">
-            {{ Form::label('idEvento') }}
-            {{ Form::text('idEvento', $event->idEvento, ['class' => 'form-control' . ($errors->has('idEvento') ? ' is-invalid' : ''), 'placeholder' => 'Idevento']) }}
-            {!! $errors->first('idEvento', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('id_ONG') }}
-            {{ Form::text('id_ONG', $event->id_ONG, ['class' => 'form-control' . ($errors->has('id_ONG') ? ' is-invalid' : ''), 'placeholder' => 'Id Ong']) }}
-            {!! $errors->first('id_ONG', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+
         <div class="form-group">
             {{ Form::label('Nombre') }}
             {{ Form::text('Nombre', $event->Nombre, ['class' => 'form-control' . ($errors->has('Nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre']) }}
@@ -23,7 +13,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('FechaEvento') }}
-            {{ Form::text('FechaEvento', $event->FechaEvento, ['class' => 'form-control' . ($errors->has('FechaEvento') ? ' is-invalid' : ''), 'placeholder' => 'Fechaevento']) }}
+            {{ Form::date('FechaEvento',  (date('d-m-Y', $event->FechaEvento)), ['class' => 'form-control' . ($errors->has('FechaEvento') ? ' is-invalid' : ''), 'placeholder' => 'Fechaevento']) }}
             {!! $errors->first('FechaEvento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -51,9 +41,9 @@
             {{ Form::text('Aportaciones', $event->Aportaciones, ['class' => 'form-control' . ($errors->has('Aportaciones') ? ' is-invalid' : ''), 'placeholder' => 'Aportaciones']) }}
             {!! $errors->first('Aportaciones', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('Foto') }}
-            {{ Form::text('Foto', $event->Foto, ['class' => 'form-control' . ($errors->has('Foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
+        <div>
+            <label for="Foto">Foto: </label>
+            <input type="file" class='form-control' name='Foto' value="" accept="image/*">
             {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

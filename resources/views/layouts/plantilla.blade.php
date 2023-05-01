@@ -6,17 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOGETHER. | @yield('titulo') </title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/cssPage.css">
+    <link rel="stylesheet" href="/css/cssPage.css">
+    @yield('styleCssPag')
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{route('/')}}">
-                <img class="logo" src="img/logo.png" alt="">
+                <img class="logo" src="/img/logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -70,7 +71,7 @@
         <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
             <div class="col mb-3">
                 <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                    <img class="w-75" src="img/logo.png" alt="">
+                    <img class="w-75" src="/img/logo.png" alt="">
                 </a>
                 <p class="text-muted">Alberto Redondo &copy; 2023</p>
             </div>

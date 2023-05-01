@@ -44,7 +44,8 @@ class User extends Authenticatable
 		'email' => 'required',
 		'Direccion' => 'required',
 		'ProvinciaLocalidad' => 'required',
-		'Telefono' => 'required'
+		'Telefono' => 'required',
+        'Foto' => 'image|max:2048'
     ];
 
     protected $perPage = 20;

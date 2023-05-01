@@ -1,0 +1,18 @@
+.photoEvent{
+    height: 30vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.photoLogo{
+    height: 25vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#defaultMapId{
+    height: 50vh!important;
+}

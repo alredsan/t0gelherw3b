@@ -27,6 +27,13 @@ class EventController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
     }
 
+    public function indexEventsONG(){
+        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(1);
+
+        return view('admin.event.index',compact('events'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -48,10 +55,12 @@ class EventController extends Controller
     {
         request()->validate(Event::$rules);
 
+        $request['id_ONG'] = Auth::user()->id_ONG;
+
         $event = Event::create($request->all());
 
-        return redirect()->route('events.index')
-            ->with('success', 'Event created successfully.');
+        return redirect()->route('admin.ong.event.index')
+            ->with('success', 'El evento ha sido creado correctamente.');
     }
 
     /**
@@ -87,14 +96,31 @@ class EventController extends Controller
      * @param  Event $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, $event)
     {
         request()->validate(Event::$rules);
 
-        $event->update($request->all());
+        // $data = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        $data = Event::find($event);
 
-        return redirect()->route('events.index')
-            ->with('success', 'Event updated successfully');
+        $data->Nombre = $request->Nombre;
+        $data->Descripcion = $request->Descripcion;
+        $data->FechaEvento = strtotime($request->FechaEvento);
+        $data->numMaxVoluntarios = $request->numMaxVoluntarios;
+        $data->Direccion = $request->Direccion;
+        $data->Latitud = $request->Latitud;
+        $data->Longitud = $request->Longitud;
+        $data->Aportaciones = $request->Aportaciones;
+
+        if ($request->hasFile('Foto')) {
+            $data->Foto = $request->file('Foto')->store('event');
+            $data->Foto = 'storage/' . $data->Foto;
+        }
+
+        $data->save();
+
+        return redirect()->route('admin.ong.event.index')
+            ->with('success', 'El evento ha sido actualizado correctamente.');
     }
 
     /**
@@ -106,8 +132,8 @@ class EventController extends Controller
     {
         $event = Event::find($id)->delete();
 
-        return redirect()->route('events.index')
-            ->with('success', 'Event deleted successfully');
+        return redirect()->route('admin.ong.event.index')
+            ->with('success', 'El evento ha sido eliminado');
     }
 
     public function destroyParticipante($id)

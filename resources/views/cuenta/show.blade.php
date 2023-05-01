@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Show') }} User</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.user.edit') }}"> {{ __('Editar') }}</a>
+                            <a class="btn btn-primary" href="{{ route('cuenta.edit') }}"> {{ __('Editar') }}</a>
                         </div>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Foto:</strong>
-                            <img src={{ 'data:image/png;base64,' . base64_encode($user->Foto) . '' }} class="card-img-top" alt="FotoPerfil" />
+                            <img src={{asset($user->Foto)}} class="card-img-top w-25" alt="FotoPerfil" />
                             {{-- {{ $user->Foto }} --}}
                         </div>
                     </div>

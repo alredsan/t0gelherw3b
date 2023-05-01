@@ -5,6 +5,11 @@
 
 @section('contenido')
     <main>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             {{-- <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -37,11 +42,12 @@
             </button>
         </div>
         <div class="contanier_form">
-            <form action="{{route('eventsFilter')}}" class="form_principal" method="GET">
+            <form action="{{ route('eventsFilter') }}" class="form_principal" method="GET">
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Buscar ..." name='nombre'>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Buscar ..."
+                                name='nombre'>
                             <label for="floatingInput">Buscar por palabra</label>
                         </div>
                     </div>
@@ -50,10 +56,8 @@
                         <div class="form-floating">
                             <select class="form-select" id="floatingSelect" name='selectType' aria-label="select tipo ">
                                 <option selected>Tipo</option>
-                                @foreach($tipos as $tipo)
-
-                                <option value={{$tipo->idtypeONG }} > {{$tipo->Nombre}}</option>
-
+                                @foreach ($tipos as $tipo)
+                                    <option value={{ $tipo->idtypeONG }}> {{ $tipo->Nombre }}</option>
                                 @endforeach
                             </select>
                             <label for="floatingSelect">Tematica</label>
@@ -68,7 +72,8 @@
 
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="localidad" name='localidad' placeholder="Buscar ...">
+                            <input type="text" class="form-control" id="localidad" name='localidad'
+                                placeholder="Buscar ...">
                             <label for="floatingInput">Localidad</label>
                         </div>
                     </div>
@@ -117,5 +122,5 @@
 @endsection
 
 @section('scripts')
-<script src="/js/script.js"></script>
+    <script src="/js/script.js"></script>
 @endsection

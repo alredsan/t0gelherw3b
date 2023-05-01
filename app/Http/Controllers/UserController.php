@@ -51,7 +51,7 @@ class UserController extends Controller
         $user = User::create($request->all());
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'El usuario ha sido creado.');
     }
 
     /**
@@ -73,11 +73,12 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $user = User::find($id);
+        // $user = User::find($id);
+        $user = User::find(Auth::user()->id);
 
-        return view('user.edit', compact('user'));
+        return view('cuenta.edit', compact('user'));
     }
 
     /**
@@ -94,7 +95,7 @@ class UserController extends Controller
         $user->update($request->all());
 
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'El usuario ha sido actualizado correctamente');
     }
 
     /**
@@ -106,8 +107,8 @@ class UserController extends Controller
     {
         $user = User::find($id)->delete();
 
-        return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+        return redirect()->route('/')
+            ->with('success', 'El usuario ha sido eliminado correctamente');
     }
 
 
@@ -116,6 +117,31 @@ class UserController extends Controller
         $user = User::find(Auth::user()->id);
 
         return view('cuenta.showEventsCuenta',compact('user'));
+    }
+
+    public function updateUserV(Request $request, User $user)
+    {
+        request()->validate(User::$rules);
+
+        $data = User::find(Auth::user()->id);
+
+        $data->DNI = $request->DNI;
+        $data->name = $request->name;
+        $data->Apellidos = $request->Apellidos;
+        $data->email = $request->email;
+        $data->Direccion = $request->Direccion;
+        $data->ProvinciaLocalidad = $request->ProvinciaLocalidad;
+        $data->Telefono = $request->Telefono;
+
+        if ($request->hasFile('Foto')) {
+            $data->Foto = $request->file('Foto')->store('foto_perfil');
+            $data->Foto = 'storage/' . $data->Foto;
+        }
+
+        $data->save();
+
+        return redirect()->route('cuenta.perfil')
+            ->with('success', 'Usuario'. $request->name .'ha sido actualizado correctamente');
     }
 
 
