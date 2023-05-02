@@ -16,13 +16,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Type extends Model
 {
-    
+
     static $rules = [
 		'idtypeONG' => 'required',
 		'Nombre' => 'required',
     ];
 
     protected $perPage = 20;
+    protected $table = 'types';
+    protected $primaryKey = 'idtypeONG';
+    public $timestamps = false;
 
     /**
      * Attributes that should be mass-assignable.
@@ -39,6 +42,6 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\EventsType', 'idType', 'idtypeONG');
     }
-    
+
 
 }

@@ -32,7 +32,7 @@
 
         <div class='row'>
             <h3>Descripción</h3>
-            {{ $event->Descripcion }}
+            {!! $event->Descripcion !!}
         </div>
 
         <x-maps-leaflet :centerPoint="['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud) ]" :markers="[['lat' => floatval($event->Latitud), 'long' =>  floatval($event->Longitud) ]]" :zoomLevel="20">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventsType;
 use App\Models\EventsUser;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -27,11 +28,11 @@ class EventController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
     }
 
-    public function indexEventsONG(){
-        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(1);
+    public function indexEventsONG()
+    {
+        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(5);
 
-        return view('admin.event.index',compact('events'));
-
+        return view('admin.event.index', compact('events'));
     }
 
     /**
@@ -55,9 +56,20 @@ class EventController extends Controller
     {
         request()->validate(Event::$rules);
 
-        $request['id_ONG'] = Auth::user()->id_ONG;
+        $data = $request->all();
 
-        $event = Event::create($request->all());
+        $data['id_ONG'] = Auth::user()->id_ONG;
+        $data['FechaEvento'] = strtotime($request->FechaEvento);
+
+        if ($request->hasFile('Foto')) {
+            $name = $request->file('Foto')->store('event');
+            $data['Foto'] = '';
+            $data['Foto'] = 'storage/' . $name;
+        }
+
+        $event = Event::create($data);
+
+        $event->eventsType()->attach($request->selectmultiple);
 
         return redirect()->route('admin.ong.event.index')
             ->with('success', 'El evento ha sido creado correctamente.');
@@ -86,7 +98,13 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
-        return view('event.edit', compact('event'));
+        $types = Type::all();
+
+        if ($event->id_ONG == Auth::user()->id_ONG) {
+            return view('event.edit', compact('event', 'types'));
+        } else {
+            return "NO PERMITIDO";
+        }
     }
 
     /**
@@ -100,7 +118,6 @@ class EventController extends Controller
     {
         request()->validate(Event::$rules);
 
-        // $data = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
         $data = Event::find($event);
 
         $data->Nombre = $request->Nombre;
@@ -118,6 +135,13 @@ class EventController extends Controller
         }
 
         $data->save();
+
+        $rows = EventsType::find($event);
+        if ($rows != null) {
+            $rows->delete();
+        }
+
+        $data->eventsType()->attach($request->selectmultiple);
 
         return redirect()->route('admin.ong.event.index')
             ->with('success', 'El evento ha sido actualizado correctamente.');
@@ -139,8 +163,8 @@ class EventController extends Controller
     public function destroyParticipante($id)
     {
         $participante = EventsUser::query();
-        $participante->where('idEvent','=',$id)
-        ->where('idUser','=',Auth::user()->id);
+        $participante->where('idEvent', '=', $id)
+            ->where('idUser', '=', Auth::user()->id);
         $participante->delete();
 
         // $event = Event::find($id)->delete();

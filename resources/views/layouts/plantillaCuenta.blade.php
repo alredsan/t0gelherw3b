@@ -40,7 +40,7 @@
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="bi bi-braces-asterisk"></i> <span class="ms-1 d-none d-sm-inline">Cambiar
+                                <i class="fs-4 bi bi-key-fill"></i> <span class="ms-1 d-none d-sm-inline">Cambiar
                                     contraseña</span> </a>
                         </li>
                         <li>
@@ -48,108 +48,12 @@
                                 <i class="fs-4 bi bi-calendar-event-fill"></i> <span class="ms-1 d-none d-sm-inline">Eventos
                                     Apuntados</span> </a>
                         </li>
-
-                        {{-- ADMINISTRADOR WEB
-                        @if (Auth::user()->roles('1'))
-                            <li>
-                                <a href="{{ route('admin.ong.index') }}" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">ONGs</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline">Eventos</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline">Usuarios</span></a>
-                            </li>
-                        @endif --}}
-                        {{-- @if (Auth::user()->roles('2'))
-                            <li>
-                                <a href="{{ route('admin.ong') }}" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
-                                        ONG</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Asignaciones
-                                        Usuarios</span></a>
-                            </li>
-                        @endif
-                        @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
-                                        ONG</span></a>
-                            </li>
-                        @endif --}}
-                        {{-- @if (Auth::user()->Role == 'O' && Auth::user()->id_ONG != null) --}}
-                        {{-- <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Crear Eventos
-                                    ONG</span> </a>
-                        </li> --}}
-                        {{-- @endif --}}
-                        {{-- @if (Auth::user()->id_ONG != null)
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Crear Eventos
-                                        ONG</span> </a>
-                            </li>
-                        @endif --}}
-
                         <li class="nav-item">
                             <a href="{{ route('/') }}" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Salir de
                                     Ajustes</span>
                             </a>
                         </li>
-                        {{-- <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                                </li>
-                            </ul>
-                        </li> --}}
-                        {{-- <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                                </li>
-                            </ul>
-                        </li> --}}
-
-                        {{-- <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                                </li>
-                            </ul>
-                        </li> --}}
-
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">

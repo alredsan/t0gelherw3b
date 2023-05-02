@@ -8,12 +8,12 @@
         </div>
         <div class="form-group">
             {{ Form::label('Descripcion') }}
-            {{ Form::text('Descripcion', $event->Descripcion, ['class' => 'form-control' . ($errors->has('Descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion']) }}
+            {{ Form::textarea('Descripcion', $event->Descripcion, ['class' => 'form-control' . ($errors->has('Descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion', 'id' => 'editor', 'rows' => '10', 'cols' => '50']) }}
             {!! $errors->first('Descripcion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('FechaEvento') }}
-            {{ Form::date('FechaEvento',  (date('d-m-Y', $event->FechaEvento)), ['class' => 'form-control' . ($errors->has('FechaEvento') ? ' is-invalid' : ''), 'placeholder' => 'Fechaevento']) }}
+            {{ Form::date('FechaEvento', date('Y-m-d', $event->FechaEvento), ['class' => 'form-control' . ($errors->has('FechaEvento') ? ' is-invalid' : ''), 'placeholder' => 'Fechaevento']) }}
             {!! $errors->first('FechaEvento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -41,6 +41,16 @@
             {{ Form::text('Aportaciones', $event->Aportaciones, ['class' => 'form-control' . ($errors->has('Aportaciones') ? ' is-invalid' : ''), 'placeholder' => 'Aportaciones']) }}
             {!! $errors->first('Aportaciones', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
+        <div>
+            {{-- <label for="typeEvent">Seleccione los tipos que relaciona la tematica:</label> --}}
+            <select id="selectmultiple" name="selectmultiple[]" multiple="multiple">
+                @foreach ($types as $type)
+                    <option value="{{ $type->idtypeONG }}">{{ $type->Nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <div>
             <label for="Foto">Foto: </label>
             <input type="file" class='form-control' name='Foto' value="" accept="image/*">
@@ -52,3 +62,29 @@
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+
+
+@push('scriptsJS')
+    <link href="/css/fSelect.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="/js/fSelect.js"></script>
+
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+    <script>
+        let element = document.querySelector('#editor');
+
+        if (element != null) {
+            ClassicEditor.create(element)
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
+
+        $('#selectmultiple').fSelect();
+    </script>
+@endpush

@@ -58,7 +58,8 @@ class Event extends Model
      */
     public function eventsType()
     {
-        return $this->hasOne('App\Models\EventsType', 'idEvento', 'idEvento');
+        // return $this->belongsToMany('App\Models\EventsType','events_types', 'idEvento', 'idEvento');
+        return $this->belongsToMany(Type::class,'events_types','idEvento','idtype');
     }
 
     /**

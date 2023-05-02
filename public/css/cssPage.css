@@ -22,6 +22,10 @@
     }
 } */
 
+#selectmultiple{
+    height: 20px;
+}
+
 .contanier_form{
     display: flex;
     justify-content: center;

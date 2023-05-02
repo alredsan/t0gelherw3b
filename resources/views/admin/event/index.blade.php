@@ -35,7 +35,7 @@
 
 										<th>Idevento</th>
 										<th>Nombre</th>
-										<th>Descripcion</th>
+										{{-- <th>Descripcion</th> --}}
 										<th>Fechaevento</th>
 										<th>Nummaxvoluntarios</th>
 										<th>Direccion</th>
@@ -52,7 +52,7 @@
 
 											<td>{{ $event->idEvento }}</td>
 											<td>{{ $event->Nombre }}</td>
-											<td>{{ $event->Descripcion }}</td>
+											{{-- <td>{!! $event->Descripcion !!}</td> --}}
                                             <td>{{ date('d-m-Y', $event->FechaEvento); }}</td>
 											<td>{{ $event->numMaxVoluntarios }}</td>
 											<td>{{ $event->Direccion }}</td>

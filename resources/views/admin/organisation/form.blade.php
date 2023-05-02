@@ -1,11 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
 
-        {{-- <div class="form-group">
-            {{ Form::label('idONG') }}
-            {{ Form::text('idONG', $organisation->idONG, ['class' => 'form-control' . ($errors->has('idONG') ? ' is-invalid' : ''), 'placeholder' => 'Idong']) }}
-            {!! $errors->first('idONG', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
         <input type="hidden" name='idONG' value='{{ $organisation->idONG }}'>
         <div class="form-group">
             {{ Form::label('Name') }}
@@ -19,12 +14,12 @@
         </div>
         <div class="form-group">
             {{ Form::label('Descripcion') }}
-            {{ Form::text('Descripcion', $organisation->Descripcion, ['class' => 'form-control' . ($errors->has('Descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion', 'id' => 'editor']) }}
+            {{ Form::textarea('Descripcion', $organisation->Descripcion, ['class' => 'form-control' . ($errors->has('Descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion', 'id' => 'editor','rows'=>'10','cols' => '80']) }}
             {!! $errors->first('Descripcion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('FechaCreacion') }}
-            {{ Form::text('FechaCreacion', $organisation->FechaCreacion, ['class' => 'form-control' . ($errors->has('FechaCreacion') ? ' is-invalid' : ''), 'placeholder' => 'Fechacreacion']) }}
+            {{ Form::date('FechaCreacion', date('Y-m-d', $organisation->FechaCreacion), ['class' => 'form-control' . ($errors->has('FechaCreacion') ? ' is-invalid' : ''), 'placeholder' => 'Fechacreacion']) }}
             {!! $errors->first('FechaCreacion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -32,11 +27,6 @@
             {{ Form::text('IBANmetodoPago', $organisation->IBANmetodoPago, ['class' => 'form-control' . ($errors->has('IBANmetodoPago') ? ' is-invalid' : ''), 'placeholder' => 'Ibanmetodopago']) }}
             {!! $errors->first('IBANmetodoPago', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        {{-- <div class="form-group">
-            {{ Form::label('FotoLogo') }}
-            {{ Form::file('FotoLogo', $organisation->FotoLogo, ['class' => 'form-control' . ($errors->has('FotoLogo') ? ' is-invalid' : ''), 'placeholder' => 'Fotologo']) }}
-            {!! $errors->first('FotoLogo', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
 
         <div class="form-group">
             {{ Form::label('eMail') }}
@@ -60,19 +50,19 @@
 </div>
 
 @push('scriptsJS')
-    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
-    <script>
-        let element = document.querySelector('#editor');
+<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+<script>
+    let element = document.querySelector('#editor');
 
-        if (element != null) {
-            ClassicEditor
-                .create(document.querySelector('#editor'))
-                .then(editor => {
-                    console.log(editor);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    </script>
+    if (element != null) {
+        ClassicEditor.create(element)
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    }
+</script>
 @endpush

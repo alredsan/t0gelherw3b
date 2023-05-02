@@ -213,6 +213,9 @@ class UserController extends Controller
     }
 
     public function selectingCuenta(){
+        if(Auth::user() == null){
+            return redirect('login');
+        }
         return view('SelectingTipoCuenta');
     }
 
@@ -222,11 +225,17 @@ class UserController extends Controller
 
     public function mostrarInicioSesion()
     {
+        if(Auth::user() != null){
+            return redirect('/');
+        }
         return view('inicioSesion');
     }
 
     public function mostrarRegistro()
     {
+        if(Auth::user() != null){
+            return redirect('/');
+        }
         return view('registro');
     }
 

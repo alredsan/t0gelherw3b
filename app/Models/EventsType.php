@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class EventsType extends Model
 {
     use HasFactory;
+
+    protected $table = 'events_types';
+    protected $primaryKey = 'idEvento';
+    public $timestamps = false;
 }
