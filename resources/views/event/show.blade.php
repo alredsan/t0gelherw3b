@@ -14,15 +14,21 @@
                 <div>
                     <div>
                         <h2>{{ $event->Nombre }}</h2>
+                        <p>
+                            @foreach ($event->eventsType as $type)
+                                {{ $type->Nombre }}
+                            @endforeach
+                        </p>
                     </div>
                     <div>
                         <div>
-                            {{ $event->Direccion }}
-                            {{ date('d-m-Y', $event->FechaEvento) }}
-
+                            <p>{{ $event->Direccion }}</p>
+                            <p>{{ date('Y-m-d H:m', $event->FechaEvento) }}</p>
                         </div>
-                        <div class='d-flex justify-content-center mt-5'>
-                            <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Apuntarse</a>
+                        <div
+                            class='d-flex justify-content-center mt-5 flex-column align-items-center justify-content-center'>
+                            <p>Quedan <b>{{ $event->numMaxVoluntarios }}</b> puestos de {{ $event->numMaxVoluntarios }}</p>
+                            <button type="button" class="btn btn-primary me-2 w-50 botonSearch">Apuntarse</button>
                         </div>
                     </div>
 
@@ -35,7 +41,7 @@
             {!! $event->Descripcion !!}
         </div>
 
-        <x-maps-leaflet :centerPoint="['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud) ]" :markers="[['lat' => floatval($event->Latitud), 'long' =>  floatval($event->Longitud) ]]" :zoomLevel="20">
+        <x-maps-leaflet :centerPoint="['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud)]" :markers="[['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud)]]" :zoomLevel="20">
         </x-maps-leaflet>
         {{-- <div id='mapid'>
 

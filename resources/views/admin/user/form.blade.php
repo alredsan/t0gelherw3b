@@ -2,52 +2,44 @@
     <div class="box-body">
 
         {{-- <div class="form-group">
-            {{ Form::label('DNI') }}
-            {{ Form::text('DNI', $user->DNI, ['class' => 'form-control' . ($errors->has('DNI') ? ' is-invalid' : ''), 'placeholder' => 'Dni']) }}
-            {!! $errors->first('DNI', '<div class="invalid-feedback">:message</div>') !!}
+             <label for="DNI">DNI</label>
+            <input type="text" class="form-control" name="DNI" id="DNI" value="{{$user->DNI}}" placeholder="DNI">
+            <div class="invalid-feedback">Introduce el DNI</div>
         </div> --}}
         <div class="form-group">
-            {{ Form::label('name') }}
-            {{ Form::text('name', $user->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
-            {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" placeholder="nombre">
+            <div class="invalid-feedback">Introduce el nombre</div>
+
         </div>
         <div class="form-group">
-            {{ Form::label('Apellidos') }}
-            {{ Form::text('Apellidos', $user->Apellidos, ['class' => 'form-control' . ($errors->has('Apellidos') ? ' is-invalid' : ''), 'placeholder' => 'Apellidos']) }}
-            {!! $errors->first('Apellidos', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="Apellidos">Apellidos:</label>
+            <input type="text" class="form-control" name="Apellidos" id="Apellidos" value="{{$user->Apellidos}}" placeholder="Apellidos">
+            <div class="invalid-feedback">Introduce los apellidos</div>
         </div>
         <div class="form-group">
-            {{ Form::label('email') }}
-            {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
-            {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="email">email:</label>
+            <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" placeholder="email">
+            <div class="invalid-feedback">Introduce el email</div>
         </div>
         <div class="form-group">
-            {{ Form::label('Direccion') }}
-            {{ Form::text('Direccion', $user->Direccion, ['class' => 'form-control' . ($errors->has('Direccion') ? ' is-invalid' : ''), 'placeholder' => 'Direccion']) }}
-            {!! $errors->first('Direccion', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="Direccion">Direccion:</label>
+            <input type="text" class="form-control" name="Direccion" id="Direccion" value="{{$user->Direccion}}" placeholder="Direccion">
+            <div class="invalid-feedback">Introduce la direccion</div>
         </div>
         <div class="form-group">
-            {{ Form::label('ProvinciaLocalidad') }}
-            {{ Form::text('ProvinciaLocalidad', $user->ProvinciaLocalidad, ['class' => 'form-control' . ($errors->has('ProvinciaLocalidad') ? ' is-invalid' : ''), 'placeholder' => 'Provincialocalidad']) }}
-            {!! $errors->first('ProvinciaLocalidad', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="ProvinciaLocalidad">Provincia:</label>
+            <input type="text" class="form-control" name="ProvinciaLocalidad" id="ProvinciaLocalidad" value="{{$user->ProvinciaLocalidad}}" placeholder="Provincia">
+            <div class="invalid-feedback">Introduce la Provincia</div>
         </div>
         <div class="form-group">
-            {{ Form::label('Telefono') }}
-            {{ Form::text('Telefono', $user->Telefono, ['class' => 'form-control' . ($errors->has('Telefono') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
-            {!! $errors->first('Telefono', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="Telefono">Telefono:</label>
+            <input type="text" class="form-control" name="Telefono" id="Telefono" value="{{$user->Telefono}}" placeholder="Telefono">
+            <div class="invalid-feedback">Introduce el telefono</div>
         </div>
-        {{-- <div class="form-group">
-            {{ Form::label('id_ONG') }}
-            {{ Form::text('id_ONG', $user->id_ONG, ['class' => 'form-control' . ($errors->has('id_ONG') ? ' is-invalid' : ''), 'placeholder' => 'Id Ong']) }}
-            {!! $errors->first('id_ONG', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
-        {{-- <div class="form-group">
-            {{ Form::label('Foto') }}
-            {{ Form::file('Foto', $user->Foto, ['class' => 'form-control' . ($errors->has('Foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
-            {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
         <div>
-            <input type="file" class='form-control' name='Foto' value="">
+            <label for="Foto">Foto perfil:</label>
+            <input type="file" class='form-control' name='Foto'>
         </div>
     </div>
     <div class="box-footer mt20">

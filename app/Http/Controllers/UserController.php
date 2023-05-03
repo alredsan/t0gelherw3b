@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar los usuarios del sistema
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,6 +29,7 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * Mostrar el formulario de nuevo usuario
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +40,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guardar en el sistema el nuevo usuario
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -55,7 +56,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar informacion de un usuario
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -64,11 +65,11 @@ class UserController extends Controller
     {
         $user = User::find(Auth::user()->id);
 
-        return view('cuenta.show',compact('user'));
+        return view('cuenta.show', compact('user'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario para editar el usuario
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -82,7 +83,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar el usuario en el sistema
      *
      * @param  \Illuminate\Http\Request $request
      * @param  User $user
@@ -99,6 +100,8 @@ class UserController extends Controller
     }
 
     /**
+     * Eliminar el usuario del sistema
+     *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
@@ -111,14 +114,20 @@ class UserController extends Controller
             ->with('success', 'El usuario ha sido eliminado correctamente');
     }
 
-
-    public function showEventos(){
+    /**
+     * Mostrar los eventos del usuario
+     */
+    public function showEventos()
+    {
 
         $user = User::find(Auth::user()->id);
 
-        return view('cuenta.showEventsCuenta',compact('user'));
+        return view('cuenta.showEventsCuenta', compact('user'));
     }
 
+    /**
+     * Actualizar el usuario
+     */
     public function updateUserV(Request $request, User $user)
     {
         request()->validate(User::$rules);
@@ -134,6 +143,8 @@ class UserController extends Controller
         $data->Telefono = $request->Telefono;
 
         if ($request->hasFile('Foto')) {
+            unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
+
             $data->Foto = $request->file('Foto')->store('foto_perfil');
             $data->Foto = 'storage/' . $data->Foto;
         }
@@ -141,10 +152,12 @@ class UserController extends Controller
         $data->save();
 
         return redirect()->route('cuenta.perfil')
-            ->with('success', 'Usuario'. $request->name .'ha sido actualizado correctamente');
+            ->with('success', 'Usuario' . $request->name . 'ha sido actualizado correctamente');
     }
 
-
+    /**
+     * Introducir el nuevo usuario voluntario en el sistema
+     */
     public function register(Request $request)
     {
         // Validacion de los datos
@@ -169,6 +182,9 @@ class UserController extends Controller
         return redirect(route('/'));
     }
 
+    /**
+     * Login del usuario en el sistema, utilizando el Auth de Lavarel
+     */
     public function login(Request $request)
     {
         // Validacion de los datos
@@ -193,6 +209,9 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Cierre del sesion del usuario
+     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -203,46 +222,96 @@ class UserController extends Controller
         return redirect(route('/'));
     }
 
-    public function acceso(){
+    /**
+     * Mostrar formulario de cambio de password de la cuenta
+     */
+    public function cambiopassword()
+    {
+        return view('cuenta.changePassword');
+    }
 
-        if(Auth::user()->id_ONG != null){
+    public function updatepassword(Request $request)
+    {
+        // Validacion
+        $oldpassword = $request->oldpassword;
+        $newpassword = $request->newpassword;
+        $confirmarpassword = $request->confirmarpassword;
+
+        if ($confirmarpassword == $newpassword) {
+            if (!Hash::check($request->old_password, Auth::user()->password)) {
+                return back()->with("error",'La contraseña es incorrecta');
+            }
+            $user = User::find(Auth::user()->id);
+
+            $user->password = Hash::make($newpassword);
+            $user->save();
+            return back()->with("exito",'La contraseña ha sido cambiada correctamente!');
+        } else {
+            return back()->with("error",'La contraseña no conciden');
+        }
+    }
+
+    /**
+     * Comprobar si el usuario tiene permisos con un ONG, para seleccionar un modo de administrar
+     * Si no tiene, entra directamente al parte voluntario
+     *  o lo contrario, puede seleccionar la parte voluntario o administrar ONG
+     */
+    public function acceso()
+    {
+        //En caso que no tiene
+        if (Auth::user()->id_ONG != null) {
             return redirect(route('selectingCuenta'));
         }
 
         return redirect('cuenta');
     }
 
-    public function selectingCuenta(){
-        if(Auth::user() == null){
+    /**
+     * Mostrar para seleccionar entre dos area de administracion
+     */
+    public function selectingCuenta()
+    {
+        if (Auth::user() == null) {
             return redirect('login');
         }
         return view('SelectingTipoCuenta');
     }
 
-    public function general(){
+    /**
+     * Acceso por la parte administrativa voluntario
+     */
+    public function general()
+    {
         return view('cuenta.welcomeCuenta');
     }
 
+    /**
+     * Mostrar form para iniciar sesion
+     */
     public function mostrarInicioSesion()
     {
-        if(Auth::user() != null){
+        if (Auth::user() != null) {
             return redirect('/');
         }
         return view('inicioSesion');
     }
 
+    /**
+     * Mostrar el form de registro usuario
+     */
     public function mostrarRegistro()
     {
-        if(Auth::user() != null){
+        if (Auth::user() != null) {
             return redirect('/');
         }
         return view('registro');
     }
 
+    /**
+     * Relacion con la tabla de roles que tiene el usuario
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
-
-
 }

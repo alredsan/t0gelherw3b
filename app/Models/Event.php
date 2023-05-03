@@ -27,17 +27,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Event extends Model
 {
-
+    //Reglas de vertificacion
     static $rules = [
-		'Nombre' => 'required',
-		'Descripcion' => 'required',
-		'FechaEvento' => 'required',
-		'numMaxVoluntarios' => 'required',
-		'Direccion' => 'required',
-		'Latitud' => 'required',
-		'Longitud' => 'required',
-		'Aportaciones' => 'required',
-		'Foto' => 'image|max:2048',
+        'Nombre' => 'required',
+        'Descripcion' => 'required',
+        'FechaEvento' => 'required',
+        'numMaxVoluntarios' => 'required',
+        'Direccion' => 'required',
+        'Latitud' => 'required',
+        'Longitud' => 'required',
+        'Aportaciones' => 'required',
+        'Foto' => 'image|max:2048',
     ];
 
     protected $primaryKey = 'idEvento';
@@ -50,7 +50,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['idEvento','id_ONG','Nombre','Descripcion','FechaEvento','numMaxVoluntarios','Direccion','Latitud','Longitud','Aportaciones','Foto'];
+    protected $fillable = ['idEvento', 'id_ONG', 'Nombre', 'Descripcion', 'FechaEvento', 'numMaxVoluntarios', 'Direccion', 'Latitud', 'Longitud', 'Aportaciones', 'Foto'];
 
 
     /**
@@ -59,7 +59,13 @@ class Event extends Model
     public function eventsType()
     {
         // return $this->belongsToMany('App\Models\EventsType','events_types', 'idEvento', 'idEvento');
-        return $this->belongsToMany(Type::class,'events_types','idEvento','idtype');
+        return $this->belongsToMany(Type::class, 'events_types', 'idEvento', 'idtype');
+    }
+
+    public function eventsdeUnType($type)
+    {
+        // return $this->belongsToMany('App\Models\EventsType','events_types', 'idEvento', 'idEvento');
+        return $this->belongsToMany(Type::class, 'events_types', 'idEvento', 'idtype')->wherePivot('idType', $type);
     }
 
     /**
@@ -78,18 +84,39 @@ class Event extends Model
         return $this->hasOne('App\Models\Organisation', 'idONG', 'id_ONG');
     }
 
-    public function scopeFechaEvento($query,$fecha){
-        if($fecha){
+    /**
+     * SCOPE CONSULTAS
+     */
+    //Fecha
+    public function scopeFechaEvento($query, $fecha)
+    {
+        if ($fecha) {
             $fecha_inicio = strtotime($fecha . " 00:00:00");
             $fecha_final = strtotime($fecha . " 23:59:59");
 
-            return $query->whereBetween('FechaEvento',[$fecha_inicio,$fecha_final]);
+            return $query->whereBetween('FechaEvento', [$fecha_inicio, $fecha_final]);
+        }else{
+            return $query->where('FechaEvento','>',time());
         }
     }
 
-    public function usuarios(){
-        return $this->belongsToMany(User::class,'events_users');
+    //Tipos
+    public function scopeTematica($query, $type)
+    {
+        if ($type) {
+            // $eventstype = EventsType::where('idType','=',$type);
+
+            // return $query->whereIn('idEvento',$eventstype);
+            // $events = $this->eventsdeUnType($type);
+
+            return $query->whereHas('eventsType', function ($query) use ($type) {
+                $query->where('idtype', $type);
+            });
+        }
     }
 
-
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class, 'events_users');
+    }
 }

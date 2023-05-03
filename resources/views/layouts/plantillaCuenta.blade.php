@@ -39,7 +39,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <a href="{{route('cuenta.pass.edit')}}" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi bi-key-fill"></i> <span class="ms-1 d-none d-sm-inline">Cambiar
                                     contraseña</span> </a>
                         </li>

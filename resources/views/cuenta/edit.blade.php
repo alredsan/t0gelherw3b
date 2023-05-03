@@ -20,7 +20,7 @@
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('form.user')
+                            @include('cuenta.formUser')
 
                         </form>
                     </div>

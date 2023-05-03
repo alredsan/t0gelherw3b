@@ -60,7 +60,6 @@
                         <div class="form-group">
                             <strong>Foto:</strong>
                             <img src={{asset($user->Foto)}} class="card-img-top w-25" alt="FotoPerfil" />
-                            {{-- {{ $user->Foto }} --}}
                         </div>
                     </div>
                 </div>

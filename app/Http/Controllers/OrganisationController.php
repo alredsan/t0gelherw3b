@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class OrganisationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Listar los ONG
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,7 +31,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario para crear nuevo ONG
      *
      * @return \Illuminate\Http\Response
      */
@@ -42,7 +42,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guardar en BBDD nuevo ONG creado
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -65,7 +65,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar un ONG con su informacion
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -81,6 +81,9 @@ class OrganisationController extends Controller
         }
     }
 
+    /**
+     * Mostrar el ONG que tiene acceso
+     */
     public function showModeAdmin()
     {
         $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
@@ -90,7 +93,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario para editar el ONG
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -107,7 +110,9 @@ class OrganisationController extends Controller
         }
     }
 
-
+    /**
+     * Mostrar el formulario de edicion el ONG que tiene permiso hacerlo
+     */
     public function showModeAdminEdit()
     {
         // $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
@@ -117,7 +122,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar el ONG tras el formulario
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Organisation $organisation
@@ -133,6 +138,9 @@ class OrganisationController extends Controller
             ->with('success', 'Organisation updated successfully');
     }
 
+    /**
+     * Actualizar el ONG que tiene permiso hacerlo
+     */
     public function ModeAdminONGUpdate(Request $request, Organisation $organisation)
     {
         request()->validate(Organisation::$rules);
@@ -142,12 +150,14 @@ class OrganisationController extends Controller
         $data->Name = $request->Name;
         $data->DireccionSede = $request->DireccionSede;
         $data->Descripcion = $request->input('Descripcion');
-        $data->FechaCreacion = $request->FechaCreacion;
+        $data->FechaCreacion = strtotime($request->FechaCreacion);
         $data->IBANmetodoPago = $request->IBANmetodoPago;
         $data->eMail = $request->eMail;
         $data->Telefono = $request->Telefono;
 
         if ($request->hasFile('FotoLogo')) {
+            unlink($data->FotoLogo); //Eliminamos del sistema la fotografia antigua
+
             $data->FotoLogo = $request->file('FotoLogo')->store('logo_ong');
             $data->FotoLogo = 'storage/' . $data->FotoLogo;
         }
@@ -159,6 +169,8 @@ class OrganisationController extends Controller
     }
 
     /**
+     * Eliminar ONG del BBDD
+     *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
@@ -168,6 +180,6 @@ class OrganisationController extends Controller
         $organisation = Organisation::find($id)->delete();
 
         return redirect()->route('admin.ong.index')
-            ->with('success', 'Organisation deleted successfully');
+            ->with('success', 'EL ONG ha sido eliminado del sistema');
     }
 }

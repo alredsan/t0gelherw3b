@@ -55,7 +55,7 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <select class="form-select" id="floatingSelect" name='selectType' aria-label="select tipo ">
-                                <option selected>Tipo</option>
+                                <option value='0'>Tipo</option>
                                 @foreach ($tipos as $tipo)
                                     <option value={{ $tipo->idtypeONG }}> {{ $tipo->Nombre }}</option>
                                 @endforeach

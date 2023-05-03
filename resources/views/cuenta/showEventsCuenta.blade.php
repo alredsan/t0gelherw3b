@@ -38,15 +38,9 @@
                                         <th>Idevento</th>
                                         <th>Nombre ONG</th>
                                         <th>Evento</th>
-                                        <th>Descripcion</th>
+                                        {{-- <th>Descripcion</th> --}}
                                         <th>Fecha</th>
-                                        {{-- <th>Nummaxvoluntarios</th> --}}
                                         <th>Direccion</th>
-                                        {{-- <th>Latitud</th>
-                                        <th>Longitud</th> --}}
-                                        {{-- <th>Aportaciones</th> --}}
-                                        {{-- <th>Foto</th> --}}
-
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -55,26 +49,21 @@
                                     @foreach ($user->eventos as $event)
                                         <tr>
 
-
                                             <td>{{ $event->idEvento }}</td>
                                             <td>{{ $event->organisation->Name }}</td>
                                             <td>{{ $event->Nombre }}</td>
-                                            <td>{{ $event->Descripcion }}</td>
+                                            {{-- <td>{{ $event->Descripcion }}</td> --}}
                                             <td>{{ date('d-m-Y', $event->FechaEvento); }}</td>
-                                            {{-- <td>{{ $event->numMaxVoluntarios }}</td> --}}
+
                                             <td>{{ $event->Direccion }}</td>
-                                            {{-- <td>{{ $event->Latitud }}</td>
-                                            <td>{{ $event->Longitud }}</td> --}}
-                                            {{-- <td>{{ $event->Aportaciones }}</td> --}}
-                                            {{-- <td>{{ $event->Foto }}</td> --}}
 
                                             <td>
                                                 <form
                                                     action="{{ route('event.destroyParticipante', ['id' => $event->idEvento]) }}"
                                                     method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary "
-                                                    href="{{ route('events.show', $event->id) }}"><i
-                                                        class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
+                                                    <a class="btn btn-sm btn-primary "
+                                                    href="{{ route('events.show', $event->idEvento) }}"><i
+                                                        class="fa fa-fw fa-eye"></i> Ver</a>
 
                                                     @csrf
                                                     @if ($event->FechaEvento > time())
