@@ -35,29 +35,29 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fs-4 bi bi-globe2"></i><span class="ms-1 d-none d-sm-inline">Administrador
+                                <i class="fs-4 bi bi-globe2"></i><span class="ms-1">Administrador
                                     WEB</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{{ route('admin.ong.index') }}" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i>
-                                        <span class="ms-1 d-none d-sm-inline">ONGs</span></a>
+                                        <span class="ms-1">ONGs</span></a>
                                 </li>
                                 <li>
                                     <a href="#" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i>
-                                        <span class="ms-1 d-none d-sm-inline">Eventos</span></a>
+                                        <span class="ms-1">Eventos</span></a>
                                 </li>
                                 <li>
                                     <a href="#" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i>
-                                        <span class="ms-1 d-none d-sm-inline">Usuarios</span></a>
+                                        <span class="ms-1">Usuarios</span></a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                             </ul>
                         </li>
                     @endif
@@ -65,26 +65,26 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fs-4 bi-building-gear"></i><span class="ms-1 d-none d-sm-inline">Administrador
+                                <i class="fs-4 bi-building-gear"></i><span class="ms-1">Administrador
                                     ONG</span>
 
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{{ route('admin.ong') }}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
+                                        <i class="fs-4 bi-table"></i> <span class="ms-1">Perfil
                                             ONG</span></a>
                                 </li>
                                 @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
                                     <li>
                                         <a href="{{ route('admin.ong.event.index') }}" class="dropdown-item">
-                                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
+                                            <i class="fs-4 bi-table"></i> <span class="ms-1">Eventos
                                                 ONG</span></a>
                                     </li>
                                 @endif
                                 <li>
                                     <a href="#" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Permisos
+                                        <i class="fs-4 bi-table"></i> <span class="ms-1">Permisos
                                             Usuarios</span></a>
                                 </li>
 
@@ -95,7 +95,7 @@
 
                     <li class="nav-item">
                         <a href="{{ route('/') }}" class="nav-link">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Salir de
+                            <i class="fs-4 bi-house"></i> <span class="ms-1">Salir de
                                 Ajustes</span>
                         </a>
                     </li>
@@ -108,7 +108,7 @@
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
                                 class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">{{ Auth::user()->name }}</span>
+                            <span class="mx-1">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark shadow">
                             <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
