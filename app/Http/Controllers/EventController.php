@@ -138,7 +138,9 @@ class EventController extends Controller
         $data->Aportaciones = $request->Aportaciones;
 
         if ($request->hasFile('Foto')) {
-            unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
+            if($data->Foto != 'img/eventWithoutPhoto.png'){
+                unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
+            }
 
             $data->Foto = $request->file('Foto')->store('event');
             $data->Foto = 'storage/' . $data->Foto;

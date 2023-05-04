@@ -143,7 +143,9 @@ class UserController extends Controller
         $data->Telefono = $request->Telefono;
 
         if ($request->hasFile('Foto')) {
-            unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
+            if($data->Foto != 'img/userWithoutPhoto.png'){
+                unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
+            }
 
             $data->Foto = $request->file('Foto')->store('foto_perfil');
             $data->Foto = 'storage/' . $data->Foto;
