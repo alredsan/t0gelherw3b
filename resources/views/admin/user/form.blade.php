@@ -8,33 +8,39 @@
         </div> --}}
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" placeholder="nombre">
+            <input type="text" class="form-control" name="name" id="name" value="{{ old('name',$user->name) }}"
+                placeholder="nombre">
             <div class="invalid-feedback">Introduce el nombre</div>
 
         </div>
         <div class="form-group">
             <label for="Apellidos">Apellidos:</label>
-            <input type="text" class="form-control" name="Apellidos" id="Apellidos" value="{{$user->Apellidos}}" placeholder="Apellidos">
+            <input type="text" class="form-control" name="Apellidos" id="Apellidos" value="{{ old('Apellidos',$user->Apellidos) }}"
+                placeholder="Apellidos">
             <div class="invalid-feedback">Introduce los apellidos</div>
         </div>
         <div class="form-group">
             <label for="email">email:</label>
-            <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" placeholder="email">
+            <input type="email" class="form-control" name="email" id="email" value="{{ old('email',$user->email) }}"
+                placeholder="email">
             <div class="invalid-feedback">Introduce el email</div>
         </div>
         <div class="form-group">
             <label for="Direccion">Direccion:</label>
-            <input type="text" class="form-control" name="Direccion" id="Direccion" value="{{$user->Direccion}}" placeholder="Direccion">
+            <input type="text" class="form-control" name="Direccion" id="Direccion" value="{{ old('Direccion',$user->Direccion) }}"
+                placeholder="Direccion">
             <div class="invalid-feedback">Introduce la direccion</div>
         </div>
         <div class="form-group">
             <label for="ProvinciaLocalidad">Provincia:</label>
-            <input type="text" class="form-control" name="ProvinciaLocalidad" id="ProvinciaLocalidad" value="{{$user->ProvinciaLocalidad}}" placeholder="Provincia">
+            <input type="text" class="form-control" name="ProvinciaLocalidad" id="ProvinciaLocalidad"
+                value="{{ old('ProvinciaLocalidad',$user->ProvinciaLocalidad) }}" placeholder="Provincia">
             <div class="invalid-feedback">Introduce la Provincia</div>
         </div>
         <div class="form-group">
             <label for="Telefono">Telefono:</label>
-            <input type="text" class="form-control" name="Telefono" id="Telefono" value="{{$user->Telefono}}" placeholder="Telefono">
+            <input type="text" class="form-control" name="Telefono" id="Telefono" value="{{ old('Telefono',$user->Telefono) }}"
+                placeholder="Telefono">
             <div class="invalid-feedback">Introduce el telefono</div>
         </div>
         <div>
@@ -43,6 +49,6 @@
         </div>
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </div>
 </div>

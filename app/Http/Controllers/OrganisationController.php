@@ -157,7 +157,7 @@ class OrganisationController extends Controller
         $data->Telefono = $request->Telefono;
 
         if ($request->hasFile('FotoLogo')) {
-            if($data->FotoLogo != 'img/ongWithoutPhoto.png'){
+            if($data->FotoLogo != config('constants.DEFAULT_PHOTO_ONG')){
                 unlink($data->FotoLogo); //Eliminamos del sistema la fotografia antigua
             }
 

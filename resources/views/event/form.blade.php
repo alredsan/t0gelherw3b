@@ -14,53 +14,54 @@
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class='form-control' name='Nombre' id='Nombre' placeholder='Nombre'
-                value='{{ $event->Nombre }}'>
+                value='{{ old('Nombre', $event->Nombre) }}'>
             <div class="invalid-feedback">Introduce el nombre</div>
         </div>
 
         <div class="form-group">
             <label for="Descripcion">Descripción del evento:</label>
-            <textarea class='form-control' name='Descripcion' id='editor' placeholder='Descripcion'>{{ $event->Descripcion }}</textarea>
+            <textarea class='form-control' name='Descripcion' id='editor' placeholder='Descripcion'>{{ old('Descripcion', $event->Descripcion) }}</textarea>
             <div class="invalid-feedback">Introduce un descripción</div>
         </div>
 
         <div class="form-group">
             <label for="FechaEvento">Fecha del evento:</label>
             <input type="datetime-local" class='form-control' name='FechaEvento' id='FechaEvento'
-                placeholder='Fecha del evento' value="{{ date('Y-m-d H:m', $event->FechaEvento) }}">
+                placeholder='Fecha del evento' value="{{ old('FechaEvento', date('Y-m-d H:m', $event->FechaEvento)) }}">
             <div class="invalid-feedback">Introduce la fecha y la hora correcta dd/mm/yyyy 00:00</div>
         </div>
 
         <div class="form-group">
             <label for="numMaxVoluntarios">Numero maximo de voluntarios:</label>
             <input type="number" class='form-control' name='numMaxVoluntarios' id='numMaxVoluntarios'
-                placeholder='numero Maximo de Voluntarios' value='{{ $event->numMaxVoluntarios }}'>
+                placeholder='numero Maximo de Voluntarios'
+                value='{{ old('numMaxVoluntarios', $event->numMaxVoluntarios) }}'>
             <div class="invalid-feedback">Introduce un numero maximo del voluntario del evento</div>
 
             <div class="form-group">
                 <label for="Direccion">Direccion:</label>
                 <input type="text" class='form-control' name='Direccion' id='Direccion' placeholder='Direccion'
-                    value='{{ $event->Direccion }}'>
+                    value='{{ old('Direccion', $event->Direccion) }}'>
                 <div class="invalid-feedback">Introduce la direccion del evento</div>
             </div>
 
             <div class="form-group">
                 <label for="Latitud">Latitud:</label>
                 <input type="text" class='form-control' name='Latitud' id='Latitud' placeholder='Latitud'
-                    value='{{ $event->Latitud }}'>
+                    value='{{ old('Latitud', $event->Latitud) }}'>
                 <div class="invalid-feedback">Introduce la Latitud</div>
             </div>
             <div class="form-group">
                 <label for="Longitud">Longitud:</label>
                 <input type="text" class='form-control' name='Longitud' id='Longitud' placeholder='Longitud'
-                    value='{{ $event->Longitud }}'>
+                    value='{{ old('Longitud', $event->Longitud) }}'>
                 <div class="invalid-feedback">Introduce la Longitud</div>
             </div>
 
             <div class="form-group">
                 <label for="Aportaciones">Aportaciones:</label>
                 <input type="number" class='form-control' name='Aportaciones' id='Aportaciones'
-                    placeholder='Aportaciones' value='{{ $event->Aportaciones }}'>
+                    placeholder='Aportaciones' value='{{ old('Aportaciones', $event->Aportaciones) }}'>
                 <div class="invalid-feedback">Introduce el numero de aportaciones</div>
             </div>
 
@@ -75,7 +76,7 @@
 
             <div>
                 <label for="Foto">Foto: </label>
-                <input type="file" class='form-control' name='Foto' value="" accept="image/*">
+                <input type="file" class='form-control' name='Foto' accept="image/*">
                 {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
             </div>
 
@@ -91,24 +92,10 @@
 
     @push('scriptsJS')
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="/js/fSelect.js"></script>
-
-
         <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+        <script src="/js/fSelect.js"></script>
+        <script src="/js/formCKeditor.js"></script>
         <script>
-            let element = document.querySelector('#editor');
-
-            if (element != null) {
-                ClassicEditor.create(element)
-                    .then(editor => {
-
-                    })
-                    .catch(error => {
-
-                    });
-
-            }
-
             $('#selectmultiple').fSelect();
         </script>
     @endpush
