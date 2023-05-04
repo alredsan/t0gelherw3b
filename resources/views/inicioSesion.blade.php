@@ -1,12 +1,24 @@
-@extends('layouts.plantilla')
-
-@section('titulo', 'Inicio Sesion')
-
-@section('contenido')
-    <main id="mainForm" class="d-flex justify-content-center align-items-center pt-5 pb-5">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio Sesion</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/cssPage.css">
+</head>
+<body id="mainForm">
+    <main class="d-flex justify-content-center align-items-center pt-5 pb-5">
 
         <form class="form" method="POST" action="{{ route('inicia-sesion') }}">
             @csrf
+            <div class='d-flex align-items-center justify-content-center'>
+                <img class='w-50' src="/img/logo.png" alt="">
+            </div>
             <p class="form__title">Iniciar Sesión</p>
 
             <label for="email">Correo Electronico</label>
@@ -22,17 +34,26 @@
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"
                     title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
                     required autocomplete="on"> --}}
-                <a class="pass__img" href="#" onclick="mostrarContrasena()">Mostrar</a>
+                <a class="pass__img" onclick="mostrarContrasena()"><i class="fs-4 bi bi-eye-fill"></i></a>
             </div>
-            <input type="radio" name="recordar"><label for="radio">Recordar cuenta</label>
+            <div>
+                <input type="checkbox" name="recordar"><label for="radio">Recordar cuenta</label>
+            </div>
             @if ($message = Session::get('message'))
                 <div class="alert alert-danger">
                     <p>{{ $message }}</p>
                 </div>
             @endif
             <input class="button form__button" type="submit" value="Iniciar Sesión" name="sign">
-            <a class="form__button" href="{{ route('registro') }}">Registrarte</a>
+
+            <div class='enlacesForm'>
+                <a class="form__button" href="{{ route('/') }}">Volver a Inicio</a>
+                <a class="form__button" href="{{ route('registro') }}">Registrarte</a>
+            </div>
+
         </form>
 
     </main>
-@endsection
+    <script src="/js/form.js"></script>
+</body>
+</html>

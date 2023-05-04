@@ -26,7 +26,7 @@ class OrganisationController extends Controller
             return view('admin.organisation.index', compact('organisations'))
                 ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
         } else {
-            return "NO PERMITIDO";
+            abort(404);
         }
     }
 
@@ -77,7 +77,7 @@ class OrganisationController extends Controller
         if (Auth::user()->id_ONG == $id || Auth::user()->roles('1')) {
             return view('admin.organisation.show', compact('organisation'));
         } else {
-            return "NO PERMITIDO";
+            abort(404);
         }
     }
 
@@ -106,7 +106,7 @@ class OrganisationController extends Controller
 
             return view('admin.organisation.edit', compact('organisation'));
         } else {
-            return "NO PERMITIDO";
+            abort(404);
         }
     }
 

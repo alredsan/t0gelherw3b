@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-floating mb-3">
                         <select class="form-select" id="floatingSelect" name='selectType' aria-label="select tipo ">
                             <option value='0'>Tipo</option>
                             @foreach ($tipos as $tipo)
@@ -44,12 +44,29 @@
                     </div>
                 </div>
 
+                <div class="col-md-2">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect" name='selectRadio' aria-label="select tipo ">
+                            <option value='0'>Sin limite</option>
+                            <option value='1'>1 km</option>
+                            <option value='5'>5 km</option>
+                            <option value='10'>10 km</option>
+                            <option value='20'>20 km</option>
+                            <option value='50'>50 km</option>
+                            <option value='100'>100 km</option>
+                            <option value='200'>200 km</option>
+                        </select>
+                        <label for="floatingInput">Radio</label>
+                    </div>
+                </div>
+
                 <div class="col-12">
                     <button class="btn btn-primary botonSearch" type="submit">Buscar</button>
                 </div>
             </div>
         </form>
     </div>
+
     <div class='d-flex gap-5 m-5 flex-wrap justify-content-center'>
         @foreach ($events as $event)
             <div class="card" style="width: 30rem;">

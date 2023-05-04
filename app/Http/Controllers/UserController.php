@@ -230,6 +230,9 @@ class UserController extends Controller
         return view('cuenta.changePassword');
     }
 
+    /**
+     * Donde se actualiza la password del usuario
+     */
     public function updatepassword(Request $request)
     {
         // Validacion
@@ -238,7 +241,7 @@ class UserController extends Controller
         $confirmarpassword = $request->confirmarpassword;
 
         if ($confirmarpassword == $newpassword) {
-            if (!Hash::check($request->old_password, Auth::user()->password)) {
+            if (!Hash::check($oldpassword, Auth::user()->password)) {
                 return back()->with("error",'La contraseña es incorrecta');
             }
             $user = User::find(Auth::user()->id);
@@ -291,7 +294,7 @@ class UserController extends Controller
     public function mostrarInicioSesion()
     {
         if (Auth::user() != null) {
-            return redirect('/');
+            return redirect('/')->with('success','Ya estas iniciado sesion');
         }
         return view('inicioSesion');
     }
@@ -302,7 +305,7 @@ class UserController extends Controller
     public function mostrarRegistro()
     {
         if (Auth::user() != null) {
-            return redirect('/');
+            return redirect('/')->with('success','Ya estas iniciado sesion');
         }
         return view('registro');
     }

@@ -14,75 +14,95 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="/css/cssPage.css">
+    @yield('styleCssPag')
 </head>
 
 <body>
-
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/"
-                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <a class="navbar-brand" href="#">
-                            <img class="logoAdmin" src="/img/logoB.png" alt="">
-                        </a>
-                    </a>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                        id="menu">
-
-                        {{-- ADMINISTRADOR WEB --}}
-                        @if (Auth::user()->roles('1'))
-                        <li>
-                            <strong>Administrador WEB</strong>
-                            <li>
-                                <a href="{{ route('admin.ong.index') }}" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">ONGs</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline">Eventos</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline">Usuarios</span></a>
-                            </li>
-
-                        </li>
-                        @endif
-                        @if (Auth::user()->roles('2'))
-                            <strong>Administrador ONG</strong>
-                            <li>
-                                <a href="{{ route('admin.ong') }}" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
-                                        ONG</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Permisos
-                                        Usuarios</span></a>
-                            </li>
-                        @endif
-                        @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
-                            <li>
-                                <a href="{{ route('admin.ong.event.index')}}" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
-                                        ONG</span></a>
-                            </li>
-                        @endif
-
-                        <li class="nav-item">
-                            <a href="{{ route('/') }}" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Salir de
-                                    Ajustes</span>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ route('Admin') }}">
+                <img class="logoAdmin" src="/img/logoB.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {{-- ADMINISTRADOR WEB --}}
+                    @if (Auth::user()->roles('1'))
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fs-4 bi bi-globe2"></i><span class="ms-1 d-none d-sm-inline">Administrador
+                                    WEB</span>
                             </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{ route('admin.ong.index') }}" class="dropdown-item">
+                                        <i class="fs-4 bi-table"></i>
+                                        <span class="ms-1 d-none d-sm-inline">ONGs</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fs-4 bi-table"></i>
+                                        <span class="ms-1 d-none d-sm-inline">Eventos</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fs-4 bi-table"></i>
+                                        <span class="ms-1 d-none d-sm-inline">Usuarios</span></a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </li>
+                    @endif
+                    @if (Auth::user()->roles('2'))
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fs-4 bi-building-gear"></i><span class="ms-1 d-none d-sm-inline">Administrador
+                                    ONG</span>
 
-                    </ul>
-                    <hr>
-                    <div class="dropdown pb-4">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a href="{{ route('admin.ong') }}" class="dropdown-item">
+                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Perfil
+                                            ONG</span></a>
+                                </li>
+                                @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
+                                    <li>
+                                        <a href="{{ route('admin.ong.event.index') }}" class="dropdown-item">
+                                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Eventos
+                                                ONG</span></a>
+                                    </li>
+                                @endif
+                                <li>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Permisos
+                                            Usuarios</span></a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                    @endif
+
+                    <li class="nav-item">
+                        <a href="{{ route('/') }}" class="nav-link">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Salir de
+                                Ajustes</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="col-md-2 text-end">
+                    <li class="nav-item dropdown d-flex align-items-center">
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,26 +110,34 @@
                                 class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1">{{ Auth::user()->name }}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
                             <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cambiar a Voluntario</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
                         </ul>
-                    </div>
+                    </li>
                 </div>
             </div>
-            <div class="col py-3">
-                @yield('contenido')
-            </div>
         </div>
+    </nav>
+
+    <div class='container pt-5'>
+        @yield('contenido')
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
+
     @stack('scriptsJS')
-    {{-- <script src="/js/form.js"></script> --}}
+
 </body>
 
 </html>

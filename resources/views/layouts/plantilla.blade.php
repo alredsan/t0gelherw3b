@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/cssPage.css">
     @yield('styleCssPag')
 </head>
@@ -16,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('/')}}">
+            <a class="navbar-brand" href="{{ route('/') }}">
                 <img class="logo" src="/img/logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -48,14 +49,15 @@
                     </li>
                 </ul>
                 <div class="col-md-4 text-end">
-                    @if(Auth::check())
-                    Hola {{ Auth::user()->name }}!
-                    <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Admin</a>
-                    <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary me-2">Cerrar Sesion</a>
-
+                    @if (Auth::check())
+                        Hola {{ Auth::user()->name }}!
+                        <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Admin</a>
+                        <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary me-2">Cerrar
+                            Sesion</a>
                     @else
-                    <a type="button" href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar Sesión</a>
-                    <a type="button" href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
+                        <a type="button" href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar
+                            Sesión</a>
+                        <a type="button" href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
                     @endif
                 </div>
             </div>
@@ -81,9 +83,20 @@
             </div>
 
             <div class="col mb-3">
+                <h5>General</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Inicio</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Terminos y Aviso de privacidad</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Mapa Web</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Envianos tus comentarios</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Ayuda</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Aviso sobre cookies</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
@@ -91,7 +104,7 @@
                 </ul>
             </div>
 
-            <div class="col mb-3">
+            {{-- <div class="col mb-3">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
@@ -100,18 +113,7 @@
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
-            </div>
-
-            <div class="col mb-3">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
+            </div> --}}
         </footer>
     </div>
 

@@ -111,7 +111,7 @@ class EventController extends Controller
         if ($event->id_ONG == Auth::user()->id_ONG) {
             return view('event.edit', compact('event', 'types'));
         } else {
-            return "NO PERMITIDO";
+            abort(404);
         }
     }
 
@@ -180,8 +180,6 @@ class EventController extends Controller
         $participante->where('idEvent', '=', $id)
             ->where('idUser', '=', Auth::user()->id);
         $participante->delete();
-
-        // $event = Event::find($id)->delete();
 
         return redirect()->route('perfil')
             ->with('success-events', 'Ya no participas en este evento');

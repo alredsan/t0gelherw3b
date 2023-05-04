@@ -85,10 +85,12 @@
         </div>
     </div>
 
+    @section('styleCssPag')
+        <link href="/css/fSelect.css" rel="stylesheet">
+    @endsection
 
     @push('scriptsJS')
-        <link href="/css/fSelect.css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="/js/fSelect.js"></script>
 
 
@@ -99,10 +101,10 @@
             if (element != null) {
                 ClassicEditor.create(element)
                     .then(editor => {
-                        console.log(editor);
+
                     })
                     .catch(error => {
-                        console.error(error);
+
                     });
 
             }
