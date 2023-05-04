@@ -52,6 +52,7 @@ class OrganisationController extends Controller
         request()->validate(Organisation::$rules);
 
         $data = $request->all();
+        $data['FechaCreacion'] = strtotime($request->FechaCreacion);
 
         if ($request->hasFile('FotoLogo')) {
             $data['FotoLogo'] = $request->file('FotoLogo')->store('logo_ong');
