@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" name='fecha'>
+                            <input type="date" class="form-control" name='fecha' min="{{date('Y-m-d')}}">
                             <label for="floatingInput">Fecha</label>
                         </div>
                     </div>

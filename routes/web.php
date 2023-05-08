@@ -22,24 +22,20 @@ use App\Http\Controllers\UserController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 // Auth::routes();
-
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('eventos', EventController::class);
 
 
+// ********Pagina inicial********
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 
-Route::resource('eventos', \App\Http\Controllers\EventController::class);
-
-Route::get('/app',[App\Http\Controllers\EventController::class,'indexFilter'])->name('eventsFilter');
-Route::get('/app/event/{id}',[App\Http\Controllers\EventController::class,'show'])->name('events.show'); //Falta por hacer!!!
-
-// Route::get('/app/create-event',)
-
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Mostrar listado de eventos
+Route::get('/app',[EventController::class,'indexFilter'])->name('eventsFilter');
+// Mostrar informacion de un evento
+Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
 
 
 // ACCEDER CUENTA
@@ -57,7 +53,8 @@ Route::get('/acceso',[UserController::class,'acceso'])->name('acceso');
 // Seleccionar el tipo, SI DISPONE VARIOS , si no, entra directamente a parte de VOLUNTARIO
 Route::get('/accesoSelecting',[UserController::class,'selectingCuenta'])->name('selectingCuenta');
 
-// Parte administrativa para el USUARIO VOLUNTARIO
+
+// ********Parte administrativa para el USUARIO VOLUNTARIO********
 Route::get('/cuenta',[UserController::class,'general'])->middleware('auth')->name('cuenta');
 Route::get('/cuenta/perfil/',[UserController::class,'show'])->middleware('auth')->name('cuenta.perfil');
 Route::get('/cuenta/perfil/editar/',[UserController::class,'edit'])->middleware('auth')->name('cuenta.edit');
@@ -67,6 +64,8 @@ Route::get('/cuenta/perfil/cambiopassword/',[UserController::class,'cambiopasswo
 Route::patch('/cuenta/perfil/cambiopassword/',[UserController::class,'updatepassword'])->middleware('auth')->name('cuenta.pass.update');
 
 Route::get('/cuenta/perfil/eventos',[UserController::class,'showEventos'])->middleware('auth')->name('cuenta.eventos');
+
+// Eliminar la participacion al evento el usuario que este iniciado sesion
 Route::delete('/cuenta/perfil/eliminarParticipante/{id}',[EventController::class,'destroyParticipante'])->middleware('auth')->name('event.destroyParticipante');
 
 // PARTE DE ADMINISTRACION
@@ -77,7 +76,8 @@ Route::delete('/cuenta/perfil/eliminarParticipante/{id}',[EventController::class
 // Route::patch('/admin/perfil/editars/',[AdminController::class,'updateUser'])->middleware('auth')->name('admin.user.update');
 // END_ELIMINAR
 
-// ADMINISTRACION ONG
+
+// ********ADMINISTRACION DEL ONG********
     // ONG
 Route::get('/admin/ong',[OrganisationController::class,'showModeAdmin'])->middleware('auth')->name('admin.ong');
 Route::get('/admin/ong/edit',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
@@ -86,22 +86,26 @@ Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUp
 
     // Eventos
 Route::get('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index');
-// Crear
+        // Crear
 Route::get('/admin/ong/event/new',[EventController::class,'create'])->middleware('auth')->name('admin.ong.event.create');
 Route::post('/admin/ong/event/new',[EventController::class,'store'])->middleware('auth')->name('admin.ong.event.store');
-// Editar
+        // Editar
 Route::get('/admin/ong/event/edit/{id}',[EventController::class,'edit'])->middleware('auth')->name('admin.ong.event.edit');
 Route::patch('/admin/ong/event/update/{id}',[EventController::class,'update'])->middleware('auth')->name('admin.ong.event.update');
-// Eliminar
+        // Eliminar
 Route::delete('/admin/ong/event/delete/{id}',[EventController::class,'destroy'])->middleware('auth')->name('admin.ong.event.destroy');
 
 // ADMINISTRACION EVENTOS admin.ong.index
 // Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
+    //Asignacion Usuarios
+// Route::get('/admin/ong/usersAssign',[OrganisationController::class,'ongUsers'])->middleware('auth')->name('NOMBREFALTA');
 
-// SUPERADMIN.
+
+
+// ********SUPERADMIN.********
     // General
 Route::get('/admin',AdminController::class)->middleware('auth')->name('Admin');
-    // ong
+    // ONGs (index, crear, eliminar)
 Route::get('/admin/ongs',[OrganisationController::class,'index'])->middleware('auth')->name('admin.ong.index');
 Route::get('/admin/ongs/new',[OrganisationController::class,'create'])->middleware('auth')->name('admin.ong.create');
 Route::post('/admin/ongs/new',[OrganisationController::class,'store'])->middleware('auth')->name('admin.ong.store');
@@ -110,11 +114,10 @@ Route::delete('/admin/ongs/delete/{id}',[OrganisationController::class,'destroy'
 Route::get('/admin/ong/{id}',[OrganisationController::class,'show'])->middleware('auth')->name('admin.ong.show');
 Route::get('/admin/ongs/edit/{id}',[OrganisationController::class,'edit'])->middleware('auth')->name('admin.ong.edit');
 
-    // Usuarios
+    // Usuarios (index, crear, eliminar)
 Route::get('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
 
 
-// Route::get('/admin/ong/usersAssign',[OrganisationController::class,'ongUsers'])->middleware('auth')->name('NOMBREFALTA');
 
 
 // Route::resource('ong',OrganisationController::class)->middleware('auth');

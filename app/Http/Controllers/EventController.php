@@ -192,10 +192,10 @@ class EventController extends Controller
      */
     public function indexFilter(Request $request)
     {
-        $nombre = $request->get('nombre');
-        $type = $request->get('selectType');
-        $fecha = $request->get('fecha');
-        $localidad = $request->get('localidad');
+        $nombre = $request->input('nombre');
+        $type = $request->input('selectType');
+        $fecha = $request->input('fecha');
+        $localidad = $request->input('localidad');
 
         $events = Event::orderBy('FechaEvento', 'ASC')
             ->where('Nombre', 'LIKE', "%$nombre%")
