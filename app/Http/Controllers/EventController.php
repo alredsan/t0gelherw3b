@@ -92,7 +92,11 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
-        return view('event.show', compact('event'));
+        $particiantes = EventsUser::where('idEvent',$id)->count();
+
+        $particiantesRestantes = $event->numMaxVoluntarios-$particiantes;
+
+        return view('event.show', compact('event','particiantesRestantes'));
     }
 
     /**

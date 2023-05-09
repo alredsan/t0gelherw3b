@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventUserController;
 use App\Http\Controllers\OrganisationController;
 use App\Http\Controllers\UserController;
 
@@ -36,6 +37,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/'
 Route::get('/app',[EventController::class,'indexFilter'])->name('eventsFilter');
 // Mostrar informacion de un evento
 Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
+
+Route::get('/app/event/{id}/addparticipation',[EventUserController::class,'add']);
+
 
 
 // ACCEDER CUENTA

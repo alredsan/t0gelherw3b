@@ -27,8 +27,12 @@
                         </div>
                         <div
                             class='d-flex justify-content-center mt-5 flex-column align-items-center justify-content-center'>
-                            <p>Quedan <b>{{ $event->numMaxVoluntarios }}</b> puestos de {{ $event->numMaxVoluntarios }}</p>
-                            <button type="button" class="btn btn-primary me-2 w-50 botonSearch">Apuntarse</button>
+                            <p>Quedan <b>{{ $particiantesRestantes }}</b> puestos de {{ $event->numMaxVoluntarios }}</p>
+                            <div id='message'>
+
+                            </div>
+                            <button type="button" id='addVolunteer'
+                                class="btn btn-primary me-2 w-50 botonSearch">Apuntarse</button>
                         </div>
                     </div>
 
@@ -56,6 +60,29 @@
 
         </div>
     </section>
+
+    <script>
+        let boton = document.getElementById('addVolunteer');
+        let divMessage = document.getElementById('message');
+
+        boton.addEventListener('click', function() {
+            fetch({!! "'/app/event/" . $event->idEvento . "/addparticipation'" !!})
+                .then(result => result.json())
+                .then(function(data) {
+                    divMessage.innerHTML = '';
+
+                    divMessage.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
+                    console.log(data);
+                })
+                .catch(function() {
+                    divMessage.innerHTML = '';
+
+                    divMessage.innerHTML = '<div class="alert alert-danger">No se ha podido realizar la peticion</div>';
+                })
+            /* .then(result => console.log(result)
+                 e => console.log(`Error capturado:  ${e}`));*/
+        });
+    </script>
 @endsection
 
 @section('styleCssPag')
