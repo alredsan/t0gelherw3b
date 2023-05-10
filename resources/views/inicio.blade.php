@@ -63,10 +63,13 @@
                     </div>
 
                     <div class="col-md">
-                        <div class="form-floating mb-3">
+                        <div class="input-group">
+                        <div class="form-floating">
                             <input type="text" class="form-control" id="localidad" name='localidad'
                                 placeholder="Buscar ...">
                             <label for="floatingInput">Localidad</label>
+                        </div>
+                        <span class="input-group-text"><i class="bi bi-cursor-fill"></i></span>
                         </div>
                     </div>
                     <div class="col-md-2">
