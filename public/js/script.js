@@ -1,20 +1,110 @@
+window.addEventListener('DOMContentLoaded', function () {
+    console.log("hola");
+
+    var x = document.getElementById("bGeo");
+
+    var lat = document.getElementById("lat");
+    var lon = document.getElementById("lon");
+    console.log(x);
+
+    var inputLocalidad = document.getElementById('localidad');
+
+    x.addEventListener('click', getLocation);
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "GeoLocation no es compatible en este navegador, lo siento.";
+        }
+    }
+
+    function showPosition(position) {
+        lat.value = position.coords.latitude;
+        lon.value = position.coords.longitude;
+
+        let prueba = new XMLHttpRequest();
+
+        prueba.onload = function (data) {
+            let result = JSON.parse(data.target.response);
+
+            inputLocalidad.value = result.address.city;
+        }
+
+        prueba.open('get', "https://nominatim.openstreetmap.org/reverse?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&format=json");
+        prueba.send();
+    }
 
 
-// var x = document.getElementById("localidad");
-// var botton = document.getElementById('botonGPS');
 
-// botton.addEventListener('click', function () {
-//     getLocation();
-// });
 
-// function getLocation() {
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(showPosition);
-//     }
-// }
+    // let form = document.forms.fGeocoder;
+    // console.log(document.forms);
+    // $(form).attr('novalidate', true);
 
-// function showPosition(position) {
-//     // localidad.value =
-//     // position.coords.latitude;
-//     // position.coords.longitude;
-// }
+    let formGeoCoder = $('#fGeocoder');
+    let inputGeoCoder = $('#localidad');
+    let addresses = $('#geocoderAddresses');
+    let lanzado = false;
+
+    inputGeoCoder.keydown(function (event) {
+
+        console.log("tecla");
+        if (!lanzado) {
+
+            lanzado = true;
+            setTimeout(function () {
+                //Volver a hablitar
+                lanzado = false;
+                console.log("puede usar");
+                geoCode();
+            }, 3000);
+        }
+    });
+
+
+    function geoCode() {
+        // let formGeoC = $(this);
+
+        $.get('https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' + inputGeoCoder.val()).then(
+            // $.get(this.action + '?format=json&limit=3&' + formGeoC.serialize()).then(
+            function (data) {
+
+                let list = $('<div class="list-group position-absolute"></div>');
+                console.log(data);
+                data.forEach((address) => {
+                    list.append(`<a href="#" data-lat="${address.lat}" data-lon="${address.lon}" class="list-group-item list-group-item-action">
+                    ${address.display_name}</a>`);
+
+                });
+                addresses.empty();
+                addresses.append(list);
+                list.find('a').click(function (event) {
+
+                    inputGeoCoder.val($(this).text().trim());
+                    console.log($(this));
+                    lat.value = $(this).data().lat;
+                    lon.value = $(this).data().lon;
+                    addresses.empty();
+
+                    // event.preventDefault();
+                    // event.stopPropagation();
+                });
+
+            },
+            function (error) {
+                addresses.empty();
+                addresses.append(`<div class="text-danger">
+                <i class="fas fa-exclamation-circle"></i>
+                No se ha podido establecer la conexión con el servidor de mapas.
+            </div>`);
+            }
+        );
+
+
+        // event.preventDefault();
+        // event.stopPropagation();
+
+    };
+
+});

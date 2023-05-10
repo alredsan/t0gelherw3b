@@ -196,15 +196,20 @@ class EventController extends Controller
      */
     public function indexFilter(Request $request)
     {
+
         $nombre = $request->input('nombre');
         $type = $request->input('selectType');
         $fecha = $request->input('fecha');
         $localidad = $request->input('localidad');
+        $lat = $request->input('lat');
+        $lon = $request->input('lon');
+        $radio = $request->input('selectRadio');
 
         $events = Event::orderBy('FechaEvento', 'ASC')
             ->where('Nombre', 'LIKE', "%$nombre%")
-            ->FechaEvento($fecha)
             ->Tematica($type)
+            ->FechaEvento($fecha)
+            ->Localidad($lat,$lon,$radio)
             ->paginate(8);
 
         $tipos = Type::all();

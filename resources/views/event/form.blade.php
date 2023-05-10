@@ -91,7 +91,7 @@
     @endsection
 
     @push('scriptsJS')
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
         <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
         <script src="/js/fSelect.js"></script>
         <script src="/js/formCKeditor.js"></script>

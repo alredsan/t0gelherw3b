@@ -34,7 +34,8 @@
             </button>
         </div>
         <div class="contanier_form">
-            <form action="{{ route('eventsFilter') }}" class="form_principal" method="GET">
+            {{-- <form action="{{ route('eventsFilter') }}" class="form_principal" method="POST">
+                @csrf
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating mb-3">
@@ -57,24 +58,36 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" name='fecha' min="{{date('Y-m-d')}}">
+                            <input type="date" class="form-control" name='fecha' min="{{ date('Y-m-d') }}">
                             <label for="floatingInput">Fecha</label>
                         </div>
                     </div>
 
                     <div class="col-md">
-                        <div class="input-group">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="localidad" name='localidad'
-                                placeholder="Buscar ...">
-                            <label for="floatingInput">Localidad</label>
-                        </div>
-                        <span class="input-group-text"><i class="bi bi-cursor-fill"></i></span>
+                        <div class="input-group align-items-end" id="fGeocoder">
+                             <div class="form-floating">
+                                <input type="text" class="form-control" id="localidad" name='localidad'
+                                    placeholder="Buscar ...">
+                                <label for="floatingInput">Localidad</label>
+                                <input type="hidden" name="lat" id='lat'>
+                                <input type="hidden" name="lon" id='lon'>
+                            </div>
+
+                            <div id="geocoderAddresses"></div>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="localidad" name='localidad' placeholder="Buscar ..." autocomplete="off">
+                                <label for="floatingInput">Localidad</label>
+                                <input type="hidden" name="lat" id='lat'>
+                                <input type="hidden" name="lon" id='lon'>
+                            </div>
+
+                            <button id='bGeo' type='button' class="input-group-text"><i class="bi bi-cursor-fill"></i></button>
+
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelect" name='selectRadio' aria-label="select tipo ">
+                            <select class="form-select" id="floatingSelect" name='selectRadio' aria-label="select tipo">
                                 <option value='0'>Sin limite</option>
                                 <option value='1'>1 km</option>
                                 <option value='5'>5 km</option>
@@ -92,7 +105,10 @@
                         <button class="btn btn-primary botonSearch" type="submit">Buscar</button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
+
+            @include('layouts.formApp');
+
         </div>
 
         <div class="text-center border-bottom">
@@ -100,7 +116,8 @@
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4">Transformando el mundo a través de la ayuda mutua.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    <a type="button" href='{{ route('eventsFilter') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Ver eventos</a>
+                    <a type="button" href='{{ route('eventsFilter') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Ver
+                        eventos</a>
                 </div>
             </div>
             <div class="overflow-hidden" style="max-height: 30vh;">
@@ -116,8 +133,10 @@
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4">Transformando el mundo a través de la ayuda mutua.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    <a type="button" href='{{route('login')}}' class="btn btn-primary btn-lg px-4 me-sm-3">Iniciar sesion</a>
-                    <a type="button" href='{{route('registro')}}' class="btn btn-outline-secondary btn-lg px-4">Registrarte</a>
+                    <a type="button" href='{{ route('login') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Iniciar
+                        sesion</a>
+                    <a type="button" href='{{ route('registro') }}'
+                        class="btn btn-outline-secondary btn-lg px-4">Registrarte</a>
                 </div>
             </div>
             <div class="overflow-hidden" style="max-height: 30vh;">
@@ -130,6 +149,4 @@
     </main>
 @endsection
 
-@section('scripts')
-    <script src="/js/script.js"></script>
-@endsection
+@stack('scriptsJS')

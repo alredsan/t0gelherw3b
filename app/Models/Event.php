@@ -95,8 +95,8 @@ class Event extends Model
             $fecha_final = strtotime($fecha . " 23:59:59");
 
             return $query->whereBetween('FechaEvento', [$fecha_inicio, $fecha_final]);
-        }else{
-            return $query->where('FechaEvento','>',time());
+        } else {
+            return $query->where('FechaEvento', '>', time());
         }
     }
 
@@ -112,6 +112,24 @@ class Event extends Model
             return $query->whereHas('eventsType', function ($query) use ($type) {
                 $query->where('idtype', $type);
             });
+        }
+    }
+
+    public function scopeLocalidad($query, $lat, $lon, $radio)
+    {
+        if ($lat != null && $lon != null) {
+
+            $query = $query->select("*")->selectRaw('(6371 * ACOS(COS(RADIANS(Latitud)) * COS(RADIANS(' . $lat . ')) * COS(RADIANS(' . $lon . ') - RADIANS(Longitud)) + SIN(RADIANS(Latitud)) * SIN(RADIANS(' . $lat . ')))) AS distancia');
+
+
+            if ($radio != 0) {
+                $query = $query->having('distancia', '<=', $radio);
+            }
+
+            $query = $query->orderBy('distancia','DESC');
+
+
+            return $query;
         }
     }
 

@@ -7,7 +7,8 @@
 @section('contenido')
     <div class="contanier_form_events">
         <h1>Busqueda</h1>
-        <form action="{{ route('eventsFilter') }}" class="form_principal" method="GET">
+        {{-- <form action="{{ route('eventsFilter') }}" class="form_principal" method="POST">
+            @csrf
             <div class="row g-2">
                 <div class="col-md">
                     <div class="form-floating mb-3">
@@ -64,7 +65,9 @@
                     <button class="btn btn-primary botonSearch" type="submit">Buscar</button>
                 </div>
             </div>
-        </form>
+        </form> --}}
+
+        @include('layouts.formApp')
     </div>
 
     <div class='d-flex gap-5 m-5 flex-wrap justify-content-center'>
@@ -75,6 +78,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->Nombre }}</h5>
                     <p class="card-text">{{ date('d-m-Y H:m', $event->FechaEvento) }}</p>
+                    <p>{{$event->distancia}}</p>
                     <a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más información</a>
                 </div>
             </div>
@@ -89,3 +93,5 @@
         </div>
     </div>
 @endsection
+
+@stack('scriptsJS')
