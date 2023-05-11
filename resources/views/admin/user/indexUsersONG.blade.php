@@ -102,7 +102,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser' novalidate>
+                    <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="email" placeholder="Buscar ..."
                                 name='email'>
