@@ -16,11 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Role extends Model
 {
-    
+
     static $rules = [
 		'idRol' => 'required',
 		'NombreRol' => 'required',
     ];
+
+
+    protected $table = 'roles';
 
     protected $perPage = 20;
 
@@ -37,8 +40,8 @@ class Role extends Model
      */
     public function usersRoles()
     {
-        return $this->hasMany('App\Models\UsersRole', 'idRol', 'idRol');
+        return $this->belongsToMany(User::class,'users_roles', 'idRol', 'idRol');
     }
-    
+
 
 }

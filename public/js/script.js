@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', function () {
-    console.log("hola");
 
     var x = document.getElementById("bGeo");
 

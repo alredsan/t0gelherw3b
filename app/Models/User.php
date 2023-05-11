@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 /**
  * Class User
  *
@@ -92,7 +93,7 @@ class User extends Authenticatable
      */
     public function usersRole()
     {
-        return $this->hasOne('App\Models\UsersRole', 'idUser', 'id');
+        return $this->belongsToMany(Role::class,'users_roles', 'idUser', 'idRol','id','idRol');
     }
 
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organisation;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -184,5 +187,21 @@ class OrganisationController extends Controller
 
         return redirect()->route('admin.ong.index')
             ->with('success', 'EL ONG ha sido eliminado del sistema');
+    }
+
+
+
+    // Mostrar los usuarios que tiene permiso sobre el ONG
+    public function showUserOng(){
+
+        $id_ONG = Auth::user()->id_ONG;
+
+        $users = User::where('id_ONG',$id_ONG)->paginate(10);
+
+        $roles = Role::where('idRol','>','1')->get();
+
+
+        return view('admin.user.indexUsersONG',compact('users','roles'));
+
     }
 }

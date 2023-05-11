@@ -319,4 +319,15 @@ class UserController extends Controller
     {
         return $this->belongsToMany(Role::class);
     }
+
+
+    public function searchUsers(Request $request)
+    {
+        $email = $request->email;
+
+        $users = User::select('id','name','email','id_ONG')->where('email','LIKE','%'.$email.'%')->get();
+
+        return $users->toJson();
+
+    }
 }
