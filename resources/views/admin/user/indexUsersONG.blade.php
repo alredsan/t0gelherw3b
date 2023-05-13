@@ -8,10 +8,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
 
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="card_title">
                                 <h5>Usuarios con Permisos</h5>
                             </span>
@@ -27,12 +32,6 @@
                             </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -101,31 +100,34 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="email" placeholder="Buscar ..."
-                                name='email'>
-                            <label for="floatingInput">Buscar por palabra</label>
+                <form action="{{ route('admin.ong.usersassign.add') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        {{-- <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'> --}}
+                        <div data-route="{{ route('api.searchUsers') }}" name='searchUser' id='searchUser'>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="email" name='inputemail' placeholder="Buscar ...">
+                                <label for="floatingInput">Buscar por palabra</label>
+                            </div>
+                            <div id="listUsers"></div>
+                            {{-- </form> --}}
                         </div>
-                        <div id="listUsers"></div>
-                    </form>
-                    @foreach ($roles as $role)
-                        <input type="checkbox" name="{{ $role->idRole }}" id="role{{ $role->idRole }}"><label
-                            for="role{{ $role->idRole }}">{{ $role->NombreRol }}</label>
-                    @endforeach
+                        @foreach ($roles as $role)
+                            <input type="checkbox" name="chxRol[{{ $role->idRol }}]" id="role{{ $role->idRol }}">
+                            <label for="role{{ $role->idRole }}">{{ $role->NombreRol }}</label>
+                        @endforeach
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Understood</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('scriptsJS')
-<script src="/js/scriptAssign.js"></script>
+    <script src="/js/scriptAssign.js"></script>
 @endpush

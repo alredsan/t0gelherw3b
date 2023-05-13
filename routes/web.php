@@ -103,6 +103,7 @@ Route::delete('/admin/ong/event/delete/{id}',[EventController::class,'destroy'])
 // Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
     //Asignacion Usuarios
 Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
+Route::post('/admin/ong/usersAssign/add',[OrganisationController::class,'assignUser'])->middleware('auth')->name('admin.ong.usersassign.add');
 
 Route::get('/api/user/search',[UserController::class,'searchUsers'])->middleware('auth')->name('api.searchUsers');
 

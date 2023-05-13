@@ -26,8 +26,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
         prueba.onload = function (data) {
             let result = JSON.parse(data.target.response);
+            console.log(result)
 
-            inputLocalidad.value = result.address.city;
+            if(result.address.city){
+                inputLocalidad.value = result.address.city;
+
+            }else{
+                inputLocalidad.value = result.address.town;
+            }
         }
 
         prueba.open('get', "https://nominatim.openstreetmap.org/reverse?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&format=json");

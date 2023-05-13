@@ -325,9 +325,13 @@ class UserController extends Controller
     {
         $email = $request->email;
 
-        $users = User::select('id','name','email','id_ONG')->where('email','LIKE','%'.$email.'%')->get();
+        $users = User::select('id','name','Apellidos','email','id_ONG')->where('email','LIKE','%'.$email.'%')
+            ->where('id_ONG','=',NULL)
+            ->limit(3)
+            ->get()
+            ->toJson();
 
-        return $users->toJson();
+        return $users;
 
     }
 }

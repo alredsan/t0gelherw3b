@@ -204,4 +204,32 @@ class OrganisationController extends Controller
         return view('admin.user.indexUsersONG',compact('users','roles'));
 
     }
+
+
+    public function assignUser(Request $request)
+    {
+
+        $array = [2=>'AdminONG',3=>'CreateEvents',4=>'View'];
+
+        $email = $request->inputemail;
+
+        $rolesAssign = $request->chxRol;
+        $rolesSS = "";
+
+        // foreach($rolesAssign as $id=>$roleschx){
+        //     $rolesSS .= $array[$id];
+        // }
+        // $result = User::with('usersRole')::create([
+        //     'idUser' => Auth::user()->id,
+        //     'idRol' => 4
+        // ]);
+
+        //$user = User::where('email','=',$email)->first();
+
+        //$user->usersRole()->attach(4);
+
+        return redirect()->route('admin.ong.usersassign')->with('success','Usuario ha sido asignado correctamente'. $request.$email.$rolesSS);
+
+        // return redirect()->route('admin.ong.usersassign')->with('success',$result);
+    }
 }
