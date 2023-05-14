@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
     <meta name="description" content="Administracion.">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Thogeter - @yield('titulo')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -61,7 +62,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if (Auth::user()->roles('2'))
+                    @if (Auth::user()->id_ONG)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -82,11 +83,13 @@
                                                 ONG</span></a>
                                     </li>
                                 @endif
+                                @if (Auth::user()->roles('2'))
                                 <li>
                                     <a href="{{ route('admin.ong.usersassign') }}" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i> <span class="ms-1">Permisos
                                             Usuarios</span></a>
                                 </li>
+                                @endif
 
                             </ul>
 

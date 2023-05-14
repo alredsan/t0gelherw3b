@@ -13,6 +13,11 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
+                @if ($message = Session::get('fail'))
+                    <div class="alert alert-danger">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
 
@@ -38,17 +43,13 @@
                                 <thead class="thead">
                                     <tr>
 
-
-
                                         <th>Name</th>
                                         <th>Apellidos</th>
                                         <th>Email</th>
-                                        <th>Direccion</th>
                                         <th>Provincialocalidad</th>
                                         <th>Telefono</th>
 
-
-
+                                        <th>Roles</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -59,7 +60,6 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->Apellidos }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->Direccion }}</td>
                                             <td>{{ $user->ProvinciaLocalidad }}</td>
                                             <td>{{ $user->Telefono }}</td>
                                             <td>
@@ -71,13 +71,16 @@
                                             </td>
 
                                             <td>
-                                                {{-- <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <button type='button' class="btn btn-sm btn-success btnEdit"
+                                                    data-src="{{ route('admin.ong.usersassign.edit', $user->id) }}">Editar Rol</button>
+                                                <form action="{{ route('admin.ong.usersassign.delete', $user->id) }}"
+                                                    method="POST">
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form> --}}
+                                                    @if (Auth::User()->id != $user->id)
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                    @endif
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -106,7 +109,8 @@
                         {{-- <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'> --}}
                         <div data-route="{{ route('api.searchUsers') }}" name='searchUser' id='searchUser'>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="email" name='inputemail' placeholder="Buscar ...">
+                                <input type="text" class="form-control" id="email" name='email'
+                                    placeholder="Buscar ..." autocomplete="off">
                                 <label for="floatingInput">Buscar por palabra</label>
                             </div>
                             <div id="listUsers"></div>

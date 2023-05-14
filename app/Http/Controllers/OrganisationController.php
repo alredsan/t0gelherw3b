@@ -160,7 +160,7 @@ class OrganisationController extends Controller
         $data->Telefono = $request->Telefono;
 
         if ($request->hasFile('FotoLogo')) {
-            if($data->FotoLogo != config('constants.DEFAULT_PHOTO_ONG')){
+            if ($data->FotoLogo != config('constants.DEFAULT_PHOTO_ONG')) {
                 unlink($data->FotoLogo); //Eliminamos del sistema la fotografia antigua
             }
 
@@ -192,44 +192,75 @@ class OrganisationController extends Controller
 
 
     // Mostrar los usuarios que tiene permiso sobre el ONG
-    public function showUserOng(){
+    public function showUserOng()
+    {
 
         $id_ONG = Auth::user()->id_ONG;
 
-        $users = User::where('id_ONG',$id_ONG)->paginate(10);
+        $users = User::where('id_ONG', $id_ONG)->paginate(10);
 
-        $roles = Role::where('idRol','>','1')->get();
+        $roles = Role::where('idRol', '>', '1')->get();
 
 
-        return view('admin.user.indexUsersONG',compact('users','roles'));
-
+        return view('admin.user.indexUsersONG', compact('users', 'roles'));
     }
 
 
     public function assignUser(Request $request)
     {
 
-        $array = [2=>'AdminONG',3=>'CreateEvents',4=>'View'];
+        $email = $request->email;
 
-        $email = $request->inputemail;
+        $rolesAssignRequest = $request->chxRol;
 
-        $rolesAssign = $request->chxRol;
-        $rolesSS = "";
+        $rolesAssign = array_keys($rolesAssignRequest);
 
-        // foreach($rolesAssign as $id=>$roleschx){
-        //     $rolesSS .= $array[$id];
-        // }
-        // $result = User::with('usersRole')::create([
-        //     'idUser' => Auth::user()->id,
-        //     'idRol' => 4
-        // ]);
+        $user = User::where('email', '=', $email)->first();
 
-        //$user = User::where('email','=',$email)->first();
+        if (!$user) {
+            return redirect()->route('admin.ong.usersassign')->with('fail', 'El Usuario no existe o ya gestiona un ONG, el email introducido: ' . $email);
+        }
 
-        //$user->usersRole()->attach(4);
+        $user->id_ONG = Auth::user()->id_ONG;
+        $user->save();
 
-        return redirect()->route('admin.ong.usersassign')->with('success','Usuario ha sido asignado correctamente'. $request.$email.$rolesSS);
+        $user->usersRole()->attach($rolesAssign);
 
-        // return redirect()->route('admin.ong.usersassign')->with('success',$result);
+        return redirect()->route('admin.ong.usersassign')->with('success', 'Usuario'.$user->Name.' ha sido asignado correctamente' . $email);
+    }
+
+
+    public function assignUserEdit($id)
+    {
+
+        $user = User::select('id', 'name','id_ONG')->where('id','=',$id)->first();
+
+        if($user->id_ONG != Auth::user()->id_ONG){
+            return ['result'=> 'No valido'];
+        }
+        $rolesUser = $user->usersRole()->get();
+
+        $array = ['result'=> 'Valido',"user"=> $user,"roles"=>$rolesUser];
+
+
+        return $array;
+    }
+
+    public function desassignUser($id)
+    {
+
+        $user = User::findOrFail($id);
+
+        if(!$user){
+            return redirect()->route('admin.ong.usersassign')->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
+        }
+
+        $user->id_ONG = NULL;
+        $user->save();
+
+        //Eliminar Roles de la tabla relacionada entre Users y Roles (users_roles)
+        $user->usersRole()->detach();
+
+        return redirect()->route('admin.ong.usersassign')->with('success', 'Usuario'.$user->Name.' ha sido desasignado correctamente');
     }
 }

@@ -105,7 +105,11 @@ Route::delete('/admin/ong/event/delete/{id}',[EventController::class,'destroy'])
 Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
 Route::post('/admin/ong/usersAssign/add',[OrganisationController::class,'assignUser'])->middleware('auth')->name('admin.ong.usersassign.add');
 
-Route::get('/api/user/search',[UserController::class,'searchUsers'])->middleware('auth')->name('api.searchUsers');
+Route::get('/admin/ong/usersAssign/edit/{id}',[OrganisationController::class,'assignUserEdit'])->middleware('auth')->name('admin.ong.usersassign.edit');
+
+Route::delete('/admin/ong/usersAssign/delete/{id}',[OrganisationController::class,'desassignUser'])->middleware('auth')->name('admin.ong.usersassign.delete');
+    //API usuarios para la busqueda
+Route::post('/api/user/search',[UserController::class,'searchUsers'])->middleware('auth')->name('api.searchUsers');
 
 
 

@@ -14,7 +14,9 @@
                             <span class="card-title"></span>
                         </div>
                         <div class="float-right">
+                            @if (Auth::user()->roles('2'))
                             <a class="btn btn-primary" href="{{ route('admin.ong.edit',$organisation->idONG) }}"> {{ __('Editar') }}</a>
+                            @endif
                         </div>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
