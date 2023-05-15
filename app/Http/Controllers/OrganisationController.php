@@ -92,7 +92,9 @@ class OrganisationController extends Controller
     {
         $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
         // $organisation = Organisation::find(Auth::user()->id_ONG);
-
+        if($organisation == null){
+            abort(404);
+        }
         return view('admin.organisation.show', compact('organisation'));
     }
 
@@ -121,6 +123,10 @@ class OrganisationController extends Controller
     {
         // $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
         $organisation = Organisation::find(Auth::user()->id_ONG);
+
+        if($organisation == null){
+            abort(404);
+        }
 
         return view('admin.organisation.edit', compact('organisation'));
     }
@@ -230,20 +236,35 @@ class OrganisationController extends Controller
     }
 
 
-    public function assignUserEdit($id)
+    public function assignUserInfo($id)
     {
 
-        $user = User::select('id', 'name','id_ONG')->where('id','=',$id)->first();
+        $user = User::select('id', 'name','Apellidos','id_ONG')->where('id','=',$id)->first();
 
         if($user->id_ONG != Auth::user()->id_ONG){
             return ['result'=> 'No valido'];
         }
-        $rolesUser = $user->usersRole()->get();
+        $rolesUser = $user->usersRole()->where('users_roles.idRol', '>', '1')->get();
 
         $array = ['result'=> 'Valido',"user"=> $user,"roles"=>$rolesUser];
 
 
         return $array;
+    }
+
+    public function assignUserEdit(Request $request)
+    {
+        $user = User::find($request->idUser);
+        $rolesAssign = array_keys($request->chxRolEdit);
+
+        if(!$user){
+            return redirect()->route('admin.ong.usersassign')->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
+        }
+
+        $user->usersRole()->detach();
+        $user->usersRole()->attach($rolesAssign);
+
+        return redirect()->route('admin.ong.usersassign')->with('success', 'Ha sido modificado los permisos correctamente para el Usuario '.$user->name);
     }
 
     public function desassignUser($id)
@@ -261,6 +282,6 @@ class OrganisationController extends Controller
         //Eliminar Roles de la tabla relacionada entre Users y Roles (users_roles)
         $user->usersRole()->detach();
 
-        return redirect()->route('admin.ong.usersassign')->with('success', 'Usuario'.$user->Name.' ha sido desasignado correctamente');
+        return redirect()->route('admin.ong.usersassign')->with('success', 'Usuario'.$user->name.' ha sido desasignado correctamente');
     }
 }

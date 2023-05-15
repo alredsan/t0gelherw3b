@@ -91,9 +91,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     lat.value = $(this).data().lat;
                     lon.value = $(this).data().lon;
                     addresses.empty();
-
-                    // event.preventDefault();
-                    // event.stopPropagation();
                 });
 
             },
@@ -105,11 +102,6 @@ window.addEventListener('DOMContentLoaded', function () {
             </div>`);
             }
         );
-
-
-        // event.preventDefault();
-        // event.stopPropagation();
-
     };
 
 });

@@ -34,17 +34,17 @@
 
                             <div class="form-group">
                                 <label for="name">Dime la antigua contraseña:</label>
-                                <input type="password" class="form-control" name="oldpassword" id="name" placeholder="Antigua contraseña">
+                                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Antigua contraseña" autocomplete="on">
                                 <div class="invalid-feedback">Introduce la contraseña antigua</div>
                             </div>
                             <div class="form-group">
                                 <label for="name">Dime la nueva contraseña:</label>
-                                <input type="password" class="form-control" name="newpassword" id="name" placeholder="nueva contraseña">
+                                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="nueva contraseña" autocomplete="on">
                                 <div class="invalid-feedback">Introduce la contraseña nueva o no conciden</div>
                             </div>
                             <div class="form-group">
                                 <label for="name">Dime de nuevo la nueva contraseña:</label>
-                                <input type="password" class="form-control" name="confirmarpassword" id="name" placeholder="confirmar contraseña">
+                                <input type="password" class="form-control" name="confirmarpassword" id="confirmarpassword" placeholder="confirmar contraseña" autocomplete="on">
                             </div>
                             <div class="box-footer mt20">
                                 <button type="submit" class="btn btn-primary">Enviar</button>

@@ -6,10 +6,14 @@ window.addEventListener('DOMContentLoaded', function () {
     let btnEdit = $('.btnEdit');
     console.log(btnEdit);
     let body = $('body');
-    //let formSearch = document.forms.searchUser;
-    //$(formSearch).attr('novalidate', true);
-    //let actionFormSearch = formSearch.data().route
 
+    let myModalDOMAssign = document.getElementById('modalAddAssign');
+
+    myModalDOMAssign.addEventListener('hidden.bs.modal', event => {
+        this.document.forms.fAssignUser.reset();
+        inputSearch.removeAttr('readonly');
+        users.empty();
+    });
 
     inputSearch.keyup(function () {
         let valueInputSearch = inputSearch.val();
@@ -31,13 +35,20 @@ window.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             }).then(function (response) {
                 let list = $('<div class="list-group"></div>');
+                if (response.length > 0) {
+                    response.forEach((user) => {
+                        list.append(`<a href="#" data-email='${user.email}' class="list-group-item list-group-item-action">
+                                            <span>${user.name} ${user.Apellidos}</span>
+                                            <p class="fw-light text-end">${user.email}</p>
+                                        </a>`);
+                    });
 
-                response.forEach((user) => {
-                    list.append(`<a href="#" data-email='${user.email}' class="list-group-item list-group-item-action">
-                                        <span>${user.name} ${user.Apellidos}</span>
-                                        <p class="fw-light text-end">${user.email}</p>
-                                    </a>`);
-                });
+                } else {
+                    list.append(`<div class="list-group-item list-group-item-action">
+                                            <strong>No ha sido encontrado, ya esta asignado un ONG o no existe</strong>
+                                </div>`);
+                }
+
                 users.empty();
                 users.append(list);
                 list.find('a').click(function (event) {
@@ -46,7 +57,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     inputSearch.attr('readonly', 'true');
                     users.empty();
 
-                })
+                });
             }).catch(function (response) {
                 console.error("Error");
                 users.empty();
@@ -55,7 +66,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         Ha producido un error de conexion, intentalo mas tarde
                     </div>`);
 
-            })
+            });
 
         }
 
@@ -101,6 +112,21 @@ window.addEventListener('DOMContentLoaded', function () {
         // event.stopPropagation();
     });
 
+    let pName = document.getElementById('pName');
+    let pIdUser = document.getElementById('idUser');
+
+    let rolesChk = $('#modalEditAssign input.chkRoleEdit');
+    let myModalDOM = document.getElementById('modalEditAssign');
+
+    let myModalEdit = new bootstrap.Modal('#modalEditAssign', {
+        keyboard: false
+    });
+
+    myModalDOM.addEventListener('hidden.bs.modal', event => {
+        rolesChk.removeAttr('checked');
+        pIdUser.value = "";
+    });
+
     btnEdit.click(function () {
         console.log($(this).data().src);
 
@@ -112,44 +138,19 @@ window.addEventListener('DOMContentLoaded', function () {
         }).then(function (data) {
             console.log(data);
             if (data.result = "Valido") {
-                body.append(`<div class="modal fade" id="modalEditAssign" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="{{ route('admin.ong.usersassign.add') }}" method="post">
-                            <div class="modal-body">
-                                    <p>${data.user.name}</p>
-                                    <p>${data.roles}</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Understood</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>`);
+                pName.innerHTML = "<p><strong>Usuario:</strong> "+data.user.name+""+data.user.Apellidos+"</p>";
+                pIdUser.value = data.user.id;
 
-                let myModal = new bootstrap.Modal('#modalEditAssign', {
-                    keyboard: false
-                });
-                myModal.show();
+                for (let i = 0; i < data.roles.length; i++) {
+                    let rol = data.roles[i];
 
-                let myModalDOM = document.getElementById('modalEditAssign');
+                    document.getElementById('role[' + rol.idRol + ']').checked = true;
+                }
 
-                myModalDOM.addEventListener('hidden.bs.modal', event => {
-                    console.log("hey");
-                    myModalDOM.remove();
-                })
-
-
+                myModalEdit.show();
             }
-        })
-    })
+        });
+    });
 
 
 

@@ -101,14 +101,19 @@ Route::delete('/admin/ong/event/delete/{id}',[EventController::class,'destroy'])
 
 // ADMINISTRACION EVENTOS admin.ong.index
 // Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
-    //Asignacion Usuarios
+    //Asignacion de Usuarios
+        //index
 Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
+        //Nuevo persona con permisos
 Route::post('/admin/ong/usersAssign/add',[OrganisationController::class,'assignUser'])->middleware('auth')->name('admin.ong.usersassign.add');
-
-Route::get('/admin/ong/usersAssign/edit/{id}',[OrganisationController::class,'assignUserEdit'])->middleware('auth')->name('admin.ong.usersassign.edit');
-
+        //Editar los roles de la persona
+Route::post('/api/ong/usersAssign/edit',[OrganisationController::class,'assignUserEdit'])->middleware('auth')->name('admin.ong.usersassign.edit');
+        //Eliminar permisos sobre el ONG que organiza
 Route::delete('/admin/ong/usersAssign/delete/{id}',[OrganisationController::class,'desassignUser'])->middleware('auth')->name('admin.ong.usersassign.delete');
-    //API usuarios para la busqueda
+
+        //Consultar persona con sus roles, devuelve un JSON
+Route::get('/api/ong/usersAssign/{id}',[OrganisationController::class,'assignUserInfo'])->middleware('auth')->name('api.ong.usersassign');
+        //BUSQUEDA: usuarios para asignar al ONG, devuelve un JSON
 Route::post('/api/user/search',[UserController::class,'searchUsers'])->middleware('auth')->name('api.searchUsers');
 
 

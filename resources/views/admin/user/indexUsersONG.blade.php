@@ -28,7 +28,7 @@
 
                             <div class="float-right">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
+                                    data-bs-target="#modalAddAssign">
                                     Añadir Persona
                                 </button>
                                 {{-- <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
@@ -72,13 +72,15 @@
 
                                             <td>
                                                 <button type='button' class="btn btn-sm btn-success btnEdit"
-                                                    data-src="{{ route('admin.ong.usersassign.edit', $user->id) }}">Editar Rol</button>
+                                                    data-src="{{ route('api.ong.usersassign', $user->id) }}">Editar
+                                                    Rol</button>
                                                 <form action="{{ route('admin.ong.usersassign.delete', $user->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @if (Auth::User()->id != $user->id)
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm">Eliminar</button>
                                                     @endif
                                                 </form>
                                             </td>
@@ -95,7 +97,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="modalAddAssign" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -103,7 +105,7 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('admin.ong.usersassign.add') }}" method="post">
+                <form name='fAssignUser' action="{{ route('admin.ong.usersassign.add') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         {{-- <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'> --}}
@@ -111,7 +113,7 @@
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="email" name='email'
                                     placeholder="Buscar ..." autocomplete="off">
-                                <label for="floatingInput">Buscar por palabra</label>
+                                <label for="floatingInput">Buscar por Correo electronico</label>
                             </div>
                             <div id="listUsers"></div>
                             {{-- </form> --}}
@@ -121,6 +123,37 @@
                             <label for="role{{ $role->idRole }}">{{ $role->NombreRol }}</label>
                         @endforeach
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Añadir Persona</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditAssign" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Permisos</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin.ong.usersassign.edit') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <p id='pName'></p>
+                        <input type="hidden" name="idUser" id='idUser' value=''>
+                        <strong>Permisos:</strong>
+                        <div>
+                            @foreach ($roles as $role)
+                                <input type="checkbox" class='chkRoleEdit' name="chxRolEdit[{{ $role->idRol }}]"
+                                    id="role[{{ $role->idRol }}]">
+                                <label for="role{{ $role->idRole }}">{{ $role->NombreRol }}</label>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
