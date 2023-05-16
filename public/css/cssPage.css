@@ -38,7 +38,7 @@
     align-content: center;
 
     position: relative;
-    z-index: 100000;
+    /* z-index: 100000; */
     top: -120px;
 }
 
@@ -48,6 +48,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    flex-direction: column;
 
     position: relative;
     width: 70%;
@@ -182,4 +183,8 @@
 
 .infoRol{
     font-size: 10px;
+}
+
+.typeEvent{
+    font-size: 15px;
 }
