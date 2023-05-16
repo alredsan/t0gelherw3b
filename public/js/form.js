@@ -72,7 +72,6 @@ function validateLogin() {
 
 function validateRegister() {
     let validateRegisterForm = document.forms.fRegister;
-    console.log(validateRegisterForm);
 
     $(validateRegisterForm).attr('novalidate', true);
 
@@ -176,7 +175,7 @@ function validateRegister() {
     });
 
     $(validateRegisterForm.passwdConfirm).change(function(){
-        console.log(validateRegisterForm.passwd.value);
+
         if (validateRegisterForm.passwd.value != validateRegisterForm.passwdConfirm.value) {
             showFeedBack($(validateRegisterForm.passwdConfirm), false);
         }else{

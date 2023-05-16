@@ -18,7 +18,6 @@ class Type extends Model
 {
 
     static $rules = [
-		'idtypeONG' => 'required',
 		'Nombre' => 'required',
     ];
 

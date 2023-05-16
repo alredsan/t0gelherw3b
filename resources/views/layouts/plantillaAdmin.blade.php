@@ -31,6 +31,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="{{ route('Admin') }}" class="nav-link">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1">Inicio</span>
+                        </a>
+                    </li>
                     {{-- ADMINISTRADOR WEB --}}
                     @if (Auth::user()->roles('1'))
                         <li class="nav-item dropdown">
@@ -54,6 +59,11 @@
                                     <a href="#" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i>
                                         <span class="ms-1">Usuarios</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.types.index') }}" class="dropdown-item">
+                                        <i class="fs-4 bi-table"></i>
+                                        <span class="ms-1">Tipos</span></a>
                                 </li>
                                 {{-- <li>
                                     <hr class="dropdown-divider">
@@ -102,6 +112,7 @@
                                 Ajustes</span>
                         </a>
                     </li>
+
                 </ul>
 
                 <div class="col-md-2 text-end">

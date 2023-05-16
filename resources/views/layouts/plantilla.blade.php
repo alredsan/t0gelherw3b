@@ -48,12 +48,11 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="col-md-4 text-end">
+                <div class="col-5 text-end">
                     @if (Auth::check())
                         Hola {{ Auth::user()->name }}!
                         <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Admin</a>
-                        <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary me-2">Cerrar
-                            Sesion</a>
+                        <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary"><i class="bi bi-box-arrow-right pe-2"></i>Salir</a>
                     @else
                         <a type="button" href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar
                             Sesión</a>

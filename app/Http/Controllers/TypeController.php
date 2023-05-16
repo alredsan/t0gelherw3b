@@ -20,7 +20,7 @@ class TypeController extends Controller
     {
         $types = Type::paginate();
 
-        return view('type.index', compact('types'))
+        return view('admin.type.index', compact('types'))
             ->with('i', (request()->input('page', 1) - 1) * $types->perPage());
     }
 
@@ -32,7 +32,7 @@ class TypeController extends Controller
     public function create()
     {
         $type = new Type();
-        return view('type.create', compact('type'));
+        return view('admin.type.create', compact('type'));
     }
 
     /**
@@ -47,21 +47,8 @@ class TypeController extends Controller
 
         $type = Type::create($request->all());
 
-        return redirect()->route('types.index')
-            ->with('success', 'Type created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $type = Type::find($id);
-
-        return view('type.show', compact('type'));
+        return redirect()->route('admin.types.index')
+            ->with('success', 'Ha sido creado nuevo Tipo de evento.');
     }
 
     /**
@@ -74,7 +61,11 @@ class TypeController extends Controller
     {
         $type = Type::find($id);
 
-        return view('type.edit', compact('type'));
+        if(!$type){
+            return redirect()->route('admin.types.index')->with('error','No se ha podido encontrar el tipo');
+        }
+
+        return view('admin.type.edit', compact('type'));
     }
 
     /**
@@ -88,10 +79,11 @@ class TypeController extends Controller
     {
         request()->validate(Type::$rules);
 
-        $type->update($request->all());
+        $type->Nombre = $request->Nombre;
+        $type->save();
 
-        return redirect()->route('types.index')
-            ->with('success', 'Type updated successfully');
+        return redirect()->route('admin.types.index')
+            ->with('success', 'Ha sido actualizado el Tipo '.$type->Nombre);
     }
 
     /**
@@ -103,7 +95,7 @@ class TypeController extends Controller
     {
         $type = Type::find($id)->delete();
 
-        return redirect()->route('types.index')
-            ->with('success', 'Type deleted successfully');
+        return redirect()->route('admin.types.index')
+            ->with('success', 'El tipo ha sido eliminado correctamente');
     }
 }

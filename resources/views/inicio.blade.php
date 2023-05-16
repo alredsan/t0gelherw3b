@@ -107,7 +107,7 @@
                 </div>
             </form> --}}
 
-            @include('layouts.formApp');
+            @include('layouts.formApp')
 
         </div>
 

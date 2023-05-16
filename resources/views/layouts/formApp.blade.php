@@ -36,12 +36,13 @@
                     <input type="hidden" name="lon" id='lon'>
                 </div> --}}
 
-                <div id="geocoderAddresses"></div>
+
                 <div class="form-floating">
                     <input type="text" class="form-control" id="localidad" name='localidad' placeholder="Buscar ..." autocomplete="off">
                     <label for="floatingInput">Localidad</label>
                     <input type="hidden" name="lat" id='lat'>
                     <input type="hidden" name="lon" id='lon'>
+                    <div id="geocoderAddresses"></div>
                 </div>
 
                 <button id='bGeo' type='button' class="input-group-text"><i class="bi bi-cursor-fill"></i></button>

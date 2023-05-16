@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     var lat = document.getElementById("lat");
     var lon = document.getElementById("lon");
-    console.log(x);
 
     var inputLocalidad = document.getElementById('localidad');
 
@@ -26,7 +25,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
         prueba.onload = function (data) {
             let result = JSON.parse(data.target.response);
-            console.log(result)
 
             if(result.address.city){
                 inputLocalidad.value = result.address.city;
@@ -42,26 +40,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-    // let form = document.forms.fGeocoder;
-    // console.log(document.forms);
-    // $(form).attr('novalidate', true);
-
-    let formGeoCoder = $('#fGeocoder');
+    // let formGeoCoder = $('#fGeocoder');
     let inputGeoCoder = $('#localidad');
     let addresses = $('#geocoderAddresses');
     let lanzado = false;
 
     inputGeoCoder.keydown(function (event) {
 
-        console.log("tecla");
         if (!lanzado) {
 
             lanzado = true;
             setTimeout(function () {
                 //Volver a hablitar
                 lanzado = false;
-                console.log("puede usar");
                 geoCode();
             }, 3000);
         }
@@ -76,7 +67,7 @@ window.addEventListener('DOMContentLoaded', function () {
             function (data) {
 
                 let list = $('<div class="list-group position-absolute"></div>');
-                console.log(data);
+
                 data.forEach((address) => {
                     list.append(`<a href="#" data-lat="${address.lat}" data-lon="${address.lon}" class="list-group-item list-group-item-action">
                     ${address.display_name}</a>`);
@@ -87,7 +78,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 list.find('a').click(function (event) {
 
                     inputGeoCoder.val($(this).text().trim());
-                    console.log($(this));
+
                     lat.value = $(this).data().lat;
                     lon.value = $(this).data().lon;
                     addresses.empty();

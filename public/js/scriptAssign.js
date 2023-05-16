@@ -1,11 +1,9 @@
 window.addEventListener('DOMContentLoaded', function () {
 
     let inputSearch = $('#email');
-    let formSearch = $('#searchUser');
+    // let formSearch = $('#searchUser');
     let users = $('#listUsers');
     let btnEdit = $('.btnEdit');
-    console.log(btnEdit);
-    let body = $('body');
 
     let myModalDOMAssign = document.getElementById('modalAddAssign');
 
@@ -128,7 +126,6 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     btnEdit.click(function () {
-        console.log($(this).data().src);
 
         fetch($(this).data().src, {
             method: "GET",
@@ -136,7 +133,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }).then(function (data) {
             return data.json();
         }).then(function (data) {
-            console.log(data);
+
             if (data.result = "Valido") {
                 pName.innerHTML = "<p><strong>Usuario:</strong> "+data.user.name+""+data.user.Apellidos+"</p>";
                 pIdUser.value = data.user.id;
@@ -151,24 +148,6 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // formSearch.submit(function(event){

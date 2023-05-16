@@ -48,7 +48,6 @@
                                         <th>Email</th>
                                         <th>Provincialocalidad</th>
                                         <th>Telefono</th>
-
                                         <th>Roles</th>
                                         <th></th>
                                     </tr>

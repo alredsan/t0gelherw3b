@@ -8,6 +8,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventUserController;
 use App\Http\Controllers\OrganisationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,9 +113,9 @@ Route::post('/api/ong/usersAssign/edit',[OrganisationController::class,'assignUs
 Route::delete('/admin/ong/usersAssign/delete/{id}',[OrganisationController::class,'desassignUser'])->middleware('auth')->name('admin.ong.usersassign.delete');
 
         //Consultar persona con sus roles, devuelve un JSON
-Route::get('/api/ong/usersAssign/{id}',[OrganisationController::class,'assignUserInfo'])->middleware('auth')->name('api.ong.usersassign');
+Route::get('/api/ong/usersAssign/{id}',[OrganisationController::class,'assignUserInfo'])->middleware('auth')->name('api.ong.usersassign'); //API
         //BUSQUEDA: usuarios para asignar al ONG, devuelve un JSON
-Route::post('/api/user/search',[UserController::class,'searchUsers'])->middleware('auth')->name('api.searchUsers');
+Route::post('/api/user/search',[UserController::class,'searchUsers'])->middleware('auth')->name('api.searchUsers'); //API
 
 
 
@@ -129,6 +130,20 @@ Route::post('/admin/ongs/new',[OrganisationController::class,'store'])->middlewa
 Route::delete('/admin/ongs/delete/{id}',[OrganisationController::class,'destroy'])->middleware('auth')->name('admin.ong.destroy');
 Route::get('/admin/ong/{id}',[OrganisationController::class,'show'])->middleware('auth')->name('admin.ong.show');
 Route::get('/admin/ongs/edit/{id}',[OrganisationController::class,'edit'])->middleware('auth')->name('admin.ong.edit');
+
+    //Types
+        //index
+Route::get('/admin/types',[TypeController::class,'index'])->middleware('auth')->name('admin.types.index');
+        //Add new type
+Route::get('/admin/types/add',[TypeController::class,'create'])->middleware('auth')->name('admin.types.create');//NO HECHO
+Route::post('/admin/types/addtype',[TypeController::class,'store'])->middleware('auth')->name('admin.types.store');//NO HECHO
+        //Eliminar type
+Route::delete('/admin/types/delete/{id}',[TypeController::class,'destroy'])->middleware('auth')->name('admin.types.destroy');//NO HECHO
+
+        //Modificar type
+Route::get('/admin/types/edit/{id}',[TypeController::class,'edit'])->middleware('auth')->name('admin.types.edit');//NO HECHO
+Route::patch('/admin/types/update/{type}',[TypeController::class,'update'])->middleware('auth')->name('admin.types.update');//NO HECHO
+
 
     // Usuarios (index, crear, eliminar)
 Route::get('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');

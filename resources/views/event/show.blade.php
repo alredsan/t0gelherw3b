@@ -7,18 +7,21 @@
 @section('contenido')
     <section class="container">
         <div class="row">
-            <div class="col-sm-4 photoEvent" style="background-image:url({{ asset($event->Foto) }})">
+            <div class="col-lg-4 photoEvent" style="background-image:url({{ asset($event->Foto) }})">
 
             </div>
-            <div class="col-sm-8">
+            <div class="col-lg-8">
                 <div>
                     <div>
                         <h2>{{ $event->Nombre }}</h2>
-                        <p>
+                        <div class='d-flex flex-row gap-2 flex-wrap'>
                             @foreach ($event->eventsType as $type)
-                                {{ $type->Nombre }}
+                            <div class='alert alert-info p-1 m-0 text-center '>
+                                <span class="typeEvent"> {{ $type->Nombre }}</span>
+                            </div>
+
                             @endforeach
-                        </p>
+                        </div>
                     </div>
                     <div>
                         <div>
@@ -28,11 +31,11 @@
                         <div
                             class='d-flex justify-content-center mt-5 flex-column align-items-center justify-content-center'>
                             <p>Quedan <b>{{ $particiantesRestantes }}</b> puestos de {{ $event->numMaxVoluntarios }}</p>
-                            <div id='message'>
+                            <div id='message'></div>
+                            <form action={{"/app/event/" . $event->idEvento . "/addparticipation"}} method="GET" id='addVolunteer'>
 
-                            </div>
-                            <button type="button" id='addVolunteer'
-                                class="btn btn-primary me-2 w-50 botonSearch">Apuntarse</button>
+                                <button type="submit" class="btn btn-primary me-2 botonSearch">Apuntarse</button>
+                            </form>
                         </div>
                     </div>
 
@@ -61,28 +64,10 @@
         </div>
     </section>
 
-    <script>
-        let boton = document.getElementById('addVolunteer');
-        let divMessage = document.getElementById('message');
+@endsection
 
-        boton.addEventListener('click', function() {
-            fetch({!! "'/app/event/" . $event->idEvento . "/addparticipation'" !!})
-                .then(result => result.json())
-                .then(function(data) {
-                    divMessage.innerHTML = '';
-
-                    divMessage.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
-                    console.log(data);
-                })
-                .catch(function() {
-                    divMessage.innerHTML = '';
-
-                    divMessage.innerHTML = '<div class="alert alert-danger">No se ha podido realizar la peticion</div>';
-                })
-            /* .then(result => console.log(result)
-                 e => console.log(`Error capturado:  ${e}`));*/
-        });
-    </script>
+@section('scripts')
+    <script src="/js/scriptEvent.js"></script>
 @endsection
 
 @section('styleCssPag')
