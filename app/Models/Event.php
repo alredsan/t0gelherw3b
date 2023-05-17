@@ -126,11 +126,30 @@ class Event extends Model
                 $query = $query->having('distancia', '<=', $radio);
             }
 
-            $query = $query->orderBy('distancia','DESC');
+            // $query = $query->orderBy('distancia','DESC');
 
 
             return $query;
         }
+    }
+
+    public function scopeOrdenacion($query, $type)
+    {
+        if ($type = '0') {
+
+            return $query->orderBy('FechaEvento', 'ASC');
+        }
+
+        if ($type = '1') {
+
+            return $query->orderBy('distancia', 'ASC');
+        }
+
+        if ($type = '2') {
+
+            return $query->orderBy('idEvento', 'ASC');
+        }
+
     }
 
     public function usuarios()

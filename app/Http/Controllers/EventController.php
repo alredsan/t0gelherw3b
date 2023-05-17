@@ -34,7 +34,7 @@ class EventController extends Controller
      */
     public function indexEventsONG()
     {
-        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(5);
+        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(10);
 
         return view('admin.event.index', compact('events'));
     }
@@ -205,14 +205,23 @@ class EventController extends Controller
         $lon = $request->input('lon');
         $radio = $request->input('selectRadio');
 
-        $events = Event::orderBy('FechaEvento', 'ASC')
-            ->where('Nombre', 'LIKE', "%$nombre%")
-            ->Tematica($type)
-            ->FechaEvento($fecha)
-            ->Localidad($lat,$lon,$radio)
-            ->paginate(8);
+        $order = $request->input('order');
 
         $tipos = Type::all();
+
+        //Si ha selecionado que ordene por distancia, comprobamos que tenemos la ubicacion deseada del cliente
+        if($order == "1" && ($lat == null || $lon == null)){
+            return redirect()->route('/',compact('request','tipos'))->with('error','Si desea ordenar por distancia, debe indicar ubicacion');
+        }
+
+        $events = Event::FechaEvento($fecha)
+            ->where('Nombre', 'LIKE', "%$nombre%")
+            ->Tematica($type)
+            ->Localidad($lat,$lon,$radio)
+            ->Ordenacion($order)
+            ->paginate(8);
+
+
         return view('event.index', compact('events', 'tipos', 'request'));
 
     }

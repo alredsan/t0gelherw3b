@@ -7,16 +7,18 @@
 @section('contenido')
     <section class="content container-fluid">
         <div class="">
+            <h1 class="card-title">Editar ONG</h1>
             <div class="col-md-12">
 
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Organisation</span>
+                    <div class="">
+                        {{-- <span class="card-title">{{ __('Update') }} Organisation</span> --}}
+
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.ong.update', $organisation->idONG) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" id="formONG" action="{{ route('admin.ong.update', $organisation->idONG) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

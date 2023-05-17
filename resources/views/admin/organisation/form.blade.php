@@ -5,13 +5,13 @@
         <div class="form-group">
             <label for="Name">Nombre:</label>
             <input class="form-control" placeholder="Name" name="Name" type="text" value="{{ $organisation->Name }}"
-                id="Name">
+                id="Name" required>
             <div class="invalid-feedback">Introduce el nombre correctamente</div>
         </div>
         <div class="form-group">
             <label for="DireccionSede">Direccion del Sede:</label>
             <input type="text" class="form-control" name="DireccionSede" id="DireccionSede"
-                value="{{ old('DireccionSede', $organisation->DireccionSede) }}" placeholder="DireccionSede">
+                value="{{ old('DireccionSede', $organisation->DireccionSede) }}" placeholder="DireccionSede" required>
             <div class="invalid-feedback">Introduce la direccion del Sede</div>
         </div>
         <div class="form-group">
@@ -24,31 +24,31 @@
             <label for="FechaCreacion">Fecha de Creacion:</label>
             <input type="date" class="form-control" name="FechaCreacion" id="FechaCreacion"
                 value="{{ old('FechaCreacion', date('Y-m-d', $organisation->FechaCreacion)) }}"
-                placeholder="FechaCreacion">
+                placeholder="FechaCreacion" required>
             <div class="invalid-feedback">Introduce la fecha de creacion</div>
         </div>
         <div class="form-group">
             <label for="IBANmetodoPago">IBAN:</label>
             <input type="text" class="form-control" name="IBANmetodoPago" id="IBANmetodoPago"
-                value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN">
+                value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN" required>
             <div class="invalid-feedback">Introduce el IBAN correctamente</div>
         </div>
 
         <div class="form-group">
             <label for="eMail">Email de contacto</label>
             <input type="email" class="form-control" name="eMail" id="eMail"
-                value="{{ old('eMail', $organisation->eMail) }}" placeholder="eMail">
+                value="{{ old('eMail', $organisation->eMail) }}" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" placeholder="eMail" required>
             <div class="invalid-feedback">Introduce el Email de contacto</div>
         </div>
         <div class="form-group">
             <label for="Telefono">Telefono:</label>
             <input type="text" class="form-control" name="Telefono" id="Telefono"
-                value="{{ old('Telefono', $organisation->Telefono) }}" placeholder="Telefono">
+                value="{{ old('Telefono', $organisation->Telefono) }}" placeholder="Telefono" required>
             <div class="invalid-feedback">Introduce la direccion del Sede</div>
         </div>
         <div>
             <input type="file" class='form-control' name='FotoLogo' accept="image/*">
-            {!! $errors->first('FotoLogo', '<div class="invalid-feedback">:message</div>') !!}
+            <div class="invalid-feedback">Imagen no ha sido procesada de forma correcta</div>
         </div>
 
     </div>
@@ -60,4 +60,8 @@
 @push('scriptsJS')
     <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
     <script src="/js/formCKeditor.js"></script>
+    <script src='/js/form.js'></script>
+    <script>
+        validateFormONG()
+    </script>
 @endpush

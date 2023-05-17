@@ -31,7 +31,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id='tableAdmin'>
                                 <thead class="thead">
                                     <tr>
                                         {{-- <th>No</th> --}}
@@ -39,33 +39,29 @@
 										<th>Idong</th>
 										<th>Name</th>
 										<th>Direccionsede</th>
-										<th>Descripcion</th>
 										<th>Fechacreacion</th>
-										<th>Ibanmetodopago</th>
-										<th>Fotologo</th>
+										<th>IBAN</th>
+										<th>Logo</th>
 										<th>Email</th>
 										<th>Telefono</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($organisations as $organisation)
                                         <tr>
-                                            {{-- <td>{{ ++$i }}</td> --}}
 
-											<td>{{ $organisation->idONG }}</td>
-											<td>{{ $organisation->Name }}</td>
-											<td>{{ $organisation->DireccionSede }}</td>
-											<td>{{ $organisation->Descripcion }}</td>
-											<td>{{ $organisation->FechaCreacion }}</td>
-											<td>{{ $organisation->IBANmetodoPago }}</td>
-											<td><img src="{{ asset($organisation->FotoLogo) }}" class='w-25' alt="LogoONG"></td>
+											<td data-head="Idong">{{ $organisation->idONG }}</td>
+											<td data-head="Nombre">{{ $organisation->Name }}</td>
+											<td data-head="Direccion">{{ $organisation->DireccionSede }}</td>
+											<td data-head="Fecha creacion">{{ $organisation->FechaCreacion }}</td>
+											<td data-head="IBAN">{{ $organisation->IBANmetodoPago }}</td>
+											<td data-head="Logo"><img src="{{ asset($organisation->FotoLogo) }}" class='w-25' alt="LogoONG"></td>
+											<td data-head="Email">{{ $organisation->eMail }}</td>
+											<td data-head="Telefono">{{ $organisation->Telefono }}</td>
 
-											<td>{{ $organisation->eMail }}</td>
-											<td>{{ $organisation->Telefono }}</td>
-
-                                            <td>
+                                            <td data-head="Acciones">
                                                 <form action="{{ route('admin.ong.destroy',$organisation->idONG) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('admin.ong.show',$organisation->idONG) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('admin.ong.edit',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>

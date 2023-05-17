@@ -125,6 +125,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     @yield('scripts')
+    @stack('scriptsJS')
 </body>
 
 </html>

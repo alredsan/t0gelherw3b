@@ -95,4 +95,20 @@ window.addEventListener('DOMContentLoaded', function () {
         );
     };
 
+
+    let botonMoreFilters = document.getElementById('btnMoreFilters');
+    let divMoreFilters = document.getElementById('divMoreFilters');
+
+    divMoreFilters.style.display = 'none';
+
+    botonMoreFilters.addEventListener('click',function(){
+
+        if(divMoreFilters.style.display == 'none'){
+            divMoreFilters.style.display = 'flex';
+        }else{
+            divMoreFilters.style.display = 'none';
+        }
+
+    })
+
 });

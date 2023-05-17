@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Type;
+use Exception;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tipos = Type::all();
+
+        try{
+            $tipos = Type::all();
+
+        }catch(Exception){
+            abort(404);
+        }
 
         return view('inicio',compact('tipos'));
     }

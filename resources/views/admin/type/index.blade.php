@@ -31,22 +31,22 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id='tableAdmin'>
                                 <thead class="thead">
                                     <tr>
 
 										<th>Id</th>
 										<th>Nombre</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($types as $type)
                                         <tr>
-											<td>{{ $type->idtypeONG }}</td>
-											<td>{{ $type->Nombre }}</td>
-                                            <td>
+											<td data-head="Id">{{ $type->idtypeONG }}</td>
+											<td data-head="Nombre">{{ $type->Nombre }}</td>
+                                            <td data-head="Acciones">
                                                 <form action="{{ route('admin.types.destroy',$type->idtypeONG) }}" method="POST">
                                                     {{-- <a class="btn btn-sm btn-primary " href="{{ route('types.show',$type->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
                                                     <a class="btn btn-sm btn-success" href="{{ route('admin.types.edit',$type->idtypeONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>

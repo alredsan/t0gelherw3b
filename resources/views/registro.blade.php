@@ -22,57 +22,57 @@
                 <img class='w-50' src="/img/logo.png" alt="">
             </div>
             <p class="form__title">Registro</p>
-            <div>
+            <div class="input_group">
                 <label for="Nombre">Nombre</label>
                 <input class="form__input form-control" type="text" name="Nombre" id="Nombre" title="Nombre"
                     pattern="[A-Z a-z\-]{3,}" required>
                 <div class="invalid-feedback">El Nombre es obligatorio.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
-            <div>
+            <div class="input_group">
                 <label for="Apellidos">Apellidos</label>
                 <input class="form__input form-control" type="text" name="Apellidos" id="Apellidos" title="Apellidos"
                     pattern="[A-Z a-z\-]{3,}" required>
                 <div class="invalid-feedback">Apellidos es obligatorio.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
-            <div>
+            <div class="input_group">
                 <label for="email">Correo Electronico</label>
                 <input class="form__input form-control" type="text" name="email" id="email"
                     pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" title="Introduca el email correcto" required>
                 <div class="invalid-feedback">El email es obligatorio.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
-            <div>
+            <div class="input_group">
                 <label for="DNI">DNI</label>
                 <input class="form__input form-control" type="text" name="DNI" id="DNI" title="DNI"
-                    required>
+                    pattern="^[a-zA-Z]{0,1}[0-9]{7,8}[a-zA-Z]{1}$" required>
                 <div class="invalid-feedback">El DNI es obligatorio y debe cumplir.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
-            <div>
+            <div class="input_group">
                 <label for="Direccion">Direccion</label>
                 <input class="form__input form-control" type="text" name="Direccion" id="Direccion" title="Direccion"
-                    required>
+                    pattern=".{4,}$" required>
                 <div class="invalid-feedback">El Direccion es obligatorio.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
-            <div>
+            <div class="input_group">
                 <label for="Provincia">Provincia</label>
                 <input class="form__input form-control" type="text" name="Provincia" id="Provincia" title="Provincia"
-                    required>
+                pattern=".{4,}$" required>
                 <div class="invalid-feedback">La Provincia es obligatorio.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
-            <div>
+            <div class="input_group">
                 <label for="Telefono">Telefono</label>
                 <input class="form__input form-control" type="text" name="Telefono" id="Telefono" title="Telefono"
-                    required>
+                pattern="([+]{0,1}[0-9]{10,12}|[0-9]{9})$" required>
                 <div class="invalid-feedback">El Telefono es obligatorio.</div>
                 <div class="valid-feedback">Correcto.</div>
             </div>
 
-            <div>
+            <div class="input_group">
                 <label for="pass">Contraseña</label>
                 <div class="form__pass">
                     {{-- <input class="form__input form-control" type="password" name="passwd" id="passwd"
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="input_group">
                 <label for="pass">Introduce de nuevo la contraseña</label>
 
                     {{-- <input class="form__input form-control" type="password" name="passwd" id="passwd"

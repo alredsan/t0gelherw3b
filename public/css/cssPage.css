@@ -100,12 +100,12 @@
     margin-bottom: 50px;
 }
 
-.form-item{
+/* .form-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-}
+} */
 
 .form__title {
     font-weight: bold;
@@ -125,10 +125,10 @@
     grid-template-columns: 90% 10%;
 }
 
-.form__input_insert:invalid {
+/* .form__input_insert:invalid {
     background-color: rgba(255, 0, 0, 0.055);
     outline: 2px solid rgb(172, 0, 0);
-}
+} */
 
 .form__input:valid {
     background-color: rgba(0, 255, 21, 0.055);
@@ -139,7 +139,7 @@
 .pass__img>img {
     border-radius: 20px;
     padding: 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     border: 0px;
     background-color: #e0e0e0;
 }
@@ -149,17 +149,21 @@
     justify-content: center;
 }
 
-.input__required {
-    color: rgb(126, 0, 0);
+.input_group{
+    margin-bottom: 20px;
 }
 
-#form__message {
+/* .input__required {
+    color: rgb(126, 0, 0);
+} */
+
+/* #form__message {
     border-radius: 20px;
     background-color: #FF331F;
     padding: 5px;
     text-align: center;
     color: white;
-}
+} */
 
 #mainForm {
     background: rgb(159, 52, 53);
@@ -169,11 +173,10 @@
     min-height: 100vh;
 }
 
-.enlacesForm{
+.enlacesForm {
     display: flex;
     justify-content: space-around;
 }
-
 
 
 .ck-editor__main {
@@ -181,10 +184,59 @@
     overflow: auto;
 }
 
-.infoRol{
+.infoRol {
     font-size: 10px;
 }
 
-.typeEvent{
+.typeEvent {
     font-size: 15px;
+}
+
+/* .card-body {
+    box-shadow: 1px 1px 10px 0px black;
+} */
+/*
+.card-body >div{
+    border-bottom: 1px rgba(110, 110, 110, 0.589) solid;
+} */
+
+.encabPie{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* TABLAS PARA MEJOR VISIBILIDAD PARA DISPOSITIVOS MOVILES */
+@media(max-width: 994px){
+    #tableAdmin thead{
+        display: none;
+    }
+
+    #tableAdmin ,#tableAdmin tbody, #tableAdmin tr, #tableAdmin td{
+        display: block;
+        /* height: 200px; */
+        width: 100;
+    }
+
+    #tableAdmin tr{
+        margin-bottom: 20px;
+    }
+
+    #tableAdmin td{
+        text-align: right;
+        position: relative;
+        display: flex;
+        justify-content: space-between
+    }
+
+    #tableAdmin td::before{
+        content: attr(data-head);
+        /* position: absolute; */
+
+        text-align: left;
+        left: 0;
+        width: 50%;
+        font-weight: bold;
+        padding-left: 15px;
+    }
 }

@@ -18,12 +18,15 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
+                <h1>Usuarios con Permisos</h1>
+
                 <div class="card">
-                    <div class="card-header">
+                    {{-- <div class="card-header"> --}}
+                    <div>
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="card_title">
-                                <h5>Usuarios con Permisos</h5>
+                                {{-- <h1>Usuarios con Permisos</h1> --}}
                             </span>
 
                             <div class="float-right">
@@ -39,29 +42,28 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id='tableAdmin'>
                                 <thead class="thead">
                                     <tr>
-
-                                        <th>Name</th>
+                                        <th>Nombre</th>
                                         <th>Apellidos</th>
                                         <th>Email</th>
-                                        <th>Provincialocalidad</th>
+                                        <th>Provincia</th>
                                         <th>Telefono</th>
                                         <th>Roles</th>
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
 
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->Apellidos }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->ProvinciaLocalidad }}</td>
-                                            <td>{{ $user->Telefono }}</td>
-                                            <td>
+                                            <td data-head="Nombre">{{ $user->name }}</td>
+                                            <td data-head="Apellidos">{{ $user->Apellidos }}</td>
+                                            <td data-head="Email">{{ $user->email }}</td>
+                                            <td data-head="Provincia">{{ $user->ProvinciaLocalidad }}</td>
+                                            <td data-head="Telefono">{{ $user->Telefono }}</td>
+                                            <td data-head="Roles">
                                                 @foreach ($user->usersRole as $role)
                                                     <div class='alert alert-info p-0 m-0 text-center'>
                                                         <span class="infoRol">{{ $role->NombreRol }}</span>
@@ -69,19 +71,22 @@
                                                 @endforeach
                                             </td>
 
-                                            <td>
+                                            <td data-head="Acciones">
+                                                @if (Auth::User()->id != $user->id)
                                                 <button type='button' class="btn btn-sm btn-success btnEdit"
                                                     data-src="{{ route('api.ong.usersassign', $user->id) }}">Editar
                                                     Rol</button>
                                                 <form action="{{ route('admin.ong.usersassign.delete', $user->id) }}"
                                                     method="POST">
                                                     @csrf
-                                                    @if (Auth::User()->id != $user->id)
+
                                                         @method('DELETE')
                                                         <button type="submit"
                                                             class="btn btn-danger btn-sm">Eliminar</button>
-                                                    @endif
                                                 </form>
+                                                @else
+                                                    <p class='fw-lighter'>No esta permitido</p>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
