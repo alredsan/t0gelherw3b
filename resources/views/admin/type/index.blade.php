@@ -8,13 +8,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <span id="card_title">
-                                {{ __('Type') }}
-                            </span>
+                            <h1 id="card_title">
+                                {{ __('Types') }}
+                            </h1>
 
                              <div class="float-right">
                                 <a href="{{ route('admin.types.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">

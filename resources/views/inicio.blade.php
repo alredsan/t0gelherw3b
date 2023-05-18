@@ -55,7 +55,7 @@
             </div>
             <div class="overflow-hidden" style="max-height: 30vh;">
                 <div class="container px-5">
-                    <img src="img/banner.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Imagen Ayuda"
+                    <img src="img/salvar-el-mundo.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Imagen Ayuda"
                         width="700" height="500" loading="lazy">
                 </div>
             </div>

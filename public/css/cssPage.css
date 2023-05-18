@@ -42,6 +42,12 @@
     top: -120px;
 }
 
+@media(max-width: 767px){
+    .contanier_form {
+        top: 0px;
+    }
+}
+
 
 /* FORMULARIO DE FILTRACION DE EVENTOS en APP */
 .contanier_form_events {

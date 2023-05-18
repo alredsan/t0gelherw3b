@@ -18,15 +18,14 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-                <h1>Usuarios con Permisos</h1>
+                {{-- <h1>Usuarios con Permisos</h1> --}}
 
-                <div class="card">
-                    {{-- <div class="card-header"> --}}
+                <div class="">
+                    <div class="card-header">
                     <div>
-
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="card_title">
-                                {{-- <h1>Usuarios con Permisos</h1> --}}
+                                <h1>Usuarios con Permisos</h1>
                             </span>
 
                             <div class="float-right">

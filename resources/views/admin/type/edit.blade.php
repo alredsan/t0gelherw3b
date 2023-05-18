@@ -11,9 +11,9 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Type</span>
+                        <h1 class="card-title">{{ __('Update') }} Type {{ $type->Nombre}}</h1>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.types.update', $type->idtypeONG) }}"  role="form" enctype="multipart/form-data">
