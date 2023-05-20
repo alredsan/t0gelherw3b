@@ -42,7 +42,7 @@
     top: -120px;
 }
 
-@media(max-width: 767px){
+@media(max-width: 767px) {
     .contanier_form {
         top: 0px;
     }
@@ -61,10 +61,10 @@
 }
 
 .form_principal {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     align-content: center;
-    justify-content: center;
+    justify-content: center; */
     /* margin-left: 100px; */
     margin-top: 60px;
     padding: 10px 25px 10px 25px;
@@ -75,10 +75,10 @@
 
 }
 
-.form_principal div:last-child {
+/* .form_principal div:last-child {
     display: flex;
     justify-content: center;
-}
+} */
 
 .botonSearch {
     padding: 20px 50px;
@@ -155,7 +155,7 @@
     justify-content: center;
 }
 
-.input_group{
+.input_group {
     margin-bottom: 20px;
 }
 
@@ -173,7 +173,7 @@
 
 #mainForm {
     background: rgb(159, 52, 53);
-    background: linear-gradient(41deg, rgba(159, 52, 53, 1) 11%, rgba(228, 39, 40, 1) 39%, rgba(228, 39, 40, 1) 69%, rgba(229, 118, 118, 1) 98%, rgba(230, 230, 230, 1) 100%);
+    background: linear-gradient(41deg, rgb(159, 52, 53) 11%, rgba(159, 39, 40, 1) 39%, rgba(159, 39, 40, 1) 69%, rgba(159, 118, 118, 1) 98%, rgba(230, 230, 230, 1) 100%);
     background-repeat: no-repeat;
     background-size: contain;
     min-height: 100vh;
@@ -198,44 +198,87 @@
     font-size: 15px;
 }
 
-/* .card-body {
-    box-shadow: 1px 1px 10px 0px black;
-} */
+.card-body {
+    box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.192);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#bodyBackground {
+
+    opacity: 1;
+    /* background-repeat: space; */
+
+    /* transform: rotate(30deg); */
+    /* background-position: 20px 30px; */
+    background-image: url("../img/mosaico.svg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-position: center;
+    /* background-size: 10%; */
+    /* background-origin: padding-box; */
+    opacity: 1;
+}
+
 /*
 .card-body >div{
     border-bottom: 1px rgba(110, 110, 110, 0.589) solid;
 } */
 
-.encabPie{
+.encabPie {
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
+#divMoreFilters {
+    display: block;
+    animation: mostrarAnimacion 0.5s;
+}
+
+@keyframes mostrarAnimacion {
+    0% {
+        opacity: 0;
+        height: 0;
+        /* transform: scaleY(0); */
+    }
+
+    100% {
+        opacity: 1;
+        height: auto;
+        /* transform: scaleY(1); */
+    }
+}
+
 /* TABLAS PARA MEJOR VISIBILIDAD PARA DISPOSITIVOS MOVILES */
-@media(max-width: 994px){
-    #tableAdmin thead{
+@media(max-width: 994px) {
+    #tableAdmin thead {
         display: none;
     }
 
-    #tableAdmin ,#tableAdmin tbody, #tableAdmin tr, #tableAdmin td{
+    #tableAdmin,
+    #tableAdmin tbody,
+    #tableAdmin tr,
+    #tableAdmin td {
         display: block;
         /* height: 200px; */
         width: 100;
     }
 
-    #tableAdmin tr{
+    #tableAdmin tr {
         margin-bottom: 20px;
     }
 
-    #tableAdmin td{
+    #tableAdmin td {
         text-align: right;
         position: relative;
         display: flex;
         justify-content: space-between
     }
 
-    #tableAdmin td::before{
+    #tableAdmin td::before {
         content: attr(data-head);
         /* position: absolute; */
 

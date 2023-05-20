@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-white">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id='tableAdmin'>
                                 <thead class="thead">
@@ -101,11 +101,11 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalAddAssign" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        aria-labelledby="modalAddAssignLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="modalAddAssignLabel">Modal title</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form name='fAssignUser' action="{{ route('admin.ong.usersassign.add') }}" method="post">
@@ -137,11 +137,11 @@
     </div>
 
     <div class="modal fade" id="modalEditAssign" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        aria-labelledby="modalEditAssignLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Permisos</h1>
+                    <h1 class="modal-title fs-5" id="modalEditAssignLabel">Editar Permisos</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('admin.ong.usersassign.edit') }}" method="post">

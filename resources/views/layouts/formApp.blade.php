@@ -32,7 +32,8 @@
 
                 <div class="form-floating">
                     <input type="text" class="form-control" id="localidad" name='localidad' placeholder="Buscar ..."
-                        autocomplete="off" value="@php echo isset($_GET['localidad'])? $_GET['localidad'] : ""; @endphp">
+                        autocomplete="off"
+                        value="@php echo isset($_GET['localidad'])? $_GET['localidad'] : ""; @endphp">
                     <label for="localidad">Localidad</label>
                     <input type="hidden" name="lat" id='lat'
                         value="@php echo isset($_GET['lat'])? $_GET['lat'] : ""; @endphp">
@@ -59,41 +60,42 @@
                     @endphp
 
                     @foreach ($array as $km)
-                        <option value='{{ $km }}'
-                        @if($existsRequest && $_GET['selectRadio'] == $km)
-                            selected
-                        @endif
-                        >{{ $km }} km</option>
+                        <option value='{{ $km }}' @if ($existsRequest && $_GET['selectRadio'] == $km) selected @endif>
+                            {{ $km }} km</option>
                     @endforeach
                 </select>
                 <label for="selectRadio">Radio</label>
             </div>
         </div>
-        <div class="col-12">
-            <button type='button' class="btn btn-primary" id='btnMoreFilters'>Mas filtros <i class="bi bi-arrow-down-short"></i></button>
-            <div class='row' id='divMoreFilters'>
-                <div class="col-md-3">
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="order" name='order' aria-label="select tipo ">
-                            <option value='0'>Ordenar por fecha</option>
-                            <option value='1'>Ordenar por Distancia</option>
-                            <option value='2'>Ordenar por Nuevos Eventos</option>
+    </div>
+    <div class="row col-md-2">
+        <button type='button' class="btn btn-primary" id='btnMoreFilters'>Mas filtros <i
+                class="bi bi-arrow-down-short"></i></button>
+    </div>
 
-                        </select>
-                        <label for="order">Ordenacion</label>
-                    </div>
-                </div>
+    <div class='row' id='divMoreFilters'>
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select" id="order" name='order' aria-label="select tipo ">
+                    <option value='0'>Ordenar por fecha</option>
+                    <option value='1'>Ordenar por Distancia</option>
+                    <option value='2'>Ordenar por Nuevos Eventos</option>
 
-                <div class="col-md-3">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="activeEvent" placeholder="Buscar ..." name='activeEvent'
-                            value="@php echo isset($_GET['nombre'])? $_GET['nombre'] : ""; @endphp">
-                        <label for="activeEvent">eVENTOS aCTIVOS</label>
-                    </div>
-                </div>
+                </select>
+                <label for="order">Ordenacion</label>
             </div>
         </div>
-        <div class="col-12">
+
+        <div class="col-md-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="activeEvent" placeholder="Buscar ..." name='activeEvent'
+                    value="@php echo isset($_GET['nombre'])? $_GET['nombre'] : ""; @endphp">
+                <label for="activeEvent">eVENTOS aCTIVOS</label>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-5 d-flex justify-content-center">
             <button class="btn btn-primary botonSearch" type="submit">Buscar</button>
         </div>
     </div>

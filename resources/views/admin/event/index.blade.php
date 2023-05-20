@@ -27,7 +27,7 @@
                         </div>
                     @endif
 
-                    <div class="card-body">
+                    <div class="card-body bg-white">
                         <div class='encabPie'>
                             <div></div>
                             <div>
@@ -74,6 +74,9 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info" href="{{ route('admin.ong.event.edit',$event->idEvento) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Ver participantes') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach

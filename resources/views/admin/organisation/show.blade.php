@@ -28,7 +28,7 @@
 
                     </div>
 
-                    <div class="card-body d-flex flex-column">
+                    <div class="card-body  bg-white d-flex flex-column">
 
                         <div class="form-group">
                             <h1>{{ $organisation->Name }}</h1>

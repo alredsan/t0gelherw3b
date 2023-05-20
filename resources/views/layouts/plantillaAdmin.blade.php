@@ -18,7 +18,7 @@
     @yield('styleCssPag')
 </head>
 
-<body>
+<body id="bodyBackground">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('Admin') }}">
@@ -141,7 +141,7 @@
         </div>
     </nav>
 
-    <div class='container pt-5'>
+    <div class='container pt-5 '>
         @yield('contenido')
     </div>
 
