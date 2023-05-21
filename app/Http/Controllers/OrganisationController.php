@@ -198,18 +198,43 @@ class OrganisationController extends Controller
 
 
     // Mostrar los usuarios que tiene permiso sobre el ONG
-    public function showUserOng()
+    public function showUserOng($id = "")
     {
+        if($id != ""){
+            if (!Auth::user()->roles('1')) {
+                abort(404);
+            }
+            $id_ONG = $id;
 
-        $id_ONG = Auth::user()->id_ONG;
+        }else{
+            $id_ONG = Auth::user()->id_ONG;
+        }
+
 
         $users = User::where('id_ONG', $id_ONG)->paginate(10);
 
         $roles = Role::where('idRol', '>', '1')->get();
 
+        $organisation = Organisation::find($id_ONG);
 
-        return view('admin.user.indexUsersONG', compact('users', 'roles'));
+        return view('admin.user.indexUsersONG', compact('users', 'roles','organisation'));
     }
+
+    // public function showUserOngAdmin($id)
+    // {
+    //     if (!Auth::user()->roles('1')) {
+    //         abort(404);
+    //     }
+
+    //     $id_ONG = $id;
+
+    //     $users = User::where('id_ONG', $id_ONG)->paginate(10);
+
+    //     $roles = Role::where('idRol', '>', '1')->get();
+
+
+    //     return view('admin.user.indexUsersONG', compact('users', 'roles'));
+    // }
 
 
     public function assignUser(Request $request)
@@ -227,7 +252,7 @@ class OrganisationController extends Controller
             return redirect()->route('admin.ong.usersassign')->with('fail', 'El Usuario no existe o ya gestiona un ONG, el email introducido: ' . $email);
         }
 
-        $user->id_ONG = Auth::user()->id_ONG;
+        $user->id_ONG = Auth::user()->id_ONG; //Cambiar, por el adminWEb, no tiene la propiedad
         $user->save();
 
         $user->usersRole()->attach($rolesAssign);
@@ -244,6 +269,7 @@ class OrganisationController extends Controller
         if($user->id_ONG != Auth::user()->id_ONG){
             return ['result'=> 'No valido'];
         }
+
         $rolesUser = $user->usersRole()->where('users_roles.idRol', '>', '1')->get();
 
         $array = ['result'=> 'Valido',"user"=> $user,"roles"=>$rolesUser];
@@ -255,14 +281,21 @@ class OrganisationController extends Controller
     public function assignUserEdit(Request $request)
     {
         $user = User::find($request->idUser);
-        $rolesAssign = array_keys($request->chxRolEdit);
 
         if(!$user){
             return redirect()->route('admin.ong.usersassign')->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
         }
 
         $user->usersRole()->detach();
-        $user->usersRole()->attach($rolesAssign);
+
+        if($request->chxRolEdit == null){
+            $user->id_ONG = null;
+            $user->save();
+        }else{
+
+            $rolesAssign = array_keys($request->chxRolEdit);
+            $user->usersRole()->attach($rolesAssign);
+        }
 
         return redirect()->route('admin.ong.usersassign')->with('success', 'Ha sido modificado los permisos correctamente para el Usuario '.$user->name);
     }

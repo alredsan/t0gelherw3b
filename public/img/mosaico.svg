@@ -42,6 +42,14 @@
          d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
          id="path4141" />
     </marker>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1093"
+       inkscape:label="filtro0">
+      <feMorphology
+         id="feMorphology1095"
+         radius="93.442622950819683" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="namedview16"
@@ -53,15 +61,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="pt"
      showgrid="false"
-     inkscape:zoom="1.3812078"
-     inkscape:cx="69.866388"
-     inkscape:cy="4.3440241"
+     inkscape:zoom="2.7624156"
+     inkscape:cx="101.54156"
+     inkscape:cy="114.39264"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g12" />
+     inkscape:current-layer="layer1" />
   <metadata
      id="metadata2">
 Created by potrace 1.16, written by Peter Selinger 2001-2019
@@ -70,7 +78,7 @@ Created by potrace 1.16, written by Peter Selinger 2001-2019
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Layer 1"
-     style="opacity:0.36820084">
+     style="opacity:0.1">
     <g
        transform="matrix(0.1,0,0,-0.1,5.0787951,159.39774)"
        fill="#000000"

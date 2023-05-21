@@ -9,11 +9,11 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Evento</span>
+                        <h1 class="card-title pb-2">Actualizar Evento</h1>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-white">
                         <form method="POST" action="{{ route('admin.ong.event.update', $event->idEvento) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf

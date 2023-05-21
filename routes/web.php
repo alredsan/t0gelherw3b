@@ -104,7 +104,8 @@ Route::delete('/admin/ong/event/delete/{id}',[EventController::class,'destroy'])
 // Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
     //Asignacion de Usuarios
         //index
-Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
+// Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
+Route::get('/admin/ong/usersAssign/{idOng?}',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
         //Nuevo persona con permisos
 Route::post('/admin/ong/usersAssign/add',[OrganisationController::class,'assignUser'])->middleware('auth')->name('admin.ong.usersassign.add');
         //Editar los roles de la persona

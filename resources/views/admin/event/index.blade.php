@@ -11,12 +11,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <h1 id="card_title">
-                                {{ __('Event') }}
+                                {{ __('Eventos') }}
                             </h1>
 
                              <div class="float-right">
                                 <a href="{{ route('admin.ong.event.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Crear nuevo evento') }}
                                 </a>
                               </div>
                         </div>
@@ -53,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($events as $event)
+                                    @forelse ($events as $event)
                                         <tr>
 
 											<td data-head='Idevento'>{{ $event->idEvento }}</td>
@@ -79,7 +79,9 @@
                                                 <a class="btn btn-sm btn-info" href="{{ route('admin.ong.event.edit',$event->idEvento) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Ver participantes') }}</a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>No hay registros</tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

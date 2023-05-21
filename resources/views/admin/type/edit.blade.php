@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <h1 class="card-title">{{ __('Update') }} Type {{ $type->Nombre}}</h1>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-white">
                         <form method="POST" action="{{ route('admin.types.update', $type->idtypeONG) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf

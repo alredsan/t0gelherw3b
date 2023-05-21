@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <h1 id="card_title">
-                                {{ __('Organisations') }}
+                                {{ __('Organizaciones') }}
                             </h1>
 
                              <div class="float-right">
@@ -69,6 +69,10 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-success" href="{{ route('admin.ong.usersassign',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Ver Usuarios con permisos') }}</a>
+
                                             </td>
                                         </tr>
                                     @endforeach
