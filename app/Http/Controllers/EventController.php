@@ -74,6 +74,7 @@ class EventController extends Controller
             $data['Foto'] = 'storage/' . $name;
         }
 
+        //Creacion objeto Event y obtenemos el objeto para insertar los tipos del evento seleccionados
         $event = Event::create($data);
 
         $event->eventsType()->attach($request->selectmultiple);
@@ -128,24 +129,28 @@ class EventController extends Controller
      */
     public function update(Request $request, $event)
     {
+        //Validamos los datos
         request()->validate(Event::$rules);
 
+        //Buscamos por idEvent
         $data = Event::find($event);
 
         $data->Nombre = $request->Nombre;
         $data->Descripcion = $request->Descripcion;
-        $data->FechaEvento = strtotime($request->FechaEvento);
+        $data->FechaEvento = strtotime($request->FechaEvento); //Convertir al EPOCH para mayor compatibilidad a largo plazo
         $data->numMaxVoluntarios = $request->numMaxVoluntarios;
         $data->Direccion = $request->Direccion;
         $data->Latitud = $request->Latitud;
         $data->Longitud = $request->Longitud;
         $data->Aportaciones = $request->Aportaciones;
 
+        //Comprobamos si existe alguna fotografia el input
         if ($request->hasFile('Foto')) {
+            //Comprobamos si no es la foto por defecto
             if($data->Foto != config('constants.DEFAULT_PHOTO_EVENT')){
                 unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
             }
-
+            //Subida imagen y asginar el nuevo nombre de imagen para mayor seguridad
             $data->Foto = $request->file('Foto')->store('event');
             $data->Foto = 'storage/' . $data->Foto;
         }
@@ -187,8 +192,9 @@ class EventController extends Controller
             ->where('idUser', '=', Auth::user()->id);
         $participante->delete();
 
-        return redirect()->route('perfil')
-            ->with('success-events', 'Ya no participas en este evento');
+        // return redirect()->route('perfil')
+        //     ->with('success-events', 'Ya no participas en este evento');
+        return back()->with('success-events', 'Ya no participa en ese Evento');
     }
 
     /**

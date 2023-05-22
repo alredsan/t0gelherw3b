@@ -22,7 +22,7 @@
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('Admin') }}">
-                <img class="logoAdmin" src="/img/logoB.png" alt="">
+                <img class="logoAdmin" src="/img/logoB.png" alt="Logo Inicio">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -39,7 +39,7 @@
                     {{-- ADMINISTRADOR WEB --}}
                     @if (Auth::user()->roles('1'))
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fs-4 bi bi-globe2"></i><span class="ms-1">Administrador
                                     WEB</span>
@@ -142,6 +142,7 @@
     </nav>
 
     <div class='container pt-5 '>
+        {{-- @dump(request()->routeIs(['admin.ong','admin.ong.edit','admin.ong.update','admin.ong.event.index'])) --}}
         @yield('contenido')
     </div>
 

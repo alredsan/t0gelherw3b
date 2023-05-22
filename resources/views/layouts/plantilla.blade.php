@@ -68,11 +68,11 @@
     @yield('contenido')
 
 
-    <div class="container">
-        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+    <div id='footerApp'>
+        <footer class="container align-items-center justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 mt-5 border-top"  >
             <div class="col mb-3">
                 <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                    <img class="w-75" src="/img/logo.png" alt="">
+                    <img class="w-75" src="/img/logo.png" alt="Logotipo">
                 </a>
                 <p class="text-muted">Alberto Redondo &copy; 2023</p>
             </div>

@@ -41,7 +41,6 @@
 
 										<th>Idevento</th>
 										<th>Nombre</th>
-										{{-- <th>Descripcion</th> --}}
 										<th>Fecha evento</th>
 										<th>Nº max de voluntarios</th>
 										<th>Direccion</th>
@@ -49,7 +48,8 @@
 										<th>Longitud</th>
 										<th>Aportaciones</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
+                                        <th>Usuarios</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,7 +58,6 @@
 
 											<td data-head='Idevento'>{{ $event->idEvento }}</td>
 											<td data-head='Nombre'>{{ $event->Nombre }}</td>
-											{{-- <td>{!! $event->Descripcion !!}</td> --}}
                                             <td data-head='Fecha evento'>{{ date('d-m-Y', $event->FechaEvento); }}</td>
 											<td data-head='Nº max de voluntarios'>{{ $event->numMaxVoluntarios }}</td>
 											<td data-head='Direccion'>{{ $event->Direccion }}</td>

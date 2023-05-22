@@ -64,19 +64,30 @@
                     placeholder='Aportaciones' value='{{ old('Aportaciones', $event->Aportaciones) }}'>
                 <div class="invalid-feedback">Introduce el numero de aportaciones</div>
             </div>
+            @php
+                $typeSelect = old('selectmultiple', $event->eventsType);
+                $idTypesSelect = [];
+                foreach ($typeSelect as $type) {
+                    $idTypesSelect[] = $type['idtypeONG'];
+                }
+            @endphp
 
-            <div class="form-group">
+            <div class="form-group d-flex flex-column">
                 <label for="typeEvent">Seleccione los tipos que relaciona la tematica:</label>
                 <select id="selectmultiple" name="selectmultiple[]" multiple="multiple">
                     @foreach ($types as $type)
-                        <option value="{{ $type->idtypeONG }}">{{ $type->Nombre }}</option>
+                        @if (in_array($type->idtypeONG, $idTypesSelect))
+                            <option value="{{ $type->idtypeONG }}" selected>{{ $type->Nombre }}</option>
+                        @else
+                            <option value="{{ $type->idtypeONG }}">{{ $type->Nombre }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
 
             <div>
                 <label for="Foto">Foto: </label>
-                <input type="file" class='form-control' name='Foto' accept="image/*">
+                <input type="file" class='form-control' name='Foto' accept="image/*" id="Foto">
                 {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
             </div>
 

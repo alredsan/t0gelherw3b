@@ -60,8 +60,5 @@
 @push('scriptsJS')
     <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
     <script src="/js/formCKeditor.js"></script>
-    <script src='/js/form.js'></script>
-    <script>
-        validateFormONG()
-    </script>
+    <script src='/js/validation.js'></script>
 @endpush

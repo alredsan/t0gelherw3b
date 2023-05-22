@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/cssPage.css">
 </head>
 
-<body id="mainForm" onload="validateLogin()">
+<body id="mainForm">
 
     <main class="d-flex justify-content-center align-items-center pt-5 pb-5">
 
@@ -39,7 +39,7 @@
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"
                     title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
                     required autocomplete="on">
-                <a class="pass__img" onclick="mostrarContrasena()"><i class="fs-4 bi bi-eye-fill"></i></a>
+                <a class="pass__img" id='showPasswd'><i class="fs-4 bi bi-eye-fill"></i></a>
                 <div class="invalid-feedback">Debe contener 4-16 caracteres, un numero, letra mayúscula y letra
                     mayuscula.</div>
                 <div class="valid-feedback">Correcto.</div>
@@ -66,7 +66,7 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="/js/form.js"></script>
+    <script src="/js/validation.js"></script>
 </body>
 
 </html>

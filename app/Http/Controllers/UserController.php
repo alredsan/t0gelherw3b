@@ -163,25 +163,33 @@ class UserController extends Controller
     public function register(Request $request)
     {
         // Validacion de los datos
+        request()->validate(User::$rules);
+
+        $comprobarUserUnique = User::orWhere('email','=',$request->email)->orWhere('DNI','=',$request->DNI)->count();
+        //dd($comprobarUserUnique);
+
+        if($comprobarUserUnique > 0){
+            return redirect()->route('registro')->with('error', 'El correo electronico o DNI ya existe en el sistema');
+        }
 
         // una vez validados los datos, creamos el objeto user
         $user = new User();
 
-        $user->name = $request->Nombre;
+        $user->name = $request->name;
         $user->Apellidos = $request->Apellidos;
         $user->email = $request->email;
         $user->DNI = $request->DNI;
         $user->Direccion = $request->Direccion;
-        $user->ProvinciaLocalidad = $request->Provincia;
+        $user->ProvinciaLocalidad = $request->ProvinciaLocalidad;
         $user->Telefono = $request->Telefono;
         $user->password = Hash::make($request->passwd);
 
         $user->save();
 
         // Add el usuario registrado al sistema, iniciado automaticamente
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(route('/'));
+        return redirect()->route('/')->with('success', 'Ha sido registrado correctamente, inicia sesión');
     }
 
     /**

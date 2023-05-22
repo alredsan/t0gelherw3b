@@ -26,6 +26,10 @@
     height: 20px;
 }
 
+#footerApp {
+    background-color: #e0e0e0;
+}
+
 .logoAdmin {
     width: 15vh;
 }

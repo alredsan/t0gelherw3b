@@ -11,20 +11,23 @@ class AdminController extends Controller
     //
     public function __invoke()
     {
-        return view('admin.index');
+        if (Auth::user()->id_ONG != null || Auth::user()->roles('1')) {
+            return view('admin.index');
+        }
+        abort(404);
     }
 
-    public function show(){
+    public function show()
+    {
         $user = User::find(Auth::user()->id);
 
-        return view('admin.user.show',compact('user'));
+        return view('admin.user.show', compact('user'));
     }
 
-    public function edit(){
+    public function edit()
+    {
         $user = User::find(Auth::user()->id);
 
-        return view('admin.user.edit',compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
-
-
 }

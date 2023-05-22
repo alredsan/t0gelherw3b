@@ -106,7 +106,7 @@ class OrganisationController extends Controller
      */
     public function edit($id)
     {
-        $organisation = Organisation::find($id);
+        $organisation = Organisation::findOrFail($id);
 
         if (Auth::user()->id_ONG == $id || Auth::user()->roles('1')) {
 
@@ -201,7 +201,8 @@ class OrganisationController extends Controller
     public function showUserOng($id = "")
     {
         if($id != ""){
-            if (!Auth::user()->roles('1')) {
+            //En caso que tenga un numero en URL , comprobamos que tiene rol requerido WEB
+            if (!Auth::user()->roles('1') || Auth::user()->id_ONG == $id) {
                 abort(404);
             }
             $id_ONG = $id;
@@ -215,7 +216,7 @@ class OrganisationController extends Controller
 
         $roles = Role::where('idRol', '>', '1')->get();
 
-        $organisation = Organisation::find($id_ONG);
+        $organisation = Organisation::findOrFail($id_ONG);
 
         return view('admin.user.indexUsersONG', compact('users', 'roles','organisation'));
     }
