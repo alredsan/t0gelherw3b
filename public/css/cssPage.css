@@ -256,8 +256,14 @@
     }
 }
 
+.formActions{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 /* TABLAS PARA MEJOR VISIBILIDAD PARA DISPOSITIVOS MOVILES */
-@media(max-width: 994px) {
+@media(max-width: 1200px) {
     #tableAdmin thead {
         display: none;
     }
@@ -291,5 +297,9 @@
         width: 50%;
         font-weight: bold;
         padding-left: 15px;
+    }
+
+    .formActions{
+        display: block;
     }
 }
