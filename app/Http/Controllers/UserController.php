@@ -28,7 +28,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
      * Mostrar el formulario de nuevo usuario
      *
      * @return \Illuminate\Http\Response

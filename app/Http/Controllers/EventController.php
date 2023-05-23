@@ -21,13 +21,13 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $events = Event::paginate();
+    // public function index()
+    // {
+    //     $events = Event::paginate();
 
-        return view('event.index', compact('events'))
-            ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
-    }
+    //     return view('event.index', compact('events'))
+    //         ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
+    // }
 
     /**
      * Mostrar solo los eventos que usuario tiene permiso
@@ -143,7 +143,11 @@ class EventController extends Controller
         $data->Latitud = $request->Latitud;
         $data->Longitud = $request->Longitud;
         $data->Aportaciones = $request->Aportaciones;
-
+        if($request->CheckVisible){
+            $data->Visible = 1;
+        }else{
+            $data->Visible = 0;
+        }
         //Comprobamos si existe alguna fotografia el input
         if ($request->hasFile('Foto')) {
             //Comprobamos si no es la foto por defecto
@@ -220,7 +224,8 @@ class EventController extends Controller
             return redirect()->route('/',compact('request','tipos'))->with('error','Si desea ordenar por distancia, debe indicar ubicacion');
         }
 
-        $events = Event::FechaEvento($fecha)
+        $events = Event::where("Visible","=","1")
+            ->FechaEvento($fecha)
             ->where('Nombre', 'LIKE', "%$nombre%")
             ->Tematica($type)
             ->Localidad($lat,$lon,$radio)

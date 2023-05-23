@@ -47,6 +47,7 @@
 										<th>Latitud</th>
 										<th>Longitud</th>
 										<th>Aportaciones</th>
+										<th>Estado</th>
 
                                         <th>Acciones</th>
                                         <th>Usuarios</th>
@@ -64,14 +65,15 @@
 											<td data-head='Latitud'>{{ $event->Latitud }}</td>
 											<td data-head='Longitud'>{{ $event->Longitud }}</td>
 											<td data-head='Aportaciones'>{{ $event->Aportaciones }}</td>
+											<td data-head='Estado'>@if($event->Visible) Visible @else Oculto @endif</td>
 
                                             <td data-head='Acciones'>
                                                 <form action="{{ route('admin.ong.event.destroy',$event->idEvento) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('events.show',$event->idEvento) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.ong.event.edit',$event->idEvento) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('events.show',$event->idEvento) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.ong.event.edit',$event->idEvento) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                             <td>

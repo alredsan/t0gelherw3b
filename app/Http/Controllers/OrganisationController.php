@@ -138,15 +138,15 @@ class OrganisationController extends Controller
      * @param  Organisation $organisation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organisation $organisation)
-    {
-        request()->validate(Organisation::$rules);
+    // public function update(Request $request, Organisation $organisation)
+    // {
+    //     request()->validate(Organisation::$rules);
 
-        $organisation->update($request->all());
+    //     $organisation->update($request->all());
 
-        return redirect()->route('organisations.index')
-            ->with('success', 'Organisation updated successfully');
-    }
+    //     return redirect()->route('organisations.index')
+    //         ->with('success', 'Organisation updated successfully');
+    // }
 
     /**
      * Actualizar el ONG que tiene permiso hacerlo

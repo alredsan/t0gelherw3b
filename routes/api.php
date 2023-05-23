@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::apiResource('/ong/usersAssign/{id}',[OrganisationController::class,'assignUserInfo'])->middleware('auth')->name('api.ong.usersassign',); //API
+// Route::apiResource('/ong/usersAssignPrueba/{id}',[OrganisationController::class,'assignUserInfo'])->middleware('auth'); //API

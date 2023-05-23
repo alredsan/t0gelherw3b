@@ -17,17 +17,17 @@ class AdminController extends Controller
         abort(404);
     }
 
-    public function show()
-    {
-        $user = User::find(Auth::user()->id);
+    // public function show()
+    // {
+    //     $user = User::find(Auth::user()->id);
 
-        return view('admin.user.show', compact('user'));
-    }
+    //     return view('admin.user.show', compact('user'));
+    // }
 
-    public function edit()
-    {
-        $user = User::find(Auth::user()->id);
+    // public function edit()
+    // {
+    //     $user = User::find(Auth::user()->id);
 
-        return view('admin.user.edit', compact('user'));
-    }
+    //     return view('admin.user.edit', compact('user'));
+    // }
 }

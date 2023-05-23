@@ -91,6 +91,11 @@
                 {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
             </div>
 
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="CheckVisible" name="CheckVisible" @if($event->Visible) checked @endif>
+                <label class="form-check-label" for="CheckVisible">El evento sea visible</label>
+              </div>
+
         </div>
         <div class="box-footer mt20">
             <button type="submit" class="btn btn-primary">Enviar</button>
