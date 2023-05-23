@@ -121,6 +121,10 @@ class UserController extends Controller
 
         $user = User::find(Auth::user()->id);
 
+        // $prueba = $user->eventos::where("Visible","=","1");
+
+        // dd($prueba);
+
         return view('cuenta.showEventsCuenta', compact('user'));
     }
 

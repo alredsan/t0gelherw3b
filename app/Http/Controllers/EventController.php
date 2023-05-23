@@ -74,6 +74,12 @@ class EventController extends Controller
             $data['Foto'] = 'storage/' . $name;
         }
 
+        if($request->CheckVisible){
+            $data['Visible'] = 1;
+        }else{
+            $data['Visible'] = 0;
+        }
+
         //Creacion objeto Event y obtenemos el objeto para insertar los tipos del evento seleccionados
         $event = Event::create($data);
 

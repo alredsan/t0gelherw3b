@@ -31,33 +31,34 @@
                         id="menu">
 
                         <li>
-                            <a href="{{ route('cuenta') }}" class="nav-link px-0 align-middle">
+                            <a href="{{ route('cuenta') }}" class="nav-link px-2 p align-middle {{request()->RouteIs("cuenta")? "active":""}}">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">General</span> </a>
                         </li>
                         <li>
-                            <a href="{{ route('cuenta.perfil') }}" class="nav-link px-0 align-middle">
+                            <a href="{{ route('cuenta.perfil') }}" class="nav-link px-2 align-middle {{request()->RouteIs(["cuenta.perfil","cuenta.edit"])? "active":""}}">
                                 <i class="fs-4 bi bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('cuenta.pass.edit')}}" class="nav-link px-0 align-middle">
+                            <a href="{{route('cuenta.pass.edit')}}" class="nav-link px-2 align-middle {{request()->RouteIs("cuenta.pass.edit")? "active":""}}">
                                 <i class="fs-4 bi bi-key-fill"></i> <span class="ms-1 d-none d-sm-inline">Cambiar
                                     contraseña</span> </a>
                         </li>
                         <li>
-                            <a href="{{ route('cuenta.eventos') }}" class="nav-link px-0 align-middle">
+                            <a href="{{ route('cuenta.eventos') }}" class="nav-link px-2 align-middle {{request()->RouteIs("cuenta.eventos")? "active":""}}">
                                 <i class="fs-4 bi bi-calendar-event-fill"></i> <span class="ms-1 d-none d-sm-inline">Eventos
                                     Apuntados</span> </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('/') }}" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Salir de
-                                    Ajustes</span>
-                            </a>
-                        </li>
+
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
+
+                        <a href="{{ route('/') }}" class="nav-link align-middle px-0 py-2">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Salir de
+                                Ajustes</span>
+                        </a>
+
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">

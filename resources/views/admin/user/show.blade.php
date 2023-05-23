@@ -8,10 +8,10 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} User</span>
+                            <h1 class="card-title">{{ __('Perfil Voluntario') }}</h1>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('admin.user.edit') }}"> {{ __('Editar') }}</a>

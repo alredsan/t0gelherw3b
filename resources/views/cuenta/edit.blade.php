@@ -11,12 +11,12 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="">
                     <div class="card-header">
-                        <span class="card-title">Actualizar User</span>
+                        <h1 class="card-title">Actualizar Usuario <i>{{$user->name}}</i></h1>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cuenta.update', $user->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('cuenta.update', $user->id) }}"  role="form" enctype="multipart/form-data" name="formUserUpdate">
                             {{ method_field('PATCH') }}
                             @csrf
 
@@ -29,3 +29,8 @@
         </div>
     </section>
 @endsection
+
+
+@push('scriptsJS')
+    <script src="/js/validation.js"></script>
+@endpush

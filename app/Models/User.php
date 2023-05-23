@@ -102,6 +102,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento');
     }
 
+    public function eventosUser(){
+        // return $this->belongsToMany(Event::class,'events_users');
+        return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento')->where("Visible","=","1");
+    }
+
     public function roles($id){
 
         $array = $this->belongsToMany('App\Models\Role','users_roles','idUser','idRol','id','idRol')->wherePivot('idRol', $id)->count();

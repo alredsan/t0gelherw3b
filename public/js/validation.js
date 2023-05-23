@@ -1,11 +1,13 @@
 "use strict";
 // USO DE PATRON IIFE
-(function(){
+(function () {
 
     const validatorsForms = {
         "/inicioSesion": () => validateLogin(),
         "/registro": () => validateRegister(),
         "/admin/ongs/edit": () => validateFormONG(),
+        "/cuenta/perfil/cambiopassword": () => validateFormChangePassword(),
+        "/cuenta/perfil/editar": () => validateFormUser()
     };
 
     /**
@@ -18,7 +20,7 @@
         console.log(window);
         try {
             validatorsForms[url]();
-        } catch (error){}
+        } catch (error) { }
     });
 
 
@@ -27,7 +29,7 @@
      */
     function mostrarContrasena() {
         let botonMostrar = document.getElementById('showPasswd');
-        botonMostrar.addEventListener('click',function(){
+        botonMostrar.addEventListener('click', function () {
             let campo = document.getElementById("passwd");
             if (campo.type == "password") {
                 campo.type = "text";
@@ -377,7 +379,227 @@
 
     }
 
-    function validateEvent(){
+    function validateFormChangePassword() {
+        let validateFormChangePassword = document.forms.formChangePasswd;
+        console.log(document.forms.formChangePasswd);
+
+        $(validateFormChangePassword).attr('novalidate', true);
+        $(validateFormChangePassword).submit(function (event) {
+            let isValid = true;
+            let firstInvalidElement = null;
+
+            if (this.passwd.value != this.passwdConfirm.value) {
+                isValid = false;
+                firstInvalidElement = this.passwdConfirm;
+                showFeedBack($(this.passwdConfirm), false);
+            }
+
+            if (this.confirmarpassword.checkValidity()) {
+                showFeedBack($(this.confirmarpassword), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.confirmarpassword;
+                showFeedBack($(this.confirmarpassword), false);
+            }
+
+            if (this.newpassword.checkValidity()) {
+                showFeedBack($(this.newpassword), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.newpassword;
+                showFeedBack($(this.newpassword), false);
+            }
+
+
+            if (this.oldpassword.checkValidity()) {
+                showFeedBack($(this.oldpassword), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.oldpassword;
+                showFeedBack($(this.oldpassword), false);
+            }
+
+            if (!isValid) {
+                firstInvalidElement.focus();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+        });
+        $(validateFormChangePassword.oldpassword).change(defaultCheckElement);
+        $(validateFormChangePassword.newpassword).change(function () {
+            if (!this.checkValidity()) {
+                showFeedBack($(this), false);
+            } else {
+                showFeedBack($(this), true);
+                validateFormChangePassword.confirmarpassword.value = "";
+            }
+        });
+        $(validateFormChangePassword.confirmarpassword).change(function () {
+
+            if (validateFormChangePassword.newpassword.value != validateFormChangePassword.confirmarpassword.value) {
+                showFeedBack($(validateFormChangePassword.confirmarpassword), false);
+            } else {
+                showFeedBack($(validateFormChangePassword.confirmarpassword), true);
+            }
+        });
+    }
+
+    function validateFormUser() {
+        let validateRegisterForm = document.forms.formUserUpdate;
+
+        $(validateRegisterForm).attr('novalidate', true);
+
+        $(validateRegisterForm).submit(function (event) {
+            let isValid = true;
+            let firstInvalidElement = null;
+
+            if (this.passwd.value != this.passwdConfirm.value) {
+                isValid = false;
+                firstInvalidElement = this.passwdConfirm;
+                showFeedBack($(this.passwdConfirm), false);
+            }
+
+            if (this.passwd.checkValidity()) {
+                showFeedBack($(this.passwd), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.passwd;
+                showFeedBack($(this.passwd), false);
+            }
+
+            if (this.Telefono.checkValidity()) {
+                showFeedBack($(this.Telefono), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Telefono;
+                showFeedBack($(this.Telefono), false);
+            }
+
+            if (this.Provincia.checkValidity()) {
+                showFeedBack($(this.Provincia), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Provincia;
+                showFeedBack($(this.Provincia), false);
+            }
+
+            if (this.Direccion.checkValidity()) {
+                showFeedBack($(this.Apellidos), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Direccion;
+                showFeedBack($(this.Direccion), false);
+            }
+
+            if (this.DNI.checkValidity()) {
+                showFeedBack($(this.DNI), true);
+
+                if (!checkDNI(this.DNI.value)) {
+                    showFeedBack($(this.DNI), false);
+                }
+            } else {
+                isValid = false;
+                firstInvalidElement = this.DNI;
+                showFeedBack($(this.DNI), false);
+            }
+
+            if (this.email.checkValidity()) {
+                showFeedBack($(this.email), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.email;
+                showFeedBack($(this.email), false);
+            }
+
+            if (this.Apellidos.checkValidity()) {
+                showFeedBack($(this.Apellidos), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Apellidos;
+                showFeedBack($(this.Apellidos), false);
+            }
+
+            if (this.Nombre.checkValidity()) {
+                showFeedBack($(this.Nombre), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Nombre;
+                showFeedBack($(this.Nombre), false);
+            }
+
+            if (!isValid) {
+                firstInvalidElement.focus();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+        });
+
+        $(validateRegisterForm.Nombre).change(defaultCheckElement);
+        $(validateRegisterForm.Apellidos).change(defaultCheckElement);
+        $(validateRegisterForm.email).change(defaultCheckElement);
+
+        $(validateRegisterForm.Direccion).change(defaultCheckElement);
+        $(validateRegisterForm.Provincia).change(defaultCheckElement);
+        $(validateRegisterForm.Telefono).change(defaultCheckElement);
+
+        $(validateRegisterForm.DNI).change(function () {
+            if (this.checkValidity()) {
+                showFeedBack($(this), true);
+                if (!checkDNI(this.value)) {
+                    showFeedBack($(this), false);
+                }
+            } else {
+                showFeedBack($(this), false);
+            }
+        });
+
+        $(validateRegisterForm.passwd).change(function () {
+            if (!this.checkValidity()) {
+                showFeedBack($(this), false);
+            } else {
+                showFeedBack($(this), true);
+                validateRegisterForm.passwdConfirm.value = "";
+            }
+        });
+
+        $(validateRegisterForm.passwdConfirm).change(function () {
+
+            if (validateRegisterForm.passwd.value != validateRegisterForm.passwdConfirm.value) {
+                showFeedBack($(validateRegisterForm.passwdConfirm), false);
+            } else {
+                showFeedBack($(validateRegisterForm.passwdConfirm), true);
+            }
+        });
+
+    }
+
+
+    function validateEvent() {
+        //Plantilla
+        let validateONGForm = document.forms.formONG;
+
+        $(validateONGForm).attr('novalidate', true);
+        $(validateONGForm).submit(function (event) {
+            let isValid = true;
+            let firstInvalidElement = null;
+
+            if (this.FotoLogo.checkValidity()) {
+                showFeedBack($(this.FotoLogo), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.FotoLogo;
+                showFeedBack($(this.FotoLogo), false);
+            }
+            if (!isValid) {
+                firstInvalidElement.focus();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+        });
+        $(validateONGForm.Name).change(defaultCheckElement);
 
     }
 

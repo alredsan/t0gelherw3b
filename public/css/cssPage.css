@@ -303,3 +303,18 @@
         display: block;
     }
 }
+
+
+
+#codeError{
+    font-size: 15vw;
+    margin: 0;
+    padding: 0;
+    text-shadow: #e5e5e5 10px 10px 2px;
+}
+
+#messageError{
+    font-size: 3vw;
+    margin: 0;
+    padding: 0;
+}

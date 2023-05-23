@@ -106,17 +106,20 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('/') }}" class="nav-link">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1">Salir de
-                                Ajustes</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                 </ul>
 
                 <div class="col-md-2 text-end">
+
                     <li class="nav-item dropdown d-flex align-items-center">
+                        <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
+                        </a>
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">

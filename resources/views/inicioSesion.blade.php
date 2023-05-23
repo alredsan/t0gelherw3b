@@ -28,7 +28,6 @@
             <input class="form__input form-control" type="text" name="email" id="email"
                 pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" title="Introduca el email correcto" required>
             <div class="invalid-feedback">El email es obligatorio.</div>
-            <div class="valid-feedback">Correcto.</div>
 
             <label for="pass">Contraseña</label>
             <div class="form__pass">
@@ -42,7 +41,6 @@
                 <a class="pass__img" id='showPasswd'><i class="fs-4 bi bi-eye-fill"></i></a>
                 <div class="invalid-feedback">Debe contener 4-16 caracteres, un numero, letra mayúscula y letra
                     mayuscula.</div>
-                <div class="valid-feedback">Correcto.</div>
             </div>
             <div>
                 <input type="checkbox" name="recordar"><label for="radio">Recordar cuenta</label>
