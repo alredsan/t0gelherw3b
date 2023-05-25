@@ -73,6 +73,8 @@ Route::get('/cuenta/perfil/eventos',[UserController::class,'showEventos'])->midd
 // Eliminar la participacion al evento el usuario que este iniciado sesion
 Route::delete('/cuenta/perfil/eliminarParticipante/{id}',[EventController::class,'destroyParticipante'])->middleware('auth')->name('event.destroyParticipante');
 
+
+
 // PARTE DE ADMINISTRACION
 // Route::get('/admin/perfil',[UserController::class,'show'])->middleware('auth')->parameter(Auth::user()->id)->name('perfil');
 // ELIMINAR
@@ -99,6 +101,10 @@ Route::get('/admin/ong/event/edit/{id}',[EventController::class,'edit'])->middle
 Route::patch('/admin/ong/event/update/{id}',[EventController::class,'update'])->middleware('auth')->name('admin.ong.event.update');
         // Eliminar
 Route::delete('/admin/ong/event/delete/{id}',[EventController::class,'destroy'])->middleware('auth')->name('admin.ong.event.destroy');
+        //Visualizar Usuarios Apuntados
+Route::get('/admin/ong/event/volunteers/{id}',[EventController::class,'showUsersEvent'])->middleware('auth')->name('admin.ong.event.users');
+Route::delete('/admin/ong/event/eliminarParticipante/{idEvent}/{idUser}',[EventController::class,'destroyParticipanteAdmin'])->middleware('auth')->name('admin.event.destroyParticipante');
+
 
 // ADMINISTRACION EVENTOS admin.ong.index
 // Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
@@ -131,6 +137,10 @@ Route::post('/admin/ongs/new',[OrganisationController::class,'store'])->middlewa
 Route::delete('/admin/ongs/delete/{id}',[OrganisationController::class,'destroy'])->middleware('auth')->name('admin.ong.destroy');
 Route::get('/admin/ong/{id}',[OrganisationController::class,'show'])->middleware('auth')->name('admin.ong.show');
 Route::get('/admin/ongs/edit/{id}',[OrganisationController::class,'edit'])->middleware('auth')->name('admin.ong.edit');
+
+    //EVENTOS
+        //index
+Route::get('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
 
     //Types
         //index

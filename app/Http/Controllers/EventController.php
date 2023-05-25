@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\EventsType;
 use App\Models\EventsUser;
 use App\Models\Type;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,17 +18,19 @@ use Illuminate\Support\Facades\DB;
 class EventController extends Controller
 {
     /**
-     * Mostrar todos los eventos
+     * Mostrar todos los eventos para el administrador WEB
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index()
-    // {
-    //     $events = Event::paginate();
+    public function index()
+    {
+        $events = Event::paginate();
+        $showONG = true;
 
-    //     return view('event.index', compact('events'))
-    //         ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
-    // }
+        return view('admin.event.index', compact('events','showONG'));
+        // return view('event.index', compact('events'))
+        //     ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
+    }
 
     /**
      * Mostrar solo los eventos que usuario tiene permiso
@@ -36,7 +39,9 @@ class EventController extends Controller
     {
         $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(10);
 
-        return view('admin.event.index', compact('events'));
+        $showONG = false;
+
+        return view('admin.event.index', compact('events','showONG'));
     }
 
     /**
@@ -50,7 +55,7 @@ class EventController extends Controller
 
         $types = Type::all();
 
-        return view('event.create', compact('event','types'));
+        return view('event.create', compact('event', 'types'));
     }
 
     /**
@@ -74,9 +79,9 @@ class EventController extends Controller
             $data['Foto'] = 'storage/' . $name;
         }
 
-        if($request->CheckVisible){
+        if ($request->CheckVisible) {
             $data['Visible'] = 1;
-        }else{
+        } else {
             $data['Visible'] = 0;
         }
 
@@ -99,11 +104,11 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
-        $particiantes = EventsUser::where('idEvent',$id)->count();
+        $particiantes = EventsUser::where('idEvent', $id)->count();
 
-        $particiantesRestantes = $event->numMaxVoluntarios-$particiantes;
+        $particiantesRestantes = $event->numMaxVoluntarios - $particiantes;
 
-        return view('event.show', compact('event','particiantesRestantes'));
+        return view('event.show', compact('event', 'particiantesRestantes'));
     }
 
     /**
@@ -149,15 +154,15 @@ class EventController extends Controller
         $data->Latitud = $request->Latitud;
         $data->Longitud = $request->Longitud;
         $data->Aportaciones = $request->Aportaciones;
-        if($request->CheckVisible){
+        if ($request->CheckVisible) {
             $data->Visible = 1;
-        }else{
+        } else {
             $data->Visible = 0;
         }
         //Comprobamos si existe alguna fotografia el input
         if ($request->hasFile('Foto')) {
             //Comprobamos si no es la foto por defecto
-            if($data->Foto != config('constants.DEFAULT_PHOTO_EVENT')){
+            if ($data->Foto != config('constants.DEFAULT_PHOTO_EVENT')) {
                 unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
             }
             //Subida imagen y asginar el nuevo nombre de imagen para mayor seguridad
@@ -226,20 +231,50 @@ class EventController extends Controller
         $tipos = Type::all();
 
         //Si ha selecionado que ordene por distancia, comprobamos que tenemos la ubicacion deseada del cliente
-        if($order == "1" && ($lat == null || $lon == null)){
-            return redirect()->route('/',compact('request','tipos'))->with('error','Si desea ordenar por distancia, debe indicar ubicacion');
+        if ($order == "1" && ($lat == null || $lon == null)) {
+            return redirect()->route('/', compact('request', 'tipos'))->with('error', 'Si desea ordenar por distancia, debe indicar ubicacion');
         }
 
-        $events = Event::where("Visible","=","1")
+        $events = Event::where("Visible", "=", "1")
             ->FechaEvento($fecha)
             ->where('Nombre', 'LIKE', "%$nombre%")
             ->Tematica($type)
-            ->Localidad($lat,$lon,$radio)
+            ->Localidad($lat, $lon, $radio)
             ->Ordenacion($order)
             ->paginate(8);
 
 
         return view('event.index', compact('events', 'tipos', 'request'));
+    }
 
+    function showUsersEvent(Event $id)
+    {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
+        if (Auth::user()->idONG != $id->idONG || !($user->roles('1'))) {
+            abort(404);
+        }
+
+        $event = $id;
+
+        $users = $event->usuarios()->paginate(10);
+
+        // return $usuarios;
+        return view('admin.user.indexUsersEvent', compact('event', 'users'));
+    }
+
+    public function destroyParticipanteAdmin($idEvent, $idUser)
+    {
+        try {
+            $participante = EventsUser::query();
+            $participante->where('idEvent', '=', $idEvent)
+                ->where('idUser', '=', $idUser);
+            $participante->delete();
+        } catch (Exception $ex) {
+            return back()->with('fail', 'Ha habido un error en eliminar el voluntario del evento');
+        }
+
+        return back()->with('success', 'Ya no participa en ese Evento');
     }
 }

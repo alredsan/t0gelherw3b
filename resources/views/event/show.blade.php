@@ -17,7 +17,7 @@
                         <div class='d-flex flex-row gap-2 flex-wrap'>
                             @foreach ($event->eventsType as $type)
                             <div class='alert alert-info p-1 m-0 text-center '>
-                                <span class="typeEvent"> {{ $type->Nombre }}</span>
+                                <a class="typeEvent" href="{{asset("/app?selectType=$type->idtypeONG")}}"> {{ $type->Nombre }}</a>
                             </div>
 
                             @endforeach

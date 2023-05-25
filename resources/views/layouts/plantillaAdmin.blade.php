@@ -51,7 +51,7 @@
                                         <span class="ms-1">ONGs</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-item">
+                                    <a href="{{ route('admin.events.index')}}" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i>
                                         <span class="ms-1">Eventos</span></a>
                                 </li>

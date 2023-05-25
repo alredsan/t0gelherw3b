@@ -15,10 +15,12 @@
                             </h1>
 
                             <div class="float-right">
+                                @if(request()->RouteIs('admin.ong.event.index'))
                                 <a href="{{ route('admin.ong.event.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     {{ __('Crear nuevo evento') }}
                                 </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -58,6 +60,7 @@
                                         <tr>
 
                                             <td data-head='Idevento'>{{ $event->idEvento }}</td>
+                                            @if($showONG)<td data-head='ONG'>{{ $event->organisation->Name }}</td>@endif
                                             <td data-head='Nombre'>{{ $event->Nombre }}</td>
                                             <td data-head='Fecha evento'>{{ date('d-m-Y', $event->FechaEvento) }}</td>
                                             <td data-head='Nº max de voluntarios'>{{ $event->numMaxVoluntarios }}</td>
@@ -94,7 +97,7 @@
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-info"
-                                                    href="{{ route('admin.ong.event.edit', $event->idEvento) }}"><i
+                                                    href="{{ route('admin.ong.event.users', $event->idEvento) }}"><i
                                                         class="fa fa-fw fa-edit"></i> {{ __('Ver participantes') }}</a>
                                             </td>
                                         </tr>

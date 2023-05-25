@@ -71,6 +71,11 @@ class Event extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
+    public function eventUsers()
+    {
+        return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
+    }
+
     public function eventsUser()
     {
         return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
@@ -151,8 +156,12 @@ class Event extends Model
 
     }
 
+    /**
+     * Obtenemos los usuarios que estan apuntando en un evento , a traves de la tabla M-M
+     *
+     */
     public function usuarios()
     {
-        return $this->belongsToMany(User::class, 'events_users');
+        return $this->belongsToMany(User::class, 'events_users','idEvent','idUser','idEvento','id')->withPivot('registration_date');
     }
 }

@@ -11,12 +11,12 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Organisation</span>
+                        <h1 class="card-title">{{ __('Crear nuevo ONG') }} </h1>
                     </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('admin.ong.store') }}"  role="form" enctype="multipart/form-data">
+                    <div class="card-body bg-white">
+                        <form method="POST" id="formONG" action="{{ route('admin.ong.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             @include('admin.organisation.form')

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Organisation;
 use App\Models\Role;
 use App\Models\User;
+use Exception;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+
 
 /**
  * Class OrganisationController
@@ -15,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class OrganisationController extends Controller
 {
+
     /**
      * Listar los ONG
      *
@@ -22,9 +27,12 @@ class OrganisationController extends Controller
      */
     public function index()
     {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
         $organisations = Organisation::paginate();
 
-        if (Auth::user()->roles('1')) {
+        if ($user->roles('1')) {
 
             return view('admin.organisation.index', compact('organisations'))
                 ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
@@ -76,9 +84,12 @@ class OrganisationController extends Controller
      */
     public function show($id)
     {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
         $organisation = Organisation::find($id);
 
-        if (Auth::user()->id_ONG == $id || Auth::user()->roles('1')) {
+        if (Auth::user()->id_ONG == $id || $user->roles('1')) {
             return view('admin.organisation.show', compact('organisation'));
         } else {
             abort(404);
@@ -106,9 +117,12 @@ class OrganisationController extends Controller
      */
     public function edit($id)
     {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
         $organisation = Organisation::findOrFail($id);
 
-        if (Auth::user()->id_ONG == $id || Auth::user()->roles('1')) {
+        if (Auth::user()->id_ONG == $id || $user->roles('1')) {
 
             return view('admin.organisation.edit', compact('organisation'));
         } else {
@@ -200,11 +214,14 @@ class OrganisationController extends Controller
     // Mostrar los usuarios que tiene permiso sobre el ONG
     public function showUserOng($id = "")
     {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
         if ($id != "") {
             $id = intval($id);
             //En caso que tenga un numero en URL , comprobamos que tiene rol requerido WEB
             if (!((Auth::user()->id_ONG) == $id)) {
-                if (!(Auth::user()->roles('1'))) {
+                if (!($user->roles('1'))) {
                     //No tiene rol de administracion total o no tiene permiso
                     abort(404);
                 }
@@ -241,28 +258,50 @@ class OrganisationController extends Controller
     //     return view('admin.user.indexUsersONG', compact('users', 'roles'));
     // }
 
-
+    /**
+     * Funcion donde asigna el usuario a un ONG, para gestionarlo
+     */
     public function assignUser(Request $request)
     {
-
+        //Recogemos del formulario
         $email = $request->email;
-
         $rolesAssignRequest = $request->chxRol;
+
+        //Comprobamos que tenga los datos requeridos para insertar
+        if($email == "" || $rolesAssignRequest == ""){
+            return back()->with('fail','No has seleccionado usuario o no has seleccionado roles');
+        }
 
         $rolesAssign = array_keys($rolesAssignRequest);
 
+        //Comprobamos si el usuario esta libre o que exista
         $user = User::where('email', '=', $email)->first();
 
         if (!$user) {
-            return redirect()->route('admin.ong.usersassign')->with('fail', 'El Usuario no existe o ya gestiona un ONG, el email introducido: ' . $email);
+            //En caso que no exista o ya esta gestionando un ONG
+            return back()->with('fail', 'El Usuario no existe o ya gestiona un ONG, el email introducido: ' . $email);
         }
 
-        $user->id_ONG = Auth::user()->id_ONG; //Cambiar, por el adminWEb, no tiene la propiedad
-        $user->save();
+        try{
+            DB::beginTransaction();
+            //Cambiamos la propiedad id_ONG del usuario
+            $user->id_ONG = Auth::user()->id_ONG; //Cambiar, por el adminWEb, no tiene la propiedad
+            $user->save();
 
-        $user->usersRole()->attach($rolesAssign);
+            //Guardamos los roles en la tabla intermedia de usuarios-Roles
+            $user->usersRole()->attach($rolesAssign);
 
-        return redirect()->route('admin.ong.usersassign')->with('success', 'Usuario' . $user->Name . ' ha sido asignado correctamente' . $email);
+            DB::commit(); //Confirmamos la intregridad de datos
+        }catch(Exception){
+            //Revertimos los cambios en BBDD y notificamos al usuario el error producido
+            DB::rollBack();
+            return back()->with('fail','Ha habido un error durante el proceso');
+        }
+
+
+        //Devolucion respuesta de forma exitosa
+        return back()->with('success', 'Usuario' . $user->Name . ' ha sido asignado correctamente' . $email);
+        //redirect()->route('admin.ong.usersassign')
     }
 
 
@@ -288,7 +327,7 @@ class OrganisationController extends Controller
         $user = User::find($request->idUser);
 
         if (!$user) {
-            return redirect()->route('admin.ong.usersassign')->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
+            return back()->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
         }
 
         $user->usersRole()->detach();
@@ -302,16 +341,16 @@ class OrganisationController extends Controller
             $user->usersRole()->attach($rolesAssign);
         }
 
-        return redirect()->route('admin.ong.usersassign')->with('success', 'Ha sido modificado los permisos correctamente para el Usuario ' . $user->name);
+        return back()->with('success', 'Ha sido modificado los permisos correctamente para el Usuario ' . $user->name);
     }
 
     public function desassignUser($id)
     {
 
-        $user = User::findOrFail($id);
+        $user = User::find($id);
 
         if (!$user) {
-            return redirect()->route('admin.ong.usersassign')->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
+            return back()->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado, error');
         }
 
         $user->id_ONG = NULL;
@@ -320,6 +359,6 @@ class OrganisationController extends Controller
         //Eliminar Roles de la tabla relacionada entre Users y Roles (users_roles)
         $user->usersRole()->detach();
 
-        return redirect()->route('admin.ong.usersassign')->with('success', 'Usuario' . $user->name . ' ha sido desasignado correctamente');
+        return back()->with('success', 'Usuario' . $user->name . ' ha sido desasignado correctamente');
     }
 }
