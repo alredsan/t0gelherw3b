@@ -39,7 +39,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     static $rules = [
-		'DNI' => 'required|max:4',
+		'DNI' => 'required',
 		'name' => 'required',
 		'Apellidos' => 'required',
 		'email' => 'required',
