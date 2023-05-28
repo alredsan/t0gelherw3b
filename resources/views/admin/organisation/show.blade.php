@@ -28,52 +28,51 @@
 
                     </div>
 
-                    <div class="card-body  bg-white d-flex flex-column">
-
+                    <div class="card-body bg-white d-flex flex-column">
                         <div class="form-group">
                             <h1>{{ $organisation->Name }}</h1>
                         </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="form-group">
+                                    <strong>Identificacion ONG:</strong>
+                                    {{ $organisation->idONG }}
+                                </div>
 
-                        <div>
-                            <div class="form-group">
-                                <img src="{{ asset($organisation->FotoLogo) }}" class='w-50' alt="LogoONG">
+                                <div class="form-group">
+                                    <strong>Direccionsede:</strong>
+                                    {{ $organisation->DireccionSede }}
+                                </div>
+                                <div class="form-group">
+                                    <strong>Fechacreacion:</strong>
+
+                                    {{ date('d-m-Y', $organisation->FechaCreacion) }}
+                                </div>
+                                <div class="form-group">
+                                    <strong>Ibanmetodopago:</strong>
+                                    {{ $organisation->IBANmetodoPago }}
+                                </div>
+
+                                <div class="form-group">
+                                    <strong>Email:</strong>
+                                    {{ $organisation->eMail }}
+                                </div>
+                                <div class="form-group">
+                                    <strong>Telefono:</strong>
+                                    {{ $organisation->Telefono }}
+                                </div>
+
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group">
+                                    <img src="{{ asset($organisation->FotoLogo) }}" class='w-50' alt="LogoONG">
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <div class="form-group">
-                                <strong>Idong:</strong>
-                                {{ $organisation->idONG }}
-                            </div>
-
-                            <div class="form-group">
-                                <strong>Direccionsede:</strong>
-                                {{ $organisation->DireccionSede }}
-                            </div>
-                            <div class="form-group">
-                                <strong>Descripcion:</strong>
-                                {!! $organisation->Descripcion !!}
-                            </div>
-                            <div class="form-group">
-                                <strong>Fechacreacion:</strong>
-
-                                {{ date('d-m-Y', $organisation->FechaCreacion) }}
-                            </div>
-                            <div class="form-group">
-                                <strong>Ibanmetodopago:</strong>
-                                {{ $organisation->IBANmetodoPago }}
-                            </div>
-
-                            <div class="form-group">
-                                <strong>Email:</strong>
-                                {{ $organisation->eMail }}
-                            </div>
-                            <div class="form-group">
-                                <strong>Telefono:</strong>
-                                {{ $organisation->Telefono }}
-                            </div>
-
+                            <h3>Descripción:</h3>
+                            {!! $organisation->Descripcion !!}
                         </div>
-
                     </div>
                 </div>
             </div>

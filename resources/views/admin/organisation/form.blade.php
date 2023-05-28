@@ -30,7 +30,7 @@
         <div class="form-group">
             <label for="IBANmetodoPago">IBAN:</label>
             <input type="text" class="form-control" name="IBANmetodoPago" id="IBANmetodoPago"
-                value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN" required>
+                value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN" pattern="^[A-Z]{2}\d{2} \d{4} \d{4} \d{4} \d{4} \d{4}$" required>
             <div class="invalid-feedback">Introduce el IBAN correctamente</div>
         </div>
 
@@ -46,9 +46,20 @@
                 value="{{ old('Telefono', $organisation->Telefono) }}" placeholder="Telefono" required>
             <div class="invalid-feedback">Introduce la direccion del Sede</div>
         </div>
-        <div>
-            <input type="file" class='form-control' name='FotoLogo' accept="image/*">
-            <div class="invalid-feedback">Imagen no ha sido procesada de forma correcta</div>
+        <div class="row">
+            <div class="col-md">
+                <p for="FotoLogo">Foto :</p>
+                @if($organisation->FotoLogo)
+                    <img src="{{ asset($organisation->FotoLogo) }}" class='w-50' id='FotoPreview' alt="LogoONG">
+                @else
+                    <img src="{{ asset(config('constants.DEFAULT_PHOTO_ONG')) }}"  id='FotoPreview' class='w-50' alt="LogoONG">
+                @endif
+            </div>
+            <div class="col-md">
+                <label for="FotoLogoSelec">Seleccionar otra foto:</label>
+                <input type="file" class='form-control' name='FotoLogo' id="FotoLogoSelec" accept="image/*">
+                <div class="invalid-feedback">La imgaen debe ser en formato jpg-png-gif</div>
+            </div>
         </div>
 
     </div>

@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class EventController
@@ -120,11 +121,15 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
         $event = Event::find($id);
 
         $types = Type::all();
 
-        if ($event->id_ONG == Auth::user()->id_ONG) {
+        if ($event->id_ONG == Auth::user()->id_ONG || $user->roles('1')) {
+
             return view('event.edit', compact('event', 'types'));
         } else {
             abort(404);
@@ -179,8 +184,10 @@ class EventController extends Controller
 
         $data->eventsType()->attach($request->selectmultiple);
 
-        return redirect()->route('admin.ong.event.index')
-            ->with('success', 'El evento ha sido actualizado correctamente.');
+
+        // return back()->with('success', 'El evento ha sido actualizado correctamente.');
+        // return redirect()->route('admin.ong.event.index')
+        //     ->with('success', 'El evento ha sido actualizado correctamente.');
     }
 
     /**

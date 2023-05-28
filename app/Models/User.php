@@ -39,7 +39,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     static $rules = [
-		'DNI' => 'required',
+		'DNI' => 'required|max:4',
 		'name' => 'required',
 		'Apellidos' => 'required',
 		'email' => 'required',
@@ -99,7 +99,7 @@ class User extends Authenticatable
 
     public function eventos(){
         // return $this->belongsToMany(Event::class,'events_users');
-        return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento');
+        return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento')->orderBy('FechaEvento','DESC');
     }
 
     public function eventosUser(){

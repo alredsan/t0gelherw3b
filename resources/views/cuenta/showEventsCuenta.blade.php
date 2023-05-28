@@ -68,11 +68,13 @@
                                                             <button type="submit" class="btn btn-danger btn-sm"><i
                                                                     class="fa fa-fw fa-trash"></i>
                                                                 {{ __('Desapuntar') }}</button>
+                                                        @else
+                                                            <i>Evento Finalizado</i>
                                                         @endif
                                                     </form>
                                                 </td>
                                             @else
-                                                <td colspan="10" class="align-items-center"><i>Este Evento ha sido ocultado</i></td>
+                                                <td colspan="10" class="text-center"><i>Este Evento ha sido ocultado</i></td>
                                             @endif
                                         </tr>
                                     @endforeach

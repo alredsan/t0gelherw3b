@@ -1,4 +1,28 @@
 "use strict";
+
+function checkFileExtension(file, allowedExtensions) {
+    let fileExtension = file.name.split('.').pop().toLowerCase();
+
+    return allowedExtensions.some((extension) => {
+        return extension === fileExtension
+    });
+}
+
+/**
+     * Mostrar o ocultar la contraseña
+     */
+function mostrarContrasena() {
+    let botonMostrar = document.getElementById('showPasswd');
+    botonMostrar.addEventListener('click', function () {
+        let campo = document.getElementById("passwd");
+        if (campo.type == "password") {
+            campo.type = "text";
+        } else {
+            campo.type = "password";
+        }
+    });
+}
+
 // USO DE PATRON IIFE
 (function () {
 
@@ -17,28 +41,12 @@
      */
     window.addEventListener('DOMContentLoaded', function () {
         let url = window.location.pathname.split(/\/\d/)[0];
-        console.log(url);
-        console.log(window);
+
+
         try {
             validatorsForms[url]();
         } catch (error) { }
     });
-
-
-    /**
-     * Mostrar o ocultar la contraseña
-     */
-    function mostrarContrasena() {
-        let botonMostrar = document.getElementById('showPasswd');
-        botonMostrar.addEventListener('click', function () {
-            let campo = document.getElementById("passwd");
-            if (campo.type == "password") {
-                campo.type = "text";
-            } else {
-                campo.type = "password";
-            }
-        });
-    }
 
     function showFeedBack(input, valid, message) {
         let validClass = (valid) ? 'is-valid' : 'is-invalid';
@@ -67,17 +75,17 @@
      * @returns
      */
     function checkDNI(dni) {
-        arrayLetters = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+        let arrayLetters = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
 
-        numberDNI = dni.substr(0, dni.length - 1);
+        let numberDNI = dni.substr(0, dni.length - 1);
 
         if (isNaN(numberDNI[0])) {
             numberDNI = dni.substr(1, numberDNI.length - 1);
         }
 
-        letterDNI = dni[dni.length - 1];
+        let letterDNI = dni[dni.length - 1];
 
-        result = numberDNI % 23;
+        let result = numberDNI % 23;
 
         if (letterDNI == arrayLetters[result]) {
             return true;
@@ -126,7 +134,7 @@
 
     function validateRegister() {
         let validateRegisterForm = document.forms.fRegister;
-
+        mostrarContrasena();
         $(validateRegisterForm).attr('novalidate', true);
 
         $(validateRegisterForm).submit(function (event) {
@@ -263,12 +271,15 @@
             let isValid = true;
             let firstInvalidElement = null;
 
-            if (this.FotoLogo.checkValidity()) {
-                showFeedBack($(this.FotoLogo), true);
-            } else {
-                isValid = false;
-                firstInvalidElement = this.FotoLogo;
-                showFeedBack($(this.FotoLogo), false);
+            if (this.FotoLogo.value) {
+                if (!checkFileExtension(this.FotoLogo.files[0], ['jpg', 'png', 'gif'])) {
+                    isValid = false;
+                    firstInvalidElement = this.FotoLogo;
+                    showFeedBack($(this.FotoLogo), false);
+                } else {
+
+                    showFeedBack($(this.FotoLogo), true);
+                }
             }
 
             if (this.Telefono.checkValidity()) {
@@ -339,10 +350,18 @@
         $(validateONGForm.DireccionSede).change(defaultCheckElement);
         $(validateONGForm.Descripcion).change(defaultCheckElement);
         $(validateONGForm.FechaCreacion).change(defaultCheckElement);
-        $(validateONGForm.IBANmetodoPago).change(defaultCheckElement);
+        // $(validateONGForm.IBANmetodoPago).change(defaultCheckElement);
         $(validateONGForm.eMail).change(defaultCheckElement);
         $(validateONGForm.Telefono).change(defaultCheckElement);
-        $(validateONGForm.FotoLogo).change(defaultCheckElement);
+        $(validateONGForm.FotoLogo).change(function () {
+            if (this.value) {
+                if (!checkFileExtension(this.files[0], ['jpg', 'png', 'gif'])) {
+                    showFeedBack($(this), false);
+                } else {
+                    showFeedBack($(this), true);
+                }
+            }
+        });
 
 
         function formatCreditCard(card) {
@@ -352,6 +371,7 @@
             card = card.replace(/\s/g, '');
             card = card.replace(/(.{4})/g, '$1 ');
             console.log('C' + card);
+            card = card.toUpperCase();
 
             // let cardNew = "";
 
@@ -380,6 +400,8 @@
                 let isValid = true;
                 let character = event.originalEvent.data;
 
+
+
                 if (character) {
                     if (this.value.length == 29) {
                         isValid = false;
@@ -387,13 +409,22 @@
                         //el resto numerico
                         if (!/[\d]/.test(character)) isValid = false;
 
-                     //} else {
-                    //     //Comprobar solo letra dos digitos iniciales
-                    //     if (/[\d]/.test(character)) isValid = false;
+                        //} else {
+                        //     //Comprobar solo letra dos digitos iniciales
+                        //     if (/[\d]/.test(character)) isValid = false;
                     }
+
                     if (!isValid) {
                         event.preventDefault();
+                        showFeedBack($(this), false);
                     }
+
+                    if (this.checkValidity()) {
+                        showFeedBack($(this), false);
+                    } else {
+                        showFeedBack($(this), true);
+                    }
+
                     this.value = formatCreditCard(this.value);
                 }
             }, paste: function (event) {

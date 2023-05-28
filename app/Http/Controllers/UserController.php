@@ -298,7 +298,9 @@ class UserController extends Controller
      */
     public function general()
     {
-        return view('cuenta.welcomeCuenta');
+        $user = User::find(Auth::user()->id);
+
+        return view('cuenta.welcomeCuenta', compact('user'));
     }
 
     /**

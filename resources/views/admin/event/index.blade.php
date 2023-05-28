@@ -43,7 +43,8 @@
                                     <tr>
 
                                         <th>Idevento</th>
-                                        <th>Nombre</th>
+                                        @if($showONG)<th data-head='ONG'>ONG</th>@endif
+                                        <th>Nombre Evento</th>
                                         <th>Fecha evento</th>
                                         <th>Nº max de voluntarios</th>
                                         <th>Direccion</th>
