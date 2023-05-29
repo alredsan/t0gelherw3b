@@ -24,11 +24,7 @@
             <a class="navbar-brand" href="{{ route('Admin') }}">
                 <img class="logoAdmin" src="/img/logoB.png" alt="Logo Inicio">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -56,7 +52,7 @@
                                         <span class="ms-1">Eventos</span></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-item">
+                                    <a href="{{ route('admin.users.index')}}" class="dropdown-item">
                                         <i class="fs-4 bi-table"></i>
                                         <span class="ms-1">Usuarios</span></a>
                                 </li>
@@ -113,34 +109,51 @@
                     </li> --}}
 
                 </ul>
+                <div class="text-end">
 
-                <div class="col-md-2 text-end">
-
-                    <li class="nav-item dropdown d-flex align-items-center">
-                        <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
                             <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
                         </a>
-                        <a href="#"
-                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
-                                class="rounded-circle">
-                            <span class="mx-1">{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow">
-                            <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cambiar a Voluntario</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
-                        </ul>
-                    </li>
+                        </li>
+                    </ul>
+
+
                 </div>
             </div>
+
+            <div class="col-md-2 text-end">
+
+                <li class="nav-item dropdown d-flex align-items-center">
+                    {{-- <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
+                        <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
+                    </a> --}}
+                    <a href="#"
+                        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
+                            class="rounded-circle">
+                        <span class="mx-1">{{ Auth::user()->name }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark shadow">
+                        <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cambiar a Voluntario</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
+                    </ul>
+                </li>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         </div>
     </nav>
 

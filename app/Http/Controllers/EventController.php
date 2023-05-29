@@ -28,7 +28,7 @@ class EventController extends Controller
         $events = Event::paginate(7);
         $showONG = true;
 
-        return view('admin.event.index', compact('events','showONG'));
+        return view('admin.event.index', compact('events', 'showONG'));
         // return view('event.index', compact('events'))
         //     ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
     }
@@ -42,7 +42,7 @@ class EventController extends Controller
 
         $showONG = false;
 
-        return view('admin.event.index', compact('events','showONG'));
+        return view('admin.event.index', compact('events', 'showONG'));
     }
 
     /**
@@ -104,6 +104,23 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
+
+        //Comprobamos que el evento este visible
+        if (!$event->Visible) {
+            //En caso que no este visible, comprobamos que tiene permiso
+
+            if (Auth::check()) {
+                /** @var \App\Models\User $user **/
+                $user = Auth::user();
+
+                if(!($user->id_ONG == $event->id_ONG || $user->roles('1'))){
+                    abort(404);
+                }
+            }else{
+                //En caso que no esta iniciado sesion
+                abort(404);
+            }
+        }
 
         $particiantes = EventsUser::where('idEvent', $id)->count();
 
@@ -259,15 +276,16 @@ class EventController extends Controller
         /** @var \App\Models\User $user **/
         $user = Auth::user();
 
-        if (Auth::user()->idONG != $id->idONG || !($user->roles('1'))) {
-            abort(404);
+        if (Auth::user()->idONG != $id->idONG) {
+            if (!($user->roles('1'))) {
+                abort(404);
+            }
         }
 
         $event = $id;
 
         $users = $event->usuarios()->paginate(10);
 
-        // return $usuarios;
         return view('admin.user.indexUsersEvent', compact('event', 'users'));
     }
 

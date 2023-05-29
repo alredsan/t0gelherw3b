@@ -83,7 +83,7 @@
     </div> --}}
     <nav class="navbar navbar-dark navbar-expand-lg" id="navBarCuenta">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('Admin') }}">
+            <a class="navbar-brand" href="{{ route('cuenta') }}">
                 <img class="logoAdmin" src="/img/logoB.png" alt="Logo Inicio">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -21,10 +21,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
+        $users = User::paginate(4);
 
-        return view('user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        return view('admin.user.index',compact('users'));
+        // return view('user.index', compact('users'))
+        //     ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
     /**
@@ -81,6 +82,18 @@ class UserController extends Controller
         return view('cuenta.edit', compact('user'));
     }
 
+    public function editUserAdmin($idUser)
+    {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
+        if(!$user->roles('1')) abort(404);
+
+        $user = User::find($idUser);
+
+        return view('admin.user.edit', compact('user'));
+    }
+
     /**
      * Actualizar el usuario en el sistema
      *
@@ -107,10 +120,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        if($id != ""){
+            /** @var \App\Models\User $user **/
+            $user = Auth::user();
+            if($user->roles("1")){
+                $user = User::find($id)->delete();
+            }
 
-        return redirect()->route('/')
-            ->with('success', 'El usuario ha sido eliminado correctamente');
+        }
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'El usuario ha sido eliminado correctamente del sistema');
+        // return redirect()->route('/')
+        //     ->with('success', 'El usuario ha sido eliminado correctamente');
     }
 
     /**
@@ -137,7 +159,11 @@ class UserController extends Controller
 
         $data = User::find(Auth::user()->id);
 
-        $data->DNI = $request->DNI;
+        if($data->DNI != $request->DNI){
+            dd($data->DNI,$request->DNI);
+            $data->DNI = $request->DNI;
+        }
+
         $data->name = $request->name;
         $data->Apellidos = $request->Apellidos;
         $data->email = $request->email;
@@ -157,6 +183,39 @@ class UserController extends Controller
         $data->save();
 
         return redirect()->route('cuenta.perfil')
+            ->with('success', 'Usuario' . $request->name . 'ha sido actualizado correctamente');
+    }
+
+    public function updateUserAdmin(Request $request, $idUser)
+    {
+        request()->validate(User::$rules);
+
+        $data = User::find($idUser);
+
+        if($data->DNI != $request->DNI){
+            dd($data->DNI,$request->DNI);
+            $data->DNI = $request->DNI;
+        }
+
+        $data->name = $request->name;
+        $data->Apellidos = $request->Apellidos;
+        $data->email = $request->email;
+        $data->Direccion = $request->Direccion;
+        $data->ProvinciaLocalidad = $request->ProvinciaLocalidad;
+        $data->Telefono = $request->Telefono;
+
+        if ($request->hasFile('Foto')) {
+            if($data->Foto != config('constants.DEFAULT_PHOTO_USER')){
+                unlink($data->Foto); //Eliminamos del sistema la fotografia antigua
+            }
+
+            $data->Foto = $request->file('Foto')->store('foto_perfil');
+            $data->Foto = 'storage/' . $data->Foto;
+        }
+
+        $data->save();
+
+        return redirect()->route('admin.users.index')
             ->with('success', 'Usuario' . $request->name . 'ha sido actualizado correctamente');
     }
 
@@ -328,10 +387,10 @@ class UserController extends Controller
     /**
      * Relacion con la tabla de roles que tiene el usuario
      */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
 
 
     public function searchUsers(Request $request)

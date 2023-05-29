@@ -32,7 +32,8 @@ function mostrarContrasena() {
         "/admin/ongs/edit": () => validateFormONG(),
         "/admin/ongs/new": () => validateFormONG(),
         "/cuenta/perfil/cambiopassword": () => validateFormChangePassword(),
-        "/cuenta/perfil/editar": () => validateFormUser()
+        "/cuenta/perfil/editar": () => validateFormUser(),
+        "/admin/users": () => confirmModalDelete()
     };
 
     /**
@@ -47,6 +48,34 @@ function mostrarContrasena() {
             validatorsForms[url]();
         } catch (error) { }
     });
+
+    function confirmModalDelete(){
+        let modalConfirm = document.getElementById("modalDeleteUser");
+
+        let formModal = document.getElementById('formDeleteUserModal');
+
+        modalConfirm.addEventListener('hidden.bs.modal', event => {
+            formModal.action = "";
+        });
+
+        let myModalDeleteUser = new bootstrap.Modal('#modalDeleteUser', {
+            keyboard: false
+        });
+
+        let bottons = document.getElementsByClassName("btnDelete");
+
+        for (let boton of bottons){
+            boton.addEventListener("click",function(event){
+
+                event.preventDefault();
+
+                formModal.action = event.target.form.action;
+
+                myModalDeleteUser.show();
+            });
+        }
+
+    }
 
     function showFeedBack(input, valid, message) {
         let validClass = (valid) ? 'is-valid' : 'is-invalid';

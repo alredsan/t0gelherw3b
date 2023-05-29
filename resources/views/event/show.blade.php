@@ -14,29 +14,47 @@
                 <div>
                     <div>
                         <h2>{{ $event->Nombre }}</h2>
-                        <div class='d-flex flex-row gap-2 flex-wrap'>
+                        <div class='d-flex flex-row gap-2 flex-wrap pb-3'>
                             @foreach ($event->eventsType as $type)
-                            <div class='alert alert-info p-1 m-0 text-center '>
-                                <a class="typeEvent" href="{{asset("/app?selectType=$type->idtypeONG")}}"> {{ $type->Nombre }}</a>
-                            </div>
-
+                                <div class='alert alert-info p-1 m-0 text-center '>
+                                    <a class="typeEvent" href="{{ asset("/app?selectType=$type->idtypeONG") }}">
+                                        {{ $type->Nombre }}</a>
+                                </div>
                             @endforeach
                         </div>
                     </div>
                     <div>
-                        <div>
-                            <p>{{ $event->Direccion }}</p>
-                            <p>{{ date('Y-m-d H:m', $event->FechaEvento) }}</p>
+                        <div class="event-info">
+                            <div>
+                                <p class="fw-bolder">Dirección:</p>
+                                <p>{{ $event->Direccion }}</p>
+                            </div>
+                            <div>
+                                <p class="fw-bolder">Fecha / Hora:</p>
+                                <p>{{ date('d-m-Y - H:m', $event->FechaEvento) }}</p>
+                            </div>
                         </div>
-                        <div
-                            class='d-flex justify-content-center mt-5 flex-column align-items-center justify-content-center'>
-                            <p>Quedan <b>{{ $particiantesRestantes }}</b> puestos de {{ $event->numMaxVoluntarios }}</p>
-                            <div id='message'></div>
-                            <form action={{"/app/event/" . $event->idEvento . "/addparticipation"}} method="GET" id='addVolunteer'>
-
-                                <button type="submit" class="btn btn-primary me-2 botonSearch">Apuntarse</button>
-                            </form>
-                        </div>
+                        @if ($event->FechaEvento >= time())
+                            <div
+                                class='d-flex justify-content-center mt-5 flex-column align-items-center justify-content-center'>
+                                <p>Quedan <strong id='numParticipantesRest'>{{ $particiantesRestantes }}</strong> puestos de {{ $event->numMaxVoluntarios }}</p>
+                                <div id='message'></div>
+                                <form action={{ '/app/event/' . $event->idEvento . '/addparticipation' }} method="GET"
+                                    id='addVolunteer'>
+                                    <button type="submit" class="btn btn-primary me-2 botonSearch">Apuntarse</button>
+                                </form>
+                            </div>
+                        @else
+                            <div
+                                class='d-flex justify-content-center mt-5 flex-column align-items-center justify-content-center'>
+                                <p>Han apuntado <b>{{ $event->numMaxVoluntarios - $particiantesRestantes }}</b>
+                                    voluntarios ¡Gracias!
+                                </p>
+                                <div id='message'></div>
+                                <button type="submit" class="btn btn-primary me-2 botonSearch" disabled>EVENTO
+                                    FINALIZADO</button>
+                            </div>
+                        @endif
                     </div>
 
                 </div>
@@ -48,6 +66,7 @@
             {!! $event->Descripcion !!}
         </div>
 
+        <h3>Donde se encuentra:</h3>
         <x-maps-leaflet :centerPoint="['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud)]" :markers="[['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud)]]" :zoomLevel="20">
         </x-maps-leaflet>
 
@@ -63,7 +82,6 @@
 
         </div>
     </section>
-
 @endsection
 
 @section('scripts')

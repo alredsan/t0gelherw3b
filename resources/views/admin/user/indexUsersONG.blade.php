@@ -111,7 +111,7 @@
                         <h1 class="modal-title fs-5" id="modalAddAssignLabel">Nueva Persona</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form name='fAssignUser' action="{{ route('admin.ong.usersassign.add') }}" method="post">
+                    <form name='fAssignUser' action="{{ route('admin.ong.usersassign.add',$organisation->idONG) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             {{-- <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'> --}}

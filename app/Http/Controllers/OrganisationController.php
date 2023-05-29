@@ -63,17 +63,31 @@ class OrganisationController extends Controller
         request()->validate(Organisation::$rules);
 
         $data = $request->all();
-        $data['FechaCreacion'] = strtotime($request->FechaCreacion);
+        $newOng = [];
+
+        $newOng['Name'] = $request->Name;
+        $newOng['DireccionSede'] = $request->DireccionSede;
+        $newOng['Descripcion'] = $request->Descripcion;
+        $newOng['IBANmetodoPago'] = $request->IBANmetodoPago;
+        $newOng['eMail'] = $request->eMail;
+        $newOng['Telefono'] = $request->Telefono;
+
+        $newOng['FechaCreacion'] = strtotime($request->FechaCreacion);
+        // $data['FechaCreacion'] = strtotime($request->FechaCreacion);
 
         if ($request->hasFile('FotoLogo')) {
-            $data['FotoLogo'] = $request->file('FotoLogo')->store('logo_ong');
-            $data['FotoLogo'] = 'storage/' . $data['FotoLogo'];
+            // $data['FotoLogo'] = $request->file('FotoLogo')->store('logo_ong');
+            // $data['FotoLogo'] = 'storage/' . $data['FotoLogo'];
+            $newImage = $request->file('FotoLogo')->store('logo_ong');
+            $newOng['FotoLogo'] = 'storage/' . $newImage;
         }
 
-        $organisation = Organisation::create($data);
+        $organisation = Organisation::create($newOng);
 
-        return redirect()->route('admin.ong.show', $organisation->idONG)
-            ->with('success', 'Organisation created successfully.');
+        // return redirect()->route('admin.ong.show', $organisation->idONG)
+        //     ->with('success', 'Organización creada con éxito.');
+        return redirect()->route('admin.ong.usersassign', $organisation->idONG)
+            ->with('success', 'Organización creada con éxito. Puedes agregar usuario');
     }
 
     /**
@@ -261,7 +275,7 @@ class OrganisationController extends Controller
     /**
      * Funcion donde asigna el usuario a un ONG, para gestionarlo
      */
-    public function assignUser(Request $request)
+    public function assignUser(Request $request,Organisation $id)
     {
         //Recogemos del formulario
         $email = $request->email;
@@ -275,7 +289,7 @@ class OrganisationController extends Controller
         $rolesAssign = array_keys($rolesAssignRequest);
 
         //Comprobamos si el usuario esta libre o que exista
-        $user = User::where('email', '=', $email)->first();
+        $user = User::where('email', '=', $email)->where('id_ONG','=',NULL)->first();
 
         if (!$user) {
             //En caso que no exista o ya esta gestionando un ONG
@@ -285,7 +299,8 @@ class OrganisationController extends Controller
         try{
             DB::beginTransaction();
             //Cambiamos la propiedad id_ONG del usuario
-            $user->id_ONG = Auth::user()->id_ONG; //Cambiar, por el adminWEb, no tiene la propiedad
+
+            $user->id_ONG = $id->idONG; //Cambiar, por el adminWEb, no tiene la propiedad
             $user->save();
 
             //Guardamos los roles en la tabla intermedia de usuarios-Roles
@@ -295,7 +310,7 @@ class OrganisationController extends Controller
         }catch(Exception){
             //Revertimos los cambios en BBDD y notificamos al usuario el error producido
             DB::rollBack();
-            return back()->with('fail','Ha habido un error durante el proceso');
+            return back()->with('fail','Ha habido un error durante el proceso de asignacion de permisos');
         }
 
 
@@ -330,8 +345,9 @@ class OrganisationController extends Controller
             return back()->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
         }
 
-        $user->usersRole()->detach();
-
+        //Eliminamos los permisos principalmente para introducir modificado
+        // dd($user->usersRole()->where('users_roles.idRol','>',1)->get());
+        $user->usersRole()->wherePivot('users_roles.idRol','>','1')->detach();
         if ($request->chxRolEdit == null) {
             $user->id_ONG = null;
             $user->save();

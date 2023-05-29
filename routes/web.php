@@ -113,7 +113,7 @@ Route::delete('/admin/ong/event/eliminarParticipante/{idEvent}/{idUser}',[EventC
 // Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
 Route::get('/admin/ong/usersAssign/{idOng?}',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
         //Nuevo persona con permisos
-Route::post('/admin/ong/usersAssign/add',[OrganisationController::class,'assignUser'])->middleware('auth')->name('admin.ong.usersassign.add');
+Route::post('/admin/ong/usersAssign/add/{id}',[OrganisationController::class,'assignUser'])->middleware('auth')->name('admin.ong.usersassign.add');
         //Editar los roles de la persona
 Route::post('/api/ong/usersAssign/edit',[OrganisationController::class,'assignUserEdit'])->middleware('auth')->name('admin.ong.usersassign.edit');
         //Eliminar permisos sobre el ONG que organiza
@@ -157,9 +157,13 @@ Route::patch('/admin/types/update/{type}',[TypeController::class,'update'])->mid
 
 
     // Usuarios (index, crear, eliminar)
+        //Index Usuarios
 Route::get('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
-
-
-
+        //Editar Usuario
+Route::get('/admin/users/editar/{idUser}',[UserController::class,'editUserAdmin'])->middleware('auth')->name('admin.user.edit');
+        //Update Usuario
+Route::patch('/cuenta/perfil/editars/{idUser}',[UserController::class,'updateUserAdmin'])->middleware('auth')->name('admin.user.update');
+        //Eliminar Usuario
+Route::delete('/admin/users/destroy/{idUser?}',[UserController::class,'destroy'])->middleware('auth')->name('admin.user.destroy');
 
 // Route::resource('ong',OrganisationController::class)->middleware('auth');

@@ -39,7 +39,6 @@ class User extends Authenticatable
     protected $table = 'users';
 
     static $rules = [
-		'DNI' => 'required',
 		'name' => 'required',
 		'Apellidos' => 'required',
 		'email' => 'required',
@@ -95,6 +94,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class,'users_roles', 'idUser', 'idRol','id','idRol');
     }
+
+    // public function userRoleONG()
+    // {
+    //     return $this->usersRole()->where('users_roles.idRol','>','1');
+    // }
 
 
     public function eventos(){

@@ -200,6 +200,7 @@
 
 .typeEvent {
     font-size: 15px;
+    text-decoration: none;
 }
 
 .card-body {
@@ -322,4 +323,24 @@
 
 #navBarCuenta{
     background-color: #2C514C;
+}
+
+.event-info div{
+    display: grid;
+    grid-template-columns: 120px auto;
+}
+
+/* mejor vision para informacion del evento */
+@media(max-width: 700px) {
+    .event-info div{
+
+        grid-template-columns: auto;
+    }
+}
+
+
+ul.navbar-nav a.active {
+    background-color: #6B0504;
+    border-radius: 10px;
+    box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.192);
 }
