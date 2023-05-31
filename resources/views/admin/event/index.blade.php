@@ -16,7 +16,7 @@
 
                             <div class="float-right">
                                 {{-- @if (request()->RouteIs('admin.ong.event.index')) --}}
-                                @if (!Auth::user()->roles('4') || Auth::user()->roles('1'))
+                                @if (!request()->RouteIs('admin.events.index') && !Auth::user()->roles('4'))
                                     <a href="{{ route('admin.ong.event.create') }}" class="btn btn-primary btn-sm float-right"
                                         data-placement="left">
                                         {{ __('Crear nuevo evento') }}

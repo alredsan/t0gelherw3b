@@ -18,7 +18,7 @@ class Type extends Model
 {
 
     static $rules = [
-		'Nombre' => 'required',
+		'Nombre' => ['required','min:3'],
     ];
 
     protected $perPage = 20;

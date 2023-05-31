@@ -13,12 +13,8 @@
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="">
-                        {{-- <span class="card-title">{{ __('Update') }} Organisation</span> --}}
-
-                    </div>
                     <div class="card-body">
-                        <form method="POST" id="formONG" action="{{ route('admin.ong.update', $organisation->idONG) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" id="formONG" action="{{ route('admin.ong.update', $organisation->idONG) }}" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

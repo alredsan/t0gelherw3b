@@ -11,15 +11,10 @@
                 <div class="">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-
-                                <h1 class="card-title pb-5">Eventos Apuntados Proximos</h1>
-
-                            </span>
-                            <div class="float-right">
+                            <h1 class="card-title pb-5">Eventos Apuntados Proximos</h1>
+                            {{-- <div class="float-right">
                                 <a href="#" class="card-title">Ver eventos realizados ></a>
-                            </div>
+                            </div> --}}
                             @if ($message = Session::get('success-events'))
                                 <div class="alert alert-success">
                                     <p>{{ $message }}</p>
@@ -50,9 +45,9 @@
                                                 <td data-head="Nombre ONG">{{ $event->organisation->Name }}</td>
                                                 <td data-head="Nombre">{{ $event->Nombre }}</td>
                                                 {{-- <td>{{ $event->Descripcion }}</td> --}}
-                                                <td data-head="Fecha">{{ date('d-m-Y', $event->FechaEvento) }}</td>
+                                                <td data-head="Fecha">{{ date('d-m-Y H:m', $event->FechaEvento) }}</td>
 
-                                                <td  data-head="Direccion">{{ $event->Direccion }}</td>
+                                                <td data-head="Direccion">{{ $event->Direccion }}</td>
 
                                                 <td data-head="Acciones">
                                                     <form
@@ -74,7 +69,8 @@
                                                     </form>
                                                 </td>
                                             @else
-                                                <td colspan="10" class="text-center"><i>Este Evento ha sido ocultado</i></td>
+                                                <td colspan="6" class="text-center"><i>Este Evento ha sido ocultado</i>
+                                                </td>
                                             @endif
                                         </tr>
                                     @endforeach

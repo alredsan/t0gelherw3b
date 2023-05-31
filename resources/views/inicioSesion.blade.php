@@ -29,7 +29,7 @@
                 pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" title="Introduca el email correcto" required>
             <div class="invalid-feedback">El email es obligatorio.</div>
 
-            <label for="pass">Contraseña</label>
+            <label for="passwd">Contraseña</label>
             <div class="form__pass">
                 {{-- <input class="form__input" type="password" name="passwd" id="passwd"
                     title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
@@ -43,7 +43,7 @@
                     mayuscula.</div>
             </div>
             <div>
-                <input type="checkbox" name="recordar"><label for="radio">Recordar cuenta</label>
+                <input type="checkbox" name="recordar" id="recordar"><label for="recordar">Recordar cuenta</label>
             </div>
             @if ($message = Session::get('message'))
                 <div class="alert alert-danger">

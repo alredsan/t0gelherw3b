@@ -1,7 +1,7 @@
 @extends('layouts.plantillaAdmin')
 
 @section('titulo')
-    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
+    Organizaciones
 @endsection
 
 @section('contenido')
@@ -46,6 +46,7 @@
 										<th>Telefono</th>
 
                                         <th>Acciones</th>
+                                        <th>Permisos</th>
                                     </tr>
                                 </thead>
                                 <tbody>

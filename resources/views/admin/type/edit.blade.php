@@ -1,7 +1,7 @@
 @extends('layouts.plantillaAdmin')
 
 @section('titulo')
-    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
+    Actualizar tipo
 @endsection
 
 @section('contenido')
@@ -13,10 +13,10 @@
 
                 <div class="">
                     <div class="card-header">
-                        <h1 class="card-title">{{ __('Update') }} Type {{ $type->Nombre}}</h1>
+                        <h1 class="card-title">{{ __('Actualizar Tipo') }} "{{ $type->Nombre}}"</h1>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('admin.types.update', $type->idtypeONG) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.types.update', $type->idtypeONG) }}" id="formType" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
@@ -29,3 +29,8 @@
         </div>
     </section>
 @endsection
+
+@push('scriptsJS')
+    <script src="/js/validation.js"></script>
+@endpush
+

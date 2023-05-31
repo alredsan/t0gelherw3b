@@ -26,14 +26,14 @@ class Organisation extends Model
 {
 
     static $rules = [
-		'Name' => 'required',
-		'DireccionSede' => 'required',
+		'Name' => ['required','min:3'],
+		'DireccionSede' => ['required','min:3'],
 		'Descripcion' => 'required',
 		'FechaCreacion' => 'required',
 		'IBANmetodoPago' => 'required',
 		'FotoLogo' => 'image|max:2048',
-		'eMail' => 'required',
-		'Telefono' => 'required',
+		'eMail' => 'required|email',
+		'Telefono' => ['required','regex:/[+]{0,1}[0-9]{10,12}|[0-9]{9}$/'],
     ];
 
     protected $primaryKey = 'idONG';

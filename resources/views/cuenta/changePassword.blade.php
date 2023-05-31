@@ -16,7 +16,7 @@
                         <h1 class="card-title pb-3">{{ __('Cambiar Contraseña Usuario') }}</h1>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cuenta.pass.update') }}"  role="form" enctype="multipart/form-data" name="formChangePasswd">
+                        <form method="POST" action="{{ route('cuenta.pass.update') }}" enctype="multipart/form-data" name="formChangePasswd">
                             {{ method_field('PATCH') }}
                             @csrf
                             @if (session('exito'))
@@ -33,18 +33,18 @@
 
 
                             <div class="form-group">
-                                <label for="name">Dime la antigua contraseña:</label>
-                                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Antigua contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
+                                <label for="oldpassword">Dime la antigua contraseña:</label>
+                                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Antigua contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
                                 <div class="invalid-feedback">Debe introduce la contraseña antigua,que contiene 4-16 caracteres, un numero, letra mayúscula y letra mayuscula.</div>
                             </div>
                             <div class="form-group">
-                                <label for="name">Dime la nueva contraseña:</label>
-                                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="nueva contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
+                                <label for="newpassword">Dime la nueva contraseña:</label>
+                                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="Nueva contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
                                 <div class="invalid-feedback">Introduce la contraseña nueva o no conciden o no cumple 4-16 caracteres, un numero, letra mayúscula y letra mayuscula.</div>
                             </div>
                             <div class="form-group">
-                                <label for="name">Dime de nuevo la nueva contraseña:</label>
-                                <input type="password" class="form-control" name="confirmarpassword" id="confirmarpassword" placeholder="confirmar contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
+                                <label for="confirmarpassword">Dime de nuevo la nueva contraseña:</label>
+                                <input type="password" class="form-control" name="confirmarpassword" id="confirmarpassword" placeholder="Confirmar contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
                                 <div class="invalid-feedback">La nueva contraseña no conciden.</div>
                             </div>
                             <div class="box-footer mt20">

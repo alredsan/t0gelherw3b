@@ -15,6 +15,7 @@ return [
     'regex' => 'El campo :attribute no cumple con el formato deseado.',
     'required' => 'El :attribute campo es requerido.',
     'unique' => 'El :attribute ya se encuentra registrado en el sistema.',
+    'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
     'accepted' => 'The :attribute field must be accepted.',
     'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
     'active_url' => 'The :attribute field must be a valid URL.',
@@ -49,7 +50,7 @@ return [
     'distinct' => 'The :attribute field has a duplicate value.',
     'doesnt_end_with' => 'The :attribute field must not end with one of the following: :values.',
     'doesnt_start_with' => 'The :attribute field must not start with one of the following: :values.',
-    'email' => 'The :attribute field must be a valid email address.',
+
     'ends_with' => 'The :attribute field must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
     'exists' => 'The selected :attribute is invalid.',
@@ -58,13 +59,13 @@ return [
     'gt' => [
         'array' => 'The :attribute field must have more than :value items.',
         'file' => 'The :attribute field must be greater than :value kilobytes.',
-        'numeric' => 'The :attribute field must be greater than :value.',
+        'numeric' => 'Campo :attribute debe ser mayor que :value.',
         'string' => 'El campo :attribute debe ser mayor que :value caracteres.',
     ],
     'gte' => [
         'array' => 'The :attribute field must have :value items or more.',
         'file' => 'The :attribute field must be greater than or equal to :value kilobytes.',
-        'numeric' => 'The :attribute field must be greater than or equal to :value.',
+        'numeric' => 'Campo :attribute debe ser mayor que o igual al :value.',
         'string' => 'El campo :attribute debe ser mayor que :value caracteres.',
     ],
     'image' => 'The :attribute field must be an image.',
@@ -101,8 +102,8 @@ return [
     'min' => [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
-        'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        'numeric' => 'El campo :attribute debe tener mas de :min caracteres.',
+        'string' => 'El campo :attribute debe tener mas de :min caracteres.',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',

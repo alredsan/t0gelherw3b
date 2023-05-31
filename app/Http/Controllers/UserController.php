@@ -159,10 +159,9 @@ class UserController extends Controller
 
         $data = User::find(Auth::user()->id);
 
-        if($data->DNI != $request->DNI){
-            dd($data->DNI,$request->DNI);
-            $data->DNI = $request->DNI;
-        }
+        // if($data->DNI != $request->DNI){
+        //     $data->DNI = $request->DNI;
+        // }
 
         $data->name = $request->name;
         $data->Apellidos = $request->Apellidos;
@@ -231,7 +230,7 @@ class UserController extends Controller
         //dd($comprobarUserUnique);
 
         if($comprobarUserUnique > 0){
-            return redirect()->route('registro')->with('error', 'El correo electronico o DNI ya existe en el sistema');
+            return back()->with('error', 'El correo electronico o DNI ya existe en el sistema')->withInput();
         }
 
         // una vez validados los datos, creamos el objeto user

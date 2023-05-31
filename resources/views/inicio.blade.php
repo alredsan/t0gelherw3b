@@ -49,7 +49,7 @@
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4">Transformando el mundo a través de la ayuda mutua.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    <a type="button" href='{{ route('eventsFilter') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Ver
+                    <a href='{{ route('eventsFilter') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Ver
                         eventos</a>
                 </div>
             </div>
@@ -66,9 +66,9 @@
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4">Transformando el mundo a través de la ayuda mutua.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    <a type="button" href='{{ route('login') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Iniciar
+                    <a href='{{ route('login') }}' class="btn btn-primary btn-lg px-4 me-sm-3">Iniciar
                         sesion</a>
-                    <a type="button" href='{{ route('registro') }}'
+                    <a href='{{ route('registro') }}'
                         class="btn btn-outline-secondary btn-lg px-4">Registrarte</a>
                 </div>
             </div>

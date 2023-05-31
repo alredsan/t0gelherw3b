@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\EventsType;
 use App\Models\EventsUser;
+use App\Models\Organisation;
 use App\Models\Type;
 use Exception;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class EventController extends Controller
      */
     public function indexEventsONG()
     {
-        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->orderBy('FechaEvento','DESC')->paginate(10);
+        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
 
         $showONG = false;
 
@@ -85,7 +86,7 @@ class EventController extends Controller
         } else {
             $data['Visible'] = 0;
         }
-
+        // dd($data);
         //Creacion objeto Event y obtenemos el objeto para insertar los tipos del evento seleccionados
         $event = Event::create($data);
 
@@ -113,10 +114,10 @@ class EventController extends Controller
                 /** @var \App\Models\User $user **/
                 $user = Auth::user();
 
-                if(!($user->id_ONG == $event->id_ONG || $user->roles('1'))){
+                if (!($user->id_ONG == $event->id_ONG || $user->roles('1'))) {
                     abort(404);
                 }
-            }else{
+            } else {
                 //En caso que no esta iniciado sesion
                 abort(404);
             }
@@ -169,8 +170,8 @@ class EventController extends Controller
 
         $particiantesApuntados = EventsUser::where('idEvent', $event)->count();
 
-        if($particiantesApuntados > $request->numMaxVoluntarios){
-            return back()->with('danger-events', 'Hay mas voluntarios apuntados que el numero maximo, elimine voluntarios para editar.');
+        if ($particiantesApuntados > $request->numMaxVoluntarios) {
+            return back()->with('danger-events', 'Hay mas voluntarios apuntados que el numero maximo, elimine voluntarios para editar.')->withInput();
         }
 
         $data->Nombre = $request->Nombre;
@@ -181,7 +182,7 @@ class EventController extends Controller
         $data->Direccion = $request->Direccion;
         $data->Latitud = $request->Latitud;
         $data->Longitud = $request->Longitud;
-        $data->Aportaciones = $request->Aportaciones;
+
         if ($request->CheckVisible) {
             $data->Visible = 1;
         } else {
@@ -199,13 +200,20 @@ class EventController extends Controller
         }
 
         $data->save();
+        try{
+            DB::beginTransaction();
+            $rows = EventsType::find($event);
+            if ($rows != null) {
+                $rows->delete();
+            }
 
-        $rows = EventsType::find($event);
-        if ($rows != null) {
-            $rows->delete();
+            $data->eventsType()->attach($request->selectmultiple);
+            DB::commit();
+
+        }catch(Exception){
+            DB::rollBack();
+            return back()->with('danger-events', 'Ha habido un error en los tipos.')->withInput();
         }
-
-        $data->eventsType()->attach($request->selectmultiple);
 
 
         // return back()->with('success', 'El evento ha sido actualizado correctamente.');
@@ -262,7 +270,7 @@ class EventController extends Controller
         // if(isset($request->id_ONG)){
         //     dd($request->id_ONG);
         // }
-        $tipos = Type::all();
+
 
         //Si ha selecionado que ordene por distancia, comprobamos que tenemos la ubicacion deseada del cliente
         if ($order == "1" && ($lat == null || $lon == null)) {
@@ -278,8 +286,10 @@ class EventController extends Controller
             ->Ordenacion($order)
             ->paginate(8);
 
+        $tipos = Type::all();
+        $organisation = Organisation::all();
 
-        return view('event.index', compact('events', 'tipos', 'request'));
+        return view('event.index', compact('events', 'tipos', 'request','organisation'));
     }
 
     function showUsersEvent(Event $id)
@@ -312,5 +322,29 @@ class EventController extends Controller
         }
 
         return back()->with('success', 'Ya no participa en ese Evento');
+    }
+
+
+    public function aportacionEvent(Request $request, Event $id)
+    {
+        $donacion = $request->donative;
+
+        if (!is_numeric($donacion)) {
+            return back()->with("fail", "La cantidad introducida debe ser numerica");
+        }
+
+        if ($donacion <= 0) {
+            return back()->with("fail", "La cantidad introducida no puede ser menos o igual a 0");
+        }
+
+        try {
+            $id->Aportaciones += $donacion;
+
+            $id->save();
+        } catch (Exception) {
+            return back()->with("fail", "Ha habido un error en el proceso");
+        }
+
+        return back()->with("success", "Has aportado {$donacion}€ a este evento ¡Gracias!");
     }
 }

@@ -39,7 +39,8 @@ if (formParticipation) {
 }
 
 let tables = $('table');
+if(tables){
+    tables.addClass('table table-bordered table-hover');
+    tables.wrap("<div class='table-responsive'>");
+}
 
-tables.addClass('table table-bordered table-hover');
-
-tables.wrap("<div class='table-responsive'>");

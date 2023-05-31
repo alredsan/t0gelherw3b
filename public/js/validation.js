@@ -8,6 +8,8 @@ function checkFileExtension(file, allowedExtensions) {
     });
 }
 
+
+
 /**
      * Mostrar o ocultar la contraseña
      */
@@ -29,11 +31,16 @@ function mostrarContrasena() {
     const validatorsForms = {
         "/inicioSesion": () => validateLogin(),
         "/registro": () => validateRegister(),
+        "/cuenta/perfil/editar": () => validateFormUser(),
+        "/cuenta/perfil/cambiopassword": () => validateFormChangePassword(),
         "/admin/ongs/edit": () => validateFormONG(),
         "/admin/ongs/new": () => validateFormONG(),
-        "/cuenta/perfil/cambiopassword": () => validateFormChangePassword(),
-        "/cuenta/perfil/editar": () => validateFormUser(),
-        "/admin/users": () => confirmModalDelete()
+        "/admin/ong/event/new": () => validateEvent(),
+        "/admin/ong/event/edit": () => validateEvent(),
+        "/admin/users": () => confirmModalDelete(),
+        "/admin/users/editar": () => validateFormUser(),
+        "/admin/types/add": () => validateFormTypes(),
+        "/admin/types/edit": () => validateFormTypes()
     };
 
     /**
@@ -43,13 +50,23 @@ function mostrarContrasena() {
     window.addEventListener('DOMContentLoaded', function () {
         let url = window.location.pathname.split(/\/\d/)[0];
 
-
+        // console.log(url);
         try {
             validatorsForms[url]();
         } catch (error) { }
     });
 
-    function confirmModalDelete(){
+    let inputFile = document.getElementById('FotoLogoSelec');
+    let photoPreview = document.getElementById('FotoPreview');
+
+    if (photoPreview) {
+        inputFile.addEventListener('change', function (event) {
+            let fileImagen = event.target.files[0];
+            if (fileImagen && checkFileExtension(fileImagen, ['jpg', 'png', 'gif'])) photoPreview.src = URL.createObjectURL(fileImagen);
+        });
+    }
+
+    function confirmModalDelete() {
         let modalConfirm = document.getElementById("modalDeleteUser");
 
         let formModal = document.getElementById('formDeleteUserModal');
@@ -64,8 +81,8 @@ function mostrarContrasena() {
 
         let bottons = document.getElementsByClassName("btnDelete");
 
-        for (let boton of bottons){
-            boton.addEventListener("click",function(event){
+        for (let boton of bottons) {
+            boton.addEventListener("click", function (event) {
 
                 event.preventDefault();
 
@@ -367,6 +384,8 @@ function mostrarContrasena() {
                 showFeedBack($(this.Name), false);
             }
 
+
+
             if (!isValid) {
                 firstInvalidElement.focus();
                 event.preventDefault();
@@ -533,13 +552,23 @@ function mostrarContrasena() {
     }
 
     function validateFormUser() {
-        let validateRegisterForm = document.forms.formUserUpdate;
+        let validateUpdateUserForm = document.forms.formUserUpdate;
+        console.log(validateUpdateUserForm)
+        $(validateUpdateUserForm).attr('novalidate', true);
 
-        $(validateRegisterForm).attr('novalidate', true);
-
-        $(validateRegisterForm).submit(function (event) {
+        $(validateUpdateUserForm).submit(function (event) {
             let isValid = true;
             let firstInvalidElement = null;
+
+            if (this.Foto.value) {
+                if (!checkFileExtension(this.Foto.files[0], ['jpg', 'png', 'gif'])) {
+                    isValid = false;
+                    firstInvalidElement = this.Foto;
+                    showFeedBack($(this.Foto), false);
+                } else {
+                    showFeedBack($(this.Foto), true);
+                }
+            }
 
             if (this.passwd.value != this.passwdConfirm.value) {
                 isValid = false;
@@ -623,15 +652,25 @@ function mostrarContrasena() {
 
         });
 
-        $(validateRegisterForm.Nombre).change(defaultCheckElement);
-        $(validateRegisterForm.Apellidos).change(defaultCheckElement);
-        $(validateRegisterForm.email).change(defaultCheckElement);
+        $(validateUpdateUserForm.Nombre).change(defaultCheckElement);
+        $(validateUpdateUserForm.Apellidos).change(defaultCheckElement);
+        $(validateUpdateUserForm.email).change(defaultCheckElement);
 
-        $(validateRegisterForm.Direccion).change(defaultCheckElement);
-        $(validateRegisterForm.Provincia).change(defaultCheckElement);
-        $(validateRegisterForm.Telefono).change(defaultCheckElement);
+        $(validateUpdateUserForm.Direccion).change(defaultCheckElement);
+        $(validateUpdateUserForm.Provincia).change(defaultCheckElement);
+        $(validateUpdateUserForm.Telefono).change(defaultCheckElement);
 
-        $(validateRegisterForm.DNI).change(function () {
+        $(validateUpdateUserForm.Foto).change(function () {
+            if (this.value) {
+                if (!checkFileExtension(this.files[0], ['jpg', 'png', 'gif'])) {
+                    showFeedBack($(this), false);
+                } else {
+                    showFeedBack($(this), true);
+                }
+            }
+        });
+
+        $(validateUpdateUserForm.DNI).change(function () {
             if (this.checkValidity()) {
                 showFeedBack($(this), true);
                 if (!checkDNI(this.value)) {
@@ -642,21 +681,21 @@ function mostrarContrasena() {
             }
         });
 
-        $(validateRegisterForm.passwd).change(function () {
+        $(validateUpdateUserForm.passwd).change(function () {
             if (!this.checkValidity()) {
                 showFeedBack($(this), false);
             } else {
                 showFeedBack($(this), true);
-                validateRegisterForm.passwdConfirm.value = "";
+                validateUpdateUserForm.passwdConfirm.value = "";
             }
         });
 
-        $(validateRegisterForm.passwdConfirm).change(function () {
+        $(validateUpdateUserForm.passwdConfirm).change(function () {
 
-            if (validateRegisterForm.passwd.value != validateRegisterForm.passwdConfirm.value) {
-                showFeedBack($(validateRegisterForm.passwdConfirm), false);
+            if (validateUpdateUserForm.passwd.value != validateUpdateUserForm.passwdConfirm.value) {
+                showFeedBack($(validateUpdateUserForm.passwdConfirm), false);
             } else {
-                showFeedBack($(validateRegisterForm.passwdConfirm), true);
+                showFeedBack($(validateUpdateUserForm.passwdConfirm), true);
             }
         });
 
@@ -664,20 +703,113 @@ function mostrarContrasena() {
 
 
     function validateEvent() {
-        //Plantilla
-        let validateONGForm = document.forms.formONG;
+        let validateEventNewForm = document.forms.formEvent;
+
+        $(validateEventNewForm).attr('novalidate', true);
+        $(validateEventNewForm).submit(function (event) {
+            let isValid = true;
+            let firstInvalidElement = null;
+
+            if (this.Foto.value) {
+                if (!checkFileExtension(this.Foto.files[0], ['jpg', 'png', 'gif'])) {
+                    isValid = false;
+                    firstInvalidElement = this.Foto;
+                    showFeedBack($(this.Foto), false);
+                } else {
+                    showFeedBack($(this.Foto), true);
+                }
+            }
+
+
+            if (this.Latitud.value != "") {
+                showFeedBack($(this.Latitud), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.searchDire;
+                showFeedBack($(this.Latitud), false);
+            }
+
+            if (this.Direccion.checkValidity()) {
+                showFeedBack($(this.Direccion), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Direccion;
+                showFeedBack($(this.Direccion), false);
+            }
+
+            if (this.numMaxVoluntarios.checkValidity()) {
+                showFeedBack($(this.numMaxVoluntarios), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.numMaxVoluntarios;
+                showFeedBack($(this.numMaxVoluntarios), false);
+            }
+
+            if (this.FechaEvento.checkValidity()) {
+                showFeedBack($(this.FechaEvento), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.FechaEvento;
+                showFeedBack($(this.FechaEvento), false);
+            }
+
+            if (this.Nombre.checkValidity()) {
+                showFeedBack($(this.Nombre), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.Nombre;
+                showFeedBack($(this.Nombre), false);
+            }
+
+            if (!isValid) {
+                firstInvalidElement.focus();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+        });
+
+        $(validateEventNewForm.Latitud).change(function() {
+            if (this.value != "") {
+                showFeedBack($(this), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = validateEventNewForm.searchDire;
+                showFeedBack($(this), false);
+            }
+        });
+        $(validateEventNewForm.Direccion).change(defaultCheckElement);
+        $(validateEventNewForm.numMaxVoluntarios).change(defaultCheckElement);
+        $(validateEventNewForm.FechaEvento).change(defaultCheckElement);
+        $(validateEventNewForm.Nombre).change(defaultCheckElement);
+
+        $(validateEventNewForm.Foto).change(function () {
+            if (this.value) {
+                if (!checkFileExtension(this.files[0], ['jpg', 'png', 'gif'])) {
+                    showFeedBack($(this), false);
+                } else {
+                    showFeedBack($(this), true);
+                }
+            }
+        });
+
+    }
+
+    function validateFormTypes() {
+
+        let validateONGForm = document.forms.formType;
 
         $(validateONGForm).attr('novalidate', true);
         $(validateONGForm).submit(function (event) {
             let isValid = true;
             let firstInvalidElement = null;
 
-            if (this.FotoLogo.checkValidity()) {
-                showFeedBack($(this.FotoLogo), true);
+            if (this.Nombre.checkValidity()) {
+                showFeedBack($(this.Nombre), true);
             } else {
                 isValid = false;
-                firstInvalidElement = this.FotoLogo;
-                showFeedBack($(this.FotoLogo), false);
+                firstInvalidElement = this.Nombre;
+                showFeedBack($(this.Nombre), false);
             }
             if (!isValid) {
                 firstInvalidElement.focus();
@@ -686,7 +818,7 @@ function mostrarContrasena() {
             }
 
         });
-        $(validateONGForm.Name).change(defaultCheckElement);
+        $(validateONGForm.Nombre).change(defaultCheckElement);
 
     }
 

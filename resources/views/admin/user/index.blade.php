@@ -1,7 +1,7 @@
 @extends('layouts.plantillaAdmin')
 
 @section('titulo')
-    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
+    Usuarios
 @endsection
 
 @section('contenido')
@@ -50,7 +50,7 @@
                                         <th>Fotografia</th>
                                         {{-- <th></th> --}}
 
-                                        {{-- <th>Acciones</th> --}}
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,15 +111,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('admin.user.destroy') }}" id="formDeleteUserModal" method="POST">
-                <div class="modal-body">
-                    @csrf
+                    <div class="modal-body">
+                        @csrf
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-primary">Eliminar Usuario</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary">Eliminar Usuario</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

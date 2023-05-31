@@ -29,14 +29,12 @@ class Event extends Model
 {
     //Reglas de vertificacion
     static $rules = [
-        'Nombre' => 'required',
+        'Nombre' => ['required','min:3'],
         'Descripcion' => 'required',
-        'FechaEvento' => 'required',
-        'numMaxVoluntarios' => 'required',
-        'Direccion' => 'required',
+        'FechaEvento' => ['required','date'],
+        'numMaxVoluntarios' => ['required','gt:0'],
+        'Direccion' => ['required','min:3'],
         'Latitud' => 'required',
-        'Longitud' => 'required',
-        'Aportaciones' => 'required',
         'Foto' => 'image|max:2048',
     ];
 
@@ -50,7 +48,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['idEvento', 'id_ONG', 'Nombre', 'Descripcion', 'FechaEvento', 'numMaxVoluntarios', 'Direccion', 'Latitud', 'Longitud', 'Aportaciones', 'Foto'];
+    protected $fillable = ['idEvento', 'id_ONG', 'Nombre', 'Descripcion', 'FechaEvento', 'numMaxVoluntarios', 'Direccion', 'Latitud', 'Longitud', 'Aportaciones', 'Foto','Visible'];
 
 
     /**
@@ -159,7 +157,7 @@ class Event extends Model
 
         if ($type == '2') {
 
-            return $query->orderBy('idEvento', 'ASC');
+            return $query->orderBy('idEvento', 'DESC');
         }
 
     }

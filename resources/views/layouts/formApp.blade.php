@@ -86,13 +86,26 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select" id="id_ONG" name='id_ONG' aria-label="select ONG ">
+                    <option value=''>Mostrar todos ONGs</option>
+                    @foreach($organisation as $ong)
+
+                    <option value='{{$ong->idONG}}' @if($existsRequest && $_GET['id_ONG'] == $ong->idONG) selected @endif>{{ $ong->Name }}</option>
+                    @endforeach
+                </select>
+                <label for="id_ONG">Organización</label>
+            </div>
+        </div>
+
+        {{-- <div class="col-md-3">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="activeEvent" placeholder="Buscar ..." name='activeEvent'
                     value="@php echo isset($_GET['nombre'])? $_GET['nombre'] : ""; @endphp">
                 <label for="activeEvent">eVENTOS aCTIVOS</label>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="row justify-content-center">
         <div class="col-5 d-flex justify-content-center">

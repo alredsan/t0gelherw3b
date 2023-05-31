@@ -67,6 +67,8 @@
                         <tbody>
                             <tr>
                                 <td>dd</td>
+                                <td>dd</td>
+                                <td>dd</td>
                             </tr>
                         </tbody>
                     </table>

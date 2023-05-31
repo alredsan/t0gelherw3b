@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-lg">
                             <div class="form-group">
-                                <img src={{asset($user->Foto)}} class="card-img-top w-50" alt="FotoPerfil"/>
+                                <img src={{asset($user->Foto)}} class="card-img-top w-50" alt="FotoPerfil">
                             </div>
                         </div>
                     </div>

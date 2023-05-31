@@ -19,16 +19,3 @@ if (element != null) {
         });
 
 }
-
-
-let inputFile = document.getElementById('FotoLogoSelec');
-let photoPreview = document.getElementById('FotoPreview');
-
-if (photoPreview) {
-    inputFile.addEventListener('change', function (event) {
-        let fileImagen = event.target.files[0];
-        if (fileImagen && checkFileExtension(fileImagen, ['jpg', 'png', 'gif'])) photoPreview.src = URL.createObjectURL(fileImagen);
-    });
-}
-
-

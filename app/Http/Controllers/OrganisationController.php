@@ -87,7 +87,7 @@ class OrganisationController extends Controller
         // return redirect()->route('admin.ong.show', $organisation->idONG)
         //     ->with('success', 'Organización creada con éxito.');
         return redirect()->route('admin.ong.usersassign', $organisation->idONG)
-            ->with('success', 'Organización creada con éxito. Puedes agregar usuario');
+            ->with('success', 'Organización creada con éxito. Puedes agregar usuarios para tener acceso');
     }
 
     /**

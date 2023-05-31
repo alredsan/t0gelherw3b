@@ -12,18 +12,24 @@
     </div>
 
     <div class='d-flex gap-5 m-5 flex-wrap justify-content-center'>
-        @foreach ($events as $event)
+        @forelse ($events as $event)
             <div class="card" style="width: 30rem;">
                 <div style="background-image:url({{ asset($event->Foto) }});height:20vh;background-repeat: no-repeat;background-size: cover;background-position: center;"
-                    class="card-img-top" alt="{{ $event->Nombre }}"></div>
+                    class="card-img-top"></div>
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->Nombre }}</h5>
                     <p class="card-text">{{ date('d/m/Y H:m', $event->FechaEvento) }}</p>
+                    @if($event->distancia)
                     <p class="fw-light">{{round($event->distancia,2)}} km</p>
+                    @endif
                     <a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más información</a>
                 </div>
             </div>
-        @endforeach
+        @empty
+        <div class="alert alert-danger">
+            <b>No hay eventos con los filtros indicados ¡Lo sentimos!</b>
+        </div>
+        @endforelse
     </div>
 
     <div class="container-fluid">

@@ -24,19 +24,7 @@
                     <div class="card-header">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span id="card_title">
-                                    <h1>Voluntarios Apuntados <i>"{{ $event->Nombre }}"</i></h1>
-                                </span>
-
-                                <div class="float-right">
-                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modalAddAssign">
-                                        Añadir Persona
-                                    </button> --}}
-                                    {{-- <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a> --}}
-                                </div>
+                                <h1>Voluntarios Apuntados <i>"{{ $event->Nombre }}"</i></h1>
                             </div>
                         </div>
                         <div class="card-body bg-white">
@@ -72,11 +60,13 @@
                                                             Rol</button> --}}
                                                     @if (!Auth::user()->roles('4') || Auth::user()->roles('1'))
                                                         <form
-                                                            action="{{ route('admin.event.destroyParticipante', ['idEvent' => $event->idEvento, 'idUser' => $user->id]) }}" method="POST">
+                                                            action="{{ route('admin.event.destroyParticipante', ['idEvent' => $event->idEvento, 'idUser' => $user->id]) }}"
+                                                            method="POST">
                                                             @csrf
 
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar Participante</button>
+                                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar
+                                                                Participante</button>
                                                         </form>
                                                     @endif
                                                     {{-- @else
@@ -96,4 +86,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

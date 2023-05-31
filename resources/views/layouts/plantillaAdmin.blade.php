@@ -43,22 +43,22 @@
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{{ route('admin.ong.index') }}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i>
+                                        <i class="fs-4 bi bi-building"></i>
                                         <span class="ms-1">ONGs</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.events.index')}}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i>
+                                    <a href="{{ route('admin.events.index') }}" class="dropdown-item">
+                                        <i class="fs-4 bi bi-calendar-event"></i>
                                         <span class="ms-1">Eventos</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.users.index')}}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i>
+                                    <a href="{{ route('admin.users.index') }}" class="dropdown-item">
+                                        <i class="fs-4 bi bi-people"></i>
                                         <span class="ms-1">Usuarios</span></a>
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.types.index') }}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i>
+                                        <i class="fs-4 bi bi-hash"></i>
                                         <span class="ms-1">Tipos</span></a>
                                 </li>
                                 {{-- <li>
@@ -72,29 +72,29 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fs-4 bi-building-gear"></i><span class="ms-1">Administrador
+                                <i class="fs-4 bi bi-building"></i><span class="ms-1">Administrador
                                     ONG</span>
 
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{{ route('admin.ong') }}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i> <span class="ms-1">Perfil
+                                        <i class="fs-4 bi bi-file-earmark-person"></i> <span class="ms-1">Perfil
                                             ONG</span></a>
                                 </li>
                                 @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
                                     <li>
                                         <a href="{{ route('admin.ong.event.index') }}" class="dropdown-item">
-                                            <i class="fs-4 bi-table"></i> <span class="ms-1">Eventos
+                                            <i class="fs-4 bi bi-calendar-event"></i> <span class="ms-1">Eventos
                                                 ONG</span></a>
                                     </li>
                                 @endif
                                 @if (Auth::user()->roles('2'))
-                                <li>
-                                    <a href="{{ route('admin.ong.usersassign') }}" class="dropdown-item">
-                                        <i class="fs-4 bi-table"></i> <span class="ms-1">Permisos
-                                            Usuarios</span></a>
-                                </li>
+                                    <li>
+                                        <a href="{{ route('admin.ong.usersassign') }}" class="dropdown-item">
+                                            <i class="fs-4 bi bi-people"></i> <span class="ms-1">Permisos
+                                                Usuarios</span></a>
+                                    </li>
                                 @endif
 
                             </ul>
@@ -114,8 +114,8 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
-                        </a>
+                                <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
+                            </a>
                         </li>
                     </ul>
 
@@ -123,37 +123,38 @@
                 </div>
             </div>
 
-            <div class="col-md-2 text-end">
-
-                <li class="nav-item dropdown d-flex align-items-center">
-                    {{-- <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
+            <div class="col-md-2 text-end" id="account">
+                <menu>
+                    <li class="nav-item dropdown d-flex align-items-center">
+                        {{-- <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
                         <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
                     </a> --}}
-                    <a href="#"
-                        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
-                            class="rounded-circle">
-                        <span class="mx-1">{{ Auth::user()->name }}</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark shadow">
-                        <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cambiar a Voluntario</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
-                    </ul>
-                </li>
+                        <a href="#"
+                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset(Auth::user()->Foto) }}" alt="fotoPerfil" width="30" height="30"
+                                class="rounded-circle">
+                            <span class="mx-1">{{ Auth::user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('cuenta') }}">Cambiar a Voluntario</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+                </menu>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </nav>
 

@@ -20,12 +20,12 @@
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class='form-control' name='Nombre' id='Nombre' placeholder='Nombre'
-                value='{{ old('Nombre', $event->Nombre) }}'>
+            pattern="[\w ]{3,}" value='{{ old('Nombre', $event->Nombre) }}'>
             <div class="invalid-feedback">Introduce el nombre</div>
         </div>
 
         <div class="form-group">
-            <label for="Descripcion">Descripción del evento:</label>
+            <label for="editor">Descripción del evento:</label>
             <textarea class='form-control' name='Descripcion' id='editor' placeholder='Descripcion'>{{ old('Descripcion', $event->Descripcion) }}</textarea>
             <div class="invalid-feedback">Introduce un descripción</div>
         </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
             <label for="FechaEvento">Fecha del evento:</label>
             <input type="datetime-local" class='form-control' name='FechaEvento' id='FechaEvento'
-                placeholder='Fecha del evento' value="{{ old('FechaEvento', date('Y-m-d H:m', $event->FechaEvento)) }}">
+                value="{{ old('FechaEvento', date('Y-m-d H:m', $event->FechaEvento)) }}">
             <div class="invalid-feedback">Introduce la fecha y la hora correcta dd/mm/yyyy 00:00</div>
         </div>
 
@@ -41,7 +41,7 @@
             <div class="form-group col-sm-5">
                 <label for="numMaxVoluntarios">Numero maximo de voluntarios:</label>
                 <input type="number" class='form-control' name='numMaxVoluntarios' id='numMaxVoluntarios'
-                    placeholder='numero Maximo de Voluntarios'
+                    placeholder='numero Maximo de Voluntarios' min="0"
                     value='{{ old('numMaxVoluntarios', $event->numMaxVoluntarios) }}'>
                 <div class="invalid-feedback">Introduce un numero maximo del voluntario del evento</div>
             </div>
@@ -54,13 +54,15 @@
         </div>
 
         <div class="form-group ">
-            <label for="Latitud">Buscador:</label>
+            <label for="searchDire">Buscador:</label>
             <div class="d-flex flex-row">
                 <input type="text" class='form-control' name='searchDire' id='searchDire'
                     placeholder='Buscar direccion'>
+
                 <button type="button" class="btn btn-primary" id="searchDireccion">Buscar</button>
             </div>
-            <div class="invalid-feedback">Introduce la Latitud</div>
+
+
             <div id="geocoderAddresses"></div>
             <div class="mapForm">
                 @if ($event->Latitud)
@@ -73,24 +75,22 @@
         </div>
 
         <div class="form-group">
-            {{-- <label for="Latitud">Latitud:</label> --}}
-            <input type="hidden" class='form-control' name='Latitud' id='Latitud' placeholder='Latitud'
+            <input type="hidden" class='form-control' name='Latitud' id='Latitud'
                 value='{{ old('Latitud', $event->Latitud) }}'>
-            {{-- <div class="invalid-feedback">Introduce la Latitud</div> --}}
+             <div class="invalid-feedback">Introduce un punto para concretar lugar del evento</div>
         </div>
         <div class="form-group">
-            {{-- <label for="Longitud">Longitud:</label> --}}
-            <input type="hidden" class='form-control' name='Longitud' id='Longitud' placeholder='Longitud'
+            <input type="hidden" class='form-control' name='Longitud' id='Longitud'
                 value='{{ old('Longitud', $event->Longitud) }}'>
-            {{-- <div class="invalid-feedback">Introduce la Longitud</div> --}}
         </div>
 
-        <div class="form-group">
+       {{--  <div class="form-group">
             <label for="Aportaciones">Aportaciones:</label>
-            <input type="number" class='form-control' name='Aportaciones' id='Aportaciones' placeholder='Aportaciones'
+            <input type="hidden" class='form-control' name='Aportaciones' id='Aportaciones' placeholder='Aportaciones'
                 value='{{ old('Aportaciones', $event->Aportaciones) }}'>
             <div class="invalid-feedback">Introduce el numero de aportaciones</div>
-        </div>
+        </div>--}}
+
         @php
             $typeSelect = old('selectmultiple', $event->eventsType);
             $idTypesSelect = [];
@@ -100,7 +100,7 @@
         @endphp
 
         <div class="form-group d-flex flex-column">
-            <label for="typeEvent">Seleccione los tipos que relaciona la tematica:</label>
+            <label for="selectmultiple">Seleccione los tipos que relaciona la tematica:</label>
             <select id="selectmultiple" name="selectmultiple[]" multiple="multiple">
                 @foreach ($types as $type)
                     @if (in_array($type->idtypeONG, $idTypesSelect))
@@ -120,7 +120,7 @@
 
         <div class="row">
             <div class="col-md">
-                <p class="pt-2" for="FotoLogo">Foto :</p>
+                <p class="pt-2">Foto :</p>
                 @if($event->Foto)
                     <img src="{{ asset($event->Foto) }}" class='w-50' id='FotoPreview' alt="Foto evento">
                 @else
@@ -155,6 +155,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
     <script src="/js/fSelect.js"></script>
     <script src="/js/formCKeditor.js"></script>
+    <script src="/js/validation.js"></script>
     <script>
         $('#selectmultiple').fSelect();
         let latInput = document.getElementById("Latitud");

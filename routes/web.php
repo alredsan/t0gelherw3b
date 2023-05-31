@@ -38,8 +38,12 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/'
 Route::get('/app',[EventController::class,'indexFilter'])->name('eventsFilter');
 // Mostrar informacion de un evento
 Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
-
+    //Mostrar el evento
+Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
+    //Add participation al evento seleccionado al usuario iniciado
 Route::get('/app/event/{id}/addparticipation',[EventUserController::class,'add']);
+//Donacion al evento
+Route::post('/app/event/{id}/aportaciones',[EventController::class,'aportacionEvent'])->name('events.donative');
 
 
 

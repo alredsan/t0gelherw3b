@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organisation;
 use App\Models\Type;
 use Exception;
 use Illuminate\Http\Request;
@@ -28,11 +29,12 @@ class HomeController extends Controller
 
         try{
             $tipos = Type::all();
+            $organisation = Organisation::all();
 
         }catch(Exception){
             abort(404);
         }
 
-        return view('inicio',compact('tipos'));
+        return view('inicio',compact('tipos','organisation'));
     }
 }

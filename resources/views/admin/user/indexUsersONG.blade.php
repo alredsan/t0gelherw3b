@@ -24,10 +24,7 @@
                     <div class="card-header">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span id="card_title">
-                                    <h1>Usuarios con Permisos <i>"{{$organisation->Name }}"</i></h1>
-                                </span>
-
+                                <h1>Usuarios con Permisos <i>"{{ $organisation->Name }}"</i></h1>
                                 <div class="float-right">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#modalAddAssign">
@@ -111,22 +108,23 @@
                         <h1 class="modal-title fs-5" id="modalAddAssignLabel">Nueva Persona</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form name='fAssignUser' action="{{ route('admin.ong.usersassign.add',$organisation->idONG) }}" method="post">
+                    <form name='fAssignUser' action="{{ route('admin.ong.usersassign.add', $organisation->idONG) }}"
+                        method="post">
                         @csrf
                         <div class="modal-body">
                             {{-- <form action="{{ route('api.searchUsers') }}" method="get" name='searchUser' id='searchUser'> --}}
-                            <div data-route="{{ route('api.searchUsers') }}" name='searchUser' id='searchUser'>
+                            <div data-route="{{ route('api.searchUsers') }}" id='searchUser'>
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="email" name='email'
                                         placeholder="Buscar ..." autocomplete="off">
-                                    <label for="floatingInput">Buscar por Correo electronico</label>
+                                    <label for="email">Buscar por Correo electronico</label>
                                 </div>
                                 <div id="listUsers"></div>
                                 {{-- </form> --}}
                             </div>
                             @foreach ($roles as $role)
                                 <input type="checkbox" name="chxRol[{{ $role->idRol }}]" id="role{{ $role->idRol }}">
-                                <label for="role{{ $role->idRole }}">{{ $role->NombreRol }}</label>
+                                <label for="role{{ $role->idRol }}">{{ $role->NombreRol }}</label>
                             @endforeach
 
                         </div>
@@ -157,20 +155,21 @@
                                 @foreach ($roles as $role)
                                     <input type="checkbox" class='chkRoleEdit' name="chxRolEdit[{{ $role->idRol }}]"
                                         id="role[{{ $role->idRol }}]">
-                                    <label for="role{{ $role->idRole }}">{{ $role->NombreRol }}</label>
+                                    <label for="role{{ $role->idRol }}">{{ $role->NombreRol }}</label>
                                 @endforeach
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Understood</button>
+                            <button type="submit" class="btn btn-primary">Editar Rol</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @push('scriptsJS')
-        <script src="/js/scriptAssign.js"></script>
-    @endpush
+@push('scriptsJS')
+    <script src="/js/scriptAssign.js"></script>
+@endpush

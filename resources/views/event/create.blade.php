@@ -14,7 +14,7 @@
                         <h1 class="card-title">{{ __('Crear nuevo Evento') }}</h1>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('admin.ong.event.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.ong.event.store') }}" id="formEvent" role="form" enctype="multipart/form-data">
                             @csrf
 
                             @include('event.form')

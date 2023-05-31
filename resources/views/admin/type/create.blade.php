@@ -1,7 +1,7 @@
 @extends('layouts.plantillaAdmin')
 
 @section('titulo')
-    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
+    Crear nuevo tipo
 @endsection
 
 @section('contenido')
@@ -13,10 +13,10 @@
 
                 <div class="">
                     <div class="card-header">
-                        <h1 class="card-title">{{ __('Create') }} Type</h1>
+                        <h1 class="card-title">{{ __('Crear tipo') }}</h1>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('admin.types.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.types.store') }}" id="formType" enctype="multipart/form-data">
                             @csrf
 
                             @include('admin.type.form')
@@ -28,3 +28,8 @@
         </div>
     </section>
 @endsection
+
+@push('scriptsJS')
+    <script src="/js/validation.js"></script>
+@endpush
+

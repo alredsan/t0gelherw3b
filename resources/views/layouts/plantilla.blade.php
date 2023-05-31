@@ -15,9 +15,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar sticky-top navbar-expand-lg shadow" id="navApp">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('/') }}">
+            <a class="navbar-brand" href="{{ route('/') }}" aria-label="Ir a inicio">
                 <img class="logo" src="/img/logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -48,15 +48,38 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="col-5 text-end">
+                <div class="col-md-3 text-end">
                     @if (Auth::check())
-                        Hola {{ Auth::user()->name }}!
+                    <menu>
+                        <li class="nav-item dropdown d-flex align-items-center">
+                            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
+                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
+                                    class="rounded-circle">
+                                <span class="mx-1">{{ Auth::user()->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu shadow">
+                                <li><a class="dropdown-item" href="{{ route('acceso') }}"><i
+                                            class="bi bi-gear pe-2"></i>Administracion</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <li>
+                                    <a href='{{ route('logout') }}' class="dropdown-item"><i
+                                            class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </menu>
+                        {{-- Hola {{ Auth::user()->name }}!
                         <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Admin</a>
-                        <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary"><i class="bi bi-box-arrow-right pe-2"></i>Salir</a>
+                        <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary"><i class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a> --}}
                     @else
-                        <a type="button" href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar
-                            Sesión</a>
-                        <a type="button" href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
+                    <div class="d-flex flex-row">
+                        <a href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+                        <a href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -69,7 +92,8 @@
 
 
     <div id='footerApp'>
-        <footer class="container align-items-center justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 mt-5 border-top"  >
+        <footer
+            class="container align-items-center justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 mt-5 border-top">
             <div class="col mb-3">
                 <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
                     <img class="w-75" src="/img/logo.png" alt="Logotipo">
@@ -85,9 +109,11 @@
                 <h5>General</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Inicio</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Terminos y Aviso de privacidad</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Terminos y Aviso de
+                            privacidad</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Mapa Web</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Envianos tus comentarios</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Envianos tus
+                            comentarios</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Ayuda</a></li>
                 </ul>
             </div>
@@ -95,7 +121,8 @@
             <div class="col mb-3">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Aviso sobre cookies</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Aviso sobre
+                            cookies</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>

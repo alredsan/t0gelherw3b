@@ -14,7 +14,7 @@
                         <h1 class="card-title pb-2">Actualizar Evento</h1>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('admin.ong.event.update', $event->idEvento) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.ong.event.update', $event->idEvento) }}" id="formEvent" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

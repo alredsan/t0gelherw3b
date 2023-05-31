@@ -120,33 +120,35 @@
                 </ul>
 
                 <div class="col-md-2 text-end">
-
-                    <li class="nav-item dropdown d-flex align-items-center">
-                        <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
-                        </a>
-                        <a href="#"
-                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
-                                class="rounded-circle">
-                            <span class="mx-1">{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow">
-                            <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            @if (Auth::user()->roles('1') || Auth::user()->id_ONG)
-                                <li><a class="dropdown-item" href="{{ route('Admin') }}">Cambiar a Administracion</a>
+                    <menu>
+                        <li class="nav-item dropdown d-flex align-items-center">
+                            <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
+                            </a>
+                            <a href="#"
+                                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
+                                    class="rounded-circle">
+                                <span class="mx-1">{{ Auth::user()->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow">
+                                <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
                                 </li>
-                            @endif
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
-                        </ul>
-                    </li>
+                                @if (Auth::user()->roles('1') || Auth::user()->id_ONG)
+                                    <li><a class="dropdown-item" href="{{ route('Admin') }}">Cambiar a
+                                            Administracion</a>
+                                    </li>
+                                @endif
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
+                            </ul>
+                        </li>
+                    </menu>
                 </div>
             </div>
         </div>

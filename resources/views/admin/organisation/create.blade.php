@@ -16,7 +16,9 @@
                         <h1 class="card-title">{{ __('Crear nuevo ONG') }} </h1>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" id="formONG" action="{{ route('admin.ong.store') }}"  role="form" enctype="multipart/form-data">
+
+                        <form method="POST" id="formONG" action="{{ route('admin.ong.store') }}"
+                            enctype="multipart/form-data">
                             @csrf
 
                             @include('admin.organisation.form')
