@@ -1,6 +1,6 @@
 @extends('layouts.plantillaAdmin')
 
-@section('titulo', 'Eventos')
+@section('titulo', 'Editar Evento')
 
 @section('contenido')
     <section class="content container-fluid">

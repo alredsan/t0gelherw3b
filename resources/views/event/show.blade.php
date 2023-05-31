@@ -78,6 +78,7 @@
 
             <div class='col-sm-8'>
                 <h4>{{ $event->organisation->Name }}</h4>
+                <a class="btn btn-primary" href="{{ asset("/app?id_ONG=$event->id_ONG") }}">Ver mas eventos sobre el ONG</a>
             </div>
 
         </div>

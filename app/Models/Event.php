@@ -93,6 +93,14 @@ class Event extends Model
      * SCOPE CONSULTAS
      */
     //Fecha
+    public function scopeOrganisation($query, $idONG)
+    {
+        if ($idONG) {
+            return $query->where('id_ONG',$idONG);
+        }
+    }
+
+    //Fecha
     public function scopeFechaEvento($query, $fecha)
     {
         if ($fecha) {

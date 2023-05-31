@@ -20,35 +20,41 @@
                 placeholder="Descripcion">{{ old('Descripcion', $organisation->Descripcion) }}</textarea>
             <div class="invalid-feedback">Introduce la descripcion de ONG</div>
         </div>
-        <div class="form-group">
-            <label for="FechaCreacion">Fecha de Creacion:</label>
-            <input type="date" class="form-control" name="FechaCreacion" id="FechaCreacion"
-                value="{{ old('FechaCreacion', date('Y-m-d', $organisation->FechaCreacion)) }}"
-                placeholder="FechaCreacion" required>
-            <div class="invalid-feedback">Introduce la fecha de creacion</div>
-        </div>
-        <div class="form-group">
-            <label for="IBANmetodoPago">IBAN:</label>
-            <input type="text" class="form-control" name="IBANmetodoPago" id="IBANmetodoPago"
-                value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN" pattern="^[A-Z]{2}\d{2} \d{4} \d{4} \d{4} \d{4} \d{4}$" required>
-            <div class="invalid-feedback">Introduce el IBAN correctamente</div>
+
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <label for="FechaCreacion">Fecha de Creacion:</label>
+                <input type="date" class="form-control" name="FechaCreacion" id="FechaCreacion"
+                    value="{{ old('FechaCreacion', date('Y-m-d', $organisation->FechaCreacion)) }}"
+                    placeholder="FechaCreacion" required>
+                <div class="invalid-feedback">Introduce la fecha de creacion</div>
+            </div>
+            <div class="form-group col-sm-8">
+                <label for="IBANmetodoPago">IBAN:</label>
+                <input type="text" class="form-control" name="IBANmetodoPago" id="IBANmetodoPago"
+                    value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN" pattern="^[A-Z]{2}\d{2} \d{4} \d{4} \d{4} \d{4} \d{4}$" required>
+                <div class="invalid-feedback">Introduce el IBAN correctamente</div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="eMail">Email de contacto</label>
-            <input type="email" class="form-control" name="eMail" id="eMail"
-                value="{{ old('eMail', $organisation->eMail) }}" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" placeholder="eMail" required>
-            <div class="invalid-feedback">Introduce el Email de contacto</div>
+        <div class="row">
+            <div class="form-group col-sm-8">
+                <label for="eMail">Email de contacto</label>
+                <input type="email" class="form-control" name="eMail" id="eMail"
+                    value="{{ old('eMail', $organisation->eMail) }}" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" placeholder="eMail" required>
+                <div class="invalid-feedback">Introduce el Email de contacto</div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="Telefono">Telefono:</label>
+                <input type="text" class="form-control" name="Telefono" id="Telefono"
+                    value="{{ old('Telefono', $organisation->Telefono) }}" placeholder="Telefono" required>
+                <div class="invalid-feedback">Introduce la direccion del Sede</div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="Telefono">Telefono:</label>
-            <input type="text" class="form-control" name="Telefono" id="Telefono"
-                value="{{ old('Telefono', $organisation->Telefono) }}" placeholder="Telefono" required>
-            <div class="invalid-feedback">Introduce la direccion del Sede</div>
-        </div>
+
         <div class="row">
             <div class="col-md">
-                <p for="FotoLogo">Foto :</p>
+                <p class="pt-2" for="FotoLogo">Foto :</p>
                 @if($organisation->FotoLogo)
                     <img src="{{ asset($organisation->FotoLogo) }}" class='w-50' id='FotoPreview' alt="LogoONG">
                 @else
@@ -58,7 +64,7 @@
             <div class="col-md">
                 <label for="FotoLogoSelec">Seleccionar otra foto:</label>
                 <input type="file" class='form-control' name='FotoLogo' id="FotoLogoSelec" accept="image/*">
-                <div class="invalid-feedback">La imgaen debe ser en formato jpg-png-gif</div>
+                <div class="invalid-feedback">La imagen debe ser en formato jpg-png-gif</div>
             </div>
         </div>
 

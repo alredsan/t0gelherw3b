@@ -51,8 +51,8 @@
                                         <th>Fecha evento</th>
                                         <th>Nº max de voluntarios</th>
                                         <th>Direccion</th>
-                                        <th>Latitud</th>
-                                        <th>Longitud</th>
+                                        {{-- <th>Latitud</th> --}}
+                                        {{-- <th>Longitud</th> --}}
                                         <th>Aportaciones</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -71,8 +71,8 @@
                                             <td data-head='Fecha evento'>{{ date('d-m-Y', $event->FechaEvento) }}</td>
                                             <td data-head='Nº max de voluntarios'>{{ $event->numMaxVoluntarios }}</td>
                                             <td data-head='Direccion'>{{ $event->Direccion }}</td>
-                                            <td data-head='Latitud'>{{ $event->Latitud }}</td>
-                                            <td data-head='Longitud'>{{ $event->Longitud }}</td>
+                                            {{-- <td data-head='Latitud'>{{ $event->Latitud }}</td> --}}
+                                            {{-- <td data-head='Longitud'>{{ $event->Longitud }}</td> --}}
                                             <td data-head='Aportaciones'>{{ $event->Aportaciones }}</td>
                                             <td data-head='Estado'>
                                                 @if ($event->Visible)

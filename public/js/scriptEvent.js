@@ -38,3 +38,8 @@ if (formParticipation) {
     });
 }
 
+let tables = $('table');
+
+tables.addClass('table table-bordered table-hover');
+
+tables.wrap("<div class='table-responsive'>");

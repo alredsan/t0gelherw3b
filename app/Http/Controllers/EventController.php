@@ -38,7 +38,7 @@ class EventController extends Controller
      */
     public function indexEventsONG()
     {
-        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->paginate(10);
+        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->orderBy('FechaEvento','DESC')->paginate(10);
 
         $showONG = false;
 
@@ -164,13 +164,19 @@ class EventController extends Controller
     {
         //Validamos los datos
         request()->validate(Event::$rules);
-
         //Buscamos por idEvent
         $data = Event::find($event);
+
+        $particiantesApuntados = EventsUser::where('idEvent', $event)->count();
+
+        if($particiantesApuntados > $request->numMaxVoluntarios){
+            return back()->with('danger-events', 'Hay mas voluntarios apuntados que el numero maximo, elimine voluntarios para editar.');
+        }
 
         $data->Nombre = $request->Nombre;
         $data->Descripcion = $request->Descripcion;
         $data->FechaEvento = strtotime($request->FechaEvento); //Convertir al EPOCH para mayor compatibilidad a largo plazo
+
         $data->numMaxVoluntarios = $request->numMaxVoluntarios;
         $data->Direccion = $request->Direccion;
         $data->Latitud = $request->Latitud;
@@ -203,8 +209,8 @@ class EventController extends Controller
 
 
         // return back()->with('success', 'El evento ha sido actualizado correctamente.');
-        // return redirect()->route('admin.ong.event.index')
-        //     ->with('success', 'El evento ha sido actualizado correctamente.');
+        return redirect()->route('admin.ong.event.index')
+            ->with('success', 'El evento ha sido actualizado correctamente.');
     }
 
     /**
@@ -252,6 +258,10 @@ class EventController extends Controller
 
         $order = $request->input('order');
 
+        $idONG = $request->id_ONG;
+        // if(isset($request->id_ONG)){
+        //     dd($request->id_ONG);
+        // }
         $tipos = Type::all();
 
         //Si ha selecionado que ordene por distancia, comprobamos que tenemos la ubicacion deseada del cliente
@@ -260,6 +270,7 @@ class EventController extends Controller
         }
 
         $events = Event::where("Visible", "=", "1")
+            ->Organisation($idONG)
             ->FechaEvento($fecha)
             ->where('Nombre', 'LIKE', "%$nombre%")
             ->Tematica($type)

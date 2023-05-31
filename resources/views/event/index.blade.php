@@ -18,8 +18,8 @@
                     class="card-img-top" alt="{{ $event->Nombre }}"></div>
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->Nombre }}</h5>
-                    <p class="card-text">{{ date('d-m-Y H:m', $event->FechaEvento) }}</p>
-                    <p>{{$event->distancia}}</p>
+                    <p class="card-text">{{ date('d/m/Y H:m', $event->FechaEvento) }}</p>
+                    <p class="fw-light">{{round($event->distancia,2)}} km</p>
                     <a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más información</a>
                 </div>
             </div>
