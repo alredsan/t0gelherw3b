@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     {{-- ADMINISTRADOR WEB --}}
-                    @if (Auth::user()->roles('1'))
+                    @if ($userAuth->Role >= 4)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -68,7 +68,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if (Auth::user()->id_ONG)
+                    @if ($userAuth->id_ONG)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -82,14 +82,14 @@
                                         <i class="fs-4 bi bi-file-earmark-person"></i> <span class="ms-1">Perfil
                                             ONG</span></a>
                                 </li>
-                                @if (Auth::user()->roles('2') || Auth::user()->roles('3') || Auth::user()->roles('4'))
+
                                     <li>
                                         <a href="{{ route('admin.ong.event.index') }}" class="dropdown-item">
                                             <i class="fs-4 bi bi-calendar-event"></i> <span class="ms-1">Eventos
                                                 ONG</span></a>
                                     </li>
-                                @endif
-                                @if (Auth::user()->roles('2'))
+
+                                @if ($userAuth->Role >= 3)
                                     <li>
                                         <a href="{{ route('admin.ong.usersassign') }}" class="dropdown-item">
                                             <i class="fs-4 bi bi-people"></i> <span class="ms-1">Permisos
@@ -132,9 +132,9 @@
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset(Auth::user()->Foto) }}" alt="fotoPerfil" width="30" height="30"
+                            <img src="{{ asset($userAuth->Foto) }}" alt="fotoPerfil" width="30" height="30"
                                 class="rounded-circle">
-                            <span class="mx-1">{{ Auth::user()->name }}</span>
+                            <span class="mx-1">{{ $userAuth->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark shadow">
                             <li><a class="dropdown-item" href="{{ route('/') }}">Inicio</a></li>

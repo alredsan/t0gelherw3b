@@ -21,11 +21,13 @@ class UserController extends Controller
      */
     public function index()
     {
+        $userAuth = Auth::user();
+
+        if ($userAuth->Role < 4) abort(404);
+
         $users = User::paginate(4);
 
-        return view('admin.user.index',compact('users'));
-        // return view('user.index', compact('users'))
-        //     ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        return view('admin.user.index',compact('users','userAuth'));
     }
 
     /**
@@ -84,14 +86,13 @@ class UserController extends Controller
 
     public function editUserAdmin($idUser)
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
-        if(!$user->roles('1')) abort(404);
+        if ($userAuth->Role < 4) abort(404);
 
         $user = User::find($idUser);
 
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user','userAuth'));
     }
 
     /**
@@ -120,19 +121,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if($id != ""){
-            /** @var \App\Models\User $user **/
-            $user = Auth::user();
-            if($user->roles("1")){
-                $user = User::find($id)->delete();
-            }
+        $userAuth = Auth::user();
 
-        }
+        if ($userAuth->Role < 4) abort(404);
+
+        if($id != "") $user = User::find($id)->delete();
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'El usuario ha sido eliminado correctamente del sistema');
-        // return redirect()->route('/')
-        //     ->with('success', 'El usuario ha sido eliminado correctamente');
+            ->with('success', 'El usuario '.$user->name.' ha sido eliminado correctamente del sistema');
     }
 
     /**

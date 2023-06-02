@@ -94,27 +94,27 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav navcuenta me-auto mb-2 mb-lg-0">
 
-                    <li>
+                    <li class="nav-item">
                         <a href="{{ route('cuenta') }}"
-                            class="nav-link px-2 p align-middle {{ request()->RouteIs('cuenta') ? 'active' : '' }}">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">General</span> </a>
+                            class="nav-link px-2 align-middle {{ request()->RouteIs('cuenta') ? 'active' : '' }}">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1">General</span> </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a href="{{ route('cuenta.perfil') }}"
                             class="nav-link px-2 align-middle {{ request()->RouteIs(['cuenta.perfil', 'cuenta.edit']) ? 'active' : '' }}">
-                            <i class="fs-4 bi bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Perfil</span>
+                            <i class="fs-4 bi bi-person-fill"></i> <span class="ms-1">Perfil</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a href="{{ route('cuenta.pass.edit') }}"
                             class="nav-link px-2 align-middle {{ request()->RouteIs('cuenta.pass.edit') ? 'active' : '' }}">
-                            <i class="fs-4 bi bi-key-fill"></i> <span class="ms-1 d-none d-sm-inline">Cambiar
+                            <i class="fs-4 bi bi-key-fill"></i> <span class="ms-1">Cambiar
                                 contraseña</span> </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a href="{{ route('cuenta.eventos') }}"
                             class="nav-link px-2 align-middle {{ request()->RouteIs('cuenta.eventos') ? 'active' : '' }}">
-                            <i class="fs-4 bi bi-calendar-event-fill"></i> <span class="ms-1 d-none d-sm-inline">Eventos
+                            <i class="fs-4 bi bi-calendar-event-fill"></i> <span class="ms-1">Eventos
                                 Apuntados</span> </a>
                     </li>
                 </ul>

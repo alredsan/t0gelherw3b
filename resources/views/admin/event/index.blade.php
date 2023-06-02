@@ -16,7 +16,7 @@
 
                             <div class="float-right">
                                 {{-- @if (request()->RouteIs('admin.ong.event.index')) --}}
-                                @if (!request()->RouteIs('admin.events.index') && !Auth::user()->roles('4'))
+                                @if (!request()->RouteIs('admin.events.index') && $userAuth->Role >= 2)
                                     <a href="{{ route('admin.ong.event.create') }}" class="btn btn-primary btn-sm float-right"
                                         data-placement="left">
                                         {{ __('Crear nuevo evento') }}
@@ -27,6 +27,11 @@
                     </div>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('fail'))
+                        <div class="alert alert-danger">
                             <p>{{ $message }}</p>
                         </div>
                     @endif
@@ -87,7 +92,7 @@
                                             </td>
 
                                             <td data-head='Acciones'>
-                                                @if (!Auth::user()->roles('4') || Auth::user()->roles('1'))
+                                                @if ($userAuth->Role >= 2)
                                                     <form action="{{ route('admin.ong.event.destroy', $event->idEvento) }}"
                                                         method="POST" class="formActions">
                                                         <a class="btn btn-sm btn-primary "

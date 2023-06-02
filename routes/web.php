@@ -110,8 +110,6 @@ Route::get('/admin/ong/event/volunteers/{id}',[EventController::class,'showUsers
 Route::delete('/admin/ong/event/eliminarParticipante/{idEvent}/{idUser}',[EventController::class,'destroyParticipanteAdmin'])->middleware('auth')->name('admin.event.destroyParticipante');
 
 
-// ADMINISTRACION EVENTOS admin.ong.index
-// Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
     //Asignacion de Usuarios
         //index
 // Route::get('/admin/ong/usersAssign',[OrganisationController::class,'showUserOng'])->middleware('auth')->name('admin.ong.usersassign');
@@ -171,3 +169,6 @@ Route::patch('/cuenta/perfil/editars/{idUser}',[UserController::class,'updateUse
 Route::delete('/admin/users/destroy/{idUser?}',[UserController::class,'destroy'])->middleware('auth')->name('admin.user.destroy');
 
 // Route::resource('ong',OrganisationController::class)->middleware('auth');
+
+// ADMINISTRACION EVENTOS admin.ong.index
+// Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');

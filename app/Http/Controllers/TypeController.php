@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class TypeController
@@ -18,9 +19,13 @@ class TypeController extends Controller
      */
     public function index()
     {
+        $userAuth = Auth::user();
+
+        if ($userAuth->Role < 4) abort(404);
+
         $types = Type::paginate();
 
-        return view('admin.type.index', compact('types'))
+        return view('admin.type.index', compact('types','userAuth'))
             ->with('i', (request()->input('page', 1) - 1) * $types->perPage());
     }
 
@@ -31,8 +36,12 @@ class TypeController extends Controller
      */
     public function create()
     {
+        $userAuth = Auth::user();
+
+        if ($userAuth->Role < 4) abort(404);
+
         $type = new Type();
-        return view('admin.type.create', compact('type'));
+        return view('admin.type.create', compact('type','userAuth'));
     }
 
     /**
@@ -59,13 +68,17 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
+        $userAuth = Auth::user();
+
+        if ($userAuth->Role < 4) abort(404);
+
         $type = Type::find($id);
 
         if(!$type){
             return redirect()->route('admin.types.index')->with('error','No se ha podido encontrar el tipo');
         }
 
-        return view('admin.type.edit', compact('type'));
+        return view('admin.type.edit', compact('type','userAuth'));
     }
 
     /**

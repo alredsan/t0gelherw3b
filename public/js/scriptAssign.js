@@ -137,12 +137,14 @@ window.addEventListener('DOMContentLoaded', function () {
             if (data.result = "Valido") {
                 pName.innerHTML = "<p><strong>Usuario:</strong> "+data.user.name+""+data.user.Apellidos+"</p>";
                 pIdUser.value = data.user.id;
+                console.log(data.user.Role);
+                document.getElementById("role"+data.user.Role).checked = true;
 
-                for (let i = 0; i < data.roles.length; i++) {
-                    let rol = data.roles[i];
+                // for (let i = 0; i < data.roles.length; i++) {
+                //     let rol = data.roles[i];
 
-                    document.getElementById('role[' + rol.idRol + ']').checked = true;
-                }
+                //     document.getElementById(rol.idRol).checked = true;
+                // }
 
                 myModalEdit.show();
             }

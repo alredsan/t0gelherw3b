@@ -27,14 +27,13 @@ class OrganisationController extends Controller
      */
     public function index()
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
         $organisations = Organisation::paginate();
 
-        if ($user->roles('1')) {
+        if ($userAuth->Role >= 4) {
 
-            return view('admin.organisation.index', compact('organisations'))
+            return view('admin.organisation.index', compact('organisations', 'userAuth'))
                 ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
         } else {
             abort(404);
@@ -48,8 +47,14 @@ class OrganisationController extends Controller
      */
     public function create()
     {
-        $organisation = new Organisation();
-        return view('admin.organisation.create', compact('organisation'));
+        $userAuth = Auth::user();
+        if ($userAuth->Role >= 4) {
+
+            $organisation = new Organisation();
+            return view('admin.organisation.create', compact('organisation', 'userAuth'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -98,13 +103,13 @@ class OrganisationController extends Controller
      */
     public function show($id)
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
         $organisation = Organisation::find($id);
 
-        if (Auth::user()->id_ONG == $id || $user->roles('1')) {
-            return view('admin.organisation.show', compact('organisation'));
+        if (Auth::user()->id_ONG == $id || $userAuth->Role >= 4) {
+
+            return view('admin.organisation.show', compact('organisation', 'userAuth'));
         } else {
             abort(404);
         }
@@ -115,12 +120,14 @@ class OrganisationController extends Controller
      */
     public function showModeAdmin()
     {
-        $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
+        $userAuth = Auth::user();
+
+        $organisation = Organisation::where('idONG', $userAuth->id_ONG)->first();
         // $organisation = Organisation::find(Auth::user()->id_ONG);
         if ($organisation == null) {
             abort(404);
         }
-        return view('admin.organisation.show', compact('organisation'));
+        return view('admin.organisation.show', compact('organisation', 'userAuth'));
     }
 
     /**
@@ -131,14 +138,13 @@ class OrganisationController extends Controller
      */
     public function edit($id)
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
         $organisation = Organisation::findOrFail($id);
 
-        if (Auth::user()->id_ONG == $id || $user->roles('1')) {
+        if (Auth::user()->id_ONG == $id || $userAuth->Role >= 4) {
 
-            return view('admin.organisation.edit', compact('organisation'));
+            return view('admin.organisation.edit', compact('organisation', 'userAuth'));
         } else {
             abort(404);
         }
@@ -149,14 +155,15 @@ class OrganisationController extends Controller
      */
     public function showModeAdminEdit()
     {
+        $userAuth = Auth::user();
         // $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
-        $organisation = Organisation::find(Auth::user()->id_ONG);
+        $organisation = Organisation::find($userAuth->id_ONG);
 
         if ($organisation == null) {
             abort(404);
         }
 
-        return view('admin.organisation.edit', compact('organisation'));
+        return view('admin.organisation.edit', compact('organisation', 'userAuth'));
     }
 
     /**
@@ -217,7 +224,12 @@ class OrganisationController extends Controller
      */
     public function destroy($id)
     {
-        $organisation = Organisation::find($id)->delete();
+        try {
+            $organisation = Organisation::find($id)->delete();
+        } catch (Exception $ex) {
+            return redirect()->route('admin.ong.index')
+                ->with('fail', 'EL ONG no ha sido eliminado del sistema, ha producido un error');
+        }
 
         return redirect()->route('admin.ong.index')
             ->with('success', 'EL ONG ha sido eliminado del sistema');
@@ -228,14 +240,13 @@ class OrganisationController extends Controller
     // Mostrar los usuarios que tiene permiso sobre el ONG
     public function showUserOng($id = "")
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
         if ($id != "") {
             $id = intval($id);
             //En caso que tenga un numero en URL , comprobamos que tiene rol requerido WEB
-            if (!((Auth::user()->id_ONG) == $id)) {
-                if (!($user->roles('1'))) {
+            if (!($userAuth->id_ONG == $id && $userAuth->Role >= 3)) {
+                if (($userAuth->Role <= 2)) {
                     //No tiene rol de administracion total o no tiene permiso
                     abort(404);
                 }
@@ -243,17 +254,21 @@ class OrganisationController extends Controller
 
             $id_ONG = $id;
         } else {
-            $id_ONG = Auth::user()->id_ONG;
+            // Comprobar que tiene el rol requerido
+
+            if ($userAuth->Role <= 2) abort(404);
+
+            $id_ONG = $userAuth->id_ONG;
         }
 
 
         $users = User::where('id_ONG', $id_ONG)->paginate(10);
 
-        $roles = Role::where('idRol', '>', '1')->get();
+        $roles = Role::where('idRol', '<', '4')->get();
 
         $organisation = Organisation::findOrFail($id_ONG);
 
-        return view('admin.user.indexUsersONG', compact('users', 'roles', 'organisation'));
+        return view('admin.user.indexUsersONG', compact('users', 'roles', 'organisation', 'userAuth'));
     }
 
     // public function showUserOngAdmin($id)
@@ -275,42 +290,45 @@ class OrganisationController extends Controller
     /**
      * Funcion donde asigna el usuario a un ONG, para gestionarlo
      */
-    public function assignUser(Request $request,Organisation $id)
+    public function assignUser(Request $request, Organisation $id)
     {
+        // dd($request);
         //Recogemos del formulario
         $email = $request->email;
         $rolesAssignRequest = $request->chxRol;
 
         //Comprobamos que tenga los datos requeridos para insertar
-        if($email == "" || $rolesAssignRequest == ""){
-            return back()->with('fail','No has seleccionado usuario o no has seleccionado roles');
+        if ($email == "" || $rolesAssignRequest == "") {
+            return back()->with('fail', 'No has seleccionado usuario o no has seleccionado roles');
         }
 
-        $rolesAssign = array_keys($rolesAssignRequest);
+        // $rolesAssign = array_keys($rolesAssignRequest);
+        $rolesAssign = $rolesAssignRequest;
 
         //Comprobamos si el usuario esta libre o que exista
-        $user = User::where('email', '=', $email)->where('id_ONG','=',NULL)->first();
+        $user = User::where('email', $email)->where('id_ONG', NULL)->first();
 
         if (!$user) {
             //En caso que no exista o ya esta gestionando un ONG
             return back()->with('fail', 'El Usuario no existe o ya gestiona un ONG, el email introducido: ' . $email);
         }
 
-        try{
+        try {
             DB::beginTransaction();
             //Cambiamos la propiedad id_ONG del usuario
 
-            $user->id_ONG = $id->idONG; //Cambiar, por el adminWEb, no tiene la propiedad
+            $user->id_ONG = $id->idONG;
+            $user->Role = $rolesAssign;
             $user->save();
 
             //Guardamos los roles en la tabla intermedia de usuarios-Roles
-            $user->usersRole()->attach($rolesAssign);
+            // $user->usersRole()->attach($rolesAssign);
 
             DB::commit(); //Confirmamos la intregridad de datos
-        }catch(Exception){
+        } catch (Exception) {
             //Revertimos los cambios en BBDD y notificamos al usuario el error producido
             DB::rollBack();
-            return back()->with('fail','Ha habido un error durante el proceso de asignacion de permisos');
+            return back()->with('fail', 'Ha habido un error durante el proceso de asignacion de permisos');
         }
 
 
@@ -323,15 +341,17 @@ class OrganisationController extends Controller
     public function assignUserInfo($id)
     {
 
-        $user = User::select('id', 'name', 'Apellidos', 'id_ONG')->where('id', '=', $id)->first();
+        $user = User::select('id', 'name', 'Apellidos', 'id_ONG', 'Role')->where('id', $id)->first();
 
         if ($user->id_ONG != Auth::user()->id_ONG) {
             return ['result' => 'No valido'];
         }
 
-        $rolesUser = $user->usersRole()->where('users_roles.idRol', '>', '1')->get();
+        // $rolesUser = $user->usersRole()->where('users_roles.idRol', '>', '1')->get();
 
-        $array = ['result' => 'Valido', "user" => $user, "roles" => $rolesUser];
+
+        // $array = ['result' => 'Valido', "user" => $user, "roles" => $rolesUser];
+        $array = ['result' => 'Valido', "user" => $user];
 
 
         return $array;
@@ -347,15 +367,16 @@ class OrganisationController extends Controller
 
         //Eliminamos los permisos principalmente para introducir modificado
         // dd($user->usersRole()->where('users_roles.idRol','>',1)->get());
-        $user->usersRole()->wherePivot('users_roles.idRol','>','1')->detach();
+        // $user->usersRole()->wherePivot('users_roles.idRol','>','1')->detach();
         if ($request->chxRolEdit == null) {
             $user->id_ONG = null;
-            $user->save();
         } else {
 
-            $rolesAssign = array_keys($request->chxRolEdit);
-            $user->usersRole()->attach($rolesAssign);
+            // $rolesAssign = array_keys($request->chxRolEdit);
+            // $user->usersRole()->attach($rolesAssign);
+            $user->Role = $request->chxRolEdit;
         }
+        $user->save();
 
         return back()->with('success', 'Ha sido modificado los permisos correctamente para el Usuario ' . $user->name);
     }
@@ -370,10 +391,12 @@ class OrganisationController extends Controller
         }
 
         $user->id_ONG = NULL;
+        $user->Role = NULL;
         $user->save();
 
         //Eliminar Roles de la tabla relacionada entre Users y Roles (users_roles)
-        $user->usersRole()->detach();
+        // $user->usersRole()->detach();
+
 
         return back()->with('success', 'Usuario' . $user->name . ' ha sido desasignado correctamente');
     }

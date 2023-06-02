@@ -20,7 +20,7 @@
                             </div>
                         @endif
                         <div class="float-right">
-                            @if (Auth::user()->roles('2'))
+                            @if ($userAuth->Role >= 3)
                                 <a class="btn btn-primary" href="{{ route('admin.ong.edit', $organisation->idONG) }}">
                                     {{ __('Editar') }}</a>
                             @endif

@@ -7,10 +7,12 @@ use App\Models\EventsType;
 use App\Models\EventsUser;
 use App\Models\Organisation;
 use App\Models\Type;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Echo_;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -26,10 +28,12 @@ class EventController extends Controller
      */
     public function index()
     {
+        $userAuth = Auth::user();
+
         $events = Event::paginate(7);
         $showONG = true;
 
-        return view('admin.event.index', compact('events', 'showONG'));
+        return view('admin.event.index', compact('events', 'showONG','userAuth'));
         // return view('event.index', compact('events'))
         //     ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
     }
@@ -39,11 +43,13 @@ class EventController extends Controller
      */
     public function indexEventsONG()
     {
-        $events = Event::where('id_ONG', '=', Auth::user()->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
+        $userAuth = Auth::user();
+
+        $events = Event::where('id_ONG', $userAuth->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
 
         $showONG = false;
 
-        return view('admin.event.index', compact('events', 'showONG'));
+        return view('admin.event.index', compact('events', 'showONG', 'userAuth'));
     }
 
     /**
@@ -53,11 +59,13 @@ class EventController extends Controller
      */
     public function create()
     {
+        $userAuth = Auth::user();
+
         $event = new Event();
 
         $types = Type::all();
 
-        return view('event.create', compact('event', 'types'));
+        return view('event.create', compact('event', 'types', 'userAuth'));
     }
 
     /**
@@ -139,16 +147,15 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
         $event = Event::find($id);
 
         $types = Type::all();
 
-        if ($event->id_ONG == Auth::user()->id_ONG || $user->roles('1')) {
+        if (($event->id_ONG == $userAuth->id_ONG && $userAuth->Role >= 2) || $userAuth->Role >= 4) {
 
-            return view('event.edit', compact('event', 'types'));
+            return view('event.edit', compact('event', 'types', 'userAuth'));
         } else {
             abort(404);
         }
@@ -200,7 +207,7 @@ class EventController extends Controller
         }
 
         $data->save();
-        try{
+        try {
             DB::beginTransaction();
             $rows = EventsType::find($event);
             if ($rows != null) {
@@ -209,8 +216,7 @@ class EventController extends Controller
 
             $data->eventsType()->attach($request->selectmultiple);
             DB::commit();
-
-        }catch(Exception){
+        } catch (Exception) {
             DB::rollBack();
             return back()->with('danger-events', 'Ha habido un error en los tipos.')->withInput();
         }
@@ -229,7 +235,13 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = Event::find($id)->delete();
+        try {
+            $event = Event::find($id)->delete();
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.ong.event.index')
+                ->with('fail', 'El evento no ha sido eliminado, ha producido un error');
+        }
 
         return redirect()->route('admin.ong.event.index')
             ->with('success', 'El evento ha sido eliminado');
@@ -289,16 +301,15 @@ class EventController extends Controller
         $tipos = Type::all();
         $organisation = Organisation::all();
 
-        return view('event.index', compact('events', 'tipos', 'request','organisation'));
+        return view('event.index', compact('events', 'tipos', 'request', 'organisation'));
     }
 
     function showUsersEvent(Event $id)
     {
-        /** @var \App\Models\User $user **/
-        $user = Auth::user();
+        $userAuth = Auth::user();
 
-        if (Auth::user()->idONG != $id->idONG) {
-            if (!($user->roles('1'))) {
+        if ($userAuth->idONG != $id->idONG) {
+            if (!($userAuth->Role >= 4)) {
                 abort(404);
             }
         }
@@ -307,7 +318,7 @@ class EventController extends Controller
 
         $users = $event->usuarios()->paginate(10);
 
-        return view('admin.user.indexUsersEvent', compact('event', 'users'));
+        return view('admin.user.indexUsersEvent', compact('event', 'users','userAuth'));
     }
 
     public function destroyParticipanteAdmin($idEvent, $idUser)

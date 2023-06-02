@@ -60,11 +60,9 @@
                                                 <td data-head="Provincia">{{ $user->ProvinciaLocalidad }}</td>
                                                 <td data-head="Telefono">{{ $user->Telefono }}</td>
                                                 <td data-head="Roles">
-                                                    @foreach ($user->usersRole as $role)
-                                                        <div class='alert alert-info p-0 m-0 text-center'>
-                                                            <span class="infoRol">{{ $role->NombreRol }}</span>
-                                                        </div>
-                                                    @endforeach
+                                                    <div class='alert alert-info p-0 m-0 text-center'>
+                                                        <span class="infoRol"> {{ $user->rol->NombreRol }}</span>
+                                                    </div>
                                                 </td>
 
                                                 <td data-head="Acciones">
@@ -123,8 +121,8 @@
                                 {{-- </form> --}}
                             </div>
                             @foreach ($roles as $role)
-                                <input type="checkbox" name="chxRol[{{ $role->idRol }}]" id="role{{ $role->idRol }}">
-                                <label for="role{{ $role->idRol }}">{{ $role->NombreRol }}</label>
+                                <input type="radio" name="chxRol" value="{{ $role->idRol }}" id="{{ $role->idRol }}">
+                                <label for="{{ $role->idRol }}">{{ $role->NombreRol }}</label>
                             @endforeach
 
                         </div>
@@ -153,8 +151,10 @@
                             <strong>Permisos:</strong>
                             <div>
                                 @foreach ($roles as $role)
-                                    <input type="checkbox" class='chkRoleEdit' name="chxRolEdit[{{ $role->idRol }}]"
-                                        id="role[{{ $role->idRol }}]">
+                                    {{-- <input type="checkbox" class='chkRoleEdit' name="chxRolEdit[{{ $role->idRol }}]"
+                                    id="role[{{ $role->idRol }}]"> --}}
+                                    <input type="radio" class='chkRoleEdit' name="chxRolEdit"
+                                        value="{{ $role->idRol }}" id="role{{ $role->idRol }}">
                                     <label for="role{{ $role->idRol }}">{{ $role->NombreRol }}</label>
                                 @endforeach
                             </div>

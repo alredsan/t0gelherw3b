@@ -87,6 +87,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Organisation', 'idONG', 'id_ONG');
     }
 
+    public function rol()
+    {
+        return $this->hasOne(Role::class, 'idRol', 'Role');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

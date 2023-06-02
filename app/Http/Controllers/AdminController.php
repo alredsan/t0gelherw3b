@@ -11,8 +11,11 @@ class AdminController extends Controller
     //
     public function __invoke()
     {
-        if (Auth::user()->id_ONG != null || Auth::user()->roles('1')) {
-            return view('admin.index');
+        $userAuth = Auth::user();
+
+        if ($userAuth->id_ONG != null || $userAuth->Role >= 4) {
+
+            return view('admin.index', compact('userAuth'));
         }
         abort(404);
     }
