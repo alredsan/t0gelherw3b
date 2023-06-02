@@ -70,6 +70,9 @@
                                             class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a>
                                 </li>
                             </ul>
+                            <div>
+                                <i class="bi bi-brightness-high" id="changeColor"></i>
+                            </div>
                         </li>
                     </menu>
                         {{-- Hola {{ Auth::user()->name }}!

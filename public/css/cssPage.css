@@ -22,6 +22,21 @@
     }
 } */
 
+[data-theme="light"]{
+    --background: #ffffff;
+    --text: #000;
+}
+
+[data-theme="dark"]{
+    --background: #201c1c;
+    --text: #fff;
+}
+
+body{
+    background-color: var(--background);
+    color: var(--text);
+}
+
 #selectmultiple {
     height: 20px;
 }
@@ -367,6 +382,8 @@ ul.navbar-nav.navcuenta a.active {
 form label{
     padding-top: 10px;
 }
+
+
 /*
 #account{
     transition: all 0.8s cubic-bezier(1, 0.31, 0.45, 0.94);

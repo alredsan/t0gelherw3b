@@ -112,3 +112,23 @@ window.addEventListener('DOMContentLoaded', function () {
     })
 
 });
+
+
+// const preferedColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+// console.log(preferedColor);
+
+// const button = document.getElementById('changeColor');
+
+// const setTheme = (theme) => {
+//     document.documentElement.setAttribute('data-theme',theme);
+//     localStorage.setItem('theme',theme);
+// }
+
+// button.addEventListener('click',function(){
+//     let buttonSelect = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+
+//     setTheme(buttonSelect);
+// });
+
+// setTheme(localStorage.getItem('theme') || preferedColor);
