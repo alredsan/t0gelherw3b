@@ -66,19 +66,24 @@
                                                     style="width:100px" alt="Foto Perfil"></td>
 
                                             <td data-head="Acciones">
+                                                <div>
 
-                                                <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
+
+                                                    {{-- <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"> --}}
                                                     {{-- <a class="btn btn-sm btn-primary " href="{{ route('admin.ong.show',$organisation->idONG) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('admin.user.edit', $user->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
+                                                    {{-- @csrf --}}
 
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm btnDelete"><i
+                                                    {{-- @method('DELETE') --}}
+                                                    <button type="submit"
+                                                        data-action="{{ route('admin.user.destroy', $user->id) }}"
+                                                        class="btn btn-danger btn-sm btnDelete"><i
                                                             class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
 
-                                                </form>
+                                                    {{-- </form> --}}
+                                                </div>
                                             </td>
                                             {{-- <td>
                                                  <a class="btn btn-sm btn-success" href="{{ route('admin.ong.usersassign',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Ver Usuarios con permisos') }}</a>

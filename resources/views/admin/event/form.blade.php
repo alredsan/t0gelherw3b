@@ -41,7 +41,7 @@
             <div class="form-group col-sm-5">
                 <label for="numMaxVoluntarios">Numero maximo de voluntarios:</label>
                 <input type="number" class='form-control' name='numMaxVoluntarios' id='numMaxVoluntarios'
-                    placeholder='numero Maximo de Voluntarios' min="0"
+                    placeholder='numero Maximo de Voluntarios' min="1"
                     value='{{ old('numMaxVoluntarios', $event->numMaxVoluntarios) }}'>
                 <div class="invalid-feedback">Introduce un numero maximo del voluntario del evento</div>
             </div>

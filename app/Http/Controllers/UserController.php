@@ -139,10 +139,6 @@ class UserController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        // $prueba = $user->eventos::where("Visible","=","1");
-
-        // dd($prueba);
-
         return view('cuenta.showEventsCuenta', compact('user'));
     }
 
@@ -250,7 +246,7 @@ class UserController extends Controller
     }
 
     /**
-     * Login del usuario en el sistema, utilizando el Auth de Lavarel
+     * Login del usuario en el sistema, utilizando el Auth de Laravel
      */
     public function login(Request $request)
     {
@@ -380,14 +376,9 @@ class UserController extends Controller
     }
 
     /**
-     * Relacion con la tabla de roles que tiene el usuario
+     * Donde se devuelve en JSON un registro de 3 personas que no tiene ningun acceso a un ONG
+     * para asignarle nuevo permisos
      */
-    // public function roles()
-    // {
-    //     return $this->belongsToMany(Role::class);
-    // }
-
-
     public function searchUsers(Request $request)
     {
         $email = $request->email;

@@ -17,7 +17,7 @@
                         <form method="POST" action="{{ route('admin.ong.event.store') }}" id="formEvent" role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('event.form')
+                            @include('admin.event.form')
 
                         </form>
                     </div>

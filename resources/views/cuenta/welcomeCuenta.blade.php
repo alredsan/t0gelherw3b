@@ -3,11 +3,10 @@
 @section('titulo', 'Cuenta')
 
 @section('contenido')
-    {{-- <h1>Hola</h1> --}}
+
     <h1 class="pb-5">Bienvenido, {{ Auth::user()->name }}</h1>
 
     <div class='d-flex flex-wrap gap-5 justify-content-around'>
-
 
         <div class="col-lg-5">
             <div>
@@ -40,36 +39,6 @@
                                 </tr>
                             @endforelse
 
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end">
-
-                        <a href="{{ route('cuenta.eventos') }}">Ver más... ></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <div>
-                <h2>Titlo</h2>
-            </div>
-            <div class="card-body bg-white">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="thead">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Fecha</th>
-                                <th>Ver</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>dd</td>
-                                <td>dd</td>
-                                <td>dd</td>
-                            </tr>
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end">

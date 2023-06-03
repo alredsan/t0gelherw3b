@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class TypeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar los tipos que puede tener un evento para mejor filtración de eventos
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +30,7 @@ class TypeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario de nuevo TIPO
      *
      * @return \Illuminate\Http\Response
      */
@@ -45,7 +45,7 @@ class TypeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * STORE: Almacenar el nuevo tipo tras de realizar el FORM
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -61,7 +61,7 @@ class TypeController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * EDIT: mostrar el formulario para editar el tipo seleccionado
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -82,7 +82,7 @@ class TypeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * UPDATE: donde se actualiza el tipo tras del formulario
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Type $type
@@ -100,6 +100,8 @@ class TypeController extends Controller
     }
 
     /**
+     * Donde se elimina el tipo del sistema
+     *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception

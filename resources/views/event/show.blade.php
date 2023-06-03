@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <section class="container">
+    <section class="container pt-5">
         <div class="row">
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -91,8 +91,14 @@
 
         <div class="d-flex flex-wrap justify-content-between pb-3">
             <h3>Donde se encuentra:</h3>
-            <a class="btn btn-success" href="https://www.google.com/maps/search/?api=1&query={{$event->Latitud}},{{$event->Longitud}}">Abrir con Google Maps</a>
-            <a class="btn btn-success" href="https://maps.apple.com/?ll={{$event->Latitud}},{{$event->Longitud}}&lsp=7618&q=Evento">Abrir con Apple Maps</a>
+            <div>
+                <a class="btn btn-success"
+                    href="https://www.google.com/maps/search/?api=1&query={{ $event->Latitud }},{{ $event->Longitud }}">Abrir
+                    con Google Maps</a>
+                <a class="btn btn-success"
+                    href="https://maps.apple.com/?ll={{ $event->Latitud }},{{ $event->Longitud }}&lsp=7618&q=Evento">Abrir
+                    con Apple Maps</a>
+            </div>
         </div>
 
 
@@ -107,7 +113,8 @@
 
             <div class='col-sm-8'>
                 <h4>{{ $event->organisation->Name }}</h4>
-                <a class="btn btn-primary" href="{{ asset("/app?id_ONG=$event->id_ONG") }}">Ver más eventos que organiza el ONG</a>
+                <a class="btn btn-primary" href="{{ asset("/app?id_ONG=$event->id_ONG") }}">Ver más eventos que organiza el
+                    ONG</a>
             </div>
             <h4>Descripcion sobre ONG:</h4>
             {!! $event->organisation->Descripcion !!}
@@ -122,19 +129,33 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">¿Cuanto quieres donar al evento?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('events.donative', $event->idEvento) }}" method="post">
-                    @csrf
+                @auth
+                    <form action="{{ route('events.donative', $event->idEvento) }}" id="donativeform" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <input type="number" name="donative" id="donative" class="form-control" min="0.5" step="any"
+                                    aria-label="Introduce la cantidad que quieres donar">
+                                <span class="input-group-text">€</span>
+                                <div class="invalid-feedback">La cantidad introducida no es correcta</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Donar</button>
+                        </div>
+                    </form>
+                @else
                     <div class="modal-body">
                         <div class="input-group">
-                            <input type="text" name="donative" class="form-control" aria-label="Introduce la cantidad que quieres donar">
-                            <span class="input-group-text">€</span>
+                            Debes iniciar sesion para poder realizar la donacion
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Donar</button>
+                        <a href="{{ route('login') }}" class="btn btn-primary">Inicia Sesion</a>
                     </div>
-                </form>
+                @endauth
             </div>
         </div>
     </div>
@@ -142,6 +163,7 @@
 
 @section('scripts')
     <script src="/js/scriptEvent.js"></script>
+    <script src="/js/validation.js"></script>
 @endsection
 
 @section('styleCssPag')

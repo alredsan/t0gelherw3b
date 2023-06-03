@@ -89,8 +89,9 @@ body{
     padding: 10px 25px 10px 25px;
 
     background-color: white;
-    border-radius: 2px;
-    box-shadow: 8px 6px 9px 0px black;
+    border-radius: 10px;
+    /* box-shadow: 8px 6px 9px 0px black; */
+    box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.192);
 
 }
 

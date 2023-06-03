@@ -1,4 +1,4 @@
-<form action="{{ route('eventsFilter') }}" class="form_principal" method="GET">
+<form action="{{ route('eventsFilter') }}" id="formSearch" class="form_principal" method="GET">
     <div class="row g-2">
         <div class="col-md">
             <div class="form-floating mb-3">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="row col-md-2">
+    <div class="row g-2 col-md-2">
         <button type='button' class="btn btn-primary" id='btnMoreFilters'>Mas filtros <i
                 class="bi bi-arrow-down-short"></i></button>
     </div>

@@ -40,7 +40,8 @@ function mostrarContrasena() {
         "/admin/users": () => confirmModalDelete(),
         "/admin/users/editar": () => validateFormUser(),
         "/admin/types/add": () => validateFormTypes(),
-        "/admin/types/edit": () => validateFormTypes()
+        "/admin/types/edit": () => validateFormTypes(),
+        "/app/event": () => validateFormDonative()
     };
 
     /**
@@ -50,7 +51,7 @@ function mostrarContrasena() {
     window.addEventListener('DOMContentLoaded', function () {
         let url = window.location.pathname.split(/\/\d/)[0];
 
-        // console.log(url);
+        console.log(url);
         try {
             validatorsForms[url]();
         } catch (error) { }
@@ -85,8 +86,7 @@ function mostrarContrasena() {
             boton.addEventListener("click", function (event) {
 
                 event.preventDefault();
-
-                formModal.action = event.target.form.action;
+                formModal.action = event.target.dataset.action;
 
                 myModalDeleteUser.show();
             });
@@ -820,6 +820,32 @@ function mostrarContrasena() {
         });
         $(validateONGForm.Nombre).change(defaultCheckElement);
 
+    }
+
+    function validateFormDonative(){
+        let validateFormDonative = document.forms.donativeform;
+
+
+        $(validateFormDonative).attr('novalidate', true);
+        $(validateFormDonative).submit(function (event) {
+            let isValid = true;
+            let firstInvalidElement = null;
+
+            if (this.donative.checkValidity()) {
+                showFeedBack($(this.donative), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.donative;
+                showFeedBack($(this.donative), false);
+            }
+            if (!isValid) {
+                firstInvalidElement.focus();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+        });
+        $(validateFormDonative.donative).change(defaultCheckElement);
     }
 
 })();

@@ -13,8 +13,9 @@
 <body id="bodyBackground">
     <div class='d-flex flex-column align-items-center justify-content-center'>
         <img class='w-25' src="/img/logo.png" alt="">
-        <b id="codeError">404</b>
-        <b id="messageError">Pagina no encontrada o no tienes acceso</b>
+        <b id="codeError">500</b>
+        <b id="messageError">Upss, Error interno del servidor </b>
+        <b id="messageError">Intentalo más tarde</b>
 
         <div class='enlacesForm'>
             <a class="form__button" href="{{ route('/') }}">Volver a Inicio</a>

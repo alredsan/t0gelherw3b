@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Organisation;
 use App\Models\Type;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,8 +32,8 @@ class HomeController extends Controller
             $tipos = Type::all();
             $organisation = Organisation::all();
 
-        }catch(Exception){
-            abort(404);
+        }catch(QueryException $ex){
+            abort(500);
         }
 
         return view('inicio',compact('tipos','organisation'));

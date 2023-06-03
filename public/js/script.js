@@ -26,10 +26,10 @@ window.addEventListener('DOMContentLoaded', function () {
         prueba.onload = function (data) {
             let result = JSON.parse(data.target.response);
 
-            if(result.address.city){
+            if (result.address.city) {
                 inputLocalidad.value = result.address.city;
 
-            }else{
+            } else {
                 inputLocalidad.value = result.address.town;
             }
         }
@@ -101,11 +101,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
     divMoreFilters.style.display = 'none';
 
-    botonMoreFilters.addEventListener('click',function(){
+    botonMoreFilters.addEventListener('click', function () {
 
-        if(divMoreFilters.style.display == 'none'){
+        if (divMoreFilters.style.display == 'none') {
             divMoreFilters.style.display = 'flex';
-        }else{
+        } else {
             divMoreFilters.style.display = 'none';
         }
 

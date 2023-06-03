@@ -7,13 +7,10 @@ use App\Models\EventsType;
 use App\Models\EventsUser;
 use App\Models\Organisation;
 use App\Models\Type;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Echo_;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class EventController
@@ -34,8 +31,6 @@ class EventController extends Controller
         $showONG = true;
 
         return view('admin.event.index', compact('events', 'showONG','userAuth'));
-        // return view('event.index', compact('events'))
-        //     ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
     }
 
     /**
@@ -65,7 +60,7 @@ class EventController extends Controller
 
         $types = Type::all();
 
-        return view('event.create', compact('event', 'types', 'userAuth'));
+        return view('admin.event.create', compact('event', 'types', 'userAuth'));
     }
 
     /**
@@ -114,6 +109,9 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
+        // en caso que no tiene la sesion, guardar la url para cuando inicie sesion, no pierda la pagina que estaba
+        app('redirect')->setIntendedUrl(request()->fullUrl());
+
         //Comprobamos que el evento este visible
         if (!$event->Visible) {
             //En caso que no este visible, comprobamos que tiene permiso
@@ -155,7 +153,7 @@ class EventController extends Controller
 
         if (($event->id_ONG == $userAuth->id_ONG && $userAuth->Role >= 2) || $userAuth->Role >= 4) {
 
-            return view('event.edit', compact('event', 'types', 'userAuth'));
+            return view('admin.event.edit', compact('event', 'types', 'userAuth'));
         } else {
             abort(404);
         }
@@ -304,12 +302,15 @@ class EventController extends Controller
         return view('event.index', compact('events', 'tipos', 'request', 'organisation'));
     }
 
+    /**
+     * Donde muestra los voluntarios apuntados a un evento
+     */
     function showUsersEvent(Event $id)
     {
         $userAuth = Auth::user();
 
-        if ($userAuth->idONG != $id->idONG) {
-            if (!($userAuth->Role >= 4)) {
+        if ($userAuth->id_ONG != $id->id_ONG) {
+            if (($userAuth->Role < 4)) {
                 abort(404);
             }
         }
@@ -321,6 +322,9 @@ class EventController extends Controller
         return view('admin.user.indexUsersEvent', compact('event', 'users','userAuth'));
     }
 
+    /**
+     * Donde se elimina la participacion del evento mediante por ADMINISTRACION
+     */
     public function destroyParticipanteAdmin($idEvent, $idUser)
     {
         try {
@@ -335,7 +339,10 @@ class EventController extends Controller
         return back()->with('success', 'Ya no participa en ese Evento');
     }
 
-
+    /**
+     * Donde se recibe la cantidad donacion para un evento y actualizar el contador de APORTACIONES
+     * Como futura aportacion, uso de la pasarela de PAYPAL con una tabla en BBDD para tener el registro
+     */
     public function aportacionEvent(Request $request, Event $id)
     {
         $donacion = $request->donative;

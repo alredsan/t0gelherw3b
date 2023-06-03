@@ -75,7 +75,7 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <th colspan="10" class="text-center">No hay Usuarios con permisos</th>
+                                            <th colspan="10" class="text-center">No hay voluntarios apuntados</th>
                                         @endforelse
                                     </tbody>
                                 </table>

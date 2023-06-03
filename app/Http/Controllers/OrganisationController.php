@@ -6,7 +6,6 @@ use App\Models\Organisation;
 use App\Models\Role;
 use App\Models\User;
 use Exception;
-use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -173,19 +172,6 @@ class OrganisationController extends Controller
      * @param  Organisation $organisation
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Organisation $organisation)
-    // {
-    //     request()->validate(Organisation::$rules);
-
-    //     $organisation->update($request->all());
-
-    //     return redirect()->route('organisations.index')
-    //         ->with('success', 'Organisation updated successfully');
-    // }
-
-    /**
-     * Actualizar el ONG que tiene permiso hacerlo
-     */
     public function ModeAdminONGUpdate(Request $request, Organisation $organisation)
     {
         request()->validate(Organisation::$rules);
@@ -337,7 +323,10 @@ class OrganisationController extends Controller
         //redirect()->route('admin.ong.usersassign')
     }
 
-
+    /**
+     * Donde se devuelve la informacion de UN usuario del sistema de forma simplicada
+     * (id, name, Apellidos, id_ONG, Role)
+     */
     public function assignUserInfo($id)
     {
 
@@ -347,16 +336,14 @@ class OrganisationController extends Controller
             return ['result' => 'No valido'];
         }
 
-        // $rolesUser = $user->usersRole()->where('users_roles.idRol', '>', '1')->get();
-
-
-        // $array = ['result' => 'Valido', "user" => $user, "roles" => $rolesUser];
         $array = ['result' => 'Valido', "user" => $user];
-
 
         return $array;
     }
 
+    /**
+     * Donde recibe del form de Edicion Roles de un usuario
+     */
     public function assignUserEdit(Request $request)
     {
         $user = User::find($request->idUser);
@@ -381,6 +368,9 @@ class OrganisationController extends Controller
         return back()->with('success', 'Ha sido modificado los permisos correctamente para el Usuario ' . $user->name);
     }
 
+    /**
+     * En caso que pulse el boton de eliminar permiso de un usuario
+     */
     public function desassignUser($id)
     {
 
@@ -393,10 +383,6 @@ class OrganisationController extends Controller
         $user->id_ONG = NULL;
         $user->Role = NULL;
         $user->save();
-
-        //Eliminar Roles de la tabla relacionada entre Users y Roles (users_roles)
-        // $user->usersRole()->detach();
-
 
         return back()->with('success', 'Usuario' . $user->name . ' ha sido desasignado correctamente');
     }

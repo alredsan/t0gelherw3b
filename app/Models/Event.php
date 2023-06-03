@@ -32,7 +32,7 @@ class Event extends Model
         'Nombre' => ['required','min:3'],
         'Descripcion' => 'required',
         'FechaEvento' => ['required','date'],
-        'numMaxVoluntarios' => ['required','gt:0'],
+        'numMaxVoluntarios' => ['required','gt:1'],
         'Direccion' => ['required','min:3'],
         'Latitud' => 'required',
         'Foto' => 'image|max:2048',
