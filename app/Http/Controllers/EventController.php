@@ -222,9 +222,7 @@ class EventController extends Controller
             return back()->with('danger-events', 'Ha habido un error en los tipos.')->withInput();
         }
 
-
-        // return back()->with('success', 'El evento ha sido actualizado correctamente.');
-        return redirect()->route('admin.ong.event.index')
+        return redirect()->route('events.show',$data->idEvento)
             ->with('success', 'El evento ha sido actualizado correctamente.');
     }
 
@@ -258,8 +256,6 @@ class EventController extends Controller
             ->where('idUser', '=', Auth::user()->id);
         $participante->delete();
 
-        // return redirect()->route('perfil')
-        //     ->with('success-events', 'Ya no participas en este evento');
         return back()->with('success-events', 'Ya no participa en ese Evento');
     }
 
@@ -280,9 +276,6 @@ class EventController extends Controller
         $order = $request->input('order');
 
         $idONG = $request->id_ONG;
-        // if(isset($request->id_ONG)){
-        //     dd($request->id_ONG);
-        // }
 
 
         //Si ha selecionado que ordene por distancia, comprobamos que tenemos la ubicacion deseada del cliente

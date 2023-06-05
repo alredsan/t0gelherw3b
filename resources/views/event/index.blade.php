@@ -22,7 +22,7 @@
                                 class="card-img-top"></div>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="card-bodyEvent">
                                 <h5 class="card-title">{{ $event->Nombre }}</h5>
                                 @php $show = substr($event->Descripcion,0,50) @endphp
                                 <p class="card-text">{!! $show !!}...</p>

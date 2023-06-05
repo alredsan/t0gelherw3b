@@ -85,7 +85,7 @@
         </div>
 
         @php
-            $typeSelect = old('selectmultiple', $event->eventsType);
+            $typeSelect = $event->eventsType;
             $idTypesSelect = [];
             foreach ($typeSelect as $type) {
                 $idTypesSelect[] = $type['idtypeONG'];

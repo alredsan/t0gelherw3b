@@ -236,6 +236,10 @@ body{
     padding: 10px;
 }
 
+.card-bodyEvent{
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+}
+
 #bodyBackground {
 
     opacity: 1;
