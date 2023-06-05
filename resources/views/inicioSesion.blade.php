@@ -31,9 +31,6 @@
 
             <label for="passwd">Contraseña</label>
             <div class="form__pass">
-                {{-- <input class="form__input" type="password" name="passwd" id="passwd"
-                    title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
-                    required autocomplete="on"> --}}
                 <input class="form__input" type="password" name="passwd" id="passwd"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"
                     title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"

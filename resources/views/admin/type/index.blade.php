@@ -16,11 +16,12 @@
                                 {{ __('Tipos Evento') }}
                             </h1>
 
-                             <div class="float-right">
-                                <a href="{{ route('admin.types.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo tipo') }}
+                            <div class="float-right">
+                                <a href="{{ route('admin.types.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Crear nuevo tipo') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -35,8 +36,8 @@
                                 <thead class="thead">
                                     <tr>
 
-										<th>Id</th>
-										<th>Nombre</th>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
 
                                         <th>Acciones</th>
                                     </tr>
@@ -44,16 +45,14 @@
                                 <tbody>
                                     @foreach ($types as $type)
                                         <tr>
-											<td data-head="Id">{{ $type->idtypeONG }}</td>
-											<td data-head="Nombre">{{ $type->Nombre }}</td>
+                                            <td data-head="Id">{{ $type->idtypeONG }}</td>
+                                            <td data-head="Nombre">{{ $type->Nombre }}</td>
                                             <td data-head="Acciones">
-                                                <form action="{{ route('admin.types.destroy',$type->idtypeONG) }}" method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('types.show',$type->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.types.edit',$type->idtypeONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
-                                                </form>
+                                                <a class="btn btn-sm btn-success" href="{{ route('admin.types.edit', $type->idtypeONG) }}">{{ __('Editar') }}</a>
+
+                                                <button type="submit"
+                                                    data-action="{{ route('admin.types.destroy', $type->idtypeONG) }}"
+                                                    class="btn btn-danger btn-sm btnDelete"> {{ __('Eliminar') }}</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -66,4 +65,31 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeleteLabel">Eliminar Tipo ¿Estas Seguro?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" id="formDeleteModal" method="POST">
+                    <div class="modal-body">
+                        @csrf
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar tipo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scriptsJS')
+    <script src="/js/modalDelete.js"></script>
+@endpush

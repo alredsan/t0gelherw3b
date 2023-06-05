@@ -12,9 +12,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h1 class="card-title pb-5">Eventos Apuntados Proximos</h1>
-                            {{-- <div class="float-right">
-                                <a href="#" class="card-title">Ver eventos realizados ></a>
-                            </div> --}}
+
                             @if ($message = Session::get('success-events'))
                                 <div class="alert alert-success">
                                     <p>{{ $message }}</p>
@@ -44,7 +42,6 @@
                                                 <td data-head="Identificacion">{{ $event->idEvento }}</td>
                                                 <td data-head="Nombre ONG">{{ $event->organisation->Name }}</td>
                                                 <td data-head="Nombre">{{ $event->Nombre }}</td>
-                                                {{-- <td>{{ $event->Descripcion }}</td> --}}
                                                 <td data-head="Fecha">{{ date('d-m-Y H:m', $event->FechaEvento) }}</td>
 
                                                 <td data-head="Direccion">{{ $event->Direccion }}</td>

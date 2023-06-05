@@ -141,7 +141,7 @@ class OrganisationController extends Controller
 
         $organisation = Organisation::findOrFail($id);
 
-        if (Auth::user()->id_ONG == $id || $userAuth->Role >= 4) {
+        if ((Auth::user()->id_ONG == $id && $userAuth->Role >= 3) || $userAuth->Role >= 4) {
 
             return view('admin.organisation.edit', compact('organisation', 'userAuth'));
         } else {
@@ -158,7 +158,7 @@ class OrganisationController extends Controller
         // $organisation = Organisation::where('idONG', '=', Auth::user()->id_ONG)->first();
         $organisation = Organisation::find($userAuth->id_ONG);
 
-        if ($organisation == null) {
+        if ($organisation == null || $userAuth->Role == 1) {
             abort(404);
         }
 
@@ -211,8 +211,16 @@ class OrganisationController extends Controller
     public function destroy($id)
     {
         try {
-            $organisation = Organisation::find($id)->delete();
+            DB::beginTransaction();
+            //Cambiamos los roles, aplicando NULL menos al WEB
+            User::where('id_ONG',$id)->where('Role','<',4)->update(['Role'=>NULL]);
+
+            //Eliminamos el ONG y ya asigna NULL al usuario por clave foranea
+            Organisation::find($id)->delete();
+
+            DB::commit();
         } catch (Exception $ex) {
+            DB::rollBack();
             return redirect()->route('admin.ong.index')
                 ->with('fail', 'EL ONG no ha sido eliminado del sistema, ha producido un error');
         }
@@ -232,7 +240,7 @@ class OrganisationController extends Controller
             $id = intval($id);
             //En caso que tenga un numero en URL , comprobamos que tiene rol requerido WEB
             if (!($userAuth->id_ONG == $id && $userAuth->Role >= 3)) {
-                if (($userAuth->Role <= 2)) {
+                if (($userAuth->Role <= 3)) {
                     //No tiene rol de administracion total o no tiene permiso
                     abort(404);
                 }
@@ -256,22 +264,6 @@ class OrganisationController extends Controller
 
         return view('admin.user.indexUsersONG', compact('users', 'roles', 'organisation', 'userAuth'));
     }
-
-    // public function showUserOngAdmin($id)
-    // {
-    //     if (!Auth::user()->roles('1')) {
-    //         abort(404);
-    //     }
-
-    //     $id_ONG = $id;
-
-    //     $users = User::where('id_ONG', $id_ONG)->paginate(10);
-
-    //     $roles = Role::where('idRol', '>', '1')->get();
-
-
-    //     return view('admin.user.indexUsersONG', compact('users', 'roles'));
-    // }
 
     /**
      * Funcion donde asigna el usuario a un ONG, para gestionarlo
@@ -352,9 +344,6 @@ class OrganisationController extends Controller
             return back()->with('success', 'No se ha podido realizar la peticion: Usuario no encontrado');
         }
 
-        //Eliminamos los permisos principalmente para introducir modificado
-        // dd($user->usersRole()->where('users_roles.idRol','>',1)->get());
-        // $user->usersRole()->wherePivot('users_roles.idRol','>','1')->detach();
         if ($request->chxRolEdit == null) {
             $user->id_ONG = null;
         } else {
@@ -381,7 +370,12 @@ class OrganisationController extends Controller
         }
 
         $user->id_ONG = NULL;
-        $user->Role = NULL;
+
+        //Comprobamos si el rol no sea ADMINWEB
+        if($user->Role <= 3){
+            $user->Role = NULL;
+        }
+
         $user->save();
 
         return back()->with('success', 'Usuario' . $user->name . ' ha sido desasignado correctamente');

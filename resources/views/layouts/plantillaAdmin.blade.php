@@ -61,10 +61,6 @@
                                         <i class="fs-4 bi bi-hash"></i>
                                         <span class="ms-1">Tipos</span></a>
                                 </li>
-                                {{-- <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                             </ul>
                         </li>
                     @endif
@@ -83,11 +79,11 @@
                                             ONG</span></a>
                                 </li>
 
-                                    <li>
-                                        <a href="{{ route('admin.ong.event.index') }}" class="dropdown-item">
-                                            <i class="fs-4 bi bi-calendar-event"></i> <span class="ms-1">Eventos
-                                                ONG</span></a>
-                                    </li>
+                                <li>
+                                    <a href="{{ route('admin.ong.event.index') }}" class="dropdown-item">
+                                        <i class="fs-4 bi bi-calendar-event"></i> <span class="ms-1">Eventos
+                                            ONG</span></a>
+                                </li>
 
                                 @if ($userAuth->Role >= 3)
                                     <li>
@@ -101,12 +97,6 @@
 
                         </li>
                     @endif
-
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('/') }}" class="nav-link">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
-                        </a>
-                    </li> --}}
 
                 </ul>
                 <div class="text-end">
@@ -126,9 +116,6 @@
             <div class="col-md-2 text-end" id="account">
                 <menu>
                     <li class="nav-item dropdown d-flex align-items-center">
-                        {{-- <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
-                        <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
-                    </a> --}}
                         <a href="#"
                             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -158,8 +145,7 @@
         </div>
     </nav>
 
-    <div class='container pt-5 '>
-        {{-- @dump(request()->routeIs(['admin.ong','admin.ong.edit','admin.ong.update','admin.ong.event.index'])) --}}
+    <div class='container pt-5'>
         @yield('contenido')
     </div>
 

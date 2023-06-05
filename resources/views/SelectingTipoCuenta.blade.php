@@ -11,13 +11,16 @@
 
             <a href="{{ route('cuenta') }}">Voluntario</a>
             <a href="{{ route('Admin') }}">
+                @php($ongExists = false)
                 @if (Auth::user()->id_ONG != null)
                     Administrador ONG
                     @php($ongExists = true)
                 @endif
-                @if (Auth::user()->roles('1'))
+                @if (Auth::user()->Role == 4)
                     @if ($ongExists)
                         /
+                    @else
+                        Administar
                     @endif
                     WEB
                 @endif

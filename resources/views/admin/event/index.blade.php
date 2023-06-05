@@ -15,7 +15,6 @@
                             </h1>
 
                             <div class="float-right">
-                                {{-- @if (request()->RouteIs('admin.ong.event.index')) --}}
                                 @if (!request()->RouteIs('admin.events.index') && $userAuth->Role >= 2)
                                     <a href="{{ route('admin.ong.event.create') }}" class="btn btn-primary btn-sm float-right"
                                         data-placement="left">
@@ -56,8 +55,6 @@
                                         <th>Fecha evento</th>
                                         <th>Nº max de voluntarios</th>
                                         <th>Direccion</th>
-                                        {{-- <th>Latitud</th> --}}
-                                        {{-- <th>Longitud</th> --}}
                                         <th>Aportaciones</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -76,8 +73,6 @@
                                             <td data-head='Fecha evento'>{{ date('d-m-Y', $event->FechaEvento) }}</td>
                                             <td data-head='Nº max de voluntarios'>{{ $event->numMaxVoluntarios }}</td>
                                             <td data-head='Direccion'>{{ $event->Direccion }}</td>
-                                            {{-- <td data-head='Latitud'>{{ $event->Latitud }}</td> --}}
-                                            {{-- <td data-head='Longitud'>{{ $event->Longitud }}</td> --}}
                                             <td data-head='Aportaciones'>{{ $event->Aportaciones }}</td>
                                             <td data-head='Estado'>
                                                 @if ($event->Visible)
@@ -91,22 +86,17 @@
                                                 @endif
                                             </td>
 
-                                            <td data-head='Acciones'>
+                                            <td data-head='Acciones' class="formActions">
                                                 @if ($userAuth->Role >= 2)
-                                                    <form action="{{ route('admin.ong.event.destroy', $event->idEvento) }}"
-                                                        method="POST" class="formActions">
-                                                        <a class="btn btn-sm btn-primary "
-                                                            href="{{ route('events.show', $event->idEvento) }}"><i
-                                                                class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
-                                                        <a class="btn btn-sm btn-success"
-                                                            href="{{ route('admin.ong.event.edit', $event->idEvento) }}"><i
-                                                                class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa fa-fw fa-trash"></i>
-                                                            {{ __('Eliminar') }}</button>
-                                                    </form>
+                                                    <a class="btn btn-sm btn-primary"
+                                                        href="{{ route('events.show', $event->idEvento) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('admin.ong.event.edit', $event->idEvento) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+
+                                                        <button type="submit"
+                                                        data-action="{{ route('admin.ong.event.destroy', $event->idEvento) }}"
+                                                        class="btn btn-danger btn-sm btnDelete"><i class="fa fa-fw fa-trash"></i>
+                                                        {{ __('Eliminar') }}</button>
                                                 @else
                                                     <div class="formActions">
                                                         <a class="btn btn-sm btn-primary "
@@ -140,4 +130,33 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalDeleteLabel">Eliminar Evento ¿Estas Seguro?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" id="formDeleteModal" method="POST">
+                    <div class="modal-body">
+                        @csrf
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar Evento</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+
+
+@push('scriptsJS')
+    <script src="/js/modalDelete.js"></script>
+@endpush

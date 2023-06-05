@@ -1,11 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
 
-        {{-- <div class="form-group">
-             <label for="DNI">DNI</label>
-            <input type="text" class="form-control" name="DNI" id="DNI" value="{{$user->DNI}}" placeholder="DNI">
-            <div class="invalid-feedback">Introduce el DNI</div>
-        </div> --}}
         <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" class="form-control" name="name" id="name" value="{{ old('name',$user->name) }}"

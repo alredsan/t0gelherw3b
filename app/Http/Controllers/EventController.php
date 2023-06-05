@@ -27,6 +27,8 @@ class EventController extends Controller
     {
         $userAuth = Auth::user();
 
+        if($userAuth->Role < 4) abort(404);
+
         $events = Event::paginate(7);
         $showONG = true;
 
@@ -39,6 +41,7 @@ class EventController extends Controller
     public function indexEventsONG()
     {
         $userAuth = Auth::user();
+        if (!$userAuth->id_ONG) abort(404);
 
         $events = Event::where('id_ONG', $userAuth->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
 
@@ -55,6 +58,7 @@ class EventController extends Controller
     public function create()
     {
         $userAuth = Auth::user();
+        if (!$userAuth->id_ONG || $userAuth->Role < 2) abort(404);
 
         $event = new Event();
 
@@ -107,7 +111,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = Event::find($id);
+        $event = Event::findorFail($id);
 
         // en caso que no tiene la sesion, guardar la url para cuando inicie sesion, no pierda la pagina que estaba
         app('redirect')->setIntendedUrl(request()->fullUrl());
@@ -117,10 +121,9 @@ class EventController extends Controller
             //En caso que no este visible, comprobamos que tiene permiso
 
             if (Auth::check()) {
-                /** @var \App\Models\User $user **/
                 $user = Auth::user();
 
-                if (!($user->id_ONG == $event->id_ONG || $user->roles('1'))) {
+                if (!($user->id_ONG == $event->id_ONG || $user->Role > 4)) {
                     abort(404);
                 }
             } else {

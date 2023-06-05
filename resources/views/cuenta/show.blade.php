@@ -1,7 +1,7 @@
 @extends('layouts.plantillaCuenta')
 
 @section('titulo')
-    {{-- {{ $user->name ?? "{{ __('Show') User" }} --}}
+    Perfil
 @endsection
 
 @section('contenido')

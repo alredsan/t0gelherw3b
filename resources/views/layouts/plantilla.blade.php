@@ -70,14 +70,9 @@
                                             class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a>
                                 </li>
                             </ul>
-                            <div>
-                                <i class="bi bi-brightness-high" id="changeColor"></i>
-                            </div>
+
                         </li>
                     </menu>
-                        {{-- Hola {{ Auth::user()->name }}!
-                        <a type="button" href='{{ route('acceso') }}' class="btn btn-outline-primary me-2">Admin</a>
-                        <a type="button" href='{{ route('logout') }}' class="btn btn-outline-primary"><i class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a> --}}
                     @else
                     <div class="d-flex flex-row">
                         <a href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar Sesión</a>
@@ -132,24 +127,9 @@
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>
-
-            {{-- <div class="col mb-3">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div> --}}
         </footer>
     </div>
 
-
-
-
-    <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>

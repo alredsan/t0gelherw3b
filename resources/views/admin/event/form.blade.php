@@ -84,13 +84,6 @@
                 value='{{ old('Longitud', $event->Longitud) }}'>
         </div>
 
-       {{--  <div class="form-group">
-            <label for="Aportaciones">Aportaciones:</label>
-            <input type="hidden" class='form-control' name='Aportaciones' id='Aportaciones' placeholder='Aportaciones'
-                value='{{ old('Aportaciones', $event->Aportaciones) }}'>
-            <div class="invalid-feedback">Introduce el numero de aportaciones</div>
-        </div>--}}
-
         @php
             $typeSelect = old('selectmultiple', $event->eventsType);
             $idTypesSelect = [];
@@ -151,7 +144,6 @@
 @endsection
 
 @push('scriptsJS')
-    {{-- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
     <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
     <script src="/js/fSelect.js"></script>
     <script src="/js/formCKeditor.js"></script>
@@ -187,10 +179,8 @@
         let addresses = $('#geocoderAddresses');
 
         function geoCode() {
-            // let formGeoC = $(this);
 
             $.get('https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' + inputSeach.value).then(
-                // $.get(this.action + '?format=json&limit=3&' + formGeoC.serialize()).then(
                 function(data) {
 
                     let list = $('<div style="z-index:1005" class="list-group position-absolute"></div>');

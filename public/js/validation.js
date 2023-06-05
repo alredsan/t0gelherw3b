@@ -25,6 +25,27 @@ function mostrarContrasena() {
     });
 }
 
+function showFeedBack(input, valid, message) {
+    let validClass = (valid) ? 'is-valid' : 'is-invalid';
+    let div = (valid) ? input.nextAll("div.valid-feedback") : input.nextAll("div.invalid-feedback");
+    input.nextAll('div').removeClass('d-block');
+    div.removeClass('d-none').addClass('d-block');
+    input.removeClass('is-valid is-invalid').addClass(validClass);
+    if (message) {
+        div.empty();
+        div.append(message);
+    }
+}
+
+function defaultCheckElement(event) {
+    this.value = this.value.trim();
+    if (!this.checkValidity()) {
+        showFeedBack($(this), false);
+    } else {
+        showFeedBack($(this), true);
+    }
+}
+
 // USO DE PATRON IIFE
 (function () {
 
@@ -37,11 +58,11 @@ function mostrarContrasena() {
         "/admin/ongs/new": () => validateFormONG(),
         "/admin/ong/event/new": () => validateEvent(),
         "/admin/ong/event/edit": () => validateEvent(),
-        "/admin/users": () => confirmModalDelete(),
         "/admin/users/editar": () => validateFormUser(),
         "/admin/types/add": () => validateFormTypes(),
         "/admin/types/edit": () => validateFormTypes(),
-        "/app/event": () => validateFormDonative()
+        "/app/event": () => validateFormDonative(),
+        "/admin/ong/usersAssign": () => validateFormAssign()
     };
 
     /**
@@ -51,7 +72,6 @@ function mostrarContrasena() {
     window.addEventListener('DOMContentLoaded', function () {
         let url = window.location.pathname.split(/\/\d/)[0];
 
-        console.log(url);
         try {
             validatorsForms[url]();
         } catch (error) { }
@@ -67,53 +87,9 @@ function mostrarContrasena() {
         });
     }
 
-    function confirmModalDelete() {
-        let modalConfirm = document.getElementById("modalDeleteUser");
 
-        let formModal = document.getElementById('formDeleteUserModal');
 
-        modalConfirm.addEventListener('hidden.bs.modal', event => {
-            formModal.action = "";
-        });
 
-        let myModalDeleteUser = new bootstrap.Modal('#modalDeleteUser', {
-            keyboard: false
-        });
-
-        let bottons = document.getElementsByClassName("btnDelete");
-
-        for (let boton of bottons) {
-            boton.addEventListener("click", function (event) {
-
-                event.preventDefault();
-                formModal.action = event.target.dataset.action;
-
-                myModalDeleteUser.show();
-            });
-        }
-
-    }
-
-    function showFeedBack(input, valid, message) {
-        let validClass = (valid) ? 'is-valid' : 'is-invalid';
-        let div = (valid) ? input.nextAll("div.valid-feedback") : input.nextAll("div.invalid-feedback");
-        input.nextAll('div').removeClass('d-block');
-        div.removeClass('d-none').addClass('d-block');
-        input.removeClass('is-valid is-invalid').addClass(validClass);
-        if (message) {
-            div.empty();
-            div.append(message);
-        }
-    }
-
-    function defaultCheckElement(event) {
-        this.value = this.value.trim();
-        if (!this.checkValidity()) {
-            showFeedBack($(this), false);
-        } else {
-            showFeedBack($(this), true);
-        }
-    }
 
     /**
      * Metodo donde se calcula la letra si es correcta
@@ -418,7 +394,6 @@ function mostrarContrasena() {
             // card = card.replace(/\s{2}/g,' ');
             card = card.replace(/\s/g, '');
             card = card.replace(/(.{4})/g, '$1 ');
-            console.log('C' + card);
             card = card.toUpperCase();
 
             // let cardNew = "";
@@ -487,7 +462,6 @@ function mostrarContrasena() {
 
     function validateFormChangePassword() {
         let validateFormChangePassword = document.forms.formChangePasswd;
-        console.log(document.forms.formChangePasswd);
 
         $(validateFormChangePassword).attr('novalidate', true);
         $(validateFormChangePassword).submit(function (event) {
@@ -553,7 +527,6 @@ function mostrarContrasena() {
 
     function validateFormUser() {
         let validateUpdateUserForm = document.forms.formUserUpdate;
-        console.log(validateUpdateUserForm)
         $(validateUpdateUserForm).attr('novalidate', true);
 
         $(validateUpdateUserForm).submit(function (event) {
@@ -846,6 +819,51 @@ function mostrarContrasena() {
 
         });
         $(validateFormDonative.donative).change(defaultCheckElement);
+    }
+
+    function validateFormAssign(){
+        let formAssignUser = document.forms.fAssignUser;
+
+        $(formAssignUser).attr('novalidate', true);
+        $(formAssignUser).submit(function (event) {
+            let isValid = true;
+            let firstInvalidElement = null;
+
+            if (this.email.readOnly) {
+                showFeedBack($(this.email), true);
+            } else {
+                isValid = false;
+                firstInvalidElement = this.email;
+                showFeedBack($(this.email), false);
+            }
+
+            if (this.chxRol.value != "") {
+                showFeedBack($(this.chxRol), true);
+            } else {
+                isValid = false;
+                // firstInvalidElement = this.chxRol;
+                showFeedBack($(this.chxRol), false);
+            }
+
+            if (!isValid) {
+                if(firstInvalidElement){
+                    firstInvalidElement.focus();
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+        });
+
+        $(formAssignUser.chxRol).change(function(event){
+            if (this.checked) {
+                showFeedBack($(this), true);
+                $("#msgRadio").addClass('d-none');
+            } else {
+                showFeedBack($(this), false);
+            }
+
+        });
     }
 
 })();

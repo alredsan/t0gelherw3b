@@ -24,12 +24,7 @@
                 <div class="invalid-feedback">Introduce los apellidos</div>
             </div>
         </div>
-        {{-- <div class="form-group">
-            <label for="DNI">DNI</label>
-            <input type="text" class="form-control" name="DNI" id="DNI" value="{{ old('DNI',$user->DNI) }}"
-                placeholder="DNI">
-            <div class="invalid-feedback">Introduce el DNI</div>
-        </div> --}}
+
         <div class="row">
             <div class="form-group col-sm">
                 <label for="email">email:</label>
@@ -73,12 +68,6 @@
                 <div class="invalid-feedback">La imagen debe ser en formato jpg-png-gif, no puede superar mas de 2MB</div>
             </div>
         </div>
-
-        {{-- <div>
-            <label for="Foto">Foto perfil:</label>
-            <input type="file" class='form-control' name='Foto' value="" accept="image/*">
-            {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
 
     </div>
     <div class="box-footer mt20">

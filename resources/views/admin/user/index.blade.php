@@ -41,14 +41,11 @@
                             <table class="table table-striped table-hover" id='tableAdmin'>
                                 <thead class="thead">
                                     <tr>
-                                        {{-- <th>No</th> --}}
-
                                         <th>DNI</th>
                                         <th>Nombre</th>
                                         <th>Apellidos</th>
                                         <th>Email</th>
                                         <th>Fotografia</th>
-                                        {{-- <th></th> --}}
 
                                         <th>Acciones</th>
                                     </tr>
@@ -62,33 +59,22 @@
                                             <td data-head="Apellidos">{{ $user->Apellidos }}</td>
                                             <td data-head="Email">{{ $user->email }}</td>
 
-                                            <td data-head="Foto Perfil"><img src="{{ asset($user->Foto) }}"
-                                                    style="width:100px" alt="Foto Perfil"></td>
+                                            <td data-head="Foto Perfil"><img src="{{ asset($user->Foto) }}" class="imgTable"
+                                                    alt="Foto Perfil"></td>
 
                                             <td data-head="Acciones">
                                                 <div>
-
-
-                                                    {{-- <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"> --}}
-                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('admin.ong.show',$organisation->idONG) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('admin.user.edit', $user->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    {{-- @csrf --}}
-
-                                                    {{-- @method('DELETE') --}}
+                                                    @if($user->id != $userAuth->id)
                                                     <button type="submit"
                                                         data-action="{{ route('admin.user.destroy', $user->id) }}"
                                                         class="btn btn-danger btn-sm btnDelete"><i
                                                             class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
-
-                                                    {{-- </form> --}}
+                                                    @endif
                                                 </div>
                                             </td>
-                                            {{-- <td>
-                                                 <a class="btn btn-sm btn-success" href="{{ route('admin.ong.usersassign',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Ver Usuarios con permisos') }}</a>
-
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -107,15 +93,15 @@
     </div>
 
 
-    <div class="modal fade" id="modalDeleteUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="modalDeleteUserLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalDeleteUserLabel">Eliminar Usuario ¿Estas Seguro?</h1>
+                    <h1 class="modal-title fs-5" id="modalDeleteLabel">Eliminar Usuario ¿Estas Seguro?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('admin.user.destroy') }}" id="formDeleteUserModal" method="POST">
+                <form action="{{ route('admin.user.destroy') }}" id="formDeleteModal" method="POST">
                     <div class="modal-body">
                         @csrf
 
@@ -123,7 +109,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary">Eliminar Usuario</button>
+                        <button type="submit" class="btn btn-danger">Eliminar Usuario</button>
                     </div>
                 </form>
             </div>
@@ -133,4 +119,6 @@
 
 @push('scriptsJS')
     <script src="/js/validation.js"></script>
+    <script src="/js/modalDelete.js"></script>
+
 @endpush

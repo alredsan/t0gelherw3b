@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
@@ -21,28 +20,17 @@ use App\Http\Controllers\TypeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::resource('eventos', EventController::class);
-
-
 // ********Pagina inicial********
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 
-// Mostrar listado de eventos
+    // Mostrar listado de eventos
 Route::get('/app',[EventController::class,'indexFilter'])->name('eventsFilter');
-// Mostrar informacion de un evento
+    // Mostrar informacion de un evento
 Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
-//     //Mostrar el evento
-// Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
+
     //Add participation al evento seleccionado al usuario iniciado
 Route::get('/app/event/{id}/addparticipation',[EventUserController::class,'add']);
-//Donacion al evento
+    //Donacion al evento
 Route::post('/app/event/{id}/aportaciones',[EventController::class,'aportacionEvent'])->name('events.donative');
 
 
@@ -78,27 +66,16 @@ Route::get('/cuenta/perfil/eventos',[UserController::class,'showEventos'])->midd
 Route::delete('/cuenta/perfil/eliminarParticipante/{id}',[EventController::class,'destroyParticipante'])->middleware('auth')->name('event.destroyParticipante');
 
 
-
-// PARTE DE ADMINISTRACION
-// Route::get('/admin/perfil',[UserController::class,'show'])->middleware('auth')->parameter(Auth::user()->id)->name('perfil');
-// ELIMINAR
-// Route::get('/admin/perfil/',[AdminController::class,'show'])->middleware('auth')->name('perfil');
-// Route::get('/admin/perfil/editar/',[AdminController::class,'edit'])->middleware('auth')->name('admin.user.edit');
-// Route::patch('/admin/perfil/editars/',[AdminController::class,'updateUser'])->middleware('auth')->name('admin.user.update');
-// END_ELIMINAR
-
-
 // ********ADMINISTRACION DEL ONG********
     // ONG
-Route::get('/admin/ong',[OrganisationController::class,'showModeAdmin'])->middleware('auth')->name('admin.ong');
-Route::get('/admin/ong/edit',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
-Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUpdate'])->middleware('auth')->name('admin.ong.update');
-// Route::patch('/admin/perfil/actualizar/',[UserController::class,'update'])->middleware('auth')->name('users.update');
+Route::get('/admin/ong',[OrganisationController::class,'showModeAdmin'])->middleware('auth')->name('admin.ong'); //
+Route::get('/admin/ong/edit',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit'); //
+Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUpdate'])->middleware('auth')->name('admin.ong.update'); //
 
     // Eventos
-Route::get('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index');
+Route::get('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
         // Crear
-Route::get('/admin/ong/event/new',[EventController::class,'create'])->middleware('auth')->name('admin.ong.event.create');
+Route::get('/admin/ong/event/new',[EventController::class,'create'])->middleware('auth')->name('admin.ong.event.create'); //
 Route::post('/admin/ong/event/new',[EventController::class,'store'])->middleware('auth')->name('admin.ong.event.store');
         // Editar
 Route::get('/admin/ong/event/edit/{id}',[EventController::class,'edit'])->middleware('auth')->name('admin.ong.event.edit');
@@ -168,7 +145,28 @@ Route::patch('/cuenta/perfil/editars/{idUser}',[UserController::class,'updateUse
         //Eliminar Usuario
 Route::delete('/admin/users/destroy/{idUser?}',[UserController::class,'destroy'])->middleware('auth')->name('admin.user.destroy');
 
+
+
 // Route::resource('ong',OrganisationController::class)->middleware('auth');
 
 // ADMINISTRACION EVENTOS admin.ong.index
 // Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
+// PARTE DE ADMINISTRACION
+// Route::get('/admin/perfil',[UserController::class,'show'])->middleware('auth')->parameter(Auth::user()->id)->name('perfil');
+// ELIMINAR
+// Route::get('/admin/perfil/',[AdminController::class,'show'])->middleware('auth')->name('perfil');
+// Route::get('/admin/perfil/editar/',[AdminController::class,'edit'])->middleware('auth')->name('admin.user.edit');
+// Route::patch('/admin/perfil/editars/',[AdminController::class,'updateUser'])->middleware('auth')->name('admin.user.update');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::resource('eventos', EventController::class);
+
+//     //Mostrar el evento
+// Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
+// END_ELIMINAR

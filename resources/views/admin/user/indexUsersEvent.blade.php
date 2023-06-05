@@ -18,9 +18,8 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-                {{-- <h1>Usuarios con Permisos</h1> --}}
 
-                <div class="">
+                <div>
                     <div class="card-header">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -54,11 +53,7 @@
                                                     {{ date('d-m-Y H:m', $user->pivot->registration_date) }}</td>
 
                                                 <td data-head="Acciones">
-                                                    {{-- @if (Auth::User()->id != $user->id)
-                                                        <button type='button' class="btn btn-sm btn-success btnEdit"
-                                                            data-src="{{ route('api.ong.usersassign', $user->id) }}">Editar
-                                                            Rol</button> --}}
-                                                    @if (!Auth::user()->roles('4') || Auth::user()->roles('1'))
+                                                    @if (Auth::user()->Role >= 2)
                                                         <form
                                                             action="{{ route('admin.event.destroyParticipante', ['idEvent' => $event->idEvento, 'idUser' => $user->id]) }}"
                                                             method="POST">
@@ -69,13 +64,12 @@
                                                                 Participante</button>
                                                         </form>
                                                     @endif
-                                                    {{-- @else
-                                                        <p class='fw-lighter'>No esta permitido</p>
-                                                    @endif  --}}
                                                 </td>
                                             </tr>
                                         @empty
-                                            <th colspan="10" class="text-center">No hay voluntarios apuntados</th>
+                                            <tr>
+                                                <th colspan="7" class="text-center">No hay voluntarios apuntados</th>
+                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

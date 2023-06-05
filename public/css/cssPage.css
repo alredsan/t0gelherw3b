@@ -95,6 +95,10 @@ body{
 
 }
 
+.imgTable{
+    width: 100px;
+}
+
 /* .form_principal div:last-child {
     display: flex;
     justify-content: center;

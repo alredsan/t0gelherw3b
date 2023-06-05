@@ -72,14 +72,14 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                @if (Auth::user()->roles('1') || Auth::user()->id_ONG)
+                                @if (Auth::user()->Role == 4 || Auth::user()->id_ONG)
                                     <li><a class="dropdown-item" href="{{ route('Admin') }}">Cambiar a
                                             Administracion</a>
                                     </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                 @endif
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesion</a></li>
                             </ul>
                         </li>
@@ -90,7 +90,6 @@
     </nav>
 
     <div class='container pt-5 '>
-        {{-- @dump(request()->routeIs(['admin.ong','admin.ong.edit','admin.ong.update','admin.ong.event.index'])) --}}
         @yield('contenido')
     </div>
 
@@ -100,7 +99,6 @@
     </script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     @stack('scriptsJS')
-    {{-- <script src="/js/validation.js"></script> --}}
 </body>
 
 </html>

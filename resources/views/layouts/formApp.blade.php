@@ -98,14 +98,6 @@
                 <label for="id_ONG">Organización</label>
             </div>
         </div>
-
-        {{-- <div class="col-md-3">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="activeEvent" placeholder="Buscar ..." name='activeEvent'
-                    value="@php echo isset($_GET['nombre'])? $_GET['nombre'] : ""; @endphp">
-                <label for="activeEvent">eVENTOS aCTIVOS</label>
-            </div>
-        </div> --}}
     </div>
     <div class="row justify-content-center">
         <div class="col-5 d-flex justify-content-center">

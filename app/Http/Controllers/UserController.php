@@ -125,10 +125,10 @@ class UserController extends Controller
 
         if ($userAuth->Role < 4) abort(404);
 
-        if($id != "") $user = User::find($id)->delete();
+        if($id != "") User::find($id)->delete();
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'El usuario '.$user->name.' ha sido eliminado correctamente del sistema');
+            ->with('success', 'El usuario ha sido eliminado correctamente del sistema');
     }
 
     /**
@@ -325,7 +325,7 @@ class UserController extends Controller
     public function acceso()
     {
         //En caso que no tiene
-        if (Auth::user()->id_ONG != null) {
+        if (Auth::user()->id_ONG != null || Auth::user()->Role != null) {
             return redirect(route('selectingCuenta'));
         }
 

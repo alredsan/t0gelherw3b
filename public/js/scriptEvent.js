@@ -6,7 +6,6 @@ if (formParticipation) {
     formParticipation.addEventListener('submit', function (event) {
         let src = this.action;
 
-        console.log(src);
         event.preventDefault();
         event.stopPropagation();
 

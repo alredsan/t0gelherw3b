@@ -39,8 +39,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 
-
-    // let formGeoCoder = $('#fGeocoder');
     let inputGeoCoder = $('#localidad');
     let addresses = $('#geocoderAddresses');
     let lanzado = false;
@@ -60,10 +58,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     function geoCode() {
-        // let formGeoC = $(this);
 
         $.get('https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' + inputGeoCoder.val()).then(
-            // $.get(this.action + '?format=json&limit=3&' + formGeoC.serialize()).then(
             function (data) {
 
                 let list = $('<div class="list-group position-absolute"></div>');

@@ -100,11 +100,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class,'users_roles', 'idUser', 'idRol','id','idRol');
     }
 
-    // public function userRoleONG()
-    // {
-    //     return $this->usersRole()->where('users_roles.idRol','>','1');
-    // }
-
 
     public function eventos(){
         // return $this->belongsToMany(Event::class,'events_users');
@@ -125,11 +120,6 @@ class User extends Authenticatable
         }else{
             return true;
         }
-
-        // $obj = array_reduce($array, static function ($carry, $item) {
-        //     return $carry === false && $item->id === 'one' ? $item : $carry;
-        // }, false);
-        // return "hola";
     }
 
     public function eventosPaginate(){

@@ -91,9 +91,6 @@
             <div class="input_group">
                 <label for="passwd">Contraseña*</label>
                 <div class="form__pass">
-                    {{-- <input class="form__input form-control" type="password" name="passwd" id="passwd"
-                        title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
-                        required autocomplete="on"> --}}
                     <input class="form__input form-control" type="password" name="passwd" id="passwd"
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"
                         title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
@@ -108,9 +105,6 @@
             <div class="input_group">
                 <label for="passwdConfirm">Introduce de nuevo la contraseña*</label>
 
-                {{-- <input class="form__input form-control" type="password" name="passwd" id="passwd"
-                        title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"
-                        required autocomplete="on"> --}}
                 <input class="form__input form-control" type="password" name="passwdConfirm" id="passwdConfirm"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"
                     title="Introduca la contraseña correcto 4-16 caracteres, un numero, letra mayúscula y letra mayuscula"

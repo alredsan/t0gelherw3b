@@ -10,10 +10,7 @@
             <div class="col-md-12">
                 <div>
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="float-left">
-                            {{-- <h1 class="card-title">Perfil ONG</h1> --}}
 
-                        </div>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
                                 <p>{{ $message }}</p>
