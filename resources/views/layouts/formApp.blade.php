@@ -13,7 +13,7 @@
                 <select class="form-select" id="selectType" name='selectType' aria-label="select tipo ">
                     <option value='0'>Tipo</option>
                     @foreach ($tipos as $tipo)
-                        <option value="{{ $tipo->idtypeONG }}"> {{ $tipo->Nombre }}</option>
+                        <option value="{{ $tipo->idtypeONG }}" @php echo (isset($_GET['selectType']) && $_GET['selectType'] == $tipo->idtypeONG)? "selected" : ""; @endphp> {{ $tipo->Nombre }}</option>
                     @endforeach
                 </select>
                 <label for="selectType">Tematica</label>
@@ -77,9 +77,9 @@
         <div class="col-md">
             <div class="form-floating">
                 <select class="form-select" id="order" name='order' aria-label="select tipo ">
-                    <option value='0'>Ordenar por fecha</option>
-                    <option value='1'>Ordenar por Distancia</option>
-                    <option value='2'>Ordenar por Nuevos Eventos</option>
+                    <option value='0' @php echo (isset($_GET['order']) && $_GET['order'] == "0")? "selected" : ""; @endphp>Ordenar por fecha</option>
+                    <option value='1' @php echo (isset($_GET['order']) && $_GET['order'] == "1")? "selected" : ""; @endphp>Ordenar por Distancia</option>
+                    <option value='2' @php echo (isset($_GET['order']) && $_GET['order'] == "2")? "selected" : ""; @endphp>Ordenar por Nuevos Eventos</option>
 
                 </select>
                 <label for="order">Ordenacion</label>

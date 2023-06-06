@@ -11,7 +11,16 @@
         <h1>Busqueda</h1>
         @include('layouts.formApp')
 
-
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
         <div class='d-flex gap-5 m-5 flex-wrap justify-content-center'>
             @forelse ($events as $event)
                 <div class="card mb-3" style="width: 100%">
@@ -26,11 +35,13 @@
                                 <h5 class="card-title">{{ $event->Nombre }}</h5>
                                 @php $show = substr($event->Descripcion,0,50) @endphp
                                 <p class="card-text">{!! $show !!}...</p>
-                                <p class="card-text"><small class="text-body-secondary">{{ date('d/m/Y H:m', $event->FechaEvento) }}</small></p>
+                                <p class="card-text"><small
+                                        class="text-body-secondary">{{ date('d/m/Y H:m', $event->FechaEvento) }}</small></p>
                                 @if ($event->distancia)
                                     <p class="fw-light">{{ round($event->distancia, 2) }} km</p>
                                 @endif
-                                <a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más información</a>
+                                <a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más
+                                    información</a>
                             </div>
                         </div>
                     </div>

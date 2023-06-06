@@ -277,10 +277,12 @@ class EventController extends Controller
 
         $idONG = $request->id_ONG;
 
+        $tipos = Type::all();
+        $organisation = Organisation::all();
 
         //Si ha selecionado que ordene por distancia, comprobamos que tenemos la ubicacion deseada del cliente
         if ($order == "1" && ($lat == null || $lon == null)) {
-            return redirect()->route('/', compact('request', 'tipos'))->with('error', 'Si desea ordenar por distancia, debe indicar ubicacion');
+            return back()->with('error', 'Si desea ordenar por distancia, debe indicar ubicacion')->withInput();
         }
 
         $events = Event::where("Visible", "=", "1")
@@ -292,8 +294,7 @@ class EventController extends Controller
             ->Ordenacion($order)
             ->paginate(8);
 
-        $tipos = Type::all();
-        $organisation = Organisation::all();
+
 
         return view('event.index', compact('events', 'tipos', 'request', 'organisation'));
     }
