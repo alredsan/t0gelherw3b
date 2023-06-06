@@ -13,8 +13,8 @@
 
         <div class="form-group">
             <label for="Nombre">Nombre</label>
-            <input class="form-control" placeholder="Nombre" name="Nombre" type="text" id="Nombre" pattern="[\w ]{3,}" value="{{ old('Nombre',$type->Nombre)}}">
-            <div class="invalid-feedback">Debe tener mas de 3 caracteres</div>
+            <input class="form-control" placeholder="Nombre" name="Nombre" type="text" id="Nombre" pattern="[\w ]{3,44}" value="{{ old('Nombre',$type->Nombre)}}">
+            <div class="invalid-feedback">Debe tener mas de 3 caracteres y menos de 44</div>
         </div>
 
     </div>

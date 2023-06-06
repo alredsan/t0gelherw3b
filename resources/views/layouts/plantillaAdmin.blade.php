@@ -19,7 +19,7 @@
 </head>
 
 <body id="bodyBackground">
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark shadow">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('Admin') }}">
                 <img class="logoAdmin" src="/img/logoB.png" alt="Logo Inicio">

@@ -20,20 +20,20 @@
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class='form-control' name='Nombre' id='Nombre' placeholder='Nombre'
-            pattern="[\w ]{3,}" value='{{ old('Nombre', $event->Nombre) }}'>
+            pattern="[\w ]{3,79}" value='{{ old('Nombre', $event->Nombre) }}' required>
             <div class="invalid-feedback">Introduce el nombre</div>
         </div>
 
         <div class="form-group">
             <label for="editor">Descripción del evento:</label>
-            <textarea class='form-control' name='Descripcion' id='editor' placeholder='Descripcion'>{{ old('Descripcion', $event->Descripcion) }}</textarea>
+            <textarea class='form-control' name='Descripcion' id='editor' placeholder='Descripcion' required>{{ old('Descripcion', $event->Descripcion) }}</textarea>
             <div class="invalid-feedback">Introduce un descripción</div>
         </div>
 
         <div class="form-group">
             <label for="FechaEvento">Fecha del evento:</label>
             <input type="datetime-local" class='form-control' name='FechaEvento' id='FechaEvento'
-                value="{{ old('FechaEvento', date('Y-m-d H:m', $event->FechaEvento)) }}">
+                value="{{ old('FechaEvento', date('Y-m-d H:m', $event->FechaEvento)) }}" required>
             <div class="invalid-feedback">Introduce la fecha y la hora correcta dd/mm/yyyy 00:00</div>
         </div>
 
@@ -42,13 +42,13 @@
                 <label for="numMaxVoluntarios">Numero maximo de voluntarios:</label>
                 <input type="number" class='form-control' name='numMaxVoluntarios' id='numMaxVoluntarios'
                     placeholder='numero Maximo de Voluntarios' min="1"
-                    value='{{ old('numMaxVoluntarios', $event->numMaxVoluntarios) }}'>
+                    value='{{ old('numMaxVoluntarios', $event->numMaxVoluntarios) }}' required>
                 <div class="invalid-feedback">Introduce un numero maximo del voluntario del evento</div>
             </div>
             <div class="form-group col-sm-7">
                 <label for="Direccion">Direccion:</label>
                 <input type="text" class='form-control' name='Direccion' id='Direccion' placeholder='Direccion'
-                    value='{{ old('Direccion', $event->Direccion) }}'>
+                    value='{{ old('Direccion', $event->Direccion) }}' pattern=".{3,79}" required>
                 <div class="invalid-feedback">Introduce la direccion del evento</div>
             </div>
         </div>
@@ -76,7 +76,7 @@
 
         <div class="form-group">
             <input type="hidden" class='form-control' name='Latitud' id='Latitud'
-                value='{{ old('Latitud', $event->Latitud) }}'>
+                value='{{ old('Latitud', $event->Latitud) }}' required>
              <div class="invalid-feedback">Introduce un punto para concretar lugar del evento</div>
         </div>
         <div class="form-group">
@@ -105,19 +105,13 @@
             </select>
         </div>
 
-        {{-- <div>
-            <label for="Foto">Foto: </label>
-            <input type="file" class='form-control' name='Foto' accept="image/*" id="Foto">
-            {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
-
         <div class="row">
             <div class="col-md">
                 <p class="pt-2">Foto :</p>
                 @if($event->Foto)
                     <img src="{{ asset($event->Foto) }}" class='w-50' id='FotoPreview' alt="Foto evento">
                 @else
-                    <img src="{{ asset(config('constants.DEFAULT_PHOTO_ONG')) }}"  id='FotoPreview' class='w-50' alt="Foto evento">
+                    <img src="{{ asset(config('constants.DEFAULT_PHOTO_EVENT')) }}"  id='FotoPreview' class='w-50' alt="Foto evento">
                 @endif
             </div>
             <div class="col-md">
@@ -127,7 +121,7 @@
             </div>
         </div>
 
-        <div class="form-check form-switch d-flex align-items-center">
+        <div class="form-check form-switch d-flex align-items-center py-2">
             <input class="form-check-input " type="checkbox" role="switch" id="CheckVisible" name="CheckVisible"
                 @if ($event->Visible) checked @endif>
             <label class="form-check-label ps-2" for="CheckVisible">El evento sea visible para el publico</label>

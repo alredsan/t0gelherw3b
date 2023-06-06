@@ -26,11 +26,11 @@ class Organisation extends Model
 {
 
     static $rules = [
-		'Name' => ['required','min:3'],
-		'DireccionSede' => ['required','min:3'],
+		'Name' => ['required','min:3','max:45'],
+		'DireccionSede' => ['required','min:3','max:60'],
 		'Descripcion' => 'required',
-		'FechaCreacion' => 'required',
-		'IBANmetodoPago' => 'required',
+		'FechaCreacion' => ['required','date'],
+		'IBANmetodoPago' => ['required','max:29'],
 		'FotoLogo' => 'image|max:2048',
 		'eMail' => 'required|email',
 		'Telefono' => ['required','regex:/[+]{0,1}[0-9]{10,12}|[0-9]{9}$/'],

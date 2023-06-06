@@ -20,7 +20,7 @@
             <div class="form-group col-sm">
                 <label for="Apellidos">Apellidos:</label>
                 <input type="text" class="form-control" name="Apellidos" id="Apellidos" value="{{ old('Apellidos',$user->Apellidos) }}"
-                    placeholder="Apellidos" pattern="[A-Z a-z\-]{3,}" required>
+                    placeholder="Apellidos" pattern="[A-Z a-zñá\-]{3,59}" required>
                 <div class="invalid-feedback">Introduce los apellidos</div>
             </div>
         </div>
@@ -43,13 +43,13 @@
         <div class="form-group">
             <label for="Direccion">Direccion:</label>
             <input type="text" class="form-control" name="Direccion" id="Direccion" value="{{ old('Direccion',$user->Direccion) }}"
-                placeholder="Direccion" pattern=".{4,}$" required>
+                placeholder="Direccion" pattern=".{4,45}$" required>
             <div class="invalid-feedback">Introduce la direccion</div>
         </div>
         <div class="form-group">
             <label for="Provincia">Provincia:</label>
             <input type="text" class="form-control" name="ProvinciaLocalidad" id="Provincia"
-                value="{{ old('ProvinciaLocalidad',$user->ProvinciaLocalidad) }}" placeholder="Provincia" pattern=".{4,}$" required>
+                value="{{ old('ProvinciaLocalidad',$user->ProvinciaLocalidad) }}" placeholder="Provincia" pattern=".{4,45}$" required>
             <div class="invalid-feedback">Introduce la Provincia</div>
         </div>
 

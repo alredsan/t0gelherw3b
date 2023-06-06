@@ -14,18 +14,18 @@
         <div class="form-group">
             <label for="Name">Nombre:</label>
             <input class="form-control" placeholder="Name" name="Name" type="text" value="{{ $organisation->Name }}"
-                id="Name" pattern="\w{3,}" required>
-            <div class="invalid-feedback">Introduce el nombre correctamente</div>
+                id="Name" pattern="\w{3,44}" required>
+            <div class="invalid-feedback">Introduce el nombre correctamente, mas de 3 caracteres y menos de 44</div>
         </div>
         <div class="form-group">
             <label for="DireccionSede">Direccion del Sede:</label>
-            <input type="text" class="form-control" name="DireccionSede" id="DireccionSede" pattern="[\w,º\ª]{3,}"
+            <input type="text" class="form-control" name="DireccionSede" id="DireccionSede" pattern=".{3,60}"
                 value="{{ old('DireccionSede', $organisation->DireccionSede) }}" placeholder="DireccionSede" required>
             <div class="invalid-feedback">Introduce la direccion del Sede</div>
         </div>
         <div class="form-group">
             <label for="editor">Descripcion:</label>
-            <textarea class="form-control" name="Descripcion" id="editor" placeholder="Descripcion">{{ old('Descripcion', $organisation->Descripcion) }}</textarea>
+            <textarea class="form-control" name="Descripcion" id="editor" placeholder="Descripcion" required>{{ old('Descripcion', $organisation->Descripcion) }}</textarea>
             <div class="invalid-feedback">Introduce la descripcion de ONG</div>
         </div>
 

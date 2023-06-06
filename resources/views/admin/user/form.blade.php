@@ -2,7 +2,7 @@
     <div class="box-body">
 
         <div class="form-group">
-            <label for="name">Nombre</label>
+            <label for="name">Nombreddd</label>
             <input type="text" class="form-control" name="name" id="name" value="{{ old('name',$user->name) }}"
                 placeholder="nombre">
             <div class="invalid-feedback">Introduce el nombre</div>

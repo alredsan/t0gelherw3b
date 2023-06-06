@@ -5,7 +5,7 @@
 @section('contenido')
     <main id="mainForm" class="d-flex justify-content-center align-items-center pt-5 pb-5">
 
-        <form class="form" method="POST" action="{{ route('inicia-sesion') }}">
+        <div class="form form_selecting">
             <p class="form__title">Entrar como...</p>
             <p>Seleccione una acción..</p>
 
@@ -25,6 +25,6 @@
                     WEB
                 @endif
             </a>
-        </form>
+        </div>
     </main>
 @endsection

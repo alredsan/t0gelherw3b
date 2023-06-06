@@ -1,26 +1,3 @@
-/* .form_principal {
-    border: 1px solid rgba(128, 128, 128, 0.281);
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;*/
-
-/*align-items: center;
-    align-content: center;
-    flex-direction: row;
-    height: auto;
-
-    width: max-content;
-    margin: auto;
-    margin-top: 30px;
-
-/* } */
-
-/* @media (max-width: 900px) {
-    .form_principal {
-        flex-direction: column;
-    }
-} */
 
 [data-theme="light"]{
     --background: #ffffff;
@@ -80,17 +57,12 @@ body{
 }
 
 .form_principal {
-    /* display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center; */
-    /* margin-left: 100px; */
     margin-top: 60px;
     padding: 10px 25px 10px 25px;
 
     background-color: white;
     border-radius: 10px;
-    /* box-shadow: 8px 6px 9px 0px black; */
+
     box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.192);
 
 }
@@ -98,11 +70,6 @@ body{
 .imgTable{
     width: 100px;
 }
-
-/* .form_principal div:last-child {
-    display: flex;
-    justify-content: center;
-} */
 
 .botonSearch {
     padding: 20px 50px;
@@ -137,17 +104,24 @@ body{
     margin-bottom: 50px;
 }
 
-/* .form-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-} */
-
 .form__title {
     font-weight: bold;
     text-align: center;
     font-size: 32px;
+}
+
+.form_selecting a{
+    text-decoration: none;
+    padding: 20px;
+    margin-bottom: 10px;
+    color: #000;
+    border-radius: 20px;
+    background-color: #cfcfcf;
+}
+
+.form_selecting a:hover{
+
+    box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.192);
 }
 
 .form__button {
@@ -161,11 +135,6 @@ body{
     display: grid;
     grid-template-columns: 90% 10%;
 }
-
-/* .form__input_insert:invalid {
-    background-color: rgba(255, 0, 0, 0.055);
-    outline: 2px solid rgb(172, 0, 0);
-} */
 
 .form__input:valid {
     background-color: rgba(0, 255, 21, 0.055);
@@ -189,18 +158,6 @@ body{
 .input_group {
     margin-bottom: 20px;
 }
-
-/* .input__required {
-    color: rgb(126, 0, 0);
-} */
-
-/* #form__message {
-    border-radius: 20px;
-    background-color: #FF331F;
-    padding: 5px;
-    text-align: center;
-    color: white;
-} */
 
 #mainForm {
     background: rgb(159, 52, 53);
@@ -243,25 +200,14 @@ body{
 #bodyBackground {
 
     opacity: 1;
-    /* background-repeat: space; */
-
-    /* transform: rotate(30deg); */
-    /* background-position: 20px 30px; */
     background-image: url("../img/mosaico.svg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
 
     background-position: center;
-    /* background-size: 10%; */
-    /* background-origin: padding-box; */
     opacity: 1;
 }
-
-/*
-.card-body >div{
-    border-bottom: 1px rgba(110, 110, 110, 0.589) solid;
-} */
 
 .encabPie {
     display: flex;
@@ -332,7 +278,8 @@ body{
     }
 
     .formActions{
-        display: block;
+        display: flex;
+        flex-direction: row;
     }
 }
 
@@ -369,11 +316,6 @@ body{
     }
 }
 
-/* ul.navbar-nav{
-    justify-items: center;
-    align-items: center;
-} */
-
 
 ul.navbar-nav.navcuenta a.active {
     /* background-color: #6B0504; */
@@ -391,9 +333,3 @@ ul.navbar-nav.navcuenta a.active {
 form label{
     padding-top: 10px;
 }
-
-
-/*
-#account{
-    transition: all 0.8s cubic-bezier(1, 0.31, 0.45, 0.94);
-} */

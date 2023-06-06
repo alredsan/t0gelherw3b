@@ -29,12 +29,12 @@ class Event extends Model
 {
     //Reglas de vertificacion
     static $rules = [
-        'Nombre' => ['required','min:3'],
-        'Descripcion' => 'required',
+        'Nombre' => ['required','min:3','max:80'],
+        'Descripcion' => ['required','max:62000'],
         'FechaEvento' => ['required','date'],
         'numMaxVoluntarios' => ['required','gt:1'],
-        'Direccion' => ['required','min:3'],
-        'Latitud' => 'required',
+        'Direccion' => ['required','min:3','max:80'],
+        'Latitud' => ['required'],
         'Foto' => 'image|max:2048',
     ];
 

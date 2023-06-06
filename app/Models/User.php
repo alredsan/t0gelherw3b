@@ -39,11 +39,11 @@ class User extends Authenticatable
     protected $table = 'users';
 
     static $rules = [
-		'name' => ['required','min:3'],
-		'Apellidos' => ['required','min:3'],
+		'name' => ['required','min:3','max:255'],
+		'Apellidos' => ['required','min:3','max:60'],
 		'email' => 'required|email',
-		'Direccion' => ['required','min:3'],
-		'ProvinciaLocalidad' => ['required','min:3'],
+		'Direccion' => ['required','min:3','max:60'],
+		'ProvinciaLocalidad' => ['required','min:3','max:45'],
 		'Telefono' => ['required','regex:/[+]{0,1}[0-9]{10,12}|[0-9]{9}$/'],
         'Foto' => 'image|max:2048'
     ];

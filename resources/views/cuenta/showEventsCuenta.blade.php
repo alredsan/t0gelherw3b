@@ -50,7 +50,7 @@
                                                     <form
                                                         action="{{ route('event.destroyParticipante', ['id' => $event->idEvento]) }}"
                                                         method="POST">
-                                                        <a class="btn btn-sm btn-primary "
+                                                        <a class="btn btn-sm btn-primary"
                                                             href="{{ route('events.show', $event->idEvento) }}"><i
                                                                 class="fa fa-fw fa-eye"></i> Ver</a>
 
