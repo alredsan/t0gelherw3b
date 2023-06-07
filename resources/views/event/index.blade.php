@@ -23,8 +23,8 @@
         @endif
         <div class='d-flex gap-5 m-5 flex-wrap justify-content-center'>
             @forelse ($events as $event)
-                <div class="card mb-3" style="width: 100%">
-                    <div class="row g-0">
+                <div class="card mb-3 " style="width: 100%">
+                    <div class="row g-0 shadow">
                         <div class="col-md-4">
                             {{-- <img src="{{ asset($event->Foto) }}" class="img-fluid rounded-start" alt="..."> --}}
                             <div style="background-image:url({{ asset($event->Foto) }});height:25vh;background-repeat: no-repeat;background-size: cover;background-position: center;"
@@ -33,8 +33,11 @@
                         <div class="col-md-8">
                             <div class="card-bodyEvent">
                                 <h5 class="card-title">{{ $event->Nombre }}</h5>
-                                @php $show = substr($event->Descripcion,0,50) @endphp
-                                <p class="card-text">{!! $show !!}...</p>
+                                {{-- @php $show = substr($event->Descripcion,0,50) @endphp --}}
+
+                                {{-- <p class="card-text">{!! $show !!}...</p> --}}
+
+                                <p class="card-text">{!! strip_tags(mb_strimwidth($event->Descripcion,0, 200, "...")) !!}...</p>
                                 <p class="card-text"><small
                                         class="text-body-secondary">{{ date('d/m/Y H:m', $event->FechaEvento) }}</small></p>
                                 @if ($event->distancia)

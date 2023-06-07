@@ -175,7 +175,13 @@ body{
 
 .ck-editor__main {
     max-height: 250px;
+    /* height: 250px; */
     overflow: auto;
+
+}
+
+.ck-editor__editable{
+    resize:vertical;
 }
 
 .infoRol {
