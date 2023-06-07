@@ -16,12 +16,12 @@
                                 {{ __('Usuarios') }}
                             </h1>
 
-                            <div class="float-right">
+                            {{-- <div class="float-right">
                                 <a href="{{ route('admin.ong.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     {{ __('Crear nuevo Usuario') }}
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))

@@ -13,7 +13,7 @@
 
                 <div class="">
                     <div class="card-header">
-                        <h1 class="card-title">Actualizar Usuario <i>{{$user->name}}</i></h1>
+                        <h1 class="card-title">Actualizar Usuarisso <i>{{$user->name}}</i></h1>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('admin.user.update', $user->id) }}"  role="form" enctype="multipart/form-data" name="formUserUpdate">
