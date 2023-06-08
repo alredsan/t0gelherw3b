@@ -50,7 +50,7 @@
                                                 <td data-head="Provincia">{{ $user->ProvinciaLocalidad }}</td>
                                                 <td data-head="Telefono">{{ $user->Telefono }}</td>
                                                 <td data-head="Fecha Apuntado">
-                                                    {{ date('d-m-Y H:m', $user->pivot->registration_date) }}</td>
+                                                    {{ date('d-m-Y H:m', ($user->pivot->registration_date +7200)) }}</td>
 
                                                 <td data-head="Acciones">
                                                     @if (Auth::user()->Role >= 2)

@@ -389,32 +389,10 @@ function defaultCheckElement(event) {
 
 
         function formatCreditCard(card) {
-            // card = card.replace(/\D/g, '');
-            // card = card.replace(/^(\w{2}\d{2})?(\d{4})?(\d{4})?(\d{4})/,'$1 $2 $3 $4');
-            // card = card.replace(/\s{2}/g,' ');
             card = card.replace(/\s/g, '');
             card = card.replace(/(.{4})/g, '$1 ');
             card = card.toUpperCase();
 
-            // let cardNew = "";
-
-            // for (let i = 1; i <= card.length; i++) {
-            //     console.log(i);
-            //     if (i % 5 == 0) {
-            //         cardNew += " ";
-            //     }
-            //     cardNew += card[i-1];
-            // }
-
-            // console.log(cardNew);
-            // if (card.length > 0) {
-
-            //     if (card.length % 5 == 0) {
-            //         card += " ";
-            //     }
-            //     card = card.toUpperCase();
-            // }
-            // return (card.length < 19) ? card.trimStart() : card.trim();
             return (card.length < 19) ? card.trimStart() : card.trim();
         }
 
@@ -431,10 +409,6 @@ function defaultCheckElement(event) {
                     } else if (this.value.length > 1) {
                         //el resto numerico
                         if (!/[\d]/.test(character)) isValid = false;
-
-                        //} else {
-                        //     //Comprobar solo letra dos digitos iniciales
-                        //     if (/[\d]/.test(character)) isValid = false;
                     }
 
                     if (!isValid) {
