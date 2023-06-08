@@ -268,7 +268,7 @@ class UserController extends Controller
             return redirect()->intended(route('/'));
         } else {
             // en caso de fallo, decir al usuario fallido acceso
-            return redirect('inicioSesion')->with('message', 'Usuario o contraseña incorrectos');
+            return back()->with('message', 'Usuario o contraseña incorrectos')->withInput();
         }
     }
 

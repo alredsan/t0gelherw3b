@@ -26,7 +26,7 @@
 
             <label for="email">Correo Electronico</label>
             <input class="form__input form-control" type="text" name="email" id="email"
-                pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" title="Introduca el email correcto" required>
+                pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$" title="Introduca el email correcto" value="{{old('email')}}" required>
             <div class="invalid-feedback">El email es obligatorio.</div>
 
             <label for="passwd">Contraseña</label>

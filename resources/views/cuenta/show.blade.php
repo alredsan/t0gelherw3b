@@ -56,10 +56,12 @@
                                 <strong>Telefono:</strong>
                                 {{ $user->Telefono }}
                             </div>
+                            @if($user->id_ONG)
                             <div class="form-group">
-                                <strong>Id Ong:</strong>
-                                {{ $user->id_ONG }}
+                                <strong>ONG al que tienes permiso:</strong>
+                                {{ $user->organisation->Name }}
                             </div>
+                            @endif
 
                         </div>
                         <div class="col-lg">
