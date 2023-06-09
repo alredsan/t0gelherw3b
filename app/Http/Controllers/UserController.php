@@ -19,13 +19,36 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $userAuth = Auth::user();
 
         if ($userAuth->Role < 4) abort(404);
 
-        $users = User::paginate(4);
+        $buscadorName = $request->name;
+        $buscadorLastName = $request->lastname;
+
+        $users = "";
+
+        if ($buscadorName){
+
+            $users = User::where('name','LIKE',"%$buscadorName%");
+        }
+
+        if ($buscadorLastName){
+            if($users == ""){
+                $users = User::where('Apellidos','LIKE',"%$buscadorLastName%");
+            }else{
+                $users->where('Apellidos','LIKE',"%$buscadorLastName%");
+            }
+        }
+
+        if($users == ""){
+            $users = User::paginate(4);
+        }else{
+            $users->paginate(4);
+            dd($users);
+        }
 
         return view('admin.user.index',compact('users','userAuth'));
     }
@@ -149,11 +172,20 @@ class UserController extends Controller
     {
         request()->validate(User::$rules);
 
+
         $data = User::find(Auth::user()->id);
 
-        // if($data->DNI != $request->DNI){
-        //     $data->DNI = $request->DNI;
-        // }
+        if($data->email != $request->email){
+            $comprobarEmail = User::where('email',$request->email)->first();
+
+            if ($comprobarEmail){
+                return back()->with('fail','El correo electronico existe en el sistema');
+            }
+
+            //Ponemos a NULL la vertificacion, para volver a verticar la cuenta por nuevo correo
+            $data->email_verified_at = NULL;
+
+        }
 
         $data->name = $request->name;
         $data->Apellidos = $request->Apellidos;
@@ -181,10 +213,30 @@ class UserController extends Controller
     {
         request()->validate(User::$rules);
 
+
         $data = User::find($idUser);
 
+        if($data->email != $request->email){
+            $comprobarEmail = User::where('email',$request->email)->first();
+
+            if ($comprobarEmail){
+                return back()->with('fail','El correo electronico existe en el sistema');
+            }
+
+
+            //Ponemos a NULL la vertificacion, para volver a verticar la cuenta por nuevo correo
+            $data->email_verified_at = NULL;
+
+        }
+
         if($data->DNI != $request->DNI){
-            dd($data->DNI,$request->DNI);
+            // dd($data->DNI,$request->DNI);
+            $comprobarDNI = User::where('DNI',"=",$request->DNI)->first();
+            if ($comprobarDNI){
+                // dd($comprobarDNI);
+                return back()->with("fail","El DNI nuevo introducido ya existe en el sistema");
+            }
+
             $data->DNI = $request->DNI;
         }
 

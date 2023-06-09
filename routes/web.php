@@ -74,6 +74,7 @@ Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUp
 
     // Eventos
 Route::get('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
+Route::post('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
         // Crear
 Route::get('/admin/ong/event/new',[EventController::class,'create'])->middleware('auth')->name('admin.ong.event.create'); //
 Route::post('/admin/ong/event/new',[EventController::class,'store'])->middleware('auth')->name('admin.ong.event.store');
@@ -120,24 +121,26 @@ Route::get('/admin/ongs/edit/{id}',[OrganisationController::class,'edit'])->midd
     //EVENTOS
         //index
 Route::get('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
+Route::post('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
 
     //Types
         //index
 Route::get('/admin/types',[TypeController::class,'index'])->middleware('auth')->name('admin.types.index');
         //Add new type
-Route::get('/admin/types/add',[TypeController::class,'create'])->middleware('auth')->name('admin.types.create');//NO HECHO
-Route::post('/admin/types/addtype',[TypeController::class,'store'])->middleware('auth')->name('admin.types.store');//NO HECHO
+Route::get('/admin/types/add',[TypeController::class,'create'])->middleware('auth')->name('admin.types.create');
+Route::post('/admin/types/addtype',[TypeController::class,'store'])->middleware('auth')->name('admin.types.store');
         //Eliminar type
-Route::delete('/admin/types/delete/{id}',[TypeController::class,'destroy'])->middleware('auth')->name('admin.types.destroy');//NO HECHO
+Route::delete('/admin/types/delete/{id}',[TypeController::class,'destroy'])->middleware('auth')->name('admin.types.destroy');
 
         //Modificar type
-Route::get('/admin/types/edit/{id}',[TypeController::class,'edit'])->middleware('auth')->name('admin.types.edit');//NO HECHO
-Route::patch('/admin/types/update/{type}',[TypeController::class,'update'])->middleware('auth')->name('admin.types.update');//NO HECHO
+Route::get('/admin/types/edit/{id}',[TypeController::class,'edit'])->middleware('auth')->name('admin.types.edit');
+Route::patch('/admin/types/update/{type}',[TypeController::class,'update'])->middleware('auth')->name('admin.types.update');
 
 
     // Usuarios (index, crear, eliminar)
         //Index Usuarios
 Route::get('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
+Route::post('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
         //Editar Usuario
 Route::get('/admin/users/editar/{idUser}',[UserController::class,'editUserAdmin'])->middleware('auth')->name('admin.user.edit');
         //Update Usuario

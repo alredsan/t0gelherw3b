@@ -23,31 +23,45 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $userAuth = Auth::user();
 
         if($userAuth->Role < 4) abort(404);
 
-        $events = Event::paginate(7);
+        $buscador = $request->name;
+
+        if ($buscador){
+            $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(7);
+        }else{
+            $events = Event::paginate(7);
+        }
+
         $showONG = true;
 
-        return view('admin.event.index', compact('events', 'showONG','userAuth'));
+        return view('admin.event.index', compact('events', 'showONG','userAuth','buscador'));
     }
 
     /**
      * Mostrar solo los eventos que usuario tiene permiso
      */
-    public function indexEventsONG()
+    public function indexEventsONG(Request $request)
     {
         $userAuth = Auth::user();
         if (!$userAuth->id_ONG) abort(404);
 
-        $events = Event::where('id_ONG', $userAuth->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
+        $buscador = $request->name;
+
+        if ($buscador){
+            $events = Event::where('id_ONG', $userAuth->id_ONG)->where('Nombre','LIKE',"%$buscador%")->orderBy('FechaEvento', 'DESC')->paginate(10);
+        }else{
+            $events = Event::where('id_ONG', $userAuth->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
+        }
+
 
         $showONG = false;
 
-        return view('admin.event.index', compact('events', 'showONG', 'userAuth'));
+        return view('admin.event.index', compact('events', 'showONG', 'userAuth','buscador'));
     }
 
     /**

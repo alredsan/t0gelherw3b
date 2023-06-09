@@ -57,9 +57,9 @@
                 <div class="col-md-2 text-end">
                     <menu>
                         <li class="nav-item dropdown d-flex align-items-center">
-                            <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
+                            {{-- <a href="{{ route('/') }}" class="d-flex align-items-center text-white me-3">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1">Volver</span>
-                            </a>
+                            </a> --}}
                             <a href="#"
                                 class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                                 id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">

@@ -20,7 +20,7 @@
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class='form-control' name='Nombre' id='Nombre' placeholder='Nombre'
-            pattern="[\w ]{3,79}" value='{{ old('Nombre', $event->Nombre) }}' required>
+                pattern="[\w ]{3,79}" value='{{ old('Nombre', $event->Nombre) }}' required>
             <div class="invalid-feedback">Introduce el nombre</div>
         </div>
 
@@ -69,7 +69,12 @@
                     <x-maps-leaflet :centerPoint="['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud)]" :marker="[['lat' => floatval($event->Latitud), 'long' => floatval($event->Longitud)]]" :zoomLevel="20">
                     </x-maps-leaflet>
                 @else
-                    <x-maps-leaflet :zoomLevel="3"></x-maps-leaflet>
+                    @if (old('Latitud'))
+                        <x-maps-leaflet :centerPoint="['lat' => floatval(old('Latitud')), 'long' => floatval(old('Longitud'))]" :marker="[['lat' => floatval(old('Latitud')), 'long' => floatval(old('Longitud'))]]" :zoomLevel="20">
+                        </x-maps-leaflet>
+                    @else
+                        <x-maps-leaflet :zoomLevel="3"></x-maps-leaflet>
+                    @endif
                 @endif
             </div>
         </div>
@@ -77,7 +82,7 @@
         <div class="form-group">
             <input type="hidden" class='form-control' name='Latitud' id='Latitud'
                 value='{{ old('Latitud', $event->Latitud) }}' required>
-             <div class="invalid-feedback">Introduce un punto para concretar lugar del evento</div>
+            <div class="invalid-feedback">Introduce un punto para concretar lugar del evento</div>
         </div>
         <div class="form-group">
             <input type="hidden" class='form-control' name='Longitud' id='Longitud'
@@ -108,10 +113,11 @@
         <div class="row">
             <div class="col-md">
                 <p class="pt-2">Foto :</p>
-                @if($event->Foto)
+                @if ($event->Foto)
                     <img src="{{ asset($event->Foto) }}" class='w-50' id='FotoPreview' alt="Foto evento">
                 @else
-                    <img src="{{ asset(config('constants.DEFAULT_PHOTO_EVENT')) }}"  id='FotoPreview' class='w-50' alt="Foto evento">
+                    <img src="{{ asset(config('constants.DEFAULT_PHOTO_EVENT')) }}" id='FotoPreview' class='w-50'
+                        alt="Foto evento">
                 @endif
             </div>
             <div class="col-md">

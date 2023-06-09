@@ -13,10 +13,16 @@
 
                 <div class="">
                     <div class="card-header">
-                        <h1 class="card-title">Actualizar Usuario <i>{{$user->name}}</i></h1>
+                        <h1 class="card-title">Actualizar Usuario <i>{{ $user->name }}</i></h1>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cuenta.update', $user->id) }}"  role="form" enctype="multipart/form-data" name="formUserUpdate">
+                        @if ($message = Session::get('fail'))
+                            <div class="alert alert-danger">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('cuenta.update', $user->id) }}" role="form"
+                            enctype="multipart/form-data" name="formUserUpdate">
                             {{ method_field('PATCH') }}
                             @csrf
 

@@ -29,6 +29,33 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+                    <div class="card-body bg-white mb-3">
+
+                        <form action="{{ route('admin.users.index') }}" method="post">
+
+                            @csrf
+                            <div class="row">
+                                <div class="form-group col-sm">
+                                    <label for="name">Buscar por nombre</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        value="@php echo isset($buscador) ? "$buscador":"" @endphp" placeholder="Buscar ..."
+                                        pattern=".{3,}">
+                                    <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
+                                </div>
+                                <div class="form-group col-sm">
+                                    <label for="name">Buscar por Apellidos</label>
+                                    <input type="text" class="form-control" name="lastname" id="lastname"
+                                        value="@php echo isset($buscador) ? "$buscador":"" @endphp" placeholder="Buscar ..."
+                                        pattern=".{3,}">
+                                    <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
+                                </div>
+                                <div class="box-footer text-end mt-2">
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="bi bi-search me-2"></i>Filtrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
                     <div class="card-body bg-white">
                         <div class='encabPie'>
@@ -67,11 +94,12 @@
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('admin.user.edit', $user->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @if($user->id != $userAuth->id)
-                                                    <button type="submit"
-                                                        data-action="{{ route('admin.user.destroy', $user->id) }}"
-                                                        class="btn btn-danger btn-sm btnDelete"><i
-                                                            class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    @if ($user->id != $userAuth->id)
+                                                        <button type="submit"
+                                                            data-action="{{ route('admin.user.destroy', $user->id) }}"
+                                                            class="btn btn-danger btn-sm btnDelete"><i
+                                                                class="fa fa-fw fa-trash"></i>
+                                                            {{ __('Eliminar') }}</button>
                                                     @endif
                                                 </div>
                                             </td>
@@ -120,5 +148,4 @@
 @push('scriptsJS')
     <script src="/js/validation.js"></script>
     <script src="/js/modalDelete.js"></script>
-
 @endpush

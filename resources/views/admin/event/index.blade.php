@@ -34,7 +34,25 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+                    <div class="card-body bg-white mb-3">
+                        @if (!request()->RouteIs('admin.events.index'))
+                        <form action="{{ route('admin.ong.event.index')}}" method="post">
 
+                        @else
+                        <form action="{{ route('admin.events.index')}}" method="post">
+                        @endif
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">Buscar por nombre de evento</label>
+                                <input type="text" class="form-control" name="name" id="name" value="@php echo isset($buscador) ? "$buscador":"" @endphp"
+                                    placeholder="Buscar ..." pattern=".{3,}" required>
+                                <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
+                            </div>
+                            <div class="box-footer text-end mt-2">
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-search me-2"></i>Filtrar</button>
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body bg-white">
                         <div class='encabPie'>
                             <div></div>
@@ -89,13 +107,16 @@
                                             <td data-head='Acciones' class="formActions">
                                                 @if ($userAuth->Role >= 2)
                                                     <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('events.show', $event->idEvento) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                        href="{{ route('events.show', $event->idEvento) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
                                                     <a class="btn btn-sm btn-success"
-                                                        href="{{ route('admin.ong.event.edit', $event->idEvento) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                        href="{{ route('admin.ong.event.edit', $event->idEvento) }}"><i
+                                                            class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
 
-                                                        <button type="submit"
+                                                    <button type="submit"
                                                         data-action="{{ route('admin.ong.event.destroy', $event->idEvento) }}"
-                                                        class="btn btn-danger btn-sm btnDelete"><i class="fa fa-fw fa-trash"></i>
+                                                        class="btn btn-danger btn-sm btnDelete"><i
+                                                            class="fa fa-fw fa-trash"></i>
                                                         {{ __('Eliminar') }}</button>
                                                 @else
                                                     <div class="formActions">

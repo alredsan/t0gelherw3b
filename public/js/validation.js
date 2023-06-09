@@ -517,19 +517,22 @@ function defaultCheckElement(event) {
                 }
             }
 
-            if (this.passwd.value != this.passwdConfirm.value) {
-                isValid = false;
-                firstInvalidElement = this.passwdConfirm;
-                showFeedBack($(this.passwdConfirm), false);
+            if (this.passwd) {
+                if (this.passwd.value != this.passwdConfirm.value) {
+                    isValid = false;
+                    firstInvalidElement = this.passwdConfirm;
+                    showFeedBack($(this.passwdConfirm), false);
+                }
+
+                if (this.passwd.checkValidity()) {
+                    showFeedBack($(this.passwd), true);
+                } else {
+                    isValid = false;
+                    firstInvalidElement = this.passwd;
+                    showFeedBack($(this.passwd), false);
+                }
             }
 
-            if (this.passwd.checkValidity()) {
-                showFeedBack($(this.passwd), true);
-            } else {
-                isValid = false;
-                firstInvalidElement = this.passwd;
-                showFeedBack($(this.passwd), false);
-            }
 
             if (this.Telefono.checkValidity()) {
                 showFeedBack($(this.Telefono), true);
@@ -555,17 +558,22 @@ function defaultCheckElement(event) {
                 showFeedBack($(this.Direccion), false);
             }
 
-            if (this.DNI.checkValidity()) {
-                showFeedBack($(this.DNI), true);
+            if (this.DNI) {
+                if (this.DNI.checkValidity()) {
+                    showFeedBack($(this.DNI), true);
 
-                if (!checkDNI(this.DNI.value)) {
+                    if (!checkDNI(this.DNI.value)) {
+                        isValid = false;
+                        firstInvalidElement = this.DNI;
+                        showFeedBack($(this.DNI), false);
+                    }
+                } else {
+                    isValid = false;
+                    firstInvalidElement = this.DNI;
                     showFeedBack($(this.DNI), false);
                 }
-            } else {
-                isValid = false;
-                firstInvalidElement = this.DNI;
-                showFeedBack($(this.DNI), false);
             }
+
 
             if (this.email.checkValidity()) {
                 showFeedBack($(this.email), true);
@@ -628,23 +636,27 @@ function defaultCheckElement(event) {
             }
         });
 
-        $(validateUpdateUserForm.passwd).change(function () {
-            if (!this.checkValidity()) {
-                showFeedBack($(this), false);
-            } else {
-                showFeedBack($(this), true);
-                validateUpdateUserForm.passwdConfirm.value = "";
-            }
-        });
+        if (validateUpdateUserForm.passwd) {
 
-        $(validateUpdateUserForm.passwdConfirm).change(function () {
+            $(validateUpdateUserForm.passwd).change(function () {
+                if (!this.checkValidity()) {
+                    showFeedBack($(this), false);
+                } else {
+                    showFeedBack($(this), true);
+                    validateUpdateUserForm.passwdConfirm.value = "";
+                }
+            });
 
-            if (validateUpdateUserForm.passwd.value != validateUpdateUserForm.passwdConfirm.value) {
-                showFeedBack($(validateUpdateUserForm.passwdConfirm), false);
-            } else {
-                showFeedBack($(validateUpdateUserForm.passwdConfirm), true);
-            }
-        });
+            $(validateUpdateUserForm.passwdConfirm).change(function () {
+
+                if (validateUpdateUserForm.passwd.value != validateUpdateUserForm.passwdConfirm.value) {
+                    showFeedBack($(validateUpdateUserForm.passwdConfirm), false);
+                } else {
+                    showFeedBack($(validateUpdateUserForm.passwdConfirm), true);
+                }
+            });
+
+        }
 
     }
 
@@ -716,7 +728,7 @@ function defaultCheckElement(event) {
 
         });
 
-        $(validateEventNewForm.Latitud).change(function() {
+        $(validateEventNewForm.Latitud).change(function () {
             if (this.value != "") {
                 showFeedBack($(this), true);
             } else {
@@ -769,7 +781,7 @@ function defaultCheckElement(event) {
 
     }
 
-    function validateFormDonative(){
+    function validateFormDonative() {
         let validateFormDonative = document.forms.donativeform;
 
 
@@ -795,7 +807,7 @@ function defaultCheckElement(event) {
         $(validateFormDonative.donative).change(defaultCheckElement);
     }
 
-    function validateFormAssign(){
+    function validateFormAssign() {
         let formAssignUser = document.forms.fAssignUser;
 
         $(formAssignUser).attr('novalidate', true);
@@ -820,7 +832,7 @@ function defaultCheckElement(event) {
             }
 
             if (!isValid) {
-                if(firstInvalidElement){
+                if (firstInvalidElement) {
                     firstInvalidElement.focus();
                 }
                 event.preventDefault();
@@ -829,7 +841,7 @@ function defaultCheckElement(event) {
 
         });
 
-        $(formAssignUser.chxRol).change(function(event){
+        $(formAssignUser.chxRol).change(function (event) {
             if (this.checked) {
                 showFeedBack($(this), true);
                 $("#msgRadio").addClass('d-none');

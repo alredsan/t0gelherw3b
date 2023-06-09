@@ -172,6 +172,9 @@ body{
     justify-content: space-around;
 }
 
+.dropdown-menu.show{
+    left: -50px
+}
 
 .ck-editor__main {
     max-height: 250px;
