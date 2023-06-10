@@ -92,7 +92,7 @@
                     <option value=''>Mostrar todos ONGs</option>
                     @foreach($organisation as $ong)
 
-                    <option value='{{$ong->idONG}}' @if($existsRequest && $_GET['id_ONG'] == $ong->idONG) selected @endif>{{ $ong->Name }}</option>
+                    <option value='{{$ong->idONG}}' @if($existsRequest && isset($_GET['id_ONG']) && $_GET['id_ONG'] == $ong->idONG) selected @endif>{{ $ong->Name }}</option>
                     @endforeach
                 </select>
                 <label for="id_ONG">Organización</label>

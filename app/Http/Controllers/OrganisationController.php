@@ -24,19 +24,23 @@ class OrganisationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $userAuth = Auth::user();
 
-        $organisations = Organisation::paginate();
+        if ($userAuth->Role < 4) abort(404);
 
-        if ($userAuth->Role >= 4) {
+        $buscador = $request->nameONG;
 
-            return view('admin.organisation.index', compact('organisations', 'userAuth'))
-                ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
-        } else {
-            abort(404);
+        if ($buscador){
+            $organisations = Organisation::where('Name','LIKE',"%$buscador%")->paginate(10)->withQueryString();
+        }else{
+            $organisations = Organisation::paginate(10)->withQueryString();
         }
+
+        return view('admin.organisation.index', compact('organisations', 'userAuth'));
+            // ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
+
     }
 
     /**
@@ -122,7 +126,6 @@ class OrganisationController extends Controller
         $userAuth = Auth::user();
 
         $organisation = Organisation::where('idONG', $userAuth->id_ONG)->first();
-        // $organisation = Organisation::find(Auth::user()->id_ONG);
         if ($organisation == null) {
             abort(404);
         }
@@ -213,7 +216,7 @@ class OrganisationController extends Controller
         try {
             DB::beginTransaction();
             //Cambiamos los roles, aplicando NULL menos al WEB
-            User::where('id_ONG',$id)->where('Role','<',4)->update(['Role'=>NULL]);
+            User::where('id_ONG', $id)->where('Role', '<', 4)->update(['Role' => NULL]);
 
             //Eliminamos el ONG y ya asigna NULL al usuario por clave foranea
             Organisation::find($id)->delete();
@@ -372,7 +375,7 @@ class OrganisationController extends Controller
         $user->id_ONG = NULL;
 
         //Comprobamos si el rol no sea ADMINWEB
-        if($user->Role <= 3){
+        if ($user->Role <= 3) {
             $user->Role = NULL;
         }
 

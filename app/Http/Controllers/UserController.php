@@ -30,24 +30,15 @@ class UserController extends Controller
 
         $users = "";
 
-        if ($buscadorName){
+        if ($buscadorName && $buscadorLastName){
 
-            $users = User::where('name','LIKE',"%$buscadorName%");
-        }
-
-        if ($buscadorLastName){
-            if($users == ""){
-                $users = User::where('Apellidos','LIKE',"%$buscadorLastName%");
-            }else{
-                $users->where('Apellidos','LIKE',"%$buscadorLastName%");
-            }
-        }
-
-        if($users == ""){
-            $users = User::paginate(4);
+            $users = User::where('name','LIKE',"%$buscadorName%")->where('Apellidos','LIKE',"%$buscadorLastName%")->paginate(10)->withQueryString();
+        }else if($buscadorName){
+            $users = User::where('name','LIKE',"%$buscadorName%")->paginate(10)->withQueryString();
+        }else if($buscadorLastName){
+            $users = User::where('Apellidos','LIKE',"%$buscadorLastName%")->paginate(10)->withQueryString();
         }else{
-            $users->paginate(4);
-            dd($users);
+            $users = User::paginate(10);
         }
 
         return view('admin.user.index',compact('users','userAuth'));

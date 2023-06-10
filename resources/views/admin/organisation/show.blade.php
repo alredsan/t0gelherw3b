@@ -16,9 +16,14 @@
                                 <p>{{ $message }}</p>
                             </div>
                         @endif
+
+                        <h1 id="card_title">
+                            {{ __('Perfil organización') }}
+                        </h1>
+
                         <div class="float-right">
                             @if ($userAuth->Role >= 3)
-                                <a class="btn btn-primary" href="{{ route('admin.ong.edit', $organisation->idONG) }}">
+                                <a class="btn btn-primary" data-placement="left" href="{{ route('admin.ong.edit', $organisation->idONG) }}">
                                     {{ __('Editar') }}</a>
                             @endif
                         </div>

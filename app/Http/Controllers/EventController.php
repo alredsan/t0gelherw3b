@@ -32,9 +32,9 @@ class EventController extends Controller
         $buscador = $request->name;
 
         if ($buscador){
-            $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(7);
+            $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(10)->withQueryString();
         }else{
-            $events = Event::paginate(7);
+            $events = Event::paginate(10)->withQueryString();
         }
 
         $showONG = true;
@@ -53,9 +53,9 @@ class EventController extends Controller
         $buscador = $request->name;
 
         if ($buscador){
-            $events = Event::where('id_ONG', $userAuth->id_ONG)->where('Nombre','LIKE',"%$buscador%")->orderBy('FechaEvento', 'DESC')->paginate(10);
+            $events = Event::where('id_ONG', $userAuth->id_ONG)->where('Nombre','LIKE',"%$buscador%")->orderBy('FechaEvento', 'DESC')->paginate(10)->withQueryString();
         }else{
-            $events = Event::where('id_ONG', $userAuth->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10);
+            $events = Event::where('id_ONG', $userAuth->id_ONG)->orderBy('FechaEvento', 'DESC')->paginate(10)->withQueryString();
         }
 
 
@@ -306,9 +306,7 @@ class EventController extends Controller
             ->Tematica($type)
             ->Localidad($lat, $lon, $radio)
             ->Ordenacion($order)
-            ->paginate(8);
-
-
+            ->paginate(10)->withQueryString();
 
         return view('event.index', compact('events', 'tipos', 'request', 'organisation'));
     }

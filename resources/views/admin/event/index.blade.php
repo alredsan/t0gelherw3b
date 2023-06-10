@@ -36,21 +36,30 @@
                     @endif
                     <div class="card-body bg-white mb-3">
                         @if (!request()->RouteIs('admin.events.index'))
-                        <form action="{{ route('admin.ong.event.index')}}" method="post">
-
-                        @else
-                        <form action="{{ route('admin.events.index')}}" method="post">
+                            <form action="{{ route('admin.ong.event.index') }}" method="get">
+                            @else
+                                <form action="{{ route('admin.events.index') }}" method="get">
                         @endif
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">Buscar por nombre de evento</label>
-                                <input type="text" class="form-control" name="name" id="name" value="@php echo isset($buscador) ? "$buscador":"" @endphp"
-                                    placeholder="Buscar ..." pattern=".{3,}" required>
-                                <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
-                            </div>
-                            <div class="box-footer text-end mt-2">
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-search me-2"></i>Filtrar</button>
-                            </div>
+
+                        <div class="form-group">
+                            <label for="name">Buscar por nombre de evento</label>
+                            <input type="text" class="form-control" name="name" id="name"
+                                value="@php echo isset($buscador) ? "$buscador":"" @endphp" placeholder="Buscar ...">
+                            <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
+                        </div>
+                        <div class="box-footer text-end mt-2">
+                            @if (isset($buscador))
+                                @if (!request()->RouteIs('admin.events.index'))
+                                    <a href="{{ route('admin.ong.event.index') }}" class="btn btn-danger"><i
+                                            class="bi bi-eraser me-2"></i>Eliminar Busqueda</a>
+                                @else
+                                    <a href="{{ route('admin.events.index') }}" class="btn btn-danger"><i
+                                            class="bi bi-eraser me-2"></i>Eliminar Busqueda</a>
+                                @endif
+
+                            @endif
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-search me-2"></i>Filtrar</button>
+                        </div>
                         </form>
                     </div>
                     <div class="card-body bg-white">
@@ -134,7 +143,9 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr>No hay registros</tr>
+                                        <tr>
+                                            <td class="text-center" colspan="9">No hay registros</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>

@@ -111,6 +111,8 @@ Route::post('/api/user/search',[UserController::class,'searchUsers'])->middlewar
 Route::get('/admin',AdminController::class)->middleware('auth')->name('Admin');
     // ONGs (index, crear, eliminar)
 Route::get('/admin/ongs',[OrganisationController::class,'index'])->middleware('auth')->name('admin.ong.index');
+// Route::post('/admin/ongs',[OrganisationController::class,'index'])->middleware('auth')->name('admin.ong.index');
+
 Route::get('/admin/ongs/new',[OrganisationController::class,'create'])->middleware('auth')->name('admin.ong.create');
 Route::post('/admin/ongs/new',[OrganisationController::class,'store'])->middleware('auth')->name('admin.ong.store');
 
@@ -121,7 +123,7 @@ Route::get('/admin/ongs/edit/{id}',[OrganisationController::class,'edit'])->midd
     //EVENTOS
         //index
 Route::get('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
-Route::post('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
+// Route::post('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
 
     //Types
         //index
@@ -140,7 +142,7 @@ Route::patch('/admin/types/update/{type}',[TypeController::class,'update'])->mid
     // Usuarios (index, crear, eliminar)
         //Index Usuarios
 Route::get('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
-Route::post('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
+// Route::post('/admin/users',[UserController::class,'index'])->middleware('auth')->name('admin.users.index');
         //Editar Usuario
 Route::get('/admin/users/editar/{idUser}',[UserController::class,'editUserAdmin'])->middleware('auth')->name('admin.user.edit');
         //Update Usuario

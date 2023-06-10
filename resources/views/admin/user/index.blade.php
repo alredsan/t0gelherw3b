@@ -31,25 +31,26 @@
                     @endif
                     <div class="card-body bg-white mb-3">
 
-                        <form action="{{ route('admin.users.index') }}" method="post">
+                        <form action="{{ route('admin.users.index') }}" method="get">
 
-                            @csrf
+                            {{-- @csrf --}}
                             <div class="row">
                                 <div class="form-group col-sm">
                                     <label for="name">Buscar por nombre</label>
                                     <input type="text" class="form-control" name="name" id="name"
-                                        value="@php echo isset($buscador) ? "$buscador":"" @endphp" placeholder="Buscar ..."
-                                        pattern=".{3,}">
-                                    <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
+                                        value="@php echo isset($_GET['name']) ? $_GET['name']:"" @endphp" placeholder="Buscar ...">
+
                                 </div>
                                 <div class="form-group col-sm">
                                     <label for="name">Buscar por Apellidos</label>
                                     <input type="text" class="form-control" name="lastname" id="lastname"
-                                        value="@php echo isset($buscador) ? "$buscador":"" @endphp" placeholder="Buscar ..."
-                                        pattern=".{3,}">
-                                    <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
+                                        value="@php echo isset($_GET['lastname']) ? $_GET['lastname'] :"" @endphp" placeholder="Buscar ...">
+
                                 </div>
                                 <div class="box-footer text-end mt-2">
+                                    @if(isset($_GET['name']) || isset($_GET['lastname']) )
+                                    <a href="{{ route('admin.users.index') }}" class="btn btn-danger"><i class="bi bi-eraser me-2"></i>Eliminar Busqueda</a>
+                                    @endif
                                     <button type="submit" class="btn btn-primary"><i
                                             class="bi bi-search me-2"></i>Filtrar</button>
                                 </div>

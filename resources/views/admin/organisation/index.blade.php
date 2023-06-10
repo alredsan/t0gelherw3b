@@ -16,11 +16,12 @@
                                 {{ __('Organizaciones') }}
                             </h1>
 
-                             <div class="float-right">
-                                <a href="{{ route('admin.ong.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo ONG') }}
+                            <div class="float-right">
+                                <a href="{{ route('admin.ong.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Crear nuevo ONG') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -29,20 +30,51 @@
                         </div>
                     @endif
 
+                    <div class="card-body bg-white mb-3">
+
+                        <form action="{{ route('admin.ong.index') }}" method="get">
+
+                            {{-- @csrf --}}
+                            <div class="row">
+                                <div class="form-group col-sm">
+                                    <label for="name">Buscar por nombre</label>
+                                    <input type="text" class="form-control" name="nameONG" id="nameONG"
+                                        value="@php echo isset($_GET['nameONG']) ? $_GET['nameONG']:"" @endphp"
+                                        placeholder="Buscar ...">
+                                </div>
+
+                                <div class="box-footer text-end mt-2">
+                                    @if (isset($_GET['nameONG']))
+                                        <a href="{{ route('admin.ong.index') }}" class="btn btn-danger"><i
+                                                class="bi bi-eraser me-2"></i>Eliminar Busqueda</a>
+                                    @endif
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="bi bi-search me-2"></i>Filtrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="card-body bg-white">
+                        <div class='encabPie'>
+                            <div></div>
+                            <div>
+                                {!! $organisations->links() !!}
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id='tableAdmin'>
                                 <thead class="thead">
                                     <tr>
 
-										<th>Idong</th>
-										<th>Logo</th>
-										<th>Name</th>
-										<th>Direccionsede</th>
-										<th>Fechacreacion</th>
-										<th>IBAN</th>
-										<th>Email</th>
-										<th>Telefono</th>
+                                        <th>Idong</th>
+                                        <th>Logo</th>
+                                        <th>Name</th>
+                                        <th>Direccionsede</th>
+                                        <th>Fechacreacion</th>
+                                        <th>IBAN</th>
+                                        <th>Email</th>
+                                        <th>Telefono</th>
 
                                         <th>Acciones</th>
                                         <th>Permisos</th>
@@ -52,26 +84,35 @@
                                     @foreach ($organisations as $organisation)
                                         <tr>
 
-											<td data-head="Idong">{{ $organisation->idONG }}</td>
-											<td data-head="Logo"><img src="{{ asset($organisation->FotoLogo) }}"  class="imgTable" alt="LogoONG"></td>
-											<td data-head="Nombre">{{ $organisation->Name }}</td>
-											<td data-head="Direccion">{{ $organisation->DireccionSede }}</td>
-											<td data-head="Fecha creacion">{{ $organisation->FechaCreacion }}</td>
-											<td data-head="IBAN">{{ $organisation->IBANmetodoPago }}</td>
-											<td data-head="Email">{{ $organisation->eMail }}</td>
-											<td data-head="Telefono">{{ $organisation->Telefono }}</td>
+                                            <td data-head="Idong">{{ $organisation->idONG }}</td>
+                                            <td data-head="Logo"><img src="{{ asset($organisation->FotoLogo) }}"
+                                                    class="imgTable" alt="LogoONG"></td>
+                                            <td data-head="Nombre">{{ $organisation->Name }}</td>
+                                            <td data-head="Direccion">{{ $organisation->DireccionSede }}</td>
+                                            <td data-head="Fecha creacion">{{ $organisation->FechaCreacion }}</td>
+                                            <td data-head="IBAN">{{ $organisation->IBANmetodoPago }}</td>
+                                            <td data-head="Email">{{ $organisation->eMail }}</td>
+                                            <td data-head="Telefono">{{ $organisation->Telefono }}</td>
 
                                             <td data-head="Acciones" class="formActions">
 
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.ong.show',$organisation->idONG) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.ong.edit',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                <a class="btn btn-sm btn-primary "
+                                                    href="{{ route('admin.ong.show', $organisation->idONG) }}"><i
+                                                        class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                <a class="btn btn-sm btn-success"
+                                                    href="{{ route('admin.ong.edit', $organisation->idONG) }}"><i
+                                                        class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
 
-                                                    <button type="submit"
-                                                        data-action="{{ route('admin.ong.destroy', $organisation->idONG) }}"
-                                                        class="btn btn-danger btn-sm btnDelete"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                <button type="submit"
+                                                    data-action="{{ route('admin.ong.destroy', $organisation->idONG) }}"
+                                                    class="btn btn-danger btn-sm btnDelete"><i
+                                                        class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-success" href="{{ route('admin.ong.usersassign',$organisation->idONG) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Ver Usuarios con permisos') }}</a>
+                                                <a class="btn btn-sm btn-success"
+                                                    href="{{ route('admin.ong.usersassign', $organisation->idONG) }}"><i
+                                                        class="fa fa-fw fa-edit"></i>
+                                                    {{ __('Ver Usuarios con permisos') }}</a>
 
                                             </td>
                                         </tr>
@@ -79,9 +120,14 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class='encabPie'>
+                            <div></div>
+                            <div>
+                                {!! $organisations->links() !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {!! $organisations->links() !!}
             </div>
         </div>
     </div>
