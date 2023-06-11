@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 class EventController extends Controller
 {
     /**
-     * Mostrar todos los eventos para el administrador WEB
+     * *Mostrar todos los eventos para el administrador WEB
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,9 +32,9 @@ class EventController extends Controller
         $buscador = $request->name;
 
         if ($buscador){
-            $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(10)->withQueryString();
+            $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(7)->withQueryString();
         }else{
-            $events = Event::paginate(10)->withQueryString();
+            $events = Event::paginate(7)->withQueryString();
         }
 
         $showONG = true;
@@ -43,7 +43,7 @@ class EventController extends Controller
     }
 
     /**
-     * Mostrar solo los eventos que usuario tiene permiso
+     * *Mostrar solo los eventos que usuario tiene permiso
      */
     public function indexEventsONG(Request $request)
     {
@@ -65,7 +65,7 @@ class EventController extends Controller
     }
 
     /**
-     * Mostrar el formualrio para crear nuevo evento
+     * *Mostrar el formualrio para crear nuevo evento
      *
      * @return \Illuminate\Http\Response
      */
@@ -82,7 +82,7 @@ class EventController extends Controller
     }
 
     /**
-     * Guardar el nuevo evento en BBDD
+     * *Guardar el nuevo evento en BBDD
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -118,7 +118,7 @@ class EventController extends Controller
     }
 
     /**
-     * Mostrar informacion de un Evento
+     * *Mostrar informacion de un Evento
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -154,7 +154,7 @@ class EventController extends Controller
     }
 
     /**
-     * Mostrar el formulario para editar el evento
+     * *Mostrar el formulario para editar el evento
      *
      *
      * @param  int $id
@@ -177,7 +177,7 @@ class EventController extends Controller
     }
 
     /**
-     * Actualizar el evento tras el submit del formulario POST
+     * *Actualizar el evento tras el submit del formulario POST
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Event $event
@@ -241,7 +241,7 @@ class EventController extends Controller
     }
 
     /**
-     * Eliminar el evento del sistema
+     * *Eliminar el evento del sistema
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
@@ -261,7 +261,7 @@ class EventController extends Controller
     }
 
     /**
-     * Eliminar el participante que esta vinculado con el evento
+     * *Eliminar el participante que esta vinculado con el evento
      */
     public function destroyParticipante($id)
     {
@@ -274,7 +274,7 @@ class EventController extends Controller
     }
 
     /**
-     * BUSCADOR: donde se va a filtrar los eventos de la aplicacion principal
+     * *BUSCADOR: donde se va a filtrar los eventos de la aplicacion principal
      */
     public function indexFilter(Request $request)
     {
@@ -306,13 +306,13 @@ class EventController extends Controller
             ->Tematica($type)
             ->Localidad($lat, $lon, $radio)
             ->Ordenacion($order)
-            ->paginate(10)->withQueryString();
+            ->paginate(7)->withQueryString();
 
         return view('event.index', compact('events', 'tipos', 'request', 'organisation'));
     }
 
     /**
-     * Donde muestra los voluntarios apuntados a un evento
+     * *Donde muestra los voluntarios apuntados a un evento
      */
     function showUsersEvent(Event $id)
     {
@@ -332,7 +332,7 @@ class EventController extends Controller
     }
 
     /**
-     * Donde se elimina la participacion del evento mediante por ADMINISTRACION
+     * *Donde se elimina la participacion del evento mediante por ADMINISTRACION
      */
     public function destroyParticipanteAdmin($idEvent, $idUser)
     {
@@ -349,7 +349,7 @@ class EventController extends Controller
     }
 
     /**
-     * Donde se recibe la cantidad donacion para un evento y actualizar el contador de APORTACIONES
+     * *Donde se recibe la cantidad donacion para un evento y actualizar el contador de APORTACIONES
      * Como futura aportacion, uso de la pasarela de PAYPAL con una tabla en BBDD para tener el registro
      */
     public function aportacionEvent(Request $request, Event $id)

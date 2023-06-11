@@ -20,7 +20,7 @@ class OrganisationController extends Controller
 {
 
     /**
-     * Listar los ONG
+     * *Listar los ONG
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,7 +44,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Mostrar el formulario para crear nuevo ONG
+     * *Mostrar el formulario para crear nuevo ONG
      *
      * @return \Illuminate\Http\Response
      */
@@ -61,7 +61,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Guardar en BBDD nuevo ONG creado
+     * *Guardar en BBDD nuevo ONG creado
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -99,7 +99,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Mostrar un ONG con su informacion
+     * *Mostrar un ONG con su informacion
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -119,7 +119,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Mostrar el ONG que tiene acceso
+     * *Mostrar el ONG que tiene acceso
      */
     public function showModeAdmin()
     {
@@ -133,7 +133,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Mostrar el formulario para editar el ONG
+     * *Mostrar el formulario para editar el ONG
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -153,7 +153,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Mostrar el formulario de edicion el ONG que tiene permiso hacerlo
+     * *Mostrar el formulario de edicion el ONG que tiene permiso hacerlo
      */
     public function showModeAdminEdit()
     {
@@ -169,7 +169,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Actualizar el ONG tras el formulario
+     * *Actualizar el ONG tras el formulario
      *
      * @param  \Illuminate\Http\Request $request
      * @param  Organisation $organisation
@@ -205,7 +205,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Eliminar ONG del BBDD
+     * *Eliminar ONG del BBDD
      *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
@@ -233,8 +233,9 @@ class OrganisationController extends Controller
     }
 
 
-
-    // Mostrar los usuarios que tiene permiso sobre el ONG
+    /**
+     * *Mostrar los usuarios que tiene permiso sobre el ONG
+     */
     public function showUserOng($id = "")
     {
         $userAuth = Auth::user();
@@ -269,7 +270,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Funcion donde asigna el usuario a un ONG, para gestionarlo
+     * *Funcion donde asigna el usuario a un ONG, para gestionarlo
      */
     public function assignUser(Request $request, Organisation $id)
     {
@@ -302,9 +303,6 @@ class OrganisationController extends Controller
             $user->Role = $rolesAssign;
             $user->save();
 
-            //Guardamos los roles en la tabla intermedia de usuarios-Roles
-            // $user->usersRole()->attach($rolesAssign);
-
             DB::commit(); //Confirmamos la intregridad de datos
         } catch (Exception) {
             //Revertimos los cambios en BBDD y notificamos al usuario el error producido
@@ -319,7 +317,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Donde se devuelve la informacion de UN usuario del sistema de forma simplicada
+     * *Donde se devuelve la informacion de UN usuario del sistema de forma simplicada
      * (id, name, Apellidos, id_ONG, Role)
      */
     public function assignUserInfo($id)
@@ -337,7 +335,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * Donde recibe del form de Edicion Roles de un usuario
+     * *Donde recibe del form de Edicion Roles de un usuario
      */
     public function assignUserEdit(Request $request)
     {
@@ -351,8 +349,6 @@ class OrganisationController extends Controller
             $user->id_ONG = null;
         } else {
 
-            // $rolesAssign = array_keys($request->chxRolEdit);
-            // $user->usersRole()->attach($rolesAssign);
             $user->Role = $request->chxRolEdit;
         }
         $user->save();
@@ -361,7 +357,7 @@ class OrganisationController extends Controller
     }
 
     /**
-     * En caso que pulse el boton de eliminar permiso de un usuario
+     * *En caso que pulse el boton de eliminar permiso de un usuario
      */
     public function desassignUser($id)
     {

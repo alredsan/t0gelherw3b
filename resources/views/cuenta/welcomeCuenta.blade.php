@@ -28,9 +28,8 @@
                                     <tr>
                                         <td data-head="Acciones">{{ $evento->Nombre }}</td>
                                         <td>{{ date('d-m-Y H:m', $evento->FechaEvento) }}</td>
-                                        <td><a class="btn btn-sm btn-primary "
-                                                href="{{ route('events.show', $evento->idEvento) }}"><i
-                                                    class="fa fa-fw fa-eye"></i> Ver</a></td>
+                                        <td><a class="btn btn-sm btn-primary"
+                                                href="{{ route('events.show', $evento->idEvento) }}"></i>Ver</a></td>
                                     </tr>
                                 @endif
                             @empty
@@ -43,7 +42,7 @@
                     </table>
                     <div class="d-flex justify-content-end">
 
-                        <a href="{{ route('cuenta.eventos') }}">Ver más... ></a>
+                        <a href="{{ route('cuenta.eventos') }}">Ver más ... ></a>
                     </div>
                 </div>
             </div>

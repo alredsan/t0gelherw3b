@@ -33,19 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Quien somos</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Sobre ONGs
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">¿Eres un ONG?</a>
                     </li>
                 </ul>
                 <div class="col-md-3 text-end">
@@ -99,7 +89,13 @@
                 <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
                     <img class="w-75" src="/img/logo.png" alt="Logotipo">
                 </a>
-                <p class="text-muted">Alberto Redondo &copy; 2023</p>
+                <p class="text-muted">TOGETHER &copy; 2023</p>
+                <div class="d-flex flex-row gap-5">
+                    <i class="fs-4 bi bi-facebook"></i>
+                    <i class="fs-4 bi bi-instagram"></i>
+                    <i class="fs-4 bi bi-twitter"></i>
+                    <i class="fs-4 bi bi-telephone-fill"></i>
+                </div>
             </div>
 
             <div class="col mb-3">

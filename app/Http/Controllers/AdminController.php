@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    //
+    /**
+     * *Acceso general a la administracion
+     */
     public function __invoke()
     {
         $userAuth = Auth::user();

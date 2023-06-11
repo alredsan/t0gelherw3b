@@ -58,7 +58,7 @@
                                                         @if ($event->FechaEvento > time())
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                    class="fa fa-fw fa-trash"></i>
+                                                                    class="bi bi-eraser"></i>
                                                                 {{ __('Desapuntar') }}</button>
                                                         @else
                                                             <i>Evento Finalizado</i>

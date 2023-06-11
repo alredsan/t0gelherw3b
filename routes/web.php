@@ -76,7 +76,7 @@ Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUp
 
     // Eventos
 Route::get('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
-Route::post('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
+// Route::post('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
         // Crear
 Route::get('/admin/ong/event/new',[EventController::class,'create'])->middleware('auth')->name('admin.ong.event.create'); //
 Route::post('/admin/ong/event/new',[EventController::class,'store'])->middleware('auth')->name('admin.ong.event.store');
@@ -153,7 +153,7 @@ Route::patch('/cuenta/perfil/editars/{idUser}',[UserController::class,'updateUse
 Route::delete('/admin/users/destroy/{idUser?}',[UserController::class,'destroy'])->middleware('auth')->name('admin.user.destroy');
 
 
-
+//ELIMINAR
 // Route::resource('ong',OrganisationController::class)->middleware('auth');
 
 // ADMINISTRACION EVENTOS admin.ong.index

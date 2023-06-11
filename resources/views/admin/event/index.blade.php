@@ -116,30 +116,24 @@
                                             <td data-head='Acciones' class="formActions">
                                                 @if ($userAuth->Role >= 2)
                                                     <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('events.show', $event->idEvento) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                        href="{{ route('events.show', $event->idEvento) }}"> {{ __('Mostrar') }}</a>
                                                     <a class="btn btn-sm btn-success"
-                                                        href="{{ route('admin.ong.event.edit', $event->idEvento) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                        href="{{ route('admin.ong.event.edit', $event->idEvento) }}">{{ __('Editar') }}</a>
 
                                                     <button type="submit"
                                                         data-action="{{ route('admin.ong.event.destroy', $event->idEvento) }}"
-                                                        class="btn btn-danger btn-sm btnDelete"><i
-                                                            class="fa fa-fw fa-trash"></i>
-                                                        {{ __('Eliminar') }}</button>
+                                                        class="btn btn-danger btn-sm btnDelete">{{ __('Eliminar') }}</button>
                                                 @else
                                                     <div class="formActions">
                                                         <a class="btn btn-sm btn-primary "
-                                                            href="{{ route('events.show', $event->idEvento) }}"><i
-                                                                class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                            href="{{ route('events.show', $event->idEvento) }}">{{ __('Mostrar') }}</a>
 
                                                     </div>
                                                 @endif
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-info"
-                                                    href="{{ route('admin.ong.event.users', $event->idEvento) }}"><i
-                                                        class="fa fa-fw fa-edit"></i> {{ __('Ver participantes') }}</a>
+                                                    href="{{ route('admin.ong.event.users', $event->idEvento) }}">{{ __('Ver participantes') }}</a>
                                             </td>
                                         </tr>
                                     @empty

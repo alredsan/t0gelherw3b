@@ -60,24 +60,24 @@ class Event extends Model
         return $this->belongsToMany(Type::class, 'events_types', 'idEvento', 'idtype');
     }
 
-    public function eventsdeUnType($type)
-    {
-        // return $this->belongsToMany('App\Models\EventsType','events_types', 'idEvento', 'idEvento');
-        return $this->belongsToMany(Type::class, 'events_types', 'idEvento', 'idtype')->wherePivot('idType', $type);
-    }
+    // public function eventsdeUnType($type)
+    // {
+    //     // return $this->belongsToMany('App\Models\EventsType','events_types', 'idEvento', 'idEvento');
+    //     return $this->belongsToMany(Type::class, 'events_types', 'idEvento', 'idtype')->wherePivot('idType', $type);
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function eventUsers()
-    {
-        return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
-    }
+    // public function eventUsers()
+    // {
+    //     return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
+    // }
 
-    public function eventsUser()
-    {
-        return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
-    }
+    // public function eventsUser()
+    // {
+    //     return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

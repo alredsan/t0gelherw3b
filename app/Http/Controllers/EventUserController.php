@@ -11,7 +11,7 @@ use stdClass;
 class EventUserController extends Controller
 {
     /**
-     * Donde se realiza la peticion por AJAX del cliente para apuntarse al evento
+     * *Donde se realiza la peticion por AJAX del cliente para apuntarse al evento
      * y devuelve en JSON para su tratamiento correcto
      */
     public function add($idEvent)

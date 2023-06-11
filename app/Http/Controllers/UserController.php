@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Mostrar los usuarios del sistema
+     * *Mostrar los usuarios del sistema
      *
      * @return \Illuminate\Http\Response
      */
@@ -49,11 +49,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $user = new User();
-        return view('user.create', compact('user'));
-    }
+    // public function create()
+    // {
+    //     $user = new User();
+    //     return view('user.create', compact('user'));
+    // }
 
     /**
      * Guardar en el sistema el nuevo usuario
@@ -61,18 +61,35 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        request()->validate(User::$rules);
+    // public function store(Request $request)
+    // {
+    //     request()->validate(User::$rules);
 
-        $user = User::create($request->all());
+    //     $user = User::create($request->all());
 
-        return redirect()->route('users.index')
-            ->with('success', 'El usuario ha sido creado.');
-    }
+    //     return redirect()->route('users.index')
+    //         ->with('success', 'El usuario ha sido creado.');
+    // }
 
     /**
-     * Mostrar informacion de un usuario
+     * Actualizar el usuario en el sistema
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  User $user
+     * @return \Illuminate\Http\Response
+     */
+    // public function update(Request $request, User $user)
+    // {
+    //     request()->validate(User::$rules);
+
+    //     $user->update($request->all());
+
+    //     return redirect()->route('users.index')
+    //         ->with('success', 'El usuario ha sido actualizado correctamente');
+    // }
+
+    /**
+     * *Mostrar informacion de un usuario
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -85,7 +102,7 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar el formulario para editar el usuario
+     * *Mostrar el formulario para editar el usuario
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -98,6 +115,9 @@ class UserController extends Controller
         return view('cuenta.edit', compact('user'));
     }
 
+    /**
+     * *Donde devuelve el formualrio para editar el usuario
+     */
     public function editUserAdmin($idUser)
     {
         $userAuth = Auth::user();
@@ -109,25 +129,9 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user','userAuth'));
     }
 
-    /**
-     * Actualizar el usuario en el sistema
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        request()->validate(User::$rules);
-
-        $user->update($request->all());
-
-        return redirect()->route('users.index')
-            ->with('success', 'El usuario ha sido actualizado correctamente');
-    }
 
     /**
-     * Eliminar el usuario del sistema
+     * *Eliminar el usuario del sistema
      *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
@@ -146,7 +150,7 @@ class UserController extends Controller
     }
 
     /**
-     * Borrar cuenta desde el area de voluntario, por razones de seguridad
+     * *Borrar cuenta desde el area de voluntario, por razones de seguridad
      */
     public function destroyCuenta()
     {
@@ -165,7 +169,7 @@ class UserController extends Controller
 
 
     /**
-     * Mostrar los eventos del usuario
+     * *Mostrar los eventos del usuario
      */
     public function showEventos()
     {
@@ -176,7 +180,7 @@ class UserController extends Controller
     }
 
     /**
-     * Actualizar el usuario
+     * *Actualizar el usuario
      */
     public function updateUserV(Request $request, User $user)
     {
@@ -219,6 +223,9 @@ class UserController extends Controller
             ->with('success', 'Usuario' . $request->name . 'ha sido actualizado correctamente');
     }
 
+    /**
+     * *Donde se actualiza los datos del usuario con mas campos que un usuario no permite hacerlo
+     */
     public function updateUserAdmin(Request $request, $idUser)
     {
         request()->validate(User::$rules);
@@ -273,7 +280,7 @@ class UserController extends Controller
     }
 
     /**
-     * Introducir el nuevo usuario voluntario en el sistema
+     * *Introducir el nuevo usuario voluntario en el sistema
      */
     public function register(Request $request)
     {
@@ -308,7 +315,7 @@ class UserController extends Controller
     }
 
     /**
-     * Login del usuario en el sistema, utilizando el Auth de Laravel
+     * *Login del usuario en el sistema, utilizando el Auth de Laravel
      */
     public function login(Request $request)
     {
@@ -335,7 +342,7 @@ class UserController extends Controller
     }
 
     /**
-     * Cierre del sesion del usuario
+     * *Cierre del sesion del usuario
      */
     public function logout(Request $request)
     {
@@ -348,7 +355,7 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar formulario de cambio de password de la cuenta
+     * *Mostrar formulario de cambio de password de la cuenta
      */
     public function cambiopassword()
     {
@@ -356,7 +363,7 @@ class UserController extends Controller
     }
 
     /**
-     * Donde se actualiza la password del usuario
+     * *Donde se actualiza la password del usuario
      */
     public function updatepassword(Request $request)
     {
@@ -380,7 +387,7 @@ class UserController extends Controller
     }
 
     /**
-     * Comprobar si el usuario tiene permisos con un ONG, para seleccionar un modo de administrar
+     * *Comprobar si el usuario tiene permisos con un ONG, para seleccionar un modo de administrar
      * Si no tiene, entra directamente al parte voluntario
      *  o lo contrario, puede seleccionar la parte voluntario o administrar ONG
      */
@@ -395,7 +402,7 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar para seleccionar entre dos area de administracion
+     * *Mostrar para seleccionar entre dos area de administracion
      */
     public function selectingCuenta()
     {
@@ -406,7 +413,7 @@ class UserController extends Controller
     }
 
     /**
-     * Acceso por la parte administrativa voluntario
+     * *Acceso por la parte administrativa voluntario
      */
     public function general()
     {
@@ -416,7 +423,7 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar form para iniciar sesion
+     * *Mostrar form para iniciar sesion
      */
     public function mostrarInicioSesion()
     {
@@ -427,7 +434,7 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar el form de registro usuario
+     * *Mostrar el form de registro usuario
      */
     public function mostrarRegistro()
     {
@@ -438,7 +445,7 @@ class UserController extends Controller
     }
 
     /**
-     * Donde se devuelve en JSON un registro de 3 personas que no tiene ningun acceso a un ONG
+     * *Donde se devuelve en JSON un registro de 3 personas que no tiene ningun acceso a un ONG
      * para asignarle nuevo permisos
      */
     public function searchUsers(Request $request)

@@ -72,14 +72,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function eventsUsers()
-    {
-        return $this->hasMany('App\Models\EventsUser', 'idUser', 'id');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function organisation()
@@ -92,38 +84,44 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'idRol', 'Role');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function usersRole()
-    {
-        return $this->belongsToMany(Role::class,'users_roles', 'idUser', 'idRol','id','idRol');
-    }
-
-
     public function eventos(){
-        // return $this->belongsToMany(Event::class,'events_users');
         return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento')->orderBy('FechaEvento','DESC');
     }
 
-    public function eventosUser(){
-        // return $this->belongsToMany(Event::class,'events_users');
-        return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento')->where("Visible","=","1");
-    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    // public function eventsUsers()
+    // {
+    //     return $this->hasMany('App\Models\EventsUser', 'idUser', 'id');
+    // }
 
-    public function roles($id){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    // public function usersRole()
+    // {
+    //     return $this->belongsToMany(Role::class,'users_roles', 'idUser', 'idRol','id','idRol');
+    // }
 
-        $array = $this->belongsToMany('App\Models\Role','users_roles','idUser','idRol','id','idRol')->wherePivot('idRol', $id)->count();
+    // public function eventosUser(){
+    //     // return $this->belongsToMany(Event::class,'events_users');
+    //     return $this->belongsToMany('App\Models\Event','events_users','idUser','idEvent','id','idEvento')->where("Visible","=","1");
+    // }
 
-        if ($array == 0){
-            return false;
-        }else{
-            return true;
-        }
-    }
+    // public function roles($id){
 
-    public function eventosPaginate(){
-        return $this->eventos()->paginate(10);
-    }
+    //     $array = $this->belongsToMany('App\Models\Role','users_roles','idUser','idRol','id','idRol')->wherePivot('idRol', $id)->count();
+
+    //     if ($array == 0){
+    //         return false;
+    //     }else{
+    //         return true;
+    //     }
+    // }
+
+    // public function eventosPaginate(){
+    //     return $this->eventos()->paginate(10);
+    // }
 
 }

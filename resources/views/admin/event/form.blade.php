@@ -20,7 +20,7 @@
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class='form-control' name='Nombre' id='Nombre' placeholder='Nombre'
-                pattern="[\w ]{3,79}" value='{{ old('Nombre', $event->Nombre) }}' required>
+                pattern=".{3,79}" value='{{ old('Nombre', $event->Nombre) }}' required>
             <div class="invalid-feedback">Introduce el nombre</div>
         </div>
 

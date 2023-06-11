@@ -97,16 +97,13 @@
                                             <td data-head="Acciones" class="formActions">
 
                                                 <a class="btn btn-sm btn-primary "
-                                                    href="{{ route('admin.ong.show', $organisation->idONG) }}"><i
-                                                        class="fa fa-fw fa-eye"></i> {{ __('Mostrar') }}</a>
+                                                    href="{{ route('admin.ong.show', $organisation->idONG) }}"> {{ __('Mostrar') }}</a>
                                                 <a class="btn btn-sm btn-success"
-                                                    href="{{ route('admin.ong.edit', $organisation->idONG) }}"><i
-                                                        class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    href="{{ route('admin.ong.edit', $organisation->idONG) }}">{{ __('Editar') }}</a>
 
                                                 <button type="submit"
                                                     data-action="{{ route('admin.ong.destroy', $organisation->idONG) }}"
-                                                    class="btn btn-danger btn-sm btnDelete"><i
-                                                        class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    class="btn btn-danger btn-sm btnDelete"> {{ __('Eliminar') }}</button>
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-success"
