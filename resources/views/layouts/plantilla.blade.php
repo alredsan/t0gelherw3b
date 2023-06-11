@@ -50,34 +50,35 @@
                 </ul>
                 <div class="col-md-3 text-end">
                     @if (Auth::check())
-                    <menu>
-                        <li class="nav-item dropdown d-flex align-items-center">
-                            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
-                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30" height="30"
-                                    class="rounded-circle">
-                                <span class="mx-1">{{ Auth::user()->name }}</span>
-                            </a>
-                            <ul class="dropdown-menu shadow">
-                                <li><a class="dropdown-item" href="{{ route('acceso') }}"><i
-                                            class="bi bi-gear pe-2"></i>Administracion</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
+                        <menu>
+                            <li class="nav-item dropdown d-flex align-items-center">
+                                <a href="#"
+                                    class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
+                                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset(Auth::user()->Foto) }}" alt="hugenerd" width="30"
+                                        height="30" class="rounded-circle">
+                                    <span class="mx-1">{{ Auth::user()->name }}</span>
+                                </a>
+                                <ul class="dropdown-menu shadow">
+                                    <li><a class="dropdown-item" href="{{ route('acceso') }}"><i
+                                                class="bi bi-gear pe-2"></i>Administracion</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
 
-                                <li>
-                                    <a href='{{ route('logout') }}' class="dropdown-item"><i
-                                            class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a>
-                                </li>
-                            </ul>
+                                    <li>
+                                        <a href='{{ route('logout') }}' class="dropdown-item"><i
+                                                class="bi bi-box-arrow-right pe-2"></i>Cerrar Sesión</a>
+                                    </li>
+                                </ul>
 
-                        </li>
-                    </menu>
+                            </li>
+                        </menu>
                     @else
-                    <div class="d-flex flex-row">
-                        <a href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar Sesión</a>
-                        <a href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
-                    </div>
+                        <div class="d-flex flex-row">
+                            <a href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+                            <a href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -88,6 +89,8 @@
     {{-- contenido --}}
     @yield('contenido')
 
+
+    @extends('layouts.alertCookie')
 
     <div id='footerApp'>
         <footer

@@ -57,6 +57,8 @@ Route::get('/cuenta/perfil/',[UserController::class,'show'])->middleware('auth')
 Route::get('/cuenta/perfil/editar/',[UserController::class,'edit'])->middleware('auth')->name('cuenta.edit');
 Route::patch('/cuenta/perfil/editars/',[UserController::class,'updateUserV'])->middleware('auth')->name('cuenta.update');
 
+Route::delete('/cuenta/perfil/delete/',[UserController::class,'destroyCuenta'])->middleware('auth')->name('cuenta.user.destroy');
+
 Route::get('/cuenta/perfil/cambiopassword/',[UserController::class,'cambiopassword'])->middleware('auth')->name('cuenta.pass.edit');
 Route::patch('/cuenta/perfil/cambiopassword/',[UserController::class,'updatepassword'])->middleware('auth')->name('cuenta.pass.update');
 

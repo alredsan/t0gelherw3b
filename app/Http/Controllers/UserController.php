@@ -146,6 +146,25 @@ class UserController extends Controller
     }
 
     /**
+     * Borrar cuenta desde el area de voluntario, por razones de seguridad
+     */
+    public function destroyCuenta()
+    {
+        $userAuth = Auth::user();
+
+        if($userAuth == "") return back()->with('success', 'Ha producido un error');
+
+        Auth::logout();
+
+        User::find($userAuth->id)->delete();
+
+        return redirect()->route('/')
+            ->with('success', 'El usuario ha sido eliminado correctamente del sistema, Gracias por usar!');
+    }
+
+
+
+    /**
      * Mostrar los eventos del usuario
      */
     public function showEventos()

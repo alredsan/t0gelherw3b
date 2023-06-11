@@ -342,3 +342,9 @@ ul.navbar-nav.navcuenta a.active {
 form label{
     padding-top: 10px;
 }
+
+
+#cardCookie{
+    /* width: 350px; */
+    width: 35vh;
+}
