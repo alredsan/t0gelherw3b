@@ -72,7 +72,7 @@
                                         <th>Name</th>
                                         <th>Direccionsede</th>
                                         <th>Fechacreacion</th>
-                                        <th>IBAN</th>
+                                        {{-- <th>IBAN</th> --}}
                                         <th>Email</th>
                                         <th>Telefono</th>
 
@@ -89,8 +89,8 @@
                                                     class="imgTable" alt="LogoONG"></td>
                                             <td data-head="Nombre">{{ $organisation->Name }}</td>
                                             <td data-head="Direccion">{{ $organisation->DireccionSede }}</td>
-                                            <td data-head="Fecha creacion">{{ $organisation->FechaCreacion }}</td>
-                                            <td data-head="IBAN">{{ $organisation->IBANmetodoPago }}</td>
+                                            <td data-head="Fecha creacion">{{ date('d-m-Y', $organisation->FechaCreacion) }}</td>
+                                            {{-- <td data-head="IBAN">{{ $organisation->IBANmetodoPago }}</td> --}}
                                             <td data-head="Email">{{ $organisation->eMail }}</td>
                                             <td data-head="Telefono">{{ $organisation->Telefono }}</td>
 

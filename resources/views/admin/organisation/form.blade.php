@@ -14,7 +14,7 @@
         <div class="form-group">
             <label for="Name">Nombre:</label>
             <input class="form-control" placeholder="Name" name="Name" type="text" value="{{ $organisation->Name }}"
-                id="Name" pattern="\w{3,44}" required>
+                id="Name" pattern=".{3,44}" required>
             <div class="invalid-feedback">Introduce el nombre correctamente, mas de 3 caracteres y menos de 44</div>
         </div>
         <div class="form-group">

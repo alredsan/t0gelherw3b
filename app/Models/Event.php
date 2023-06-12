@@ -34,7 +34,8 @@ class Event extends Model
         'FechaEvento' => ['required','date'],
         'numMaxVoluntarios' => ['required','gt:1'],
         'Direccion' => ['required','min:3','max:80'],
-        'Latitud' => ['required'],
+        'Latitud' => ['required','regex:/^-?(90|[0-8]?\d)(\.\d+)?$/'],
+        'Longitud' => ['required','regex:/^-?(180|1[0-7]\d|\d?\d)(\.\d+)?$/'],
         'Foto' => 'image|max:2048',
     ];
 
@@ -66,9 +67,6 @@ class Event extends Model
     //     return $this->belongsToMany(Type::class, 'events_types', 'idEvento', 'idtype')->wherePivot('idType', $type);
     // }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     // public function eventUsers()
     // {
     //     return $this->hasOne('App\Models\EventsUser', 'idEvento', 'idEvento');
@@ -115,17 +113,13 @@ class Event extends Model
     public function scopeTematica($query, $type)
     {
         if ($type) {
-            // $eventstype = EventsType::where('idType','=',$type);
-
-            // return $query->whereIn('idEvento',$eventstype);
-            // $events = $this->eventsdeUnType($type);
-
             return $query->whereHas('eventsType', function ($query) use ($type) {
                 $query->where('idtype', $type);
             });
         }
     }
 
+    //Localidad
     public function scopeLocalidad($query, $lat, $lon, $radio)
     {
         if ($lat != null && $lon != null) {
@@ -136,13 +130,11 @@ class Event extends Model
                 $query = $query->having('distancia', '<=', $radio);
             }
 
-            // $query = $query->orderBy('distancia','DESC');
-
-
             return $query;
         }
     }
 
+    //Ordenacion
     public function scopeOrdenacion($query, $type)
     {
         if ($type == '0') {

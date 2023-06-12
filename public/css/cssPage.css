@@ -244,9 +244,16 @@ body{
 }
 
 .formActions{
-    display: flex;
-    flex-direction: column;
+
+    display: grid;
     gap: 2px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.formActions *{
+    width: 70px;
+    margin: 2px;
 }
 
 /* TABLAS PARA MEJOR VISIBILIDAD PARA DISPOSITIVOS MOVILES */

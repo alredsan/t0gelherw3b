@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-md">
-            <div class="input-group align-items-end" id="fGeocoder">
+            <div class="input-group " id="fGeocoder">
 
                 <div class="form-floating">
                     <input type="text" class="form-control" id="localidad" name='localidad' placeholder="Buscar ..."
