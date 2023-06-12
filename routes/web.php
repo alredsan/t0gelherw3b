@@ -151,29 +151,3 @@ Route::get('/admin/users/editar/{idUser}',[UserController::class,'editUserAdmin'
 Route::patch('/cuenta/perfil/editars/{idUser}',[UserController::class,'updateUserAdmin'])->middleware('auth')->name('admin.user.update');
         //Eliminar Usuario
 Route::delete('/admin/users/destroy/{idUser?}',[UserController::class,'destroy'])->middleware('auth')->name('admin.user.destroy');
-
-
-//ELIMINAR
-// Route::resource('ong',OrganisationController::class)->middleware('auth');
-
-// ADMINISTRACION EVENTOS admin.ong.index
-// Route::get('/admin/ong/events',[OrganisationController::class,'showModeAdminEdit'])->middleware('auth')->name('admin.ong.edit');
-// PARTE DE ADMINISTRACION
-// Route::get('/admin/perfil',[UserController::class,'show'])->middleware('auth')->parameter(Auth::user()->id)->name('perfil');
-// ELIMINAR
-// Route::get('/admin/perfil/',[AdminController::class,'show'])->middleware('auth')->name('perfil');
-// Route::get('/admin/perfil/editar/',[AdminController::class,'edit'])->middleware('auth')->name('admin.user.edit');
-// Route::patch('/admin/perfil/editars/',[AdminController::class,'updateUser'])->middleware('auth')->name('admin.user.update');
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::resource('eventos', EventController::class);
-
-//     //Mostrar el evento
-// Route::get('/app/event/{id}',[EventController::class,'show'])->name('events.show');
-// END_ELIMINAR

@@ -300,7 +300,12 @@ class OrganisationController extends Controller
             //Cambiamos la propiedad id_ONG del usuario
 
             $user->id_ONG = $id->idONG;
-            $user->Role = $rolesAssign;
+
+            if ($user->Role == NULL || $user->Role < 4){
+                //En caso que tenga un rol superior WEB, no cambiar el rol
+                $user->Role = $rolesAssign;
+            }
+
             $user->save();
 
             DB::commit(); //Confirmamos la intregridad de datos
