@@ -37,7 +37,7 @@
                     <div class="card-body bg-white mb-3">
                         @if (!request()->RouteIs('admin.events.index'))
                             <form action="{{ route('admin.ong.event.index') }}" method="get">
-                            @else
+                        @else
                                 <form action="{{ route('admin.events.index') }}" method="get">
                         @endif
 
@@ -47,8 +47,9 @@
                                 value="@php echo isset($buscador) ? "$buscador":"" @endphp" placeholder="Buscar ...">
                             <div class="invalid-feedback">Introduce mas de 3 caracteres</div>
                         </div>
+                        <input type="hidden" name="idONG" value="@php echo isset($_GET['idONG']) ? $_GET['idONG'] :"" @endphp">
                         <div class="box-footer text-end mt-2">
-                            @if (isset($buscador))
+                            @if (isset($buscador) || isset($_GET['idONG']))
                                 @if (!request()->RouteIs('admin.events.index'))
                                     <a href="{{ route('admin.ong.event.index') }}" class="btn btn-danger"><i
                                             class="bi bi-eraser me-2"></i>Eliminar Busqueda</a>
@@ -116,7 +117,8 @@
                                             <td data-head='Acciones' class="formActions">
                                                 @if ($userAuth->Role >= 2)
                                                     <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('events.show', $event->idEvento) }}"> {{ __('Mostrar') }}</a>
+                                                        href="{{ route('events.show', $event->idEvento) }}">
+                                                        {{ __('Mostrar') }}</a>
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('admin.ong.event.edit', $event->idEvento) }}">{{ __('Editar') }}</a>
 

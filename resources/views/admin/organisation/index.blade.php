@@ -106,10 +106,15 @@
                                                     class="btn btn-danger btn-sm btnDelete"> {{ __('Eliminar') }}</button>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-success"
+                                                <a class="btn btn-sm btn-success w-100 mb-3 me-2"
                                                     href="{{ route('admin.ong.usersassign', $organisation->idONG) }}"><i
                                                         class="fa fa-fw fa-edit"></i>
                                                     {{ __('Ver Usuarios con permisos') }}</a>
+
+                                                <a class="btn btn-sm btn-success w-100 mb-3"
+                                                    href="{{ route('admin.events.index', ['idONG' => $organisation->idONG])}}"><i
+                                                        class="fa fa-fw fa-edit"></i>
+                                                    {{ __('Ver Eventos') }}</a>
 
                                             </td>
                                         </tr>

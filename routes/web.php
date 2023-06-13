@@ -76,6 +76,7 @@ Route::patch('/admin/ong/editar/',[OrganisationController::class,'ModeAdminONGUp
 
     // Eventos
 Route::get('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
+
 // Route::post('/admin/ong/event',[EventController::class,'indexEventsONG'])->middleware('auth')->name('admin.ong.event.index'); //
         // Crear
 Route::get('/admin/ong/event/new',[EventController::class,'create'])->middleware('auth')->name('admin.ong.event.create'); //
@@ -113,6 +114,7 @@ Route::post('/api/user/search',[UserController::class,'searchUsers'])->middlewar
 Route::get('/admin',AdminController::class)->middleware('auth')->name('Admin');
     // ONGs (index, crear, eliminar)
 Route::get('/admin/ongs',[OrganisationController::class,'index'])->middleware('auth')->name('admin.ong.index');
+
 // Route::post('/admin/ongs',[OrganisationController::class,'index'])->middleware('auth')->name('admin.ong.index');
 
 Route::get('/admin/ongs/new',[OrganisationController::class,'create'])->middleware('auth')->name('admin.ong.create');
@@ -125,6 +127,7 @@ Route::get('/admin/ongs/edit/{id}',[OrganisationController::class,'edit'])->midd
     //EVENTOS
         //index
 Route::get('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
+// Route::get('/admin/events/{id?}',[EventController::class,'index'])->middleware('auth')->name('admin.events.index.ong');
 // Route::post('/admin/events',[EventController::class,'index'])->middleware('auth')->name('admin.events.index');
 
     //Types

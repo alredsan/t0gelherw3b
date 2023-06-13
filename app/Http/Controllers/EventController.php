@@ -29,12 +29,22 @@ class EventController extends Controller
 
         if($userAuth->Role < 4) abort(404);
 
+        $idONG = $request->idONG;
         $buscador = $request->name;
 
         if ($buscador){
-            $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(7)->withQueryString();
+            if ($idONG != ""){
+                $events = Event::where('id_ONG',$idONG)->where('Nombre','LIKE',"%$buscador%")->paginate(7)->withQueryString();
+
+            }else{
+                $events = Event::where('Nombre','LIKE',"%$buscador%")->paginate(7)->withQueryString();
+            }
         }else{
-            $events = Event::paginate(7)->withQueryString();
+            if ($idONG != ""){
+                $events = Event::where('id_ONG',$idONG)->paginate(7)->withQueryString();
+            }else{
+                $events = Event::paginate(7)->withQueryString();
+            }
         }
 
         $showONG = true;
