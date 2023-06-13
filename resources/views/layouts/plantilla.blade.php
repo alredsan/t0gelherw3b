@@ -80,7 +80,7 @@
     @yield('contenido')
 
 
-    @extends('layouts.alertCookie')
+    @include('layouts.alertCookie')
 
     <div id='footerApp'>
         <footer

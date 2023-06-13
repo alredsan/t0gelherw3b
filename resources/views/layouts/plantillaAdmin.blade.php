@@ -108,8 +108,6 @@
                             </a>
                         </li>
                     </ul>
-
-
                 </div>
             </div>
 
@@ -149,7 +147,7 @@
         @yield('contenido')
     </div>
 
-    @extends('layouts.alertCookie')
+    @include('layouts.alertCookie')
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

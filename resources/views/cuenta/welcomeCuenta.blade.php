@@ -29,7 +29,7 @@
                                         <td data-head="Acciones">{{ $evento->Nombre }}</td>
                                         <td>{{ date('d-m-Y H:m', $evento->FechaEvento) }}</td>
                                         <td><a class="btn btn-sm btn-primary"
-                                                href="{{ route('events.show', $evento->idEvento) }}"></i>Ver</a></td>
+                                                href="{{ route('events.show', $evento->idEvento) }}">Ver</a></td>
                                     </tr>
                                 @endif
                             @empty

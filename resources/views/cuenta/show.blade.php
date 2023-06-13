@@ -12,7 +12,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;" class="p-3">
                             <div class="float-left">
-                                <h1 class="card-title">{{ __('Perfil Voluntario') }}</h1>
+                                <p class="card-title fs-1 fw-bold">{{ __('Perfil Voluntario') }}</p>
                             </div>
                             <div class="float-right">
                                 <a class="btn btn-primary" href="{{ route('cuenta.edit') }}"> {{ __('Editar Perfil') }}</a>
@@ -87,7 +87,7 @@
                     <h1 class="modal-title fs-5" id="modalDeleteLabel">Eliminar Usuario ¿Estas Seguro?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" id="formDeleteModal" method="POST">
+                <form action="{{ route('cuenta.user.destroy') }}" id="formDeleteModal" method="POST">
                     <div class="modal-body">
                         @csrf
 
