@@ -106,7 +106,7 @@
         </x-maps-leaflet>
 
         <div class='row'>
-            <h3>Sobre el ONG</h3>
+            <h3>Sobre la ONG</h3>
 
             <div class="col-sm-4 photoLogo" style="background-image:url({{ asset($event->organisation->FotoLogo) }})">
             </div>
@@ -116,7 +116,7 @@
                 <a class="btn btn-primary" href="{{ asset("/app?id_ONG=$event->id_ONG") }}">Ver más eventos que organiza el
                     ONG</a>
             </div>
-            <h4>Descripcion sobre ONG:</h4>
+            <h4 class="pt-2">Descripción sobre ONG:</h4>
             {!! $event->organisation->Descripcion !!}
         </div>
     </section>

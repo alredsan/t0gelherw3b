@@ -41,7 +41,7 @@
                                             <th>Apellidos</th>
                                             <th>Email</th>
                                             <th>Provincia</th>
-                                            <th>Telefono</th>
+                                            <th>Teléfono</th>
                                             <th>Roles</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -54,7 +54,7 @@
                                                 <td data-head="Apellidos">{{ $user->Apellidos }}</td>
                                                 <td data-head="Email">{{ $user->email }}</td>
                                                 <td data-head="Provincia">{{ $user->ProvinciaLocalidad }}</td>
-                                                <td data-head="Telefono">{{ $user->Telefono }}</td>
+                                                <td data-head="Teléfono">{{ $user->Telefono }}</td>
                                                 <td data-head="Roles">
                                                     <div class='alert alert-info p-0 m-0 text-center'>
                                                         <span class="infoRol"> {{ $user->rol->NombreRol }}</span>
@@ -71,7 +71,7 @@
                                                             data-action="{{ route('admin.ong.usersassign.delete', $user->id) }}"
                                                             class="btn btn-danger btn-sm btnDelete">Eliminar</button>
                                                     @else
-                                                        <p class='fw-lighter'>No esta permitido</p>
+                                                        <p class='fw-lighter'>No está permitido</p>
                                                     @endif
                                                 </td>
                                             </tr>

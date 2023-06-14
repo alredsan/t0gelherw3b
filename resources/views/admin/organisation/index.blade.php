@@ -67,14 +67,14 @@
                                 <thead class="thead">
                                     <tr>
 
-                                        <th>Idong</th>
+                                        <th>Id ong</th>
                                         <th>Logo</th>
-                                        <th>Name</th>
-                                        <th>Direccionsede</th>
-                                        <th>Fechacreacion</th>
+                                        <th>Nombre</th>
+                                        <th>Dirección sede</th>
+                                        <th>Fecha creación</th>
                                         {{-- <th>IBAN</th> --}}
                                         <th>Email</th>
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
 
                                         <th>Acciones</th>
                                         <th>Permisos</th>

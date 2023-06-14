@@ -35,7 +35,7 @@
                                             <th>Apellidos</th>
                                             <th>Email</th>
                                             <th>Provincia</th>
-                                            <th>Telefono</th>
+                                            <th>Teléfono</th>
                                             <th>Fecha Apuntado</th>
                                             <th>Acciones</th>
                                         </tr>

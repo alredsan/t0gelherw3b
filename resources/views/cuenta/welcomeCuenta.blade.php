@@ -10,7 +10,7 @@
 
         <div class="col-lg-5">
             <div>
-                <h2>Eventos Proximos</h2>
+                <h2>Eventos Próximos</h2>
             </div>
             <div class="card-body bg-white">
                 <div class="table-responsive">
@@ -34,7 +34,7 @@
                                 @endif
                             @empty
                                 <tr>
-                                    <th class="text-center" colspan="5">No hay eventos proximos</th>
+                                    <th class="text-center" colspan="5">No hay eventos próximos</th>
                                 </tr>
                             @endforelse
 

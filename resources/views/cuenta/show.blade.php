@@ -32,11 +32,11 @@
                     <div class="card-body row">
                         <div class="col-lg">
                             <div class="form-group">
-                                <strong>Dni:</strong>
+                                <strong>DNI:</strong>
                                 {{ $user->DNI }}
                             </div>
                             <div class="form-group">
-                                <strong>Name:</strong>
+                                <strong>Nombre:</strong>
                                 {{ $user->name }}
                             </div>
                             <div class="form-group">
@@ -48,15 +48,15 @@
                                 {{ $user->email }}
                             </div>
                             <div class="form-group">
-                                <strong>Direccion:</strong>
+                                <strong>Dirección:</strong>
                                 {{ $user->Direccion }}
                             </div>
                             <div class="form-group">
-                                <strong>Provincialocalidad:</strong>
+                                <strong>Provincia:</strong>
                                 {{ $user->ProvinciaLocalidad }}
                             </div>
                             <div class="form-group">
-                                <strong>Telefono:</strong>
+                                <strong>Teléfono:</strong>
                                 {{ $user->Telefono }}
                             </div>
                             @if ($user->id_ONG)
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-lg">
                             <div class="form-group">
-                                <img src={{ asset($user->Foto) }} class="card-img-top w-50" alt="FotoPerfil">
+                                <img src={{ asset($user->Foto) }} class="card-img-top w-50" alt="Foto Perfil">
                             </div>
                         </div>
                     </div>

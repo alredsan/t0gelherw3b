@@ -73,7 +73,7 @@
                                         <th>Nombre</th>
                                         <th>Apellidos</th>
                                         <th>Email</th>
-                                        <th>Fotografia</th>
+                                        <th>Fotografía</th>
 
                                         <th>Acciones</th>
                                     </tr>

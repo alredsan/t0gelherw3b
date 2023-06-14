@@ -16,7 +16,7 @@
                         <option value="{{ $tipo->idtypeONG }}" @php echo (isset($_GET['selectType']) && $_GET['selectType'] == $tipo->idtypeONG)? "selected" : ""; @endphp> {{ $tipo->Nombre }}</option>
                     @endforeach
                 </select>
-                <label for="selectType">Tematica</label>
+                <label for="selectType">Temática</label>
             </div>
         </div>
         <div class="col-md">
@@ -50,7 +50,7 @@
         <div class="col-md-2">
             <div class="form-floating mb-3">
                 <select class="form-select" id="selectRadio" name='selectRadio' aria-label="select tipo">
-                    <option value='0'>Sin limite</option>
+                    <option value='0'>Sin límite</option>
                     @php
                         $array[0] = 5;
                         for ($i = 1; $i < 8; $i++) {

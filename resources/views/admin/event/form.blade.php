@@ -39,14 +39,14 @@
 
         <div class="row">
             <div class="form-group col-sm-5">
-                <label for="numMaxVoluntarios">Numero maximo de voluntarios:</label>
+                <label for="numMaxVoluntarios">Número máximo de voluntarios:</label>
                 <input type="number" class='form-control' name='numMaxVoluntarios' id='numMaxVoluntarios'
-                    placeholder='numero Maximo de Voluntarios' min="1"
+                    placeholder='Voluntarios' min="1"
                     value='{{ old('numMaxVoluntarios', $event->numMaxVoluntarios) }}' required>
                 <div class="invalid-feedback">Introduce un numero maximo del voluntario del evento</div>
             </div>
             <div class="form-group col-sm-7">
-                <label for="Direccion">Direccion:</label>
+                <label for="Direccion">Dirección:</label>
                 <input type="text" class='form-control' name='Direccion' id='Direccion' placeholder='Direccion'
                     value='{{ old('Direccion', $event->Direccion) }}' pattern=".{3,79}" required>
                 <div class="invalid-feedback">Introduce la direccion del evento</div>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group ">
-            <label for="searchDire">Buscador:</label>
+            <label for="searchDire">Buscador de dirección:</label>
             <div class="d-flex flex-row">
                 <input type="text" class='form-control' name='searchDire' id='searchDire'
                     placeholder='Buscar direccion'>
@@ -112,7 +112,7 @@
 
         <div class="row">
             <div class="col-md">
-                <p class="pt-2">Foto :</p>
+                <p class="pt-2">Foto:</p>
                 @if ($event->Foto)
                     <img src="{{ asset($event->Foto) }}" class='w-50' id='FotoPreview' alt="Foto evento">
                 @else
@@ -130,7 +130,7 @@
         <div class="form-check form-switch d-flex align-items-center py-2">
             <input class="form-check-input " type="checkbox" role="switch" id="CheckVisible" name="CheckVisible"
                 @if ($event->Visible) checked @endif>
-            <label class="form-check-label ps-2" for="CheckVisible">El evento sea visible para el publico</label>
+            <label class="form-check-label ps-2" for="CheckVisible">El evento sea visible para el público</label>
         </div>
 
     </div>

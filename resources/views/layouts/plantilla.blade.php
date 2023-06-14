@@ -35,7 +35,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">¿Eres un ONG?</a>
+                        <a class="nav-link" href="#">¿Eres una ONG?</a>
                     </li>
                 </ul>
                 <div class="col-md-3 text-end">
@@ -106,7 +106,7 @@
                 <h5>General</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Inicio</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Terminos y Aviso de
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Términos y Aviso de
                             privacidad</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Mapa Web</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Envianos tus
@@ -116,14 +116,14 @@
             </div>
 
             <div class="col mb-3">
-                <h5>Section</h5>
+                <h5>Más información</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Aviso sobre
                             cookies</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Preguntas Frecuentes</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">¿Eres una ONG?</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Beneficios</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Acerca de</a></li>
                 </ul>
             </div>
         </footer>

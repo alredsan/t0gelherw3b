@@ -11,7 +11,7 @@
                 <div class="">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h1 class="card-title pb-5">Eventos Apuntados Proximos</h1>
+                            <h1 class="card-title pb-5">Eventos Apuntados Próximos</h1>
 
                             @if ($message = Session::get('success-events'))
                                 <div class="alert alert-success">
@@ -26,11 +26,11 @@
                             <table class="table table-striped table-hover" id="tableAdmin">
                                 <thead class="thead">
                                     <tr>
-                                        <th>Idevento</th>
+                                        <th>Id evento</th>
                                         <th>Nombre ONG</th>
                                         <th>Evento</th>
                                         <th>Fecha</th>
-                                        <th>Direccion</th>
+                                        <th>Dirección</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -44,7 +44,7 @@
                                                 <td data-head="Nombre">{{ $event->Nombre }}</td>
                                                 <td data-head="Fecha">{{ date('d-m-Y H:m', $event->FechaEvento) }}</td>
 
-                                                <td data-head="Direccion">{{ $event->Direccion }}</td>
+                                                <td data-head="Dirección">{{ $event->Direccion }}</td>
 
                                                 <td data-head="Acciones">
                                                     <form

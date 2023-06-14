@@ -13,25 +13,25 @@
         <input type="hidden" name='idONG' value='{{ $organisation->idONG }}'>
         <div class="form-group">
             <label for="Name">Nombre:</label>
-            <input class="form-control" placeholder="Name" name="Name" type="text" value="{{ $organisation->Name }}"
+            <input class="form-control" placeholder="Nombre" name="Name" type="text" value="{{ $organisation->Name }}"
                 id="Name" pattern=".{3,44}" required>
             <div class="invalid-feedback">Introduce el nombre correctamente, mas de 3 caracteres y menos de 44</div>
         </div>
         <div class="form-group">
-            <label for="DireccionSede">Direccion del Sede:</label>
-            <input type="text" class="form-control" name="DireccionSede" id="DireccionSede" pattern=".{3,60}"
+            <label for="DireccionSede">Dirección de la Sede:</label>
+            <input type="text" class="form-control" name="Direccion Sede" id="DireccionSede" pattern=".{3,60}"
                 value="{{ old('DireccionSede', $organisation->DireccionSede) }}" placeholder="DireccionSede" required>
             <div class="invalid-feedback">Introduce la direccion del Sede</div>
         </div>
         <div class="form-group">
-            <label for="editor">Descripcion:</label>
+            <label for="editor">Descripción:</label>
             <textarea class="form-control" name="Descripcion" id="editor" placeholder="Descripcion" required>{{ old('Descripcion', $organisation->Descripcion) }}</textarea>
             <div class="invalid-feedback">Introduce la descripcion de ONG</div>
         </div>
 
         <div class="row">
             <div class="form-group col-sm-4">
-                <label for="FechaCreacion">Fecha de Creacion:</label>
+                <label for="FechaCreacion">Fecha de Creación:</label>
                 <input type="date" class="form-control" name="FechaCreacion" id="FechaCreacion"
                     value="{{ old('FechaCreacion', date('Y-m-d', $organisation->FechaCreacion)) }}" required>
                 <div class="invalid-feedback">Introduce la fecha de creacion</div>
@@ -50,11 +50,11 @@
                 <label for="eMail">Email de contacto</label>
                 <input type="email" class="form-control" name="eMail" id="eMail"
                     value="{{ old('eMail', $organisation->eMail) }}" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{2,}$"
-                    placeholder="eMail" required>
+                    placeholder="email" required>
                 <div class="invalid-feedback">Introduce el Email de contacto</div>
             </div>
             <div class="form-group col-sm-4">
-                <label for="Telefono">Telefono:</label>
+                <label for="Telefono">Teléfono:</label>
                 <input type="text" class="form-control" name="Telefono" id="Telefono"
                     pattern="^([+]{0,1}[0-9]{10,12}|[0-9]{9})$" value="{{ old('Telefono', $organisation->Telefono) }}"
                     placeholder="Telefono" required>
@@ -64,7 +64,7 @@
 
         <div class="row">
             <div class="col-md">
-                <p class="pt-2">Foto :</p>
+                <p class="pt-2">Foto:</p>
                 @if ($organisation->FotoLogo)
                     <img src="{{ asset($organisation->FotoLogo) }}" class='w-50' id='FotoPreview' alt="LogoONG">
                 @else
