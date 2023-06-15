@@ -37,8 +37,7 @@
                                 @if ($event->distancia)
                                     <p class="fw-light">{{ round($event->distancia, 2) }} km</p>
                                 @endif
-                                <a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más
-                                    información</a>
+                                <p><a href="{{ route('events.show', $event->idEvento) }}" class="btn btn-primary">Más información</a></p>
                             </div>
                         </div>
                     </div>

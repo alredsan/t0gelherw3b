@@ -114,7 +114,8 @@
                                                 @endif
                                             </td>
 
-                                            <td data-head='Acciones' class="formActions">
+                                            <td data-head="Acciones">
+                                                <div class="formActions">
                                                 @if ($userAuth->Role >= 2)
                                                     <a class="btn btn-sm btn-primary"
                                                         href="{{ route('events.show', $event->idEvento) }}">
@@ -132,6 +133,7 @@
 
                                                     </div>
                                                 @endif
+                                                </div>
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-info"

@@ -42,7 +42,7 @@
 
                                 </div>
                                 <div class="form-group col-sm">
-                                    <label for="name">Buscar por Apellidos</label>
+                                    <label for="lastname">Buscar por Apellidos</label>
                                     <input type="text" class="form-control" name="lastname" id="lastname"
                                         value="@php echo isset($_GET['lastname']) ? $_GET['lastname'] :"" @endphp" placeholder="Buscar ...">
 
@@ -70,10 +70,10 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>DNI</th>
+                                        <th>Fotografía</th>
                                         <th>Nombre</th>
                                         <th>Apellidos</th>
                                         <th>Email</th>
-                                        <th>Fotografía</th>
 
                                         <th>Acciones</th>
                                     </tr>
@@ -83,12 +83,12 @@
                                         <tr>
 
                                             <td data-head="DNI">{{ $user->DNI }}</td>
+                                            <td data-head="Foto Perfil"><img src="{{ asset($user->Foto) }}" class="imgTable"
+                                                    alt="Foto Perfil"></td>
                                             <td data-head="Nombre">{{ $user->name }}</td>
                                             <td data-head="Apellidos">{{ $user->Apellidos }}</td>
                                             <td data-head="Email">{{ $user->email }}</td>
 
-                                            <td data-head="Foto Perfil"><img src="{{ asset($user->Foto) }}" class="imgTable"
-                                                    alt="Foto Perfil"></td>
 
                                             <td data-head="Acciones">
                                                 <div>

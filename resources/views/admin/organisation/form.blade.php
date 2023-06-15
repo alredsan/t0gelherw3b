@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="DireccionSede">Dirección de la Sede:</label>
-            <input type="text" class="form-control" name="Direccion Sede" id="DireccionSede" pattern=".{3,60}"
+            <input type="text" class="form-control" name="DireccionSede" id="DireccionSede" pattern=".{3,60}"
                 value="{{ old('DireccionSede', $organisation->DireccionSede) }}" placeholder="DireccionSede" required>
             <div class="invalid-feedback">Introduce la direccion del Sede</div>
         </div>

@@ -42,7 +42,7 @@
                     <div id="geocoderAddresses"></div>
                 </div>
 
-                <button id='bGeo' type='button' class="input-group-text"><i
+                <button id='bGeo' type='button' class="input-group-text" aria-label="usar GPS para la localización"><i
                         class="bi bi-cursor-fill"></i></button>
 
             </div>

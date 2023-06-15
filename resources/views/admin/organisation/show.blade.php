@@ -11,15 +11,17 @@
                 <div>
                     <div class="card-header d-flex justify-content-between align-items-center">
 
+
+
+                        <h1 id="card_title">
+                            {{ __('Perfil organización') }}
+                        </h1>
+
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
                                 <p>{{ $message }}</p>
                             </div>
                         @endif
-
-                        <h1 id="card_title">
-                            {{ __('Perfil organización') }}
-                        </h1>
 
                         <div class="float-right">
                             @if ($userAuth->Role >= 3)

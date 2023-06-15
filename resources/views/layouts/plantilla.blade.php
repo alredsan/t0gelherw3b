@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOGETHER. | @yield('titulo') </title>
+    <meta name="description" content="Together Eventos.">
     <link rel="icon" type="image/x-icon" href="/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -66,7 +67,7 @@
                         </menu>
                     @else
                         <div class="d-flex flex-row">
-                            <a href='{{ route('login') }}' class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+                            <a href='{{ route('login') }}' class="btn btn-outline-primary me-2 text-wrap">Iniciar Sesión</a>
                             <a href='{{ route('registro') }}' class="btn btn-primary">Registrarte</a>
                         </div>
                     @endif
@@ -89,7 +90,7 @@
                 <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
                     <img class="w-75" src="/img/logo.png" alt="Logotipo">
                 </a>
-                <p class="text-muted">TOGETHER &copy; 2023</p>
+                <p>TOGETHER &copy; 2023</p>
                 <div class="d-flex flex-row gap-5">
                     <i class="fs-4 bi bi-facebook"></i>
                     <i class="fs-4 bi bi-instagram"></i>
@@ -105,25 +106,25 @@
             <div class="col mb-3">
                 <h5>General</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Inicio</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Términos y Aviso de
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Inicio</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Términos y Aviso de
                             privacidad</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Mapa Web</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Envianos tus
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Mapa Web</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Envianos tus
                             comentarios</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Ayuda</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Ayuda</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>Más información</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Aviso sobre
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Aviso sobre
                             cookies</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Preguntas Frecuentes</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">¿Eres una ONG?</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Beneficios</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Acerca de</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Preguntas Frecuentes</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">¿Eres una ONG?</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Beneficios</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-dark">Acerca de</a></li>
                 </ul>
             </div>
         </footer>

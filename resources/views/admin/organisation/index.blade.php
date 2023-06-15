@@ -37,7 +37,7 @@
                             {{-- @csrf --}}
                             <div class="row">
                                 <div class="form-group col-sm">
-                                    <label for="name">Buscar por nombre</label>
+                                    <label for="nameONG">Buscar por nombre</label>
                                     <input type="text" class="form-control" name="nameONG" id="nameONG"
                                         value="@php echo isset($_GET['nameONG']) ? $_GET['nameONG']:"" @endphp"
                                         placeholder="Buscar ...">
@@ -94,16 +94,17 @@
                                             <td data-head="Email">{{ $organisation->eMail }}</td>
                                             <td data-head="Telefono">{{ $organisation->Telefono }}</td>
 
-                                            <td data-head="Acciones" class="formActions">
+                                            <td data-head="Acciones">
+                                                <div class="formActions">
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('admin.ong.show', $organisation->idONG) }}"> {{ __('Mostrar') }}</a>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('admin.ong.edit', $organisation->idONG) }}">{{ __('Editar') }}</a>
 
-                                                <a class="btn btn-sm btn-primary "
-                                                    href="{{ route('admin.ong.show', $organisation->idONG) }}"> {{ __('Mostrar') }}</a>
-                                                <a class="btn btn-sm btn-success"
-                                                    href="{{ route('admin.ong.edit', $organisation->idONG) }}">{{ __('Editar') }}</a>
-
-                                                <button type="submit"
-                                                    data-action="{{ route('admin.ong.destroy', $organisation->idONG) }}"
-                                                    class="btn btn-danger btn-sm btnDelete"> {{ __('Eliminar') }}</button>
+                                                    <button type="submit"
+                                                        data-action="{{ route('admin.ong.destroy', $organisation->idONG) }}"
+                                                        class="btn btn-danger btn-sm btnDelete"> {{ __('Eliminar') }}</button>
+                                                </div>
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-success w-100 mb-3 me-2"
