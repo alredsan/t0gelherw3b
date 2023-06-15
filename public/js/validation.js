@@ -387,49 +387,49 @@ function defaultCheckElement(event) {
             }
         });
 
+        $((validateONGForm.IBANmetodoPago)).change(defaultCheckElement);
+        // function formatCreditCard(card) {
+        //     card = card.replace(/\s/g, '');
+        //     card = card.replace(/(.{4})/g, '$1 ');
+        //     card = card.toUpperCase();
 
-        function formatCreditCard(card) {
-            card = card.replace(/\s/g, '');
-            card = card.replace(/(.{4})/g, '$1 ');
-            card = card.toUpperCase();
+        //     return (card.length < 19) ? card.trimStart() : card.trim();
+        // }
 
-            return (card.length < 19) ? card.trimStart() : card.trim();
-        }
-
-        $((validateONGForm.IBANmetodoPago)).on({
-            beforeinput: function (event) {
-                let isValid = true;
-                let character = event.originalEvent.data;
+        // $((validateONGForm.IBANmetodoPago)).on({
+        //     beforeinput: function (event) {
+        //         let isValid = true;
+        //         let character = event.originalEvent.data;
 
 
 
-                if (character) {
-                    if (this.value.length == 29) {
-                        isValid = false;
-                    } else if (this.value.length > 1) {
-                        //el resto numerico
-                        if (!/[\d]/.test(character)) isValid = false;
-                    }
+        //         if (character) {
+        //             if (this.value.length == 29) {
+        //                 isValid = false;
+        //             } else if (this.value.length > 1) {
+        //                 //el resto numerico
+        //                 if (!/[\d]/.test(character)) isValid = false;
+        //             }
 
-                    if (!isValid) {
-                        event.preventDefault();
-                        showFeedBack($(this), false);
-                    }
+        //             if (!isValid) {
+        //                 event.preventDefault();
+        //                 showFeedBack($(this), false);
+        //             }
 
-                    if (this.checkValidity()) {
-                        showFeedBack($(this), false);
-                    } else {
-                        showFeedBack($(this), true);
-                    }
+        //             if (this.checkValidity()) {
+        //                 showFeedBack($(this), false);
+        //             } else {
+        //                 showFeedBack($(this), true);
+        //             }
 
-                    this.value = formatCreditCard(this.value);
-                }
-            }, paste: function (event) {
-                this.value = formatCreditCard(this.value);
-            }, change: function () {
-                this.value = formatCreditCard(this.value);
-            }
-        });
+        //             this.value = formatCreditCard(this.value);
+        //         }
+        //     }, paste: function (event) {
+        //         this.value = formatCreditCard(this.value);
+        //     }, change: function () {
+        //         this.value = formatCreditCard(this.value);
+        //     }
+        // });
 
 
     }

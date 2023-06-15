@@ -40,7 +40,7 @@
                 <label for="IBANmetodoPago">IBAN:</label>
                 <input type="text" class="form-control" name="IBANmetodoPago" id="IBANmetodoPago"
                     value="{{ old('IBANmetodoPago', $organisation->IBANmetodoPago) }}" placeholder="IBAN"
-                    pattern="^[A-Z]{2}\d{2} \d{4} \d{4} \d{4} \d{4} \d{4}$" required>
+                    pattern="^[A-Z]{2}\d{2}\d{4}\d{4}\d{4}\d{4}\d{4}$" required>
                 <div class="invalid-feedback">Introduce el IBAN correctamente</div>
             </div>
         </div>
