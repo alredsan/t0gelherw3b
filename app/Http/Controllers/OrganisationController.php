@@ -39,7 +39,6 @@ class OrganisationController extends Controller
         }
 
         return view('admin.organisation.index', compact('organisations', 'userAuth'));
-            // ->with('i', (request()->input('page', 1) - 1) * $organisations->perPage());
 
     }
 
@@ -317,7 +316,7 @@ class OrganisationController extends Controller
 
 
         //Devolucion respuesta de forma exitosa
-        return back()->with('success', 'Usuario' . $user->Name . ' ha sido asignado correctamente' . $email);
+        return back()->with('success', 'Usuario ' . $user->Name . ' ha sido asignado correctamente ' . $email);
         //redirect()->route('admin.ong.usersassign')
     }
 
@@ -382,6 +381,6 @@ class OrganisationController extends Controller
 
         $user->save();
 
-        return back()->with('success', 'Usuario' . $user->name . ' ha sido desasignado correctamente');
+        return back()->with('success', 'Usuario ' . $user->name . ' ha sido desasignado correctamente');
     }
 }

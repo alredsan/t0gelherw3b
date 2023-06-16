@@ -220,7 +220,7 @@ class UserController extends Controller
         $data->save();
 
         return redirect()->route('cuenta.perfil')
-            ->with('success', 'Usuario' . $request->name . 'ha sido actualizado correctamente');
+            ->with('success', 'Usuario ' . $request->name . ' ha sido actualizado correctamente');
     }
 
     /**
@@ -276,7 +276,7 @@ class UserController extends Controller
         $data->save();
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'Usuario' . $request->name . 'ha sido actualizado correctamente');
+            ->with('success', 'Usuario ' . $request->name . ' ha sido actualizado correctamente');
     }
 
     /**
