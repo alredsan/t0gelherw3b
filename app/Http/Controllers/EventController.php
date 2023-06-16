@@ -147,7 +147,7 @@ class EventController extends Controller
             if (Auth::check()) {
                 $user = Auth::user();
 
-                if (!($user->id_ONG == $event->id_ONG || $user->Role > 4)) {
+                if (!($user->id_ONG == $event->id_ONG || $user->Role < 4)) {
                     abort(404);
                 }
             } else {
