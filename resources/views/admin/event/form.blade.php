@@ -184,7 +184,7 @@
                 function(data) {
 
                     let list = $('<div style="z-index:1005" class="list-group position-absolute"></div>');
-                    console.log(data);
+
                     data.forEach((address) => {
                         list.append(
                             `<a data-lat="${address.lat}" data-lon="${address.lon}" class="list-group-item list-group-item-action">${address.display_name}</a>`

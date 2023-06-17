@@ -172,7 +172,7 @@
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="" id="formDeleteModal" method="POST">
+                    <form action="." id="formDeleteModal" method="POST">
                         <div class="modal-body">
                             @csrf
 

@@ -1,3 +1,8 @@
+
+/**
+ * LOCALIZACIÓN
+ */
+
 window.addEventListener('DOMContentLoaded', function () {
 
     var x = document.getElementById("bGeo");
@@ -17,6 +22,10 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Dado un latitud y longitud, hacer una consulta para obtener el nombre de la ciudad
+     * @param {*} position
+     */
     function showPosition(position) {
         lat.value = position.coords.latitude;
         lon.value = position.coords.longitude;
@@ -42,7 +51,9 @@ window.addEventListener('DOMContentLoaded', function () {
     let inputGeoCoder = $('#localidad');
     let addresses = $('#geocoderAddresses');
     let lanzado = false;
-
+    /**
+     * Para tecla se habilita tiempo de espera, para respectar la normativa de la API nominatim
+     */
     inputGeoCoder.keydown(function (event) {
 
         if (!lanzado) {
@@ -56,7 +67,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
+    /**
+     * Metodo donde muestra el listado de la localicaciones según la busqueda
+     */
     function geoCode() {
 
         $.get('https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' + inputGeoCoder.val()).then(
@@ -72,7 +85,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 addresses.empty();
                 addresses.append(list);
                 list.find('a').click(function (event) {
-
+                    //Accion cuando pulse un elemento de la lista
                     inputGeoCoder.val($(this).text().trim());
 
                     lat.value = $(this).data().lat;

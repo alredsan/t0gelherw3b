@@ -1,3 +1,7 @@
+/**
+ * ACCION: ASIGNAR/EDITAR ROLES DE UN USUARIO
+ */
+
 window.addEventListener('DOMContentLoaded', function () {
 
     let inputSearch = $('#email');
@@ -17,7 +21,9 @@ window.addEventListener('DOMContentLoaded', function () {
         $(formAssignUser.chxRol).nextAll('div').removeClass('d-block');
         users.empty();
     });
-
+    /**
+     * BUSCADOR DE USUARIOS
+     */
     inputSearch.keyup(function () {
         let valueInputSearch = inputSearch.val();
 
@@ -92,7 +98,11 @@ window.addEventListener('DOMContentLoaded', function () {
         pIdUser.value = "";
     });
 
+    /**
+     * EDITAR ROLES DE UN USUARIO, RECUPERAR EL ROL QUE TIENE ASIGNADO
+     */
     btnEdit.click(function () {
+
 
         fetch($(this).data().src, {
             method: "GET",
@@ -100,19 +110,10 @@ window.addEventListener('DOMContentLoaded', function () {
         }).then(function (data) {
             return data.json();
         }).then(function (data) {
-
             if (data.result = "Valido") {
-                pName.innerHTML = "<p><strong>Usuario:</strong> "+data.user.name+""+data.user.Apellidos+"</p>";
+                pName.innerHTML = "<p><strong>Usuario:</strong> "+data.user.name+" "+data.user.Apellidos+"</p>";
                 pIdUser.value = data.user.id;
                 document.getElementById("role"+data.user.Role).checked = true;
-
-
-
-                // for (let i = 0; i < data.roles.length; i++) {
-                //     let rol = data.roles[i];
-
-                //     document.getElementById(rol.idRol).checked = true;
-                // }
 
                 myModalEdit.show();
             }

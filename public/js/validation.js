@@ -116,6 +116,9 @@ function defaultCheckElement(event) {
         return false;
     }
 
+    /**
+     * Metodo donde se valida los datos del Usuario
+     */
     function validateLogin() {
         let validateLoginForm = document.forms.fLogin;
         mostrarContrasena();
@@ -153,7 +156,9 @@ function defaultCheckElement(event) {
         $(validateLoginForm.passwd).change(defaultCheckElement);
     }
 
-
+    /**
+     * Metodo donde se valida el registro
+     */
     function validateRegister() {
         let validateRegisterForm = document.forms.fRegister;
         mostrarContrasena();
@@ -284,7 +289,9 @@ function defaultCheckElement(event) {
 
     }
 
-
+    /**
+     * Metodo donde se valida el formulario de ONG
+     */
     function validateFormONG() {
         let validateONGForm = document.forms.formONG;
 
@@ -374,7 +381,6 @@ function defaultCheckElement(event) {
         $(validateONGForm.DireccionSede).change(defaultCheckElement);
         $(validateONGForm.Descripcion).change(defaultCheckElement);
         $(validateONGForm.FechaCreacion).change(defaultCheckElement);
-        // $(validateONGForm.IBANmetodoPago).change(defaultCheckElement);
         $(validateONGForm.eMail).change(defaultCheckElement);
         $(validateONGForm.Telefono).change(defaultCheckElement);
         $(validateONGForm.FotoLogo).change(function () {
@@ -388,52 +394,11 @@ function defaultCheckElement(event) {
         });
 
         $((validateONGForm.IBANmetodoPago)).change(defaultCheckElement);
-        // function formatCreditCard(card) {
-        //     card = card.replace(/\s/g, '');
-        //     card = card.replace(/(.{4})/g, '$1 ');
-        //     card = card.toUpperCase();
-
-        //     return (card.length < 19) ? card.trimStart() : card.trim();
-        // }
-
-        // $((validateONGForm.IBANmetodoPago)).on({
-        //     beforeinput: function (event) {
-        //         let isValid = true;
-        //         let character = event.originalEvent.data;
-
-
-
-        //         if (character) {
-        //             if (this.value.length == 29) {
-        //                 isValid = false;
-        //             } else if (this.value.length > 1) {
-        //                 //el resto numerico
-        //                 if (!/[\d]/.test(character)) isValid = false;
-        //             }
-
-        //             if (!isValid) {
-        //                 event.preventDefault();
-        //                 showFeedBack($(this), false);
-        //             }
-
-        //             if (this.checkValidity()) {
-        //                 showFeedBack($(this), false);
-        //             } else {
-        //                 showFeedBack($(this), true);
-        //             }
-
-        //             this.value = formatCreditCard(this.value);
-        //         }
-        //     }, paste: function (event) {
-        //         this.value = formatCreditCard(this.value);
-        //     }, change: function () {
-        //         this.value = formatCreditCard(this.value);
-        //     }
-        // });
-
-
     }
 
+    /**
+     * Metodo donde se valida el formulario de cambio contraseña
+     */
     function validateFormChangePassword() {
         let validateFormChangePassword = document.forms.formChangePasswd;
 
@@ -499,6 +464,9 @@ function defaultCheckElement(event) {
         });
     }
 
+    /**
+     * metodo donde se valida el usuario
+     */
     function validateFormUser() {
         let validateUpdateUserForm = document.forms.formUserUpdate;
         $(validateUpdateUserForm).attr('novalidate', true);
@@ -660,7 +628,9 @@ function defaultCheckElement(event) {
 
     }
 
-
+    /**
+     * Metodo donde se valida el formulario de Evento
+     */
     function validateEvent() {
         let validateEventNewForm = document.forms.formEvent;
 
@@ -754,6 +724,9 @@ function defaultCheckElement(event) {
 
     }
 
+    /**
+     * Metodo donde se valida el formuario de Types
+     */
     function validateFormTypes() {
 
         let validateONGForm = document.forms.formType;
@@ -781,6 +754,9 @@ function defaultCheckElement(event) {
 
     }
 
+    /**
+     * Metodo donde se valida el numero introducido en la form de donación
+     */
     function validateFormDonative() {
         let validateFormDonative = document.forms.donativeform;
 
@@ -807,6 +783,9 @@ function defaultCheckElement(event) {
         $(validateFormDonative.donative).change(defaultCheckElement);
     }
 
+    /**
+     * Metodo donde se valida el asignacion del permiso
+     */
     function validateFormAssign() {
         let formAssignUser = document.forms.fAssignUser;
 

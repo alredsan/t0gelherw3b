@@ -1,4 +1,6 @@
-
+/**
+ * COOKIES
+ */
 window.addEventListener('DOMContentLoaded',function(){
     let button = document.getElementById('acceptCookie');
     let cardCookie = document.getElementById('cardCookie');
@@ -13,7 +15,7 @@ window.addEventListener('DOMContentLoaded',function(){
         });
     }
 
-
+    //Asignar el cookie al aceptar
     function setCookie(cname, cvalue, exdays) {
         const d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -21,6 +23,8 @@ window.addEventListener('DOMContentLoaded',function(){
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
+
+    //Obtener el cookie
     function getCookie(cname) {
         let re = new RegExp('(?:(?:^|.*;\\s*)' + cname + '\\s*\\=\\s*([^;]*).*$)|^.*$');
         return document.cookie.replace(re, "$1");

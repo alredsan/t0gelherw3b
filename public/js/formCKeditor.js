@@ -1,3 +1,6 @@
+/**
+ * Tratamiento previo para CKeditor
+ */
 let element = document.querySelector('#editor');
 
 if (element != null) {

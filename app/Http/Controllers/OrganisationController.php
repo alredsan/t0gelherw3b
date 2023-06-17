@@ -330,7 +330,9 @@ class OrganisationController extends Controller
         $user = User::select('id', 'name', 'Apellidos', 'id_ONG', 'Role')->where('id', $id)->first();
 
         if ($user->id_ONG != Auth::user()->id_ONG) {
-            return ['result' => 'No valido'];
+            if (Auth::user()->Role < 4){
+                return ['result' => 'No valido'];
+            }
         }
 
         $array = ['result' => 'Valido', "user" => $user];

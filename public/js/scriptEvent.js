@@ -1,4 +1,8 @@
 
+/**
+ * BOTÓN APUNTAR VOLUNARIO EN UN EVENTO
+ */
+
 let formParticipation = document.forms.addVolunteer;
 let divMessage = document.getElementById('message');
 let numParticipante = document.getElementById("numParticipantesRest");
@@ -38,6 +42,7 @@ if (formParticipation) {
 }
 
 let tables = $('table');
+
 if(tables){
     tables.addClass('table table-bordered table-hover');
     tables.wrap("<div class='table-responsive'>");
