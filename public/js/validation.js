@@ -407,12 +407,6 @@ function defaultCheckElement(event) {
             let isValid = true;
             let firstInvalidElement = null;
 
-            if (this.passwd.value != this.passwdConfirm.value) {
-                isValid = false;
-                firstInvalidElement = this.passwdConfirm;
-                showFeedBack($(this.passwdConfirm), false);
-            }
-
             if (this.confirmarpassword.checkValidity()) {
                 showFeedBack($(this.confirmarpassword), true);
             } else {
@@ -436,6 +430,12 @@ function defaultCheckElement(event) {
                 isValid = false;
                 firstInvalidElement = this.oldpassword;
                 showFeedBack($(this.oldpassword), false);
+            }
+
+            if (this.newpassword.value != this.confirmarpassword.value) {
+                isValid = false;
+                firstInvalidElement = this.confirmarpassword;
+                showFeedBack($(this.confirmarpassword), false);
             }
 
             if (!isValid) {

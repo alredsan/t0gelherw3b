@@ -34,17 +34,17 @@
 
                             <div class="form-group">
                                 <label for="oldpassword">Dime la antigua contraseña:</label>
-                                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Antigua contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
+                                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Antigua contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on" required>
                                 <div class="invalid-feedback">Debe introduce la contraseña antigua,que contiene 4-16 caracteres, un numero, letra mayúscula y letra mayuscula.</div>
                             </div>
                             <div class="form-group">
                                 <label for="newpassword">Dime la nueva contraseña:</label>
-                                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="Nueva contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
+                                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="Nueva contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on" required>
                                 <div class="invalid-feedback">Introduce la contraseña nueva o no conciden o no cumple 4-16 caracteres, un numero, letra mayúscula y letra mayuscula.</div>
                             </div>
                             <div class="form-group">
                                 <label for="confirmarpassword">Dime de nuevo la nueva contraseña:</label>
-                                <input type="password" class="form-control" name="confirmarpassword" id="confirmarpassword" placeholder="Confirmar contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on">
+                                <input type="password" class="form-control" name="confirmarpassword" id="confirmarpassword" placeholder="Confirmar contraseña"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$" autocomplete="on" required>
                                 <div class="invalid-feedback">La nueva contraseña no conciden.</div>
                             </div>
                             <div class="box-footer mt20">
